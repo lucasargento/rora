@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nModel: LinearSolver\nVariables:\n  QuantityRegular: 59.99999999999999\n  QuantityTempered: 0.0\nObjective Value: 479.99999999999994\n"
+}

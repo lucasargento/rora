@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n--- LinearSolverImplementation ---\nHighVolumePipes: 5\nLowVolumePipes: 20\nTotal Pipes (Objective Value): 25.0\n\n"
+}

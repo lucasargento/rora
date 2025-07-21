@@ -1,0 +1,129 @@
+# Problem Description:
+'''Problem description: A scientist in the arctic needs to get enough vitamin D and vitamin C in his diet by drinking orange and apple juice. Each box of orange juice contains 10 units of vitamin D and 8 units of vitamin C. Each box of apple juice contains 12 units of vitamin D and 6 units of vitamin C. Since the scientist prefers apple juice, he must drink at least 3 times as many apple juice boxes and orange juice boxes. However, he must also drink at least 3 orange juice boxes. To avoid a vitamin C overdose, the scientist can consume at most 300 units of vitamin C. How many of each juice box should he drink to maximize his total vitamin D intake?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfAppleJuiceBoxes": "float",
+    "NumberOfOrangeJuiceBoxes": "float"
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Below is a complete mathematical optimization model for the given problem using the five-element framework.
+
+-----------------------------------------------------------
+Sets:
+- JuiceTypes: set of juice types = {AppleJuice, OrangeJuice}
+
+-----------------------------------------------------------
+Parameters:
+- vitaminD_apple: vitamin D units per apple juice box = 12 [units per box]
+- vitaminC_apple: vitamin C units per apple juice box = 6 [units per box]
+- vitaminD_orange: vitamin D units per orange juice box = 10 [units per box]
+- vitaminC_orange: vitamin C units per orange juice box = 8 [units per box]
+- max_vitaminC: maximum allowed vitamin C intake = 300 [units]
+- min_orange_boxes: minimum required orange juice boxes = 3 [boxes]
+- apple_preference_ratio: minimum ratio of apple to orange juice boxes = 3 [dimensionless]
+  (This means NumberOfAppleJuiceBoxes must be at least 3 times NumberOfOrangeJuiceBoxes.)
+
+-----------------------------------------------------------
+Variables:
+- NumberOfAppleJuiceBoxes: number of apple juice boxes to drink, continuous (or integer) ≥ 0 [boxes]
+- NumberOfOrangeJuiceBoxes: number of orange juice boxes to drink, continuous (or integer) ≥ 0 [boxes]
+
+-----------------------------------------------------------
+Objective:
+- Maximize total vitamin D intake = vitaminD_apple * NumberOfAppleJuiceBoxes + vitaminD_orange * NumberOfOrangeJuiceBoxes
+
+-----------------------------------------------------------
+Constraints:
+1. Vitamin C intake constraint:
+   vitaminC_apple * NumberOfAppleJuiceBoxes + vitaminC_orange * NumberOfOrangeJuiceBoxes ≤ max_vitaminC
+   [6 * NumberOfAppleJuiceBoxes + 8 * NumberOfOrangeJuiceBoxes ≤ 300]
+
+2. Apple preference constraint:
+   NumberOfAppleJuiceBoxes ≥ apple_preference_ratio * NumberOfOrangeJuiceBoxes
+   [NumberOfAppleJuiceBoxes ≥ 3 * NumberOfOrangeJuiceBoxes]
+
+3. Minimum orange juice boxes constraint:
+   NumberOfOrangeJuiceBoxes ≥ min_orange_boxes
+   [NumberOfOrangeJuiceBoxes ≥ 3]
+
+-----------------------------------------------------------
+Notes:
+- All units are in terms of boxes for the juice products and vitamin units for vitamins.
+- The variables can be set as integers if boxes must be whole numbers; here they are defined as continuous as per the expected output schema.
+- This model maximizes the scientist’s vitamin D intake while ensuring that his vitamin C consumption does not exceed safe limits and his personal juice preferences and minimum requirements are met.
+'''
+
+# Generated Code:
+from ortools.linear_solver import pywraplp
+
+def solve_with_linear_solver():
+    # Create the solver. Using GLOP for continuous linear programming.
+    solver = pywraplp.Solver.CreateSolver('GLOP')
+    if not solver:
+        return None
+
+    # Define variables as continuous non-negative.
+    NumberOfAppleJuiceBoxes = solver.NumVar(0.0, solver.infinity(), 'NumberOfAppleJuiceBoxes')
+    NumberOfOrangeJuiceBoxes = solver.NumVar(0.0, solver.infinity(), 'NumberOfOrangeJuiceBoxes')
+
+    # Constraint 1: Vitamin C intake constraint
+    # 6 * NumberOfAppleJuiceBoxes + 8 * NumberOfOrangeJuiceBoxes <= 300
+    solver.Add(6 * NumberOfAppleJuiceBoxes + 8 * NumberOfOrangeJuiceBoxes <= 300)
+
+    # Constraint 2: Apple preference constraint
+    # NumberOfAppleJuiceBoxes >= 3 * NumberOfOrangeJuiceBoxes
+    solver.Add(NumberOfAppleJuiceBoxes >= 3 * NumberOfOrangeJuiceBoxes)
+
+    # Constraint 3: Minimum orange juice boxes constraint
+    # NumberOfOrangeJuiceBoxes >= 3
+    solver.Add(NumberOfOrangeJuiceBoxes >= 3)
+
+    # Objective: Maximize total vitamin D intake.
+    # 12 * NumberOfAppleJuiceBoxes + 10 * NumberOfOrangeJuiceBoxes
+    objective = solver.Objective()
+    objective.SetCoefficient(NumberOfAppleJuiceBoxes, 12)
+    objective.SetCoefficient(NumberOfOrangeJuiceBoxes, 10)
+    objective.SetMaximization()
+
+    # Solve the problem.
+    status = solver.Solve()
+    if status == pywraplp.Solver.OPTIMAL:
+        result = {
+            "variables": {
+                "NumberOfAppleJuiceBoxes": NumberOfAppleJuiceBoxes.solution_value(),
+                "NumberOfOrangeJuiceBoxes": NumberOfOrangeJuiceBoxes.solution_value()
+            },
+            "objective": objective.Value()
+        }
+        return result
+    else:
+        return {"message": "The problem does not have an optimal solution."}
+
+def main():
+    # Currently only one implementation (using linear_solver) is provided.
+    # In case multiple formulations are given, each would be implemented separately.
+    model1_result = solve_with_linear_solver()
+
+    # Print the results in a structured way.
+    print("Solution for the juice optimization problem (using ortools.linear_solver):")
+    print(model1_result)
+
+if __name__ == '__main__':
+    main()
+
+'''Execution Results:
+SUCCESS:
+Solution for the juice optimization problem (using ortools.linear_solver):
+{'variables': {'NumberOfAppleJuiceBoxes': 46.0, 'NumberOfOrangeJuiceBoxes': 3.0}, 'objective': 582.0}
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfAppleJuiceBoxes': 46.0, 'NumberOfOrangeJuiceBoxes': 3.0}, 'objective': 582.0}'''
+

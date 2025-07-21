@@ -1,0 +1,89 @@
+Problem Name: 179_nlp4lp_179
+
+# Problem Description:
+'''Problem description: Forest Paper makes two types of products: graph paper and music paper. Each type of paper requires the use of two machines, a printing machine and a scanning machine. It takes 3 minutes on the printing machine and 5.5 minutes on the scanning machine to make a ream of graph paper. On the other hand, it takes 1.5 minutes on the printing machine and 3 minutes on the scanning machine to make a ream of music paper. Each machine is available for a maximum of 350 minutes per day. The company sells a package of graph paper at a profit of $4 and a package of music paper at a profit of $2.5. The company can sell all the paper it makes. How many reams of each type should the company produce in a day in order to maximize profit? What is that profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "ProductionQuantity": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is a complete and unambiguous formulation using the five‐element framework.
+
+------------------------------------------------------------
+Sets:
+• P = {Graph, Music}  
+  (P is the set of paper types produced by Forest Paper)
+
+Parameters:
+• profit_p: profit per ream for paper type p [USD per ream]  
+  profit_Graph = 4  
+  profit_Music = 2.5
+
+• printing_time_p: printing machine time required per ream for paper type p [minutes per ream]  
+  printing_time_Graph = 3  
+  printing_time_Music = 1.5
+
+• scanning_time_p: scanning machine time required per ream for paper type p [minutes per ream]  
+  scanning_time_Graph = 5.5  
+  scanning_time_Music = 3
+
+• max_printing_time: total available printing machine time per day = 350 [minutes]  
+• max_scanning_time: total available scanning machine time per day = 350 [minutes]
+
+(Comments: All time parameters are in minutes per ream and machine availabilities are in minutes per day. We assume that the production decision can be taken as a continuous amount.)
+
+Variables:
+• x_p: number of reams of paper type p to produce per day [continuous, nonnegative]  
+  x_Graph: reams of graph paper  
+  x_Music: reams of music paper
+
+Objective:
+• Maximize total_profit = profit_Graph * x_Graph + profit_Music * x_Music  
+  (i.e., maximize 4 * x_Graph + 2.5 * x_Music)
+
+Constraints:
+1. Printing machine time constraint:  
+  printing_time_Graph * x_Graph + printing_time_Music * x_Music ≤ max_printing_time  
+  => 3 * x_Graph + 1.5 * x_Music ≤ 350
+
+2. Scanning machine time constraint:  
+  scanning_time_Graph * x_Graph + scanning_time_Music * x_Music ≤ max_scanning_time  
+  => 5.5 * x_Graph + 3 * x_Music ≤ 350
+
+------------------------------------------------------------
+
+This structured model clearly defines the sets, parameters, decision variables, objective function, and constraints. It can be used directly to generate a working implementation in Python or OR-Tools.
+
+Below is a JSON schema snippet that corresponds to the decision variables and objective for reference:
+
+{
+  "variables": {
+    "ProductionQuantity": {
+      "Graph": "float",
+      "Music": "float"
+    }
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Results from Linear Solver (Continuous LP):
+{'variables': {'ProductionQuantity': {'Graph': 0.0, 'Music': 116.66666666666666}}, 'objective': 291.66666666666663}
+
+Results from CP-SAT Model (Integer variables, scaled formulation):
+{'variables': {'ProductionQuantity': {'Graph': 2, 'Music': 113}}, 'objective': 290.5}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'ProductionQuantity': {'0': 0.0, '1': 116.66666666666667}}, 'objective': 291.6666666666667}

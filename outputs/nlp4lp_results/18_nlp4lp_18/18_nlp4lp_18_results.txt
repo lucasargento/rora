@@ -1,0 +1,91 @@
+Problem Name: 18_nlp4lp_18
+
+# Problem Description:
+'''Problem description: A suspicious factory has 100 sq. feet of space. It makes bootleg phones and laptops. Phones require 2 hours of labor and cost $12 for each sq. foot of space allocated for phone production (cost of electricity and equipment). Laptops require 3 hours of labor and cost $15 for each sq. foot of space allocated for laptop production. Phones produce a net revenue of $50 per sq. foot while laptops produce a net revenue of $70 per sq. foot. The factory wants to spend at most $5000 and 2000 hours of labor. What is the optimal factory layout to maximize revenue?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AllocatedSpace": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is one complete formulation of the factory layout problem using the five-element framework.
+
+--------------------------------------------------
+
+Sets:
+- P: set of products = {Phone, Laptop}
+
+Parameters:
+- total_space: total available factory floor space [sq. feet] = 100
+- cost_per_sqft:
+  • phone: cost per square foot for phone production [USD/sq.ft] = 12
+  • laptop: cost per square foot for laptop production [USD/sq.ft] = 15
+- net_revenue_per_sqft:
+  • phone: net revenue per square foot for phone production [USD/sq.ft] = 50
+  • laptop: net revenue per square foot for laptop production [USD/sq.ft] = 70
+- labor_required:
+  • phone: labor hours required per square foot for phone production [hours/sq.ft] = 2
+  • laptop: labor hours required per square foot for laptop production [hours/sq.ft] = 3
+- cost_limit: maximum spending for production inputs [USD] = 5000
+- labor_limit: maximum labor hours available [hours] = 2000
+
+Variables:
+- x_p: allocated space for product p ∈ P in square feet (continuous variable, ≥ 0)
+  • x_phone corresponds to space for phone production
+  • x_laptop corresponds to space for laptop production
+
+Objective:
+- Maximize total net revenue = (net_revenue_per_sqft[phone] * x_phone) + (net_revenue_per_sqft[laptop] * x_laptop)
+  (Note: The term “net revenue” already represents revenue in excess of other variable production costs. The production costs appear only as constraints through the spending limit.)
+
+Constraints:
+1. Space constraint:
+   - x_phone + x_laptop ≤ total_space
+2. Cost constraint:
+   - (cost_per_sqft[phone] * x_phone) + (cost_per_sqft[laptop] * x_laptop) ≤ cost_limit
+3. Labor constraint:
+   - (labor_required[phone] * x_phone) + (labor_required[laptop] * x_laptop) ≤ labor_limit
+4. Non-negativity:
+   - For each p in P, x_p ≥ 0
+
+--------------------------------------------------
+
+Comments:
+- All parameters are expressed with consistent units: space in square feet, cost and revenue in US dollars per square foot, and labor in hours per square foot.
+- The decision variables (x_phone and x_laptop) represent how many square feet of the available 100 sq. feet are allocated to each product.
+- The objective maximizes total net revenue subject to physical (space) and operational (labor and expenditure) constraints.
+
+--------------------------------------------------
+
+Alternative modeling note:
+If one instead prefers to separately account for revenue and the cost of space allocation (i.e., treating revenue and cost as separate expressions), an alternative formulation would be:
+  • Total revenue = (50 * x_phone) + (70 * x_laptop)
+  • Total cost = (12 * x_phone) + (15 * x_laptop)
+  • Then the net objective would be: maximize (Total revenue – Total cost)
+In that case, the cost constraint (Total cost ≤ 5000) would still be enforced, and the objective would explicitly subtract total cost from total revenue. However, based on the phrase “net revenue” in the problem statement, the first formulation is the direct translation.
+
+Execution Results:
+SUCCESS:
+Optimization Results for Factory Layout Problem
+--------------------------------------------------
+Model Version 1 (Maximize net revenue):
+Solution: {'AllocatedSpace': {'0': 0.0, '1': 100.0}}
+Objective Value (Total Net Revenue): 7000.0
+
+--------------------------------------------------
+Model Version 2 (Maximize Total Revenue - Total Cost):
+Solution: {'AllocatedSpace': {'0': 0.0, '1': 100.0}}
+Objective Value (Net Objective): 5500.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'AllocatedSpace': {'0': 0.0, '1': 100.0}}, 'objective': 7000.0}

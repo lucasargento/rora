@@ -1,0 +1,89 @@
+Problem Name: 76_nlp4lp_76
+
+# Problem Description:
+'''Problem description: A small chocolate shop makes milk chocolate and dark chocolate bars. Milk chocolate bars require 4 units of cocoa and 7 units of milk. Dark chocolate bars require 6 units of cocoa and 3 units of milk. The shop has 2000 units of cocoa and 1750 units of milk available. In addition since milk chocolate sells better, at least 2 times as many milk chocolate bars need to be made as dark chocolate bars.  If making a milk chocolate bar takes 15 minutes and making a dark chocolate bar takes 12 mins, how many of each should the make to minimize total production time?
+
+Expected Output Schema:
+{
+  "variables": {
+    "MilkBars": "float",
+    "DarkBars": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is a complete and unambiguous mathematical model using the five-element structure.
+
+--------------------------------------------------
+Sets:
+- P: set of chocolate bar types = {Milk, Dark}
+
+--------------------------------------------------
+Parameters:
+- Cocoa_per_Milk: cocoa units required per milk chocolate bar = 4 [units/bar]
+- Cocoa_per_Dark: cocoa units required per dark chocolate bar = 6 [units/bar]
+- Milk_per_Milk: milk units required per milk chocolate bar = 7 [units/bar]
+- Milk_per_Dark: milk units required per dark chocolate bar = 3 [units/bar]
+- Total_Cocoa: total available cocoa = 2000 [units]
+- Total_Milk: total available milk = 1750 [units]
+- Time_Milk: production time per milk chocolate bar = 15 [minutes/bar]
+- Time_Dark: production time per dark chocolate bar = 12 [minutes/bar]
+- Ratio_Min: minimum ratio of milk chocolate bars to dark chocolate bars = 2 [milk bars per dark bar]
+
+--------------------------------------------------
+Variables:
+- MilkBars: number of milk chocolate bars produced [nonnegative integer; units: bars]
+- DarkBars: number of dark chocolate bars produced [nonnegative integer; units: bars]
+
+--------------------------------------------------
+Objective:
+- Minimize total production time = (Time_Milk * MilkBars) + (Time_Dark * DarkBars)
+  which translates to: Minimize 15 * MilkBars + 12 * DarkBars [minutes]
+
+--------------------------------------------------
+Constraints:
+1. Cocoa availability constraint:
+   4 * MilkBars + 6 * DarkBars ≤ 2000
+   (Total cocoa used by both types cannot exceed available cocoa.)
+
+2. Milk availability constraint:
+   7 * MilkBars + 3 * DarkBars ≤ 1750
+   (Total milk used by both types cannot exceed available milk.)
+
+3. Production ratio constraint:
+   MilkBars ≥ 2 * DarkBars
+   (At least two milk chocolate bars must be produced for every dark chocolate bar.)
+
+--------------------------------------------------
+
+Additional Comments:
+- All units are clearly stated in the parameter definitions.
+- Decision variables are assumed to be integers since they represent countable bars. However, if divisibility is acceptable (or for relaxation purposes), they may be treated as continuous nonnegative variables.
+- The model is self-contained and avoids duplications by directly referencing parameters in constraints and the objective.
+- This complete formulation can be directly mapped to code using Python or OR-Tools.
+
+--------------------------------------------------
+
+Expected Output Schema:
+{
+  "variables": {
+    "MilkBars": "float",
+    "DarkBars": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Integer Formulation Solution:
+{'MilkBars': 0.0, 'DarkBars': 0.0, 'objective': 0.0}
+
+Continuous Formulation Solution:
+{'MilkBars': 0.0, 'DarkBars': 0.0, 'objective': 0.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'MilkBars': -0.0, 'DarkBars': -0.0}, 'objective': 0.0}

@@ -1,0 +1,75 @@
+Problem Name: 41_nlp4lp_41
+
+# Problem Description:
+'''Problem description: A woodshop can purchase two types of saws, a miter saw and a circular saw. A miter saw can cut 50 planks of wood and produces 60 units of sawdust per day. A circular saw can cut 70 planks of wood and produces 100 units of sawdust per day. The woodshop must cut at least 1500 planks of wood per day. However, to avoid too much pollution in the woodshop they can produce at most 2000 units of sawdust per day. How many of each type of saw should be purchased to minimize the total number of saws needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfSaws": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- SawTypes: {Miter, Circular}
+
+Parameters:
+- cuts_per_day:
+  - Miter: 50 planks per saw per day
+  - Circular: 70 planks per saw per day
+- sawdust_per_day:
+  - Miter: 60 units of sawdust per saw per day
+  - Circular: 100 units of sawdust per saw per day
+- required_planks: 1500 planks per day (minimum)
+- max_sawdust: 2000 units of sawdust per day (maximum)
+
+Variables:
+- x_Miter: number of miter saws purchased [integer, ≥ 0]
+- x_Circular: number of circular saws purchased [integer, ≥ 0]
+
+Objective:
+- Minimize total_saws = x_Miter + x_Circular
+
+Constraints:
+- Plank Cutting Constraint: (50 * x_Miter) + (70 * x_Circular) ≥ 1500  
+  (This ensures the woodshop cuts at least 1500 planks per day.)
+- Sawdust Production Constraint: (60 * x_Miter) + (100 * x_Circular) ≤ 2000  
+  (This ensures the woodshop produces at most 2000 units of sawdust per day.)
+
+--------------------------------------------------
+
+For reference, the expected output schema in JSON format is structured as follows:
+
+{
+  "variables": {
+    "NumberOfSaws": {
+      "0": "x_Miter as float (or integer)",
+      "1": "x_Circular as float (or integer)"
+    }
+  },
+  "objective": "total_saws as float (or integer)"
+}
+
+Execution Results:
+SUCCESS:
+Linear Programming Model Results:
+{
+  "variables": {
+    "NumberOfSaws": {
+      "0": 15.0,
+      "1": 11.0
+    }
+  },
+  "objective": 26.0
+}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfSaws': {'0': 15.0, '1': 11.0}}, 'objective': 26.0}

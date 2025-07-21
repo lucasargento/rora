@@ -1,0 +1,65 @@
+Problem Name: 211_nlp4lp_211
+
+# Problem Description:
+'''Problem description: A dim sum restaurant can deliver their food by cart or by hand. Servers can deliver by cart and have 70 customer interactions and will have to refill food five times an hour. They can also deliver more food by hand, due to the increased mobility, and have 85 customer interactions while refilling food twenty times an hour. However, the customers get more options when delivering by cart, therefore at least 70% of delivery shifts must be by cart. There must be at least 3 servers delivering by hand for their direct customer service. If the restaurant wants to have 4000 customer interactions per hour, how many of each form of delivery should the dim sum restaurant schedule to minimize the total number of refills per hour?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfCartDeliveryServers": "float",
+    "NumberOfHandDeliveryServers": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- D: set of delivery modes = {Cart, Hand}
+
+Parameters:
+- interactions_Cart: number of customer interactions per hour for a cart server = 70 [interactions/server·hour]
+- interactions_Hand: number of customer interactions per hour for a hand server = 85 [interactions/server·hour]
+- refills_Cart: number of refills per hour for a cart server = 5 [refills/server·hour]
+- refills_Hand: number of refills per hour for a hand server = 20 [refills/server·hour]
+- required_interactions: required total customer interactions per hour = 4000 [interactions/hour]
+- cart_shift_percentage: minimum percentage of shifts to be delivered by cart = 0.70 [unitless]
+- min_hand_servers: minimum number of servers delivering by hand = 3 [servers]
+
+Variables:
+- x_Cart: number of cart delivery servers scheduled (continuous, nonnegative) [servers]
+- x_Hand: number of hand delivery servers scheduled (continuous, nonnegative) [servers]
+
+Objective:
+- Minimize total refills per hour = (refills_Cart * x_Cart) + (refills_Hand * x_Hand)
+
+Constraints:
+1. Customer interaction constraint:
+   interactions_Cart * x_Cart + interactions_Hand * x_Hand = required_interactions
+   (i.e., 70 * x_Cart + 85 * x_Hand = 4000)
+
+2. Delivery mode ratio (at least 70% by cart):
+   x_Cart >= cart_shift_percentage * (x_Cart + x_Hand)
+   (This is equivalent to x_Cart >= 0.7*(x_Cart + x_Hand))
+
+3. Minimum hand delivery servers:
+   x_Hand >= min_hand_servers
+
+Comments:
+- All parameters are expressed per hour.
+- The decision variables x_Cart and x_Hand are modeled as continuous for scheduling purposes. If only integer numbers of servers can be scheduled, these should be declared as integers.
+- The customer interaction constraint is set to equality to exactly meet the desired 4000 interactions per hour.
+- The delivery mode ratio constraint can be algebraically rearranged (x_Cart >= (7/3)*x_Hand) if needed for simplification.
+
+Execution Results:
+SUCCESS:
+Solution using Linear Solver (continuous variables):
+{'NumberOfCartDeliveryServers': 53.5, 'NumberOfHandDeliveryServers': 3.0, 'objective': 327.5}
+
+Solution using CP-SAT Model (integer variables):
+{'NumberOfCartDeliveryServers': 45, 'NumberOfHandDeliveryServers': 10, 'objective': 425.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfCartDeliveryServers': 54.0, 'NumberOfHandDeliveryServers': 3.0}, 'objective': 330.0}

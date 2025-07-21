@@ -1,0 +1,50 @@
+Problem Name: 48_Place_Numbers_in_Cross
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Decision Variables:}&&&\\[1mm]
+x &\in& \mathbb{R}_{>0} & \text{Width of the left column (common to area1 and area3)};\\[1mm]
+L &\in& \mathbb{R}_{>0} & \text{Total width (“len”) of the large rectangle, with } L > x;\\[1mm]
+y &\in& \mathbb{R}_{>0} & \text{Height of the top row (common to area1 and area2)};\\[1mm]
+H &\in& \mathbb{R}_{>0} & \text{Total height (“height”) of the large rectangle, with } H > y;\\[1mm]
+Z &\in& \mathbb{R} & \text{Area of the unknown (bottom right) rectangle.}\\[2mm]
+\textbf{Fixed Data:}&&&\\[1mm]
+a_1 &=& 13, & \text{(area1)};\\[1mm]
+a_2 &=& 39, & \text{(area2)};\\[1mm]
+a_3 &=& 16, & \text{(area3)}.\\[2mm]
+\textbf{Model:}&&&\\[1mm]
+\begin{aligned}
+\min_{x,\,L,\,y,\,H,\,Z}\quad &0 \quad && \text{(Feasibility problem)}\\[1mm]
+\text{s.t.}\quad 
+& x \, y = a_1 = 13,  &&\quad\text{(Area of top left rectangle)}\\[1mm]
+& (L - x) \, y = a_2 = 39,  &&\quad\text{(Area of top right rectangle)}\\[1mm]
+& x \, (H - y) = a_3 = 16,  &&\quad\text{(Area of bottom left rectangle)}\\[1mm]
+& Z = (L - x)(H - y), &&\quad\text{(Area of bottom right rectangle)}\\[1mm]
+& L > x,\quad H > y,\quad x > 0,\quad y > 0,\quad L > 0,\quad H > 0.
+\end{aligned}
+\end{array}
+\]
+
+\noindent This formulation exactly captures the given puzzles and games problem. The unknown area Z will be determined from the feasibility of the above system. Note that the objective is simply a dummy function (minimize 0) to cast the problem in an optimization framework, as the primary goal is to find a feasible solution that computes Z.
+
+Execution Results:
+SUCCESS:
+Solution found:
+x (width of left column): 1
+y (height of top row): 13
+L (total width): 4
+H (total height): 29
+dx (L - x): 3
+dy (H - y): 16
+Area of top left rectangle (area1): 13
+Area of top right rectangle (area2): 39
+Area of bottom left rectangle (area3): 16
+Area of bottom right rectangle (unknown Z): 48
+Objective value: 0.0
+
+
+Expected Output:
+Expected solution
+
+: {'area4': 48, 'len': 4, 'height': 29, 'x': 1, 'y': 13}

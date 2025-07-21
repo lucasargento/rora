@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{\n  \"Model1_SubstitutedExpressions\": {\n    \"HelicopterTrips\": 24.0,\n    \"BusTrips\": 0.0,\n    \"PatientsHelicopter\": 120.0,\n    \"PatientsBus\": 0.0,\n    \"objective\": 24.0,\n    \"status\": \"Optimal\"\n  },\n  \"Model2_WithLinkingVariables\": {\n    \"HelicopterTrips\": 24.0,\n    \"BusTrips\": 0.0,\n    \"PatientsHelicopter\": 120.0,\n    \"PatientsBus\": 0.0,\n    \"objective\": 24.0,\n    \"status\": \"Optimal\"\n  }\n}\n"
+}

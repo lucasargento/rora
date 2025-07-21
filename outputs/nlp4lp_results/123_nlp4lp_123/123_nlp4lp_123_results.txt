@@ -1,0 +1,77 @@
+Problem Name: 123_nlp4lp_123
+
+# Problem Description:
+'''Problem description: An engineering school has a bridge building competition where students must build as many beam bridges and truss bridges as they can using Popsicle sticks and glue. A beam bridge requires 30 Popsicle sticks and 5 units of glue while a truss bridge requires 50 Popsicle sticks and 8 units of glue. Each team has at most 600 Popsicle sticks and 100 units of glue. In addition, each team can build at most 5 truss bridges and the number of beam bridges must be larger than the number of truss bridges. If a beam bridge can hold 40 grams and a truss bridge can hold 60 grams, how many of each bridge should a team build to maximize the total mass that can be supported?
+
+Expected Output Schema:
+{
+  "variables": {
+    "BeamBridges": "float",
+    "TrussBridges": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Bridges = {Beam, Truss}
+
+Parameters:
+- sticks_per_beam = 30    // Popsicle sticks required per beam bridge (units: sticks)
+- glue_per_beam = 5       // Glue units required per beam bridge (units: glue units)
+- capacity_beam = 40      // Mass supported by a beam bridge (units: grams)
+- sticks_per_truss = 50   // Popsicle sticks required per truss bridge (units: sticks)
+- glue_per_truss = 8      // Glue units required per truss bridge (units: glue units)
+- capacity_truss = 60     // Mass supported by a truss bridge (units: grams)
+- max_sticks = 600        // Maximum available popsicle sticks (units: sticks)
+- max_glue = 100          // Maximum available glue (units: glue units)
+- max_truss_bridges = 5   // Maximum number of truss bridges allowed per team
+
+Variables:
+- BeamBridges: integer, number of beam bridges built (≥ 0) [units: bridges]
+- TrussBridges: integer, number of truss bridges built (≥ 0) [units: bridges]
+
+Objective:
+- Maximize TotalMassSupported = (capacity_beam * BeamBridges) + (capacity_truss * TrussBridges)
+  // This represents the sum of the supported masses by all built bridges (units: grams)
+
+Constraints:
+1. Popsicle Sticks Constraint:
+   (sticks_per_beam * BeamBridges) + (sticks_per_truss * TrussBridges) ≤ max_sticks
+2. Glue Constraint:
+   (glue_per_beam * BeamBridges) + (glue_per_truss * TrussBridges) ≤ max_glue
+3. Maximum Truss Bridges Constraint:
+   TrussBridges ≤ max_truss_bridges
+4. Relative Count Constraint:
+   BeamBridges ≥ TrussBridges + 1
+   // Ensures that the number of beam bridges is strictly larger than the number of truss bridges
+
+Comments:
+- All parameters are assumed to be in consistent units as given in the problem.
+- The decision variables are modeled as integers since the number of bridges built must be whole numbers.
+- The relative count constraint is written as BeamBridges ≥ TrussBridges + 1 to capture the strict inequality in an integer context.
+
+Expected Output Schema:
+{
+  "variables": {
+    "BeamBridges": "float",
+    "TrussBridges": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model1 Results:
+Variables:
+  BeamBridges: 20.0
+  TrussBridges: 0.0
+Objective Value (Total Mass Supported in grams): 800.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'BeamBridges': 20.0, 'TrussBridges': 0.0}, 'objective': 800.0}

@@ -1,0 +1,46 @@
+Problem Name: 89_Ski_Assignment_Optimization
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{Sets and Parameters} \\
+I & = & \{1, 2, 3, 4, 5, 6\} \quad (\text{indices for skis}) \\
+J & = & \{1, 2, 3, 4, 5\} \quad (\text{indices for skiers}) \\[1em]
+s_i & = & \text{ski height of ski } i,\quad \text{with } s_1 = 1,\; s_2 = 2,\; s_3 = 5,\; s_4 = 7,\; s_5 = 13,\; s_6 = 21 \\
+h_j & = & \text{height of skier } j,\quad \text{with } h_1 = 3,\; h_2 = 4,\; h_3 = 7,\; h_4 = 11,\; h_5 = 18 \\[1em]
+d_{ij} & = & \left| s_i - h_j \right| \quad (\text{absolute disparity between ski } i \text{ and skier } j) \\[2em]
+
+\textbf{Decision Variables} \\
+x_{ij} & \in & \{0,1\}, \quad \forall\, i \in I,\; j \in J, \\
+& & \quad \text{where } x_{ij} = 
+\begin{cases}
+1, & \text{if ski } i \text{ is assigned to skier } j, \\
+0, & \text{otherwise.}
+\end{cases} \\[2em]
+
+\textbf{Mathematical Model} \\[1em]
+\begin{aligned}
+\min_{x_{ij}} \quad & \sum_{j \in J} \sum_{i \in I} d_{ij}\, x_{ij} \\[1em]
+\text{s.t.} \quad 
+& \sum_{i \in I} x_{ij} = 1, & \quad \forall\, j \in J, \quad &\text{(Each skier is assigned exactly one ski)} \\[1em]
+& \sum_{j \in J} x_{ij} \le 1, & \quad \forall\, i \in I, \quad &\text{(Each ski is assigned to at most one skier)} \\[1em]
+& x_{ij} \in \{0,1\}, & \quad \forall\, i \in I,\; j \in J. & \quad \text{(Binary assignment)}
+\end{aligned}
+\end{array}
+\]
+
+Execution Results:
+SUCCESS:
+Solution:
+Total disparity: 7.0
+Skier 1 (height 3) is assigned Ski 2 (height 2), disparity = 1
+Skier 2 (height 4) is assigned Ski 3 (height 5), disparity = 1
+Skier 3 (height 7) is assigned Ski 4 (height 7), disparity = 0
+Skier 4 (height 11) is assigned Ski 5 (height 13), disparity = 2
+Skier 5 (height 18) is assigned Ski 6 (height 21), disparity = 3
+
+
+Expected Output:
+Expected solution
+
+: {'x': [2, 3, 4, 5, 6], '_objective': 7}

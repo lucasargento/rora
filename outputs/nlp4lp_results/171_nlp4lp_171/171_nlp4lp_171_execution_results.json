@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n----- MIP Model (Integer Variables) Solution -----\nNumber of Hamburgers:  3.0\nNumber of Chicken Wraps:  1.0\nTotal Cost:  23.5\n\n----- LP Relaxation Model (Continuous Variables) Solution -----\nNumber of Hamburgers:  3.5\nNumber of Chicken Wraps:  0.0\nTotal Cost:  22.75\n"
+}

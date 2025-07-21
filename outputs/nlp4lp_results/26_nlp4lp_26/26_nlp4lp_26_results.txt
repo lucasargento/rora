@@ -1,0 +1,85 @@
+Problem Name: 26_nlp4lp_26
+
+# Problem Description:
+'''Problem description: An ice cream store makes chocolate and vanilla ice cream by the gallon. In a week, they must make at least 5 gallons of each type but at most 10 gallons of chocolate ice cream and at most 8 gallons of vanilla ice cream. It takes 1 hour to produce a gallon of chocolate ice cream and 2 hours to produce a gallon of vanilla ice cream. In a week, 30 hours are available to make ice cream. In addition at least 6 workers are needed with 1 working on the chocolate ice cream and 2 on the vanilla ice cream at any time. If the profit per gallon of chocolate ice cream is $200 and the profit per gallon of vanilla ice cream is $300, how many gallons of each should be made to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "GallonsChocolateProduced": "float",
+    "GallonsVanillaProduced": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is one complete formulation that faithfully captures the problem using the five‐element format. In this formulation we assume that the 30 available production hours already reflect the combined effect of having 6 workers available throughout the week. (A note on the staffing requirement: the problem states that a minimum of 6 workers are needed with at least 1 working on chocolate and 2 on vanilla at any time. One interpretation is that the available 30 production hours are achieved by those 6 workers – if the reader prefers, an alternative formulation could introduce explicit worker assignment variables. Here we assume that the production-hour limit implicitly enforces the worker capacity.) 
+
+--------------------------------------------------
+Sets:
+• F: set of ice cream flavors = {Chocolate, Vanilla}
+
+--------------------------------------------------
+Parameters:
+• minProd[Chocolate] = 5   // minimum gallons of chocolate ice cream (gallons)
+• maxProd[Chocolate] = 10  // maximum gallons of chocolate ice cream (gallons)
+• minProd[Vanilla] = 5     // minimum gallons of vanilla ice cream (gallons)
+• maxProd[Vanilla] = 8     // maximum gallons of vanilla ice cream (gallons)
+• prodTime[Chocolate] = 1  // production time needed per gallon of chocolate (hours/gallon)
+• prodTime[Vanilla] = 2    // production time needed per gallon of vanilla (hours/gallon)
+• availableHours = 30      // total available production hours per week (hours)
+• profit[Chocolate] = 200  // profit per gallon of chocolate ice cream (USD/gallon)
+• profit[Vanilla] = 300    // profit per gallon of vanilla ice cream (USD/gallon)
+
+// Note on workers: It is given that at least 6 workers are available (with a minimum of 1 on chocolate and 2 on vanilla at any time). 
+// In this formulation, we assume that the provided availableHours (30) are the result of the labor available from these workers.
+
+--------------------------------------------------
+Variables:
+• x[Chocolate] = GallonsChocolateProduced, continuous variable (gallons produced)
+• x[Vanilla] = GallonsVanillaProduced, continuous variable (gallons produced)
+
+--------------------------------------------------
+Objective:
+Maximize total profit = profit[Chocolate]*x[Chocolate] + profit[Vanilla]*x[Vanilla]
+// That is, maximize 200*x[Chocolate] + 300*x[Vanilla]
+
+--------------------------------------------------
+Constraints:
+1. Production quantity bounds for Chocolate:
+   - x[Chocolate] >= minProd[Chocolate]   (x[Chocolate] >= 5)
+   - x[Chocolate] <= maxProd[Chocolate]   (x[Chocolate] <= 10)
+
+2. Production quantity bounds for Vanilla:
+   - x[Vanilla] >= minProd[Vanilla]   (x[Vanilla] >= 5)
+   - x[Vanilla] <= maxProd[Vanilla]   (x[Vanilla] <= 8)
+
+3. Total production time available:
+   - prodTime[Chocolate]*x[Chocolate] + prodTime[Vanilla]*x[Vanilla] <= availableHours
+   - i.e., 1*x[Chocolate] + 2*x[Vanilla] <= 30
+
+// (Optional Additional Worker-Staggered Constraint: Although not needed when assuming availableHours covers worker availability, an alternative formulation might include constraints reflecting that whenever production is operating, at least 1 worker must be dedicated to chocolate and 2 to vanilla. Here, we assume that these staffing requirements are satisfied by the predetermined availableHours.)
+
+--------------------------------------------------
+
+Below is the expected output JSON schema mapping decision variables and the overall objective expression (profit expressed in USD):
+
+{
+  "variables": {
+    "GallonsChocolateProduced": "float",
+    "GallonsVanillaProduced": "float"
+  },
+  "objective": "float"
+}
+
+This complete formulation should be unambiguous and easy to implement in Python or OR-Tools.
+
+Execution Results:
+SUCCESS:
+{'Model1': {'variables': {'GallonsChocolateProduced': 10.0, 'GallonsVanillaProduced': 8.0}, 'objective': 4400.0}, 'Model2': {'variables': {'GallonsChocolateProduced': 10.0, 'GallonsVanillaProduced': 8.0, 'WorkersChocolate': 4.0, 'WorkersVanilla': 2.0}, 'objective': 4400.0}}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'GallonsChocolateProduced': 10.0, 'GallonsVanillaProduced': 8.0}, 'objective': 4400.0}

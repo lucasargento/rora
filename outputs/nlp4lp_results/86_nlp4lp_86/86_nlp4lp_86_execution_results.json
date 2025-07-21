@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution for the Linear Programming Formulation:\n------------------------------------------------\nFactory1 Operating Hours (x[Factory1]): 33.33 hours\nFactory2 Operating Hours (x[Factory2]): 3.33 hours\nTotal Operating Hours (MaxOperatingHours): 36.67 hours\nObjective Value (Minimized Total Time): 36.67 hours\n"
+}

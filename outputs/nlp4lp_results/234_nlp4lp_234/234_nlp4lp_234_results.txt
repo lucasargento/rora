@@ -1,0 +1,99 @@
+Problem Name: 234_nlp4lp_234
+
+# Problem Description:
+'''Problem description: A village delivers mail to nearby villages either by runners or canoers. Runners can carry three bags of mail each time and takes 4 hours. Canoers can carry ten bags of mail each time and takes 2 hours. At most 33% of deliveries can be by canoe. Additionally, the village can spare at most 200 total hours and at least 4 runners must be used. How many of each way to deliver must be used to maximize the total amount of mail that can be delivered?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumRunnerTrips": "float",
+    "NumCanoeTrips": "float",
+    "NumberOfRunners": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is one complete formulation that faithfully translates the problem into a structured five‐element model.
+
+--------------------------------------------------
+
+Sets:
+• DeliveryModes = {Runner, Canoe}
+  (This set distinguishes the two types of delivery methods.)
+
+Parameters:
+• bag_capacity_runner = 3                [mail bags per runner trip]
+• bag_capacity_canoe = 10                [mail bags per canoe trip]
+• time_runner_trip = 4                   [hours per runner trip]
+• time_canoe_trip = 2                    [hours per canoe trip]
+• max_total_time = 200                   [total available delivery hours]
+• max_canoe_fraction = 0.33              [maximum fraction of trips that may be by canoe]
+• min_runners = 4                        [minimum number of distinct runners required]
+• Note: We assume that each runner makes a single trip. (Alternatively, if runners can make multiple trips then a linking constraint between trips and number of runners would be needed. For this model we assume one trip per runner so that NumberOfRunners equals the number of runner trips.)
+
+Variables:
+• NumRunnerTrips: integer ≥ 0  
+  (Number of trips made on foot by runners)
+• NumCanoeTrips: integer ≥ 0  
+  (Number of trips made by canoe)
+• NumberOfRunners: integer ≥ 0  
+  (Number of distinct runners employed; will be forced to be at least min_runners)
+
+Objective:
+• Maximize TotalMailDelivered = bag_capacity_runner * NumRunnerTrips + bag_capacity_canoe * NumCanoeTrips  
+  [mail bags delivered]
+
+Constraints:
+1. Total time available:
+   time_runner_trip * NumRunnerTrips + time_canoe_trip * NumCanoeTrips ≤ max_total_time
+
+2. Canoe delivery fraction:
+   NumCanoeTrips ≤ max_canoe_fraction * (NumRunnerTrips + NumCanoeTrips)
+   (This ensures that at most 33% of all deliveries are by canoe.)
+
+3. Minimum number of runners:
+   NumberOfRunners ≥ min_runners
+
+4. Linking runners and runner trips (based on the assumption that each runner can only make one trip):
+   NumRunnerTrips ≤ NumberOfRunners
+   (If, in another formulation, runners can make multiple trips then a different linking constraint would be required.)
+
+--------------------------------------------------
+
+The expected output schema (using the variable names defined above) is:
+
+{
+  "variables": {
+    "NumRunnerTrips": "integer, number of trips by runners",
+    "NumCanoeTrips": "integer, number of trips by canoe",
+    "NumberOfRunners": "integer, number of distinct runners used (must be at least 4)"
+  },
+  "objective": "Maximize TotalMailDelivered = 3 * NumRunnerTrips + 10 * NumCanoeTrips"
+}
+
+This structured model is self-contained and can be implemented in a working optimization code.
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: Single Trip per Runner
+Objective Value: 310.0
+Variables:
+  NumRunnerTrips = 40.0
+  NumCanoeTrips = 19.0
+  NumberOfRunners = 40.0
+
+Model: Multiple Trips per Runner
+Objective Value: 310.0
+Variables:
+  NumRunnerTrips = 40.0
+  NumCanoeTrips = 19.0
+  NumberOfRunners = 4.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumRunnerTrips': 47.0, 'NumCanoeTrips': 6.0, 'NumberOfRunners': 4.0}, 'objective': 201.0}

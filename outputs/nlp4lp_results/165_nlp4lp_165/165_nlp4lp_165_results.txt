@@ -1,0 +1,102 @@
+Problem Name: 165_nlp4lp_165
+
+# Problem Description:
+'''Problem description: There has been a horrible accident and patients need to be taken to the hospital by either a helicopter or bus. A helicopter can transport 5 patients per trip and takes 1 hour. On the other hand, a bus can transport 8 patients per trip and takes 3 hours. At least 120 patients need to be transported and at least 30% of the trips should be by helicopter. In addition, there can be at most 10 bus trips. How should the patients be taken to minimize the total time to transport the patients?
+
+Expected Output Schema:
+{
+  "variables": {
+    "HelicopterTrips": "float",
+    "BusTrips": "float",
+    "PatientsHelicopter": "float",
+    "PatientsBus": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- TransportModes = {Helicopter, Bus}
+
+Parameters:
+- helicopter_capacity = 5        // patients transported per helicopter trip [patients/trip]
+- bus_capacity = 8               // patients transported per bus trip [patients/trip]
+- helicopter_trip_time = 1       // time per helicopter trip [hour/trip]
+- bus_trip_time = 3              // time per bus trip [hour/trip]
+- min_patients = 120             // minimum number of patients to transport [patients]
+- min_helicopter_ratio = 0.3     // minimum ratio of helicopter trips to total trips [fraction]
+- max_bus_trips = 10             // maximum number of bus trips allowed [trips]
+
+Variables:
+- HelicopterTrips: integer ≥ 0   // number of helicopter trips to schedule [trips]
+- BusTrips: integer ≥ 0          // number of bus trips to schedule [trips]
+- PatientsHelicopter: integer ≥ 0  // number of patients transported by helicopter [patients]
+- PatientsBus: integer ≥ 0         // number of patients transported by bus [patients]
+
+Objective:
+- Minimize total time = HelicopterTrips * helicopter_trip_time + BusTrips * bus_trip_time
+  // This represents the sum of time spent on helicopter and bus trips [hours]
+
+Constraints:
+1. Patient Coverage Constraint:
+   - PatientsHelicopter + PatientsBus ≥ min_patients
+   - Note: PatientsHelicopter is defined as helicopter_capacity * HelicopterTrips and PatientsBus as bus_capacity * BusTrips
+
+2. Helicopter Trip Ratio Constraint:
+   - HelicopterTrips ≥ min_helicopter_ratio * (HelicopterTrips + BusTrips)
+   - This ensures that at least 30% of the trips are by helicopter
+
+3. Bus Trip Capacity Constraint:
+   - BusTrips ≤ max_bus_trips
+
+4. Definition Constraints:
+   - PatientsHelicopter = helicopter_capacity * HelicopterTrips
+   - PatientsBus = bus_capacity * BusTrips
+
+5. Non-negativity Constraints:
+   - HelicopterTrips, BusTrips, PatientsHelicopter, PatientsBus ≥ 0
+
+-------------------------------------------------
+For implementation purposes, one can substitute the expressions for PatientsHelicopter and PatientsBus directly into the patient coverage constraint. The variables HelicopterTrips and BusTrips would typically be modeled as integer decision variables even though they are listed as floats in the expected output schema.
+
+The objective and constraints are given in consistent units (hours for time and patients for patient counts), ensuring a coherent model.
+
+-----------------------------------------------
+Expected JSON output (schema):
+
+{
+  "variables": {
+    "HelicopterTrips": "float",
+    "BusTrips": "float",
+    "PatientsHelicopter": "float",
+    "PatientsBus": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+{
+  "Model1_SubstitutedExpressions": {
+    "HelicopterTrips": 24.0,
+    "BusTrips": 0.0,
+    "PatientsHelicopter": 120.0,
+    "PatientsBus": 0.0,
+    "objective": 24.0,
+    "status": "Optimal"
+  },
+  "Model2_WithLinkingVariables": {
+    "HelicopterTrips": 24.0,
+    "BusTrips": 0.0,
+    "PatientsHelicopter": 120.0,
+    "PatientsBus": 0.0,
+    "objective": 24.0,
+    "status": "Optimal"
+  }
+}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'HelicopterTrips': 24.0, 'BusTrips': 0.0, 'PatientsHelicopter': -0.0, 'PatientsBus': -0.0}, 'objective': 24.0}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n=== Optimization Results ===\n\nModel:  ORTools Linear Solver (CBC)\nOptimal Total Profit: 648.00\nDecision Variables (UnitsToProduce):\n  Cake type 0: 14\n  Cake type 1: 0\n  Cake type 2: 32\n"
+}

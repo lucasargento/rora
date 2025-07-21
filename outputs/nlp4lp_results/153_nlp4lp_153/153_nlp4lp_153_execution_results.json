@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n===================================\nResults for Model Implementation 1:\n===================================\nModel Description: Linear Model using ortools.linear_solver\nSolution:\n  NumberOfTractorsUsed = 6.0\n  NumberOfCarsUsed     = 13.0\n  CornTractor         = 240.0 kg\n  CornCar             = 260.0 kg\n  Objective Value     = 19.0\n"
+}

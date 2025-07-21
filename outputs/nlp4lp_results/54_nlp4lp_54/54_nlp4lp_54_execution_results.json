@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving Model Version 1 (Using shift variables only):\n{'variables': {'NumberOfNurseShifts': 0.0, 'NumberOfPharmacistShifts': 29.0, 'NumberOfNurses': 0.0, 'NumberOfPharmacists': 29.0}, 'objective': 29.0}\n\nSolving Model Version 2 (Using separate shift and worker variables with linking constraints):\n{'variables': {'NumberOfNurseShifts': 0.0, 'NumberOfPharmacistShifts': 29.0, 'NumberOfNurses': 0.0, 'NumberOfPharmacists': 29.0}, 'objective': 29.0}\n"
+}

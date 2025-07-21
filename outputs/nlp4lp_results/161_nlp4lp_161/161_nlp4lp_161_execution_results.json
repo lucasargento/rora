@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution using OR-Tools Linear Solver:\n{'variables': {'NumberOfCows': 15.0, 'NumberOfElephants': 14.0}, 'objective': 29.0}\n"
+}

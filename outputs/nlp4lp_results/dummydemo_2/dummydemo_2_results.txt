@@ -1,0 +1,58 @@
+Problem Name: dummydemo_2
+
+# Problem Description:
+'''Minimize 3x + 2y subject to x + y >= 10, x >= 0, y >= 0'''
+
+Mathematical Formulation:
+Below is the structured mathematical model using the five-element framework:
+
+--------------------------------------------------
+
+Sets:
+- V: set of decision variables, V = {x, y}
+
+Parameters:
+- cost_x: cost coefficient for variable x, cost_x = 3 (cost per unit, assumed in USD per unit)
+- cost_y: cost coefficient for variable y, cost_y = 2 (cost per unit, assumed in USD per unit)
+- min_total: minimum combined value required, min_total = 10 (unit: same units as x and y)
+
+Variables:
+- x: decision variable representing the quantity corresponding to cost coefficient 3 [continuous, x ≥ 0, unit count]
+- y: decision variable representing the quantity corresponding to cost coefficient 2 [continuous, y ≥ 0, unit count]
+
+Objective:
+- Minimize total cost = cost_x * x + cost_y * y
+  (That is, minimize 3 * x + 2 * y)
+
+Constraints:
+- Combined requirement constraint: x + y ≥ min_total  
+  (This ensures that the sum of x and y is at least 10)
+
+--------------------------------------------------
+
+Comments:
+- All numerical values are assumed to be in consistent units (e.g., units of product or activity count for x and y and USD for cost coefficients).
+- x and y are modeled as continuous nonnegative decisions.
+- No integer or binary restrictions are present in this problem.
+- This model formulation is direct and should map readily to Python or OR-Tools code.
+
+Execution Results:
+SUCCESS:
+----- Solving using ortools.linear_solver (GLOP) -----
+Optimal solution found using Linear Solver.
+Solution:
+  x = 0.0
+  y = 10.0
+Objective value = 20.0
+
+----- Solving using ortools.sat.python.cp_model (CP-SAT) -----
+Optimal solution found using CP-SAT Model.
+Solution:
+  x = 0
+  y = 10
+Objective value = 20.0
+
+
+Expected Output:
+SAPEEEE solution: x = 0, y = 10
+Optimal objective value: 20

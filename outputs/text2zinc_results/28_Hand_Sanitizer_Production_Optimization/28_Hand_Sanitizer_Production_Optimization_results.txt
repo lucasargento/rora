@@ -1,0 +1,41 @@
+Problem Name: 28_Hand_Sanitizer_Production_Optimization
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Decision Variables:} \\
+\quad L &\in& \mathbb{Z}, & L \ge 1 \quad \text{(number of liquid sanitizers produced)} \\
+\quad F &\in& \mathbb{Z}, & F \ge 1 \quad \text{(number of foam sanitizers produced)} \\[1mm]
+\textbf{Parameters:} \\
+\quad w_L &=& 40, & \text{(water required per liquid sanitizer)} \\
+\quad a_L &=& 50, & \text{(alcohol required per liquid sanitizer)} \\
+\quad w_F &=& 60, & \text{(water required per foam sanitizer)} \\
+\quad a_F &=& 40, & \text{(alcohol required per foam sanitizer)} \\
+\quad W_{\text{total}} &=& 2000, & \text{(total available water)} \\
+\quad A_{\text{total}} &=& 2100, & \text{(total available alcohol)} \\
+\quad h_L &=& 30, & \text{(hands cleaned per liquid sanitizer)} \\
+\quad h_F &=& 20, & \text{(hands cleaned per foam sanitizer)} \\
+\quad L_{\text{max}} &=& 30, & \text{(maximum liquid sanitizers allowed)} \\[1mm]
+\textbf{Mathematical Model:} \\[1mm]
+\text{maximize} \quad & Z = & h_L L + h_F F &= 30L + 20F \\[1mm]
+\text{subject to} \quad 
+& w_L L + w_F F &\le &\; W_{\text{total}} \quad \Longrightarrow \quad 40L + 60F \le 2000, \\[1mm]
+& a_L L + a_F F &\le &\; A_{\text{total}} \quad \Longrightarrow \quad 50L + 40F \le 2100, \\[1mm]
+& L &\le &\; L_{\text{max}} \quad \Longrightarrow \quad L \le 30, \\[1mm]
+& F &\ge &\; L + 1, \quad \text{(ensure more foam sanitizers than liquid sanitizers)} \\[1mm]
+& L,\, F &\ge &\; 1, \quad \text{and } L,\, F \in \mathbb{Z} \quad \text{(non-trivial production for both products).}
+\end{array}
+\]
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Number of liquid sanitizers (L): 19
+Number of foam sanitizers (F): 20
+Maximum number of hands cleaned: 970
+
+
+Expected Output:
+Expected solution
+
+: {'LiquidSanitizers': 19, 'FoamSanitizers': 20, 'TotalHandsCleaned': 970, '_objective': 970}

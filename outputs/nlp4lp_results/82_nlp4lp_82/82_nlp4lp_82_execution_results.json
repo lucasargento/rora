@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults:\n----------\nLinear Solver Implementation:\nvariables: {'FlourUsedPerBeaker': {'0': -0.0, '1': 15.0}}\nobjective: 45.0\n\nCP-SAT Model Implementation:\nvariables: {'FlourUsedPerBeaker': {'0': 0, '1': 15}}\nobjective: 45\n"
+}

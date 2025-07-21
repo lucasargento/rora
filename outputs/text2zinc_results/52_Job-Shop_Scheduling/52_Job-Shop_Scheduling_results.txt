@@ -1,0 +1,97 @@
+Problem Name: 52_Job-Shop_Scheduling
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Sets:}\\[1mm]
+&i \in I = \{1, 2, \dots, n\} \quad &&\text{(jobs, where } n = \mathtt{num\_jobs}\text{)}\\[1mm]
+&r \in R = \{1, 2, \dots, m\} \quad &&\text{(operation positions in a job, where } m = \mathtt{num\_machines}\text{)}\\[1mm]
+&j \in M = \{1, 2, \dots, m\} \quad &&\text{(machines)}\\[2mm]
+\textbf{Data:}\\[1mm]
+& p_{i,j} \quad &&\text{processing time of job } i \text{ on machine } j,\ \text{given by the matrix } \mathtt{job\_times}.\\[1mm]
+& o_{i,j} \quad &&\text{the prescribed position in the sequence at which job } i \text{ is processed on machine } j,\ \text{given by } \mathtt{job\_order}.\\[1mm]
+& \mathtt{max\_time} \quad &&\text{an upper bound on time horizon.}\\[2mm]
+\textbf{Auxiliary Mapping:}\\[1mm]
+&\text{For each job } i \text{ and position } r\in R,\text{ define } M(i,r) \text{ as the unique machine } j \text{ such that } o_{i,j} = r.\\[2mm]
+\textbf{Decision Variables:}\\[1mm]
+& S_{i,r} \in [0,\mathtt{max\_time}] \quad &&\text{start time of the } r\text{-th operation (i.e., on machine } M(i,r)\text{) of job } i.\\[1mm]
+& C_{i,r} \in [0,\mathtt{max\_time}] \quad &&\text{completion time of the } r\text{-th operation of job } i, \text{ with } C_{i,r} = S_{i,r} + p_{i, M(i,r)}.\\[1mm]
+& \delta_{i,k,j} \in \{0,1\} \quad &&\forall\, i,k\in I,\ i<k,\ \forall\, j\in M \text{ that appear in both jobs,}\\[1mm]
+&&&\text{indicating the processing order on machine } j \text{ between jobs } i \text{ and } k.\\[2mm]
+& C_{\max} \in [0,\mathtt{max\_time}] \quad &&\text{the overall makespan (maximum completion time)}.\\[2mm]
+\textbf{Objective Function:}\\[1mm]
+& \text{Minimize} \quad C_{\max} &\\[2mm]
+\textbf{Constraints:}\\[1mm]
+\text{(1) Job precedence constraints:}\\[1mm]
+& \forall i \in I,\ \forall r=1,\dots, m-1:\quad & C_{i,r} &\le S_{i,r+1}, \quad\text{where } C_{i,r} = S_{i,r} + p_{i, M(i,r)}. \\[2mm]
+\text{(2) Machine non‐overlap constraints:}\\[1mm]
+& \text{For every machine } j \in M \text{ and for every pair of distinct jobs } i,k \in I \text{ that use } j\text{,}\\[1mm]
+& \text{let } r = \text{ such that } M(i,r)=j \quad \text{and} \quad r' = \text{ such that } M(k,r')=j. \text{ Then,}\\[1mm]
+& \forall\, i,k\in I,\ i<k \text{ with } j \text{ used by both:}\\[1mm]
+& S_{i,r} + p_{i,j} \le S_{k,r'} + M\,(1-\delta_{i,k,j}), \\[1mm]
+& S_{k,r'} + p_{k,j} \le S_{i,r} + M\,\delta_{i,k,j}, \quad\text{where } M \text{ is a suitably large constant (e.g. } \mathtt{max\_time}\text{)}.\\[2mm]
+\text{(3) Makespan constraint:}\\[1mm]
+& \forall i \in I:\quad C_{i,m} &\le C_{\max}, \quad\text{where } C_{i,m} = S_{i,m} + p_{i, M(i,m)}.\\[2mm]
+\text{(4) Consistency of completion times:}\\[1mm]
+& \forall i \in I,\ \forall r \in R:\quad C_{i,r} &= S_{i,r} + p_{i, M(i,r)}.\\[2mm]
+\textbf{Summary of the Model:}\\[1mm]
+\text{Minimize } & C_{\max} \\[1mm]
+\text{subject to:}\\[1mm]
+& S_{i,r} \ge 0, \quad \forall\, i\in I,\ r\in R,\\[1mm]
+& C_{i,r} = S_{i,r} + p_{i, M(i,r)}, \quad \forall\, i\in I,\ r\in R,\\[1mm]
+& S_{i,r+1} \ge C_{i,r}, \quad \forall\, i\in I,\ r=1,\dots,m-1,\\[1mm]
+& S_{i,r} + p_{i,j} \le S_{k,r'} + M\,(1-\delta_{i,k,j}),\\[1mm]
+& \quad\forall \, i,k\in I,\ i<k,\ \forall\, j \in M \text{ with } \exists\, r,\, r' \text{ satisfying } M(i,r)=M(k,r')=j,\\[1mm]
+& S_{k,r'} + p_{k,j} \le S_{i,r} + M\,\delta_{i,k,j},\\[1mm]
+& \quad\forall \, i,k\in I,\ i<k,\ \forall\, j \in M \text{ with } \exists\, r,\, r' \text{ satisfying } M(i,r)=M(k,r')=j,\\[1mm]
+& C_{i,m} \le C_{\max},\quad \forall\, i\in I,\\[1mm]
+& \delta_{i,k,j} \in \{0,1\},\quad \forall\, i,k\in I,\ i<k,\ \forall\, j \in M \text{ used by both jobs.}
+\end{align*}
+
+\vspace{2mm}
+\textbf{Explanation:}\\[1mm]
+1. \emph{Decision Variables:}  
+   - S_{i,r} denotes the start time of the r-th operation for job i; its domain is [0, max\_time].  
+   - C_{i,r} is defined as the corresponding completion time (start time plus processing time on the assigned machine).  
+   - \delta_{i,k,j} is a binary variable that enforces the sequencing between jobs i and k on a common machine j.  
+   - C_{\max} represents the overall makespan and is to be minimized.  
+2. \emph{Objective Function:} We minimize C_{\max} (i.e. minimize the earliest possible finish time over all jobs).  
+3. \emph{Constraints:}  
+   - The job precedence constraints enforce that within each job, the operations follow the required order (as specified by o_{i,j} encoded via the mapping M(i,r)).  
+   - The machine non‐overlap constraints, using the binary variables \delta_{i,k,j} and a big‐M constant, ensure that no two jobs are processed simultaneously on the same machine.  
+   - The makespan constraints guarantee that C_{\max} is at least the finishing time of the final operation for each job.  
+   - The consistency constraints define the relationship between start times and completion times.  
+4. The model is fully specified, bounded (by max\_time) and feasible provided the data (job\_times and job\_order) yield a consistent job processing sequence.
+
+This complete formulation accurately represents the Job-Shop Scheduling Problem as described.
+
+Execution Results:
+SUCCESS:
+Solution:
+Optimal makespan = 138
+Job 0:
+  Operation 1 on Machine 1: Start = 30, Duration = 60, Completion = 90
+  Operation 2 on Machine 0: Start = 96, Duration = 30, Completion = 126
+  Operation 3 on Machine 2: Start = 126, Duration = 2, Completion = 128
+  Operation 4 on Machine 3: Start = 133, Duration = 5, Completion = 138
+Job 1:
+  Operation 1 on Machine 0: Start = 20, Duration = 75, Completion = 95
+  Operation 2 on Machine 2: Start = 95, Duration = 3, Completion = 98
+  Operation 3 on Machine 1: Start = 98, Duration = 25, Completion = 123
+  Operation 4 on Machine 3: Start = 123, Duration = 10, Completion = 133
+Job 2:
+  Operation 1 on Machine 2: Start = 0, Duration = 5, Completion = 5
+  Operation 2 on Machine 0: Start = 5, Duration = 15, Completion = 20
+  Operation 3 on Machine 1: Start = 20, Duration = 10, Completion = 30
+  Operation 4 on Machine 3: Start = 90, Duration = 30, Completion = 120
+Job 3:
+  Operation 1 on Machine 3: Start = 0, Duration = 90, Completion = 90
+  Operation 2 on Machine 1: Start = 90, Duration = 1, Completion = 91
+  Operation 3 on Machine 0: Start = 95, Duration = 1, Completion = 96
+  Operation 4 on Machine 2: Start = 98, Duration = 1, Completion = 99
+
+
+
+Expected Output:
+Expected solution
+
+: {'job_start': [[95, 30, 125, 133], [20, 98, 95, 123], [5, 20, 0, 90], [125, 90, 127, 0]], 'job_end': [[125, 90, 127, 138], [95, 123, 98, 133], [20, 30, 5, 120], [126, 91, 128, 90]], '_objective': 138}

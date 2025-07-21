@@ -1,0 +1,86 @@
+Problem Name: 82_Hospital_Night_Shift_Scheduling
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{Parameters:} \quad & & \\
+K &=& \text{Planning period in weeks, with } K=4,\\[1mm]
+D_d &=& \text{Demand (number of nurses) for the night shift on day } d,\quad d=1,\ldots,7,\\[1mm]
+& & \text{with } (D_1,\ldots,D_7) = (0,\;5,\;9,\;15,\;4,\;7,\;3).\\[2mm]
+\multicolumn{3}{l}{\textbf{Decision Variables:}}\\[1mm]
+y_{x,s} &\in& \mathbb{Z}_{\ge 0} \quad \forall\; x\in\{1,2,\ldots,7\},\; s\in\{1,2,\ldots,7\},
+\end{array}
+\]
+
+Here, the interpretation is as follows: for each possible work‐pattern parameterized by 
+• x = the number of consecutive days worked (night shift) 
+• s = the starting day of the work block (with days indexed cyclically 1,2,…,7)
+a nurse assigned the pattern \((x,s)\) works on the days 
+\[
+s,\; s+1,\; \ldots,\; s+(x-1) \quad (\text{mod } 7)
+\]
+every week. (Note that with cyclic indexing, if for example \(s=6\) and \(x=3\), then the nurse works on days 6,7, and 1.) Each nurse works the same set of days every week during the \(K\) weeks. The overall number of nurses hired equals
+\[
+\sum_{x=1}^7\sum_{s=1}^7 y_{x,s}.
+\]
+
+To ensure that the hospital’s daily demand is met for every day of the week, we define an auxiliary parameter for coverage:
+\[
+a_{d,x,s} = 
+\begin{cases}
+1, & \text{if day } d \text{ is covered by a nurse with pattern } (x,s),\\[1mm]
+0, & \text{otherwise},
+\end{cases}
+\]
+which is equivalent to
+\[
+a_{d,x,s} = 1 \quad \text{if } ((d - s) \mod 7) \in \{0, 1, \ldots, x-1\},\quad \forall\, d=1,\ldots,7,
+\]
+with the understanding that modular arithmetic is taken with the set \(\{0,1,\ldots,6\}\).
+
+The full mathematical model is then formulated as follows:
+
+\[
+\begin{align*}
+\textbf{Minimize} \quad & Z = \sum_{x=1}^{7} \sum_{s=1}^{7} y_{x,s} \\
+\\
+\textbf{subject to} \quad 
+& \sum_{x=1}^{7} \sum_{s=1}^{7} a_{d,x,s}\, y_{x,s} \ge D_d, \quad \forall\, d = 1,2,\ldots,7,\\[1mm]
+& y_{x,s} \in \mathbb{Z}_{\ge 0}, \quad \forall\, x=1,\ldots,7,\; s=1,\ldots,7.
+\end{align*}
+\]
+
+Explanation of the formulation:
+
+1. Decision Variables:  
+  \(y_{x,s}\) denotes the number of nurses hired that follow the work schedule characterized by working \(x\) consecutive night shifts starting on day \(s\) (followed by \(7-x\) consecutive days off). These are nonnegative integers.
+
+2. Objective Function:  
+  We minimize the total number of nurses hired,
+\[
+\min \sum_{x=1}^{7} \sum_{s=1}^{7} y_{x,s},
+\]
+which is a minimization objective.
+
+3. Constraints:  
+  For each day \(d \in \{1,2,\ldots,7\}\) of the week, the total number of nurses scheduled (the summation over all patterns \((x,s)\) that cover day \(d\)) must be at least the demand \(D_d\):
+\[
+\sum_{x=1}^{7} \sum_{s=1}^{7} a_{d,x,s}\, y_{x,s} \ge D_d,\quad d=1,\ldots,7.
+\]
+  This ensures that the staffing demand for each night shift of each day is met during every week of the planning period.
+
+4. Feasibility and Boundedness:  
+  Because there is an explicit demand on each day and decision variables are nonnegative integers, the problem is feasible (provided there exists at least one assignment of nurse patterns that cover the demand) and the objective is bounded from below by the minimum number of nurses needed.
+
+This formulation is self-contained and directly reflects the real‐world problem as described, with no oversimplification.
+
+Execution Results:
+SUCCESS:
+Optimal objective: 15.0
+Pattern (x=6, s=2): 15
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 15.0}

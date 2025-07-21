@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nMILP Model (using ortools.linear_solver) Optimal Solution:\n  Rural factories: 20\n  Urban factories: 5\n  Objective (total factories): 25.0\n\nOutput Schema:\n{\n    \"variables\": {\n        \"FactoriesBuilt\": {\n            \"0\": 20.0,\n            \"1\": 5.0\n        }\n    },\n    \"objective\": 25.0\n}\n"
+}

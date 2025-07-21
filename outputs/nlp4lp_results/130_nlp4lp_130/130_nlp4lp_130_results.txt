@@ -1,0 +1,65 @@
+Problem Name: 130_nlp4lp_130
+
+# Problem Description:
+'''Problem description: A lawn mowing service provides neighborhood services using small teams and large teams. A small team requires 3 employees and can mow 50 sq ft of lawn. A large team requires 5 employees and can mow 80 sq ft of lawn. The company has 150 employees available. Because most people have smaller lawns in the city, the number of small teams must be at least 3 times as much as the number of large teams. In addition, to make sure the company can meet all demands, there has to be at least 6 large teams and at least 10 small teams. How many of each team type should be used to maximize the amount of lawn that can be mowed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "SmallTeams": "float",
+    "LargeTeams": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- TeamTypes = {SmallTeam, LargeTeam}
+
+Parameters:
+- employees_small = 3        // Number of employees required for one small team [employees/team]
+- employees_large = 5        // Number of employees required for one large team [employees/team]
+- lawn_small = 50            // Lawn area mowed by one small team [sq ft/team]
+- lawn_large = 80            // Lawn area mowed by one large team [sq ft/team]
+- total_employees = 150      // Total employees available [employees]
+- min_small_teams = 10       // Minimum number of small teams required [teams]
+- min_large_teams = 6        // Minimum number of large teams required [teams]
+- ratio_small_to_large = 3   // The number of small teams must be at least 3 times the number of large teams
+
+Variables:
+- SmallTeams: integer, number of small teams to deploy [teams]
+- LargeTeams: integer, number of large teams to deploy [teams]
+
+Objective:
+- Maximize Total Lawn Mowed = (lawn_small * SmallTeams) + (lawn_large * LargeTeams) 
+  [square feet]
+
+Constraints:
+1. Employee Availability: 
+   (employees_small * SmallTeams) + (employees_large * LargeTeams) <= total_employees
+
+2. Ratio Constraint: 
+   SmallTeams >= ratio_small_to_large * LargeTeams
+
+3. Minimum Team Requirements: 
+   SmallTeams >= min_small_teams
+   LargeTeams >= min_large_teams
+
+Comments:
+- All units are consistent. Employees are counted per team, and the total lawn area is measured in square feet.
+- Decision variables are modeled as integers because partial teams are not allowed.
+- The model seeks to maximize the total lawn area that can be mowed under the given labor and team composition restrictions.
+
+Execution Results:
+SUCCESS:
+Results from Linear Solver:
+{'variables': {'SmallTeams': 40.0, 'LargeTeams': 6.0}, 'objective': 2480.0}
+
+Results from CP-SAT Solver:
+{'variables': {'SmallTeams': 40, 'LargeTeams': 6}, 'objective': 2480.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallTeams': 40.0, 'LargeTeams': 6.0}, 'objective': 2480.0}

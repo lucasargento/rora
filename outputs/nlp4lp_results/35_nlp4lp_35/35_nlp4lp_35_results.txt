@@ -1,0 +1,84 @@
+Problem Name: 35_nlp4lp_35
+
+# Problem Description:
+'''Problem description: A teddy bear company produces three different colored bears: black, white, and brown. These bears are made in two different factories. Running factory 1 for 1 hour costs $300 and produces 5 black teddy bears, 6 white teddy bears, and 3 brown ones. Running factory 2 for 1 hour costs $600 and produces 10 black teddy bears and 10 white teddy bears. (but no brown ones). To meet children's demand, at least 20 black teddy bears, 5 white teddy bears, and 15 brown teddy bears must be made daily. Given this information, develop a linear programming problem assuming the teddy bear company wants to minimize the cost of production.
+
+Expected Output Schema:
+{
+  "variables": {
+    "RunningTime": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is a precise formulation of the problem using the five-element structure:
+
+------------------------------------------------------------
+Sets:
+- F: set of factories = {1, 2}
+- B: set of bear colors = {black, white, brown}
+
+------------------------------------------------------------
+Parameters:
+- cost[f]: production cost per hour for factory f (in USD/hour). Namely, cost[1] = 300, cost[2] = 600.
+- prod[f, b]: number of bears of color b produced per hour in factory f.
+  - For factory 1: prod[1, black] = 5, prod[1, white] = 6, prod[1, brown] = 3.
+  - For factory 2: prod[2, black] = 10, prod[2, white] = 10, prod[2, brown] = 0.
+- demand[b]: minimum number of bears that must be produced daily for each color.
+  - demand[black] = 20, demand[white] = 5, demand[brown] = 15.
+
+------------------------------------------------------------
+Variables:
+- x[f]: running time of factory f (in hours). Here x[1] and x[2] are continuous variables with x[f] >= 0.
+  (The variable x[f] represents the number of hours factory f is operated.)
+
+------------------------------------------------------------
+Objective:
+- Minimize total production cost.
+  That is, minimize Z = sum over f in F of (cost[f] * x[f]).
+  In this problem: Z = 300*x[1] + 600*x[2].
+
+------------------------------------------------------------
+Constraints:
+For each bear color b in B, the total production from both factories must meet or exceed the daily demand.
+- For black bears: prod[1, black]*x[1] + prod[2, black]*x[2] >= demand[black]
+  which becomes: 5*x[1] + 10*x[2] >= 20.
+- For white bears: prod[1, white]*x[1] + prod[2, white]*x[2] >= demand[white]
+  which becomes: 6*x[1] + 10*x[2] >= 5.
+- For brown bears: prod[1, brown]*x[1] + prod[2, brown]*x[2] >= demand[brown]
+  which becomes: 3*x[1] + 0*x[2] >= 15.
+
+------------------------------------------------------------
+Additional Notes:
+- All production rates and costs are given per hour, ensuring consistency in units.
+- The decision variables (x[1] and x[2]) are continuous, assuming that fractional hours of operation are allowed.
+- The model is linear and minimizes the total operational costs while satisfying the daily production requirements.
+- In implementation, one could map the factories with indices 0 and 1 if required (e.g., RunningTime{0} corresponds to x[1] and RunningTime{1} corresponds to x[2]).
+
+This completes the structured linear programming model for the teddy bear production problem.
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Version1:
+  Optimal RunningTimes:
+    Factory 1: 5.0
+    Factory 2: 0.0
+  Objective Value: 1500.0
+
+Version2:
+  Optimal RunningTimes:
+    Factory 0: 5.0
+    Factory 1: 0.0
+  Objective Value: 1500.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'RunningTime': {'0': 5.0, '1': 0.0}}, 'objective': 1500.0}

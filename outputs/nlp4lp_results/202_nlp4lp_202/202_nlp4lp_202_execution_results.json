@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nModel Implementation 1:\nOptimal solution:\n  ThrowingGames = 42.0\n  ClimbingGames = 5.0\nMaximum total customers per hour = 670.0\n"
+}

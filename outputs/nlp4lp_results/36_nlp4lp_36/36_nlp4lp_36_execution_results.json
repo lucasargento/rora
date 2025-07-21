@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nModel 1 (Linear Programming Optimization) Results:\n{'variables': {'LandTurnips': 124.99999999999997, 'LandPumpkins': 375.00000000000006}, 'objective': 206250.00000000003}\n"
+}

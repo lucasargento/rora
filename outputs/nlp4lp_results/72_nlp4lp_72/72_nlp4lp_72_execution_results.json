@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults:\n----------------------------------------\nMethod: LinearSolver\nOptimal Variables: {'NumberA': 20, 'NumberB': 8}\nObjective Value: 28.0\n----------------------------------------\nMethod: CPSAT\nOptimal Variables: {'NumberA': 20, 'NumberB': 8}\nObjective Value: 28\n----------------------------------------\n"
+}

@@ -1,0 +1,64 @@
+Problem Name: 182_nlp4lp_182
+
+# Problem Description:
+'''Problem description: Maple Oil processes three types of crude oil: light oil, non-sticky oil and heavy oil. Each tank of light oil produces a net revenue of $550, each tank of non-sticky oil produces a net revenue of $750, and each tank of heavy oil produces a net revenue of $950. To process a tank of light oil, 3 units of compound A and 3 units of compound B are required. To process a tank of non-sticky oil, 6 units of compound A and 2 units of compound B are required. To process a tank of heavy oil, 9 units of compound A and 3 units of compound B are required. Currently the company has 250 units of compound A and 150 units of compound B to process. How many full or partial tanks of each oil should the company process so that net revenue is maximized?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumTanksProcessed": {
+      "0": "float",
+      "1": "float",
+      "2": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- OilTypes: set of oil types = {Light, NonSticky, Heavy}
+
+Parameters:
+- revenue[o] : net revenue per tank processed for oil type o [USD per tank]
+  • revenue[Light] = 550
+  • revenue[NonSticky] = 750
+  • revenue[Heavy] = 950
+- compoundA_req[o] : amount of Compound A required per tank for oil type o [units per tank]
+  • compoundA_req[Light] = 3
+  • compoundA_req[NonSticky] = 6
+  • compoundA_req[Heavy] = 9
+- compoundB_req[o] : amount of Compound B required per tank for oil type o [units per tank]
+  • compoundB_req[Light] = 3
+  • compoundB_req[NonSticky] = 2
+  • compoundB_req[Heavy] = 3
+- available_CompoundA: total available units of Compound A = 250 [units]
+- available_CompoundB: total available units of Compound B = 150 [units]
+
+Variables:
+- tanks[o] : number of tanks processed for oil type o, where o in OilTypes [continuous, nonnegative]
+  (Interpretation: Number of full or partial tanks processed for each oil type)
+
+Objective:
+- Maximize total net revenue = sum over o in OilTypes of (revenue[o] * tanks[o])
+  (Units: USD; Interpretation: Total net revenue from processing tanks)
+
+Constraints:
+1. Compound A Constraint:
+  sum over o in OilTypes of (compoundA_req[o] * tanks[o]) ≤ available_CompoundA
+  (Ensures that Compound A used does not exceed 250 units)
+
+2. Compound B Constraint:
+  sum over o in OilTypes of (compoundB_req[o] * tanks[o]) ≤ available_CompoundB
+  (Ensures that Compound B used does not exceed 150 units)
+
+Execution Results:
+SUCCESS:
+Linear Optimization (GLOP) Solution:
+{'variables': {'NumTanksProcessed': {'0': 33.33333333333334, '1': 24.999999999999996, '2': 0.0}}, 'objective': 37083.333333333336}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumTanksProcessed': {'0': 33.333333333333336, '1': 25.0, '2': 0.0}}, 'objective': 37083.333333333336}

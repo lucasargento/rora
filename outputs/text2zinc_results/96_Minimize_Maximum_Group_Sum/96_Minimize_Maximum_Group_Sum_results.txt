@@ -1,0 +1,38 @@
+Problem Name: 96_Minimize_Maximum_Group_Sum
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:} \quad & n \in \mathbb{N} \quad \text{(number of items)}, \quad a_i \in \mathbb{R}_{>0} \quad \forall i = 1, \dots, n \quad \text{(value of item } i\text{)}, \\
+& k \in \mathbb{N} \quad \text{(number of groups)}. \\[1mm]
+%
+\textbf{Decision Variables:} \quad & x_{ij} \in \{0,1\} \quad \forall \, i = 1,\dots,n,\; j = 1,\dots,k, \quad \text{where} \quad x_{ij} =
+\begin{cases}
+1, & \text{if item } i \text{ is assigned to group } j,\\[1mm]
+0, & \text{otherwise.}
+\end{cases} \\[1mm]
+%
+& Y \in \mathbb{R}_{\ge 0} \quad \text{(maximum sum among all groups)}. \\[2mm]
+%
+\textbf{Objective Function:} \quad & \min Y \\[2mm]
+%
+\textbf{Constraints:} \quad & \text{(a) Each item must be assigned to exactly one group:} \\
+& \sum_{j=1}^{k} x_{ij} = 1, \quad \forall \, i = 1,\dots,n. \\[2mm]
+%
+& \text{(b) Definition of the maximum group sum:} \\
+& \sum_{i=1}^{n} a_i \, x_{ij} \le Y, \quad \forall \, j = 1,\dots,k. \\[2mm]
+%
+& \text{(c) Feasibility and boundedness are ensured by the finite number of items and the positive values } a_i.
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal objective value (Y): 100
+Group 1: item 3 (value: 40), item 4 (value: 30), item 5 (value: 20), item 6 (value: 10) | Sum = 100
+Group 2: item 1 (value: 51), item 2 (value: 49) | Sum = 100
+Group 3: item 0 (value: 100) | Sum = 100
+
+
+Expected Output:
+Expected solution
+
+: {'x': [1, 2, 2, 3, 3, 3, 3], 'sums': [100, 100, 100], '_objective': 100}

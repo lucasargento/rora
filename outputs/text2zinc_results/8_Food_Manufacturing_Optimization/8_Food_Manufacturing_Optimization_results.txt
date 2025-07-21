@@ -1,0 +1,104 @@
+Problem Name: 8_Food_Manufacturing_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Sets and Indices:}\quad & m = 1,\ldots, M,\quad i = 1,\ldots, I. \\[1mm]
+\textbf{Parameters:}\quad &
+\begin{array}{rcl}
+\text{BuyPrice}_{m,i}     &:& \text{Purchase cost per ton of oil } i \text{ in month } m,\\[1mm]
+\text{SellPrice}          &:& \text{Fixed selling price per ton of final product},\\[1mm]
+\text{IsVegetable}_{i}    &:& \begin{cases}
+1, & \text{if oil } i \text{ is a vegetable oil},\\[1mm]
+0, & \text{if oil } i \text{ is a non‐vegetable oil},
+\end{cases}\\[1mm]
+\text{MaxVegRefine}       &:& \text{Maximum total tons of vegetable oil that can}\\[0.5mm]
+                        & & \quad \text{be refined in any month},\\[1mm]
+\text{MaxNonVegRefine}    &:& \text{Maximum total tons of non–vegetable oil that can}\\[0.5mm]
+                        & & \quad \text{be refined in any month},\\[1mm]
+\text{StorageSize}        &:& \text{Maximum total tonnage of raw oil that can be stored in any month},\\[1mm]
+\text{StorageCost}        &:& \text{Cost per ton per month for storing raw oil},\\[1mm]
+\text{MinHardness}        &:& \text{Minimum hardness allowed for the final product},\\[1mm]
+\text{MaxHardness}        &:& \text{Maximum hardness allowed for the final product},\\[1mm]
+\text{Hardness}_{i}       &:& \text{Hardness value of raw oil } i, \\[1mm]
+\text{InitialAmount}_{i}  &:& \text{Initial inventory (in tons) of raw oil } i.
+\end{array} \\[2mm]
+\textbf{Decision Variables:}\quad &  
+\begin{array}{rcl}
+x_{m,i} &\ge& 0,\quad \text{tons of raw oil } i \text{ purchased in month } m,\\[1mm]
+r_{m,i} &\ge& 0,\quad \text{tons of raw oil } i \text{ refined in month } m,\\[1mm]
+s_{m,i} &\ge& 0,\quad \text{tons of raw oil } i \text{ held in storage at end of month } m.
+\end{array} \\[2mm]
+\textbf{Objective Function:}\\[0.5mm]
+\text{Maximize} \quad Z =\; & \underbrace{\text{SellPrice} \cdot \sum_{m=1}^{M} \sum_{i=1}^{I} r_{m,i}}_{\text{Revenue from final product}} \;-\; \underbrace{\sum_{m=1}^{M} \sum_{i=1}^{I} \text{BuyPrice}_{m,i}\, x_{m,i}}_{\text{Purchasing cost}} \;-\; \underbrace{\text{StorageCost} \cdot \sum_{m=1}^{M} \sum_{i=1}^{I} s_{m,i}}_{\text{Storage cost}}.
+\\[2mm]
+\textbf{Subject to:}\\[1mm]
+\textbf{(1) Inventory Balance (for each } m=1,\ldots,M,\; i=1,\ldots,I\textbf{):} \quad &
+s_{m,i} = s_{m-1,i} + x_{m,i} - r_{m,i}, \quad \text{with } s_{0,i} = \text{InitialAmount}_{i}.\\[2mm]
+\textbf{(2) Final Storage Requirement (for each } i=1,\ldots,I\textbf{):} \quad & s_{M,i} = \text{InitialAmount}_{i}.\\[2mm]
+\textbf{(3) Storage Capacity (for each month } m=1,\ldots,M\textbf{):} \quad &
+\sum_{i=1}^{I} s_{m,i} \le \text{StorageSize}.\\[2mm]
+\textbf{(4) Refining Capacity for Vegetable Oils (for each month } m=1,\ldots,M\textbf{):} \quad &
+\sum_{i=1}^{I} \text{IsVegetable}_{i}\; r_{m,i} \le \text{MaxVegRefine}.\\[2mm]
+\textbf{(5) Refining Capacity for Non–Vegetable Oils (for each month } m=1,\ldots,M\textbf{):} \quad &
+\sum_{i=1}^{I} \bigl(1-\text{IsVegetable}_{i}\bigr)\; r_{m,i} \le \text{MaxNonVegRefine}.\\[2mm]
+\textbf{(6) Hardness Blending Constraint (for each month } m=1,\ldots,M\textbf{):} \quad &
+\text{MinHardness} \cdot \sum_{i=1}^{I} r_{m,i} \; \le \; \sum_{i=1}^{I} \text{Hardness}_{i}\, r_{m,i} \; \le \; \text{MaxHardness} \cdot \sum_{i=1}^{I} r_{m,i}.\\[2mm]
+\textbf{(7) Nonnegativity:} \quad & x_{m,i} \ge 0,\quad r_{m,i} \ge 0,\quad s_{m,i}\ge 0,\quad \forall \; m=1,\ldots,M,\; i=1,\ldots,I.
+\end{align*}
+
+\vspace{2mm}
+This formulation fully captures the decisions of purchasing raw oils, storing them under a capacity limit (with associated holding costs), and refining them subject to separate monthly capacity limits for vegetable and non–vegetable oils. The refined oils are blended to produce the final product subject to a weighted–average hardness requirement while ensuring that the initial storage levels are exactly reproduced at the end of the planning horizon. The objective is to maximize the net profit defined as revenue minus purchasing and storage costs. This model is both feasible (with appropriate parameter values) and bounded.
+
+Execution Results:
+SUCCESS:
+Optimal solution found!
+Optimal objective value:  132712.962962963
+
+Month 1:
+  Oil 1: Purchase = 229.63, Refine = 170.37, Storage = 159.26
+  Oil 2: Purchase = 11.11, Refine = 29.63, Storage = 81.48
+  Oil 3: Purchase = 0.00, Refine = 50.00, Storage = 50.00
+  Oil 4: Purchase = 0.00, Refine = 100.00, Storage = 0.00
+  Oil 5: Purchase = 0.00, Refine = 100.00, Storage = -0.00
+
+Month 2:
+  Oil 1: Purchase = 0.00, Refine = 159.26, Storage = 0.00
+  Oil 2: Purchase = 0.00, Refine = 40.74, Storage = 40.74
+  Oil 3: Purchase = 0.00, Refine = 0.00, Storage = 50.00
+  Oil 4: Purchase = 750.00, Refine = 250.00, Storage = 500.00
+  Oil 5: Purchase = 0.00, Refine = 0.00, Storage = 0.00
+
+Month 3:
+  Oil 1: Purchase = 159.26, Refine = 159.26, Storage = -0.00
+  Oil 2: Purchase = 0.00, Refine = 40.74, Storage = 0.00
+  Oil 3: Purchase = 0.00, Refine = 0.00, Storage = 50.00
+  Oil 4: Purchase = 0.00, Refine = 250.00, Storage = 250.00
+  Oil 5: Purchase = 250.00, Refine = 0.00, Storage = 250.00
+
+Month 4:
+  Oil 1: Purchase = 0.00, Refine = 0.00, Storage = 0.00
+  Oil 2: Purchase = 240.74, Refine = 200.00, Storage = 40.74
+  Oil 3: Purchase = 50.00, Refine = 0.00, Storage = 100.00
+  Oil 4: Purchase = 0.00, Refine = 0.00, Storage = 250.00
+  Oil 5: Purchase = 0.00, Refine = 250.00, Storage = 0.00
+
+Month 5:
+  Oil 1: Purchase = 159.26, Refine = 159.26, Storage = 0.00
+  Oil 2: Purchase = 0.00, Refine = 40.74, Storage = 0.00
+  Oil 3: Purchase = 0.00, Refine = 0.00, Storage = 100.00
+  Oil 4: Purchase = 0.00, Refine = 250.00, Storage = 0.00
+  Oil 5: Purchase = 100.00, Refine = 0.00, Storage = 100.00
+
+Month 6:
+  Oil 1: Purchase = 259.26, Refine = 159.26, Storage = 100.00
+  Oil 2: Purchase = 140.74, Refine = 40.74, Storage = 100.00
+  Oil 3: Purchase = 0.00, Refine = 0.00, Storage = 100.00
+  Oil 4: Purchase = 350.00, Refine = 250.00, Storage = 100.00
+  Oil 5: Purchase = 0.00, Refine = 0.00, Storage = 100.00
+
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 107843.0}

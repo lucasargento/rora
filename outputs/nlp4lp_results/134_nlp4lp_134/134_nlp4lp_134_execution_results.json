@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nModel 1 (Constraint: NumberLargeBuses <= 0.2*(Total Buses)) solution:\n{'NumberSmallBuses': 16, 'NumberLargeBuses': 4, 'objective': 20}\n\nModel 2 (Constraint: NumberSmallBuses >= 4*NumberLargeBuses) solution:\n{'NumberSmallBuses': 16, 'NumberLargeBuses': 4, 'objective': 20}\n"
+}

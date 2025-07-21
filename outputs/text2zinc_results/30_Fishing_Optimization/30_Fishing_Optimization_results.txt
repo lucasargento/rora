@@ -1,0 +1,41 @@
+Problem Name: 30_Fishing_Optimization
+
+Mathematical Formulation:
+\[
+\begin{array}{rll}
+\textbf{Decision Variables:} & & \\[1mm]
+x_N & = \text{Acres fished using the net method} & (x_N \ge 0)\\[1mm]
+x_L & = \text{Acres fished using the fishing line method} & (x_L \ge 0)\\[2mm]
+\textbf{Parameters:} & & \\[1mm]
+\text{TotalAcres} & = 250, & \text{Total available lake acres}\\[1mm]
+\text{TotalBait} & = 800, & \text{Total available bait}\\[1mm]
+\text{MaxPain} & = 350, & \text{Maximum tolerable pain}\\[1mm]
+\text{FishPerNetAcre} & = 8, & \text{Fish caught per acre using a net}\\[1mm]
+\text{FishPerLineAcre} & = 5, & \text{Fish caught per acre using a fishing line}\\[1mm]
+\text{BaitPerNetAcre} & = 4, & \text{Bait required per acre using a net}\\[1mm]
+\text{BaitPerLineAcre} & = 3, & \text{Bait required per acre using a fishing line}\\[1mm]
+\text{PainPerNetAcre} & = 2, & \text{Pain caused per acre using a net}\\[1mm]
+\text{PainPerLineAcre} & = 1, & \text{Pain caused per acre using a fishing line}\\[2mm]
+\textbf{Mathematical Model:} & & \\[1mm]
+\text{Maximize} \quad & Z = 8x_N + 5x_L \\[2mm]
+\text{Subject to:} \quad & x_N + x_L \le 250 \quad & \text{(Lake area constraint)} \\[1mm]
+& 4x_N + 3x_L \le 800 \quad & \text{(Bait consumption constraint)} \\[1mm]
+& 2x_N + x_L \le 350 \quad & \text{(Pain tolerance constraint)} \\[1mm]
+& x_N \ge 0, \quad x_L \ge 0 \quad & \text{(Non-negativity constraints)}
+\end{array}
+\]
+
+This formulation fully captures the decision variables, the objective (maximizing total fish caught), and all the constraints reflecting the limited lake area, bait, and maximum tolerable pain, ensuring that the problem is both feasible and bounded.
+
+Execution Results:
+SUCCESS:
+Solution:
+Optimal fish caught =  1500.0
+Acres fished using net =  124.99999999999991
+Acres fished using fishing line =  100.00000000000014
+
+
+Expected Output:
+Expected solution
+
+: {'NetAcres': 125, 'LineAcres': 100, 'TotalFish': 1500, '_objective': 1500}

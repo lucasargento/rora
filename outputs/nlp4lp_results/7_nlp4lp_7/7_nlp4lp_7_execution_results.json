@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults from Linear/MIP formulation using ortools.linear_solver:\nOptimal Solution:\nx_thin (number of thin jars, integer ≥ 0) = 1\nx_stubby (number of stubby jars, integer ≥ 0) = 26\nMaximum Profit: 239.0\n"
+}

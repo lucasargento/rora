@@ -1,0 +1,72 @@
+Problem Name: 223_nlp4lp_223
+
+# Problem Description:
+'''Problem description: Platinum in combination with palladium has been used as a catalyst in cars and it changes carbon monoxide, which is toxic, into carbon dioxide. An automotive company is comparing two different catalysts, a palladium-heavy catalyst and a platinum-heavy catalyst. The process with a palladium-heavy catalyst requires 15 units of platinum and 25 units of palladium and can perform the conversion to carbon dioxide at a rate of 5 units per second. A platinum-heavy catalyst requires 20 units of platinum and 14 units of palladium and converts to carbon dioxide at a rate of 4 units per second. There are 450 units of platinum and 390 units of palladium available. How many of each catalyst should be used to maximize the amount converted into carbon dioxide?
+
+Expected Output Schema:
+{
+  "variables": {
+    "CatalystUsage": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- CATALYST: set of catalyst types = {PalladiumHeavy, PlatinumHeavy}
+
+Parameters:
+- platinum_req[c] = units of platinum required per catalyst type c
+  • platinum_req[PalladiumHeavy] = 15 (units per catalyst)
+  • platinum_req[PlatinumHeavy] = 20 (units per catalyst)
+- palladium_req[c] = units of palladium required per catalyst type c
+  • palladium_req[PalladiumHeavy] = 25 (units per catalyst)
+  • palladium_req[PlatinumHeavy] = 14 (units per catalyst)
+- conversion_rate[c] = conversion rate (units of carbon monoxide converted to carbon dioxide per second) per catalyst type c
+  • conversion_rate[PalladiumHeavy] = 5 (units/second)
+  • conversion_rate[PlatinumHeavy] = 4 (units/second)
+- available_platinum = 450 (units of platinum available)
+- available_palladium = 390 (units of palladium available)
+
+Variables:
+- CatalystUsage[c] for each c in CATALYST, representing the number of catalysts of type c to use
+  • Domain: CatalystUsage[c] ≥ 0 (assuming continuous decision variables; if catalysts must be whole units, then they are integers)
+
+Objective:
+- Maximize total conversion rate per second = 
+  conversion_rate[PalladiumHeavy] * CatalystUsage[PalladiumHeavy] + conversion_rate[PlatinumHeavy] * CatalystUsage[PlatinumHeavy]
+
+Constraints:
+1. Platinum availability constraint:
+   platinum_req[PalladiumHeavy] * CatalystUsage[PalladiumHeavy] + platinum_req[PlatinumHeavy] * CatalystUsage[PlatinumHeavy] ≤ available_platinum
+   (i.e., 15 * CatalystUsage[PalladiumHeavy] + 20 * CatalystUsage[PlatinumHeavy] ≤ 450)
+
+2. Palladium availability constraint:
+   palladium_req[PalladiumHeavy] * CatalystUsage[PalladiumHeavy] + palladium_req[PlatinumHeavy] * CatalystUsage[PlatinumHeavy] ≤ available_palladium
+   (i.e., 25 * CatalystUsage[PalladiumHeavy] + 14 * CatalystUsage[PlatinumHeavy] ≤ 390)
+
+-----------------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "CatalystUsage": {
+      "0": "float",     // corresponds to PalladiumHeavy catalyst
+      "1": "float"      // corresponds to PlatinumHeavy catalyst
+    }
+  },
+  "objective": "float"   // total conversion rate (units converted per second)"
+}
+
+Execution Results:
+SUCCESS:
+Results from the Linear Programming Model:
+{'variables': {'CatalystUsage': {'0': 5.172413793103451, '1': 18.620689655172413}}, 'objective': 100.3448275862069}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'CatalystUsage': {'0': 5.172413793103448, '1': 18.620689655172413}}, 'objective': 100.34482758620689}

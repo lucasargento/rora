@@ -1,0 +1,104 @@
+Problem Name: 92_Cheapest_Alloy_Combination
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:} \quad &K \in \{1,2,\dots,5\} \quad &&\text{(set of available alloys)}\\[1mm]
+&M \in \{1,2\} \quad &&\text{(set of metals)}\\[1mm]
+&Q = 1000 \quad &&\text{(total alloy production in lb)}\\[1mm]
+&T_m,\; m \in M,\quad &&\text{Target amount of metal } m,\quad T_1 = 300,\; T_2 = 700\\[1mm]
+&r_{k,m},\; k\in K,\; m\in M,\quad &&\text{Fraction of metal } m \text{ in alloy } k,\\[1mm]
+&&& \begin{array}{lll}
+r_{1,1}=0.10, & r_{1,2}=0.90;\\[1mm]
+r_{2,1}=0.25, & r_{2,2}=0.75;\\[1mm]
+r_{3,1}=0.50, & r_{3,2}=0.50;\\[1mm]
+r_{4,1}=0.75, & r_{4,2}=0.25;\\[1mm]
+r_{5,1}=0.95, & r_{5,2}=0.05;
+\end{array}\\[2mm]
+&p_k,\; k\in K,\quad &&\text{Unit price of alloy } k,\quad p_1=5,\; p_2=4,\; p_3=3,\; p_4=2,\; p_5=1.5.
+\end{align*}
+
+\bigskip
+
+\noindent
+\textbf{Decision Variables:}  
+\begin{itemize}
+    \item Let $x_k$ denote the quantity in lb of alloy $k$ used in the production, for each $k\in\{1,\ldots,5\}$.
+    \item Domain: \quad $x_k \geq 0$, for all $k\in\{1,2,\dots,5\}$.
+\end{itemize}
+
+\bigskip
+
+\noindent
+\textbf{Objective Function:}  
+\[
+\text{Minimize} \quad Z = \sum_{k=1}^{5} p_k\, x_k,
+\]
+i.e., minimize the total production cost.
+
+\bigskip
+
+\noindent
+\textbf{Constraints:}
+\begin{enumerate}
+    \item \emph{Total Alloy Production:}  
+    \[
+    \sum_{k=1}^{5} x_k = Q.
+    \]
+    
+    \item \emph{Metal Composition Constraints:}  
+    For each metal $m \in \{1,2\}$, the sum of the metal contributed by all alloys must equal the target amount:
+    \[
+    \sum_{k=1}^{5} r_{k,m}\, x_k = T_m,\quad \forall m\in\{1,2\}.
+    \]
+    
+    \item \emph{Non-negativity:}  
+    \[
+    x_k \ge 0,\quad \forall k\in \{1,2,\dots,5\}.
+    \]
+    
+    \item \emph{Non-trivial Alloy Mix:}  
+    To avoid a degenerate production mix where only one alloy is used (unless forced by the targets), we enforce that the quantities of at least two alloys are strictly positive. One way to enforce this is by introducing a sufficiently small positive number $\epsilon>0$ and binary variables $y_k\in\{0,1\}$, for $k\in \{1,\dots,5\}$, and then requiring
+    \[
+    x_k \ge \epsilon\, y_k,\quad \forall k\in \{1,\dots,5\},
+    \]
+    and
+    \[
+    \sum_{k=1}^{5} y_k \ge 2.
+    \]
+    This set of constraints forces that at least two alloys have a production quantity of at least $\epsilon$. (The choice of $\epsilon$ should be small relative to $Q$ but large enough to be meaningful in context.)
+\end{enumerate}
+
+\bigskip
+
+\noindent
+\textbf{Complete Mathematical Model:}
+\begin{align*}
+\text{Minimize} \quad & Z = \sum_{k=1}^{5} p_k\, x_k \\[1mm]
+\text{subject to} \quad 
+& \sum_{k=1}^{5} x_k = Q, \\[1mm]
+& \sum_{k=1}^{5} r_{k,1}\, x_k = T_1, \\[1mm]
+& \sum_{k=1}^{5} r_{k,2}\, x_k = T_2, \\[1mm]
+& x_k \geq \epsilon\, y_k,\quad \forall k \in \{1,2,\dots,5\}, \\[1mm]
+& \sum_{k=1}^{5} y_k \geq 2, \\[1mm]
+& x_k \geq 0,\quad y_k \in \{0,1\} \quad \forall k \in \{1,2,\dots,5\}.
+\end{align*}
+
+\bigskip
+
+This formulation is self-contained, explicitly defines all decision variables, parameters, objective, and constraints, and avoids trivial solutions by ensuring that the production mix utilizes at least two alloys. The model is both feasible and bounded given the provided data.
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+x_1 = 0.0
+x_2 = 799.9999999999998
+x_3 = 200.00000000000026
+x_4 = 0.0
+x_5 = 0.0
+Objective value = 3800.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 3800.0}

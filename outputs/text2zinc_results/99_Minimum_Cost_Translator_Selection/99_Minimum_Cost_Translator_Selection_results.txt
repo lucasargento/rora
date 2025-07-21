@@ -1,0 +1,48 @@
+Problem Name: 99_Minimum_Cost_Translator_Selection
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:}\\[1mm]
+& N \quad=\quad \text{Number of translators (here, } N=6\text{)}\\[1mm]
+& M \quad=\quad \text{Number of required languages (here, } M=8\text{)}\\[1mm]
+& \text{Cost}_i \quad=\quad \text{Cost of translator } i, \quad i=1,\ldots,N\\[1mm]
+& a_{ij} \quad=\quad \text{Element of the TranslatorLanguagesMatrix, which is }\\
+& \qquad\quad 1 \text{ if translator } i \text{ can translate into required language } j, \quad 0 \text{ otherwise},\\[1mm]
+& \text{RequiredLanguages: a list of } M \text{ languages (e.g., }``\text{FR, AR, GE, RU, SP, CH, IT, PO}"\text{)}.\\[2mm]
+
+\textbf{Decision Variables:}\\[1mm]
+& x_i \; \in \; \{0, 1\} \quad && \forall i \in \{1,2,\ldots,N\} \\
+& && \text{where } x_i = 
+\begin{cases}
+1, & \text{if translator } i \text{ is selected,} \\
+0, & \text{otherwise.}
+\end{cases}\\[2mm]
+
+\textbf{Objective Function:}\\[1mm]
+& \textbf{minimize} \quad Z \;=\; \sum_{i=1}^{N} \text{Cost}_i\, x_i. \\[2mm]
+
+\textbf{Constraints:}\\[1mm]
+& \sum_{i=1}^{N} a_{ij}\, x_i \;\ge\; 1, \quad && \forall j \in \{1,2,\ldots,M\} \\
+& && \text{(Ensures that each required language } j \text{ is covered by at least one selected translator.)} \\[2mm]
+
+\textbf{Model Summary:}\\[1mm]
+\begin{aligned}
+\underset{x}{\text{minimize}} \quad & Z = \sum_{i=1}^{N} \text{Cost}_i\, x_i \\[1mm]
+\text{subject to} \quad & \sum_{i=1}^{N} a_{ij}\, x_i \ge 1 \quad \forall j \in \{1,2,\ldots,M\}, \\[1mm]
+& x_i \in \{0,1\} \quad \forall i \in \{1,2,\ldots,N\}.
+\end{aligned}
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Translator 1 is selected with cost 12000.
+Translator 2 is selected with cost 16000.
+Translator 6 is selected with cost 7000.
+Total cost = 35000
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 35000.0}

@@ -1,0 +1,60 @@
+Problem Name: 13_nlp4lp_13
+
+# Problem Description:
+'''Problem description: My family has decided to invest in real state for the first time. Currently, they have $600,000 to invest, some in apartments and the rest in townhouses. The money invested in apartments must not be greater than $200,000. They have decided that the money invested in apartments must be at least a half as much as that in townhouses.  If the apartments earn 10%, and the townhouses earn 15%, how much money should they invest in each to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "InvestmentApartments": "float",
+    "InvestmentTownhouses": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- S: set of property types = {Apartments, Townhouses}
+
+Parameters:
+- TotalInvestment: total available funds for investment = 600000 (USD)
+- MaxApartmentInvestment: maximum allowed funds for apartments = 200000 (USD)
+- ReturnApartment: profit rate for apartments = 0.10 (profit per dollar)
+- ReturnTownhouse: profit rate for townhouses = 0.15 (profit per dollar)
+- MinApartmentToTownhouseRatio: minimum ratio of apartment investment to townhouse investment = 0.5
+
+Variables:
+- InvestmentApartments: amount invested in apartments (continuous, USD, ≥ 0)
+- InvestmentTownhouses: amount invested in townhouses (continuous, USD, ≥ 0)
+
+Objective:
+- Maximize total profit = (ReturnApartment × InvestmentApartments) + (ReturnTownhouse × InvestmentTownhouses)
+
+Constraints:
+1. Budget constraint: InvestmentApartments + InvestmentTownhouses ≤ TotalInvestment
+2. Apartment cap: InvestmentApartments ≤ MaxApartmentInvestment
+3. Ratio constraint: InvestmentApartments ≥ MinApartmentToTownhouseRatio × InvestmentTownhouses
+4. Nonnegativity: InvestmentApartments ≥ 0 and InvestmentTownhouses ≥ 0
+
+--------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "InvestmentApartments": "float",
+    "InvestmentTownhouses": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Results for Investment Optimization Model:
+InvestmentApartments = 200000.0
+InvestmentTownhouses = 400000.0
+Optimal Profit = 80000.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'InvestmentApartments': 200000.0, 'InvestmentTownhouses': 400000.0}, 'objective': 80000.0}

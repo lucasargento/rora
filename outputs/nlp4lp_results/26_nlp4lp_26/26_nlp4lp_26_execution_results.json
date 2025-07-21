@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{'Model1': {'variables': {'GallonsChocolateProduced': 10.0, 'GallonsVanillaProduced': 8.0}, 'objective': 4400.0}, 'Model2': {'variables': {'GallonsChocolateProduced': 10.0, 'GallonsVanillaProduced': 8.0, 'WorkersChocolate': 4.0, 'WorkersVanilla': 2.0}, 'objective': 4400.0}}\n"
+}

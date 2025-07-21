@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nRunning Model Version 1 (Fractional Constraint)...\nVersion 1 (Fractional Constraint) Optimal Solution:\n{'KayakTrips': 107.0, 'MotorboatTrips': 25.0, 'objective': 610.0}\n\nRunning Model Version 2 (Algebraic Constraint)...\nVersion 2 (Algebraic Constraint) Optimal Solution:\n{'KayakTrips': 107.0, 'MotorboatTrips': 25.0, 'objective': 610.0}\n"
+}

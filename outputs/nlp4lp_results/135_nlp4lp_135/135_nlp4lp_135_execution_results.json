@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{'LinearSolverImplementation': {'model': 'LinearSolver', 'variables': {'NumTrips': {'0': 25.0, '1': 50.0}, 'NumVehicles': {'0': 25.0, '1': 50.0}}, 'objective': 75.0}, 'CpModelImplementation': {'model': 'CpModel', 'variables': {'NumTrips': {'0': 25, '1': 50}, 'NumVehicles': {'0': 25, '1': 50}}, 'objective': 75}}\n"
+}

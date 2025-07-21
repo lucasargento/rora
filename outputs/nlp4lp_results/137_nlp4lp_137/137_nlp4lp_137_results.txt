@@ -1,0 +1,84 @@
+Problem Name: 137_nlp4lp_137
+
+# Problem Description:
+'''Problem description: A toy store decides to deliver gifts using two shipping companies, a new one and an old one. The new company can deliver 50 gifts per trip while the old company can deliver 70 gifts per trip. The new company uses 30 liters of diesel per trip while the old company uses 40 liters of diesel per trip. The toy store needs to deliver at least 1000 gifts. There can be at most 15 trips made by the new company. In order to make sure that the old company does not go out of business, at least 40% of all trips must be made by the old company. How many trips should each company make to minimize the total amount of diesel used?
+
+Expected Output Schema:
+{
+  "variables": {
+    "TripsNewCompany": "float",
+    "TripsOldCompany": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Companies: {New, Old}
+
+Parameters:
+- new_trip_capacity: Number of gifts delivered by the new company per trip (50 gifts per trip)
+- old_trip_capacity: Number of gifts delivered by the old company per trip (70 gifts per trip)
+- new_trip_diesel: Diesel consumption per trip for the new company (30 liters per trip)
+- old_trip_diesel: Diesel consumption per trip for the old company (40 liters per trip)
+- min_gifts: Minimum total number of gifts to deliver (1000 gifts)
+- max_new_trips: Maximum number of trips allowed by the new company (15 trips)
+- min_old_trip_ratio: Minimum fraction of total trips that must be made by the old company (0.40)
+
+Variables:
+- TripsNewCompany: Number of trips by the new company (integer, ≥ 0)
+- TripsOldCompany: Number of trips by the old company (integer, ≥ 0)
+
+Objective:
+- Minimize total diesel usage = new_trip_diesel * TripsNewCompany + old_trip_diesel * TripsOldCompany
+
+Constraints:
+1. Gift Delivery Constraint:
+   new_trip_capacity * TripsNewCompany + old_trip_capacity * TripsOldCompany ≥ min_gifts
+
+2. New Company Trip Limit:
+   TripsNewCompany ≤ max_new_trips
+
+3. Minimum Old Company Trip Proportion:
+   To ensure at least 40% of all trips are by the old company, the following must hold:
+   TripsOldCompany ≥ min_old_trip_ratio * (TripsNewCompany + TripsOldCompany)
+   This can be reformulated as:  TripsOldCompany - min_old_trip_ratio * (TripsNewCompany + TripsOldCompany) ≥ 0
+   or equivalently:  (1 - min_old_trip_ratio)*TripsOldCompany - min_old_trip_ratio*TripsNewCompany ≥ 0
+   With min_old_trip_ratio = 0.40, this becomes:
+   0.60 * TripsOldCompany - 0.40 * TripsNewCompany ≥ 0
+   which can also be written as:
+   3 * TripsOldCompany - 2 * TripsNewCompany ≥ 0
+
+Comments:
+- All parameter units are consistent: capacities in gifts per trip, diesel usage in liters per trip, and the gift requirement in gifts.
+- The decision variables are modeled as integers since trips are discrete counts.
+- The model minimizes the total diesel consumption while ensuring sufficient delivery of gifts and the required distribution of trips between the companies.
+
+Expected Output Schema:
+{
+  "variables": {
+    "TripsNewCompany": "integer",
+    "TripsOldCompany": "integer"
+  },
+  "objective": "Minimize total diesel usage = 30 * TripsNewCompany + 40 * TripsOldCompany"
+}
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model_Version1:
+TripsNewCompany: 2
+TripsOldCompany: 13
+Total Diesel Consumption (Objective): 580.0
+
+Model_Version2:
+TripsNewCompany: 2
+TripsOldCompany: 13
+Total Diesel Consumption (Objective): 580.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'TripsNewCompany': 2.0, 'TripsOldCompany': 13.0}, 'objective': 580.0}

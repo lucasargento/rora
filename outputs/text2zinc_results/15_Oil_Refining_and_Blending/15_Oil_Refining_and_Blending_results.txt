@@ -1,0 +1,143 @@
+Problem Name: 15_Oil_Refining_and_Blending
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Sets:} \quad & i \in I = \{1,\ldots,I\} \quad,\quad m \in M = \{1,\ldots,M\}. \\
+\\
+\textbf{Parameters:} \quad & \text{BuyPrice}_{i,m} \quad \text{(cost per ton of oil } i \text{ in month } m\text{)},\\[1mm]
+& \text{SellPrice} \quad \text{(revenue per ton of final product)},\\[1mm]
+& \text{IsVeg}_i \in \{0,1\} \quad \text{(1 if oil } i \text{ is vegetable, 0 otherwise)},\\[1mm]
+& \text{MaxVegRefining} \quad \text{(maximum tons of vegetable oil that can be refined per month)},\\[1mm]
+& \text{MaxNonvegRefining} \quad \text{(maximum tons of non‐vegetable oil that can be refined per month)},\\[1mm]
+& \text{StorageSize} \quad \text{(maximum storage capacity in tons for each oil type)},\\[1mm]
+& \text{StorageCost} \quad \text{(cost per ton per month for storing raw oil)},\\[1mm]
+& \text{MaxHardness},\; \text{MinHardness} \quad \text{(upper and lower bounds on the hardness of the final product)},\\[1mm]
+& \text{Hardness}_i \quad \text{(hardness value of oil } i\text{)},\\[1mm]
+& \text{InitialAmount}_i \quad \text{(initial storage, in tons, of oil } i\text{)},\\[1mm]
+& \text{MinUsage}_i \quad \text{(minimum usage in tons if oil } i \text{ is used in a month)},\\[1mm]
+& \text{Dependencies}_{i,j} \in \{0,1\} \quad \text{(if } \text{Dependencies}_{i,j}=1, \text{ then use of oil } i \text{ requires use of oil } j\text{)}.
+\\[3mm]
+\textbf{Decision Variables:} & \\[1mm]
+x_{i,m} &\ge 0,\quad \text{tons of raw oil } i \text{ purchased in month } m, \\[1mm]
+u_{i,m} &\ge 0,\quad \text{tons of raw oil } i \text{ refined in month } m \; \Bigl(\text{note: no loss in refining} \Bigr), \\[1mm]
+s_{i,m} &\ge 0,\quad \text{tons of oil } i \text{ held in storage at the end of month } m, \\[1mm]
+z_{i,m} &\in \{0,1\},\quad \text{binary indicator: } z_{i,m}=1 \text{ if oil } i \text{ is used (i.e. } u_{i,m} >0\text{) in month } m.
+\\[3mm]
+\textbf{Auxiliary Notation:} \quad & V = \{ i \in I : \text{IsVeg}_i=1 \} \quad,\quad NV = \{ i \in I : \text{IsVeg}_i=0 \}.
+\\[3mm]
+\textbf{Objective Function:} \quad & \text{Maximize Profit } P, \text{ given by} \\
+P =\; & \sum_{m \in M} \Biggl[ \, \text{SellPrice}\,\left(\sum_{i \in I} u_{i,m}\right) - \sum_{i \in I} \Bigl( \text{BuyPrice}_{i,m}\,x_{i,m} + \text{StorageCost}\,s_{i,m} \Bigr) \Biggr].
+\\[3mm]
+\textbf{Subject to:} & \\[1mm]
+\textbf{(1) Inventory Flow (Balance) Equations:} \quad & \text{For each oil } i \in I \text{ and month } m=1,\ldots,M,\\[1mm]
+& s_{i,0} = \text{InitialAmount}_i, \\[1mm]
+& s_{i,1} = s_{i,0} + x_{i,1} - u_{i,1},\\[1mm]
+& s_{i,m} = s_{i,m-1} + x_{i,m} - u_{i,m} \quad \forall\, m = 2,\ldots,M,\\[1mm]
+& s_{i,M} = \text{InitialAmount}_i \quad \text{(the ending storage must equal the initial amount)}.
+\\[3mm]
+\textbf{(2) Storage Capacity:} \quad & \forall\, i \in I,\; \forall\, m \in M:\quad 0 \le s_{i,m} \le \text{StorageSize}.
+\\[3mm]
+\textbf{(3) Refining Capacity Limits:} \quad & \forall\, m \in M: \\[1mm]
+& \sum_{i \in V} u_{i,m} \le \text{MaxVegRefining},\\[1mm]
+& \sum_{i \in NV} u_{i,m} \le \text{MaxNonvegRefining}.
+\\[3mm]
+\textbf{(4) Technological (Hardness) Constraints:} \quad & \forall\, m \in M \text{ such that } \sum_{i\in I} u_{i,m} > 0: \\[1mm]
+& \text{MinHardness} \left(\sum_{i \in I} u_{i,m}\right) \le \sum_{i \in I} \text{Hardness}_i\,u_{i,m} \le \text{MaxHardness} \left(\sum_{i \in I} u_{i,m}\right). 
+\\[3mm]
+\textbf{(5) Minimum Usage and Linking to Binary Variables:} \quad & \forall\, i \in I,\; \forall\, m \in M:\\[1mm]
+& u_{i,m} \ge \text{MinUsage}_i \, z_{i,m}, \\[1mm]
+& u_{i,m} \le M^{\max}_{i,m}\, z_{i,m}, \quad \text{where } M^{\max}_{i,m} \text{ is a sufficiently large constant.}
+\\[3mm]
+\textbf{(6) Maximum Number of Oils Used (Mixing Limit):} \quad & \forall\, m \in M: \quad \sum_{i \in I} z_{i,m} \le 3.
+\\[3mm]
+\textbf{(7) Dependency Constraints:} \quad & \forall\, m \in M,\; \forall\, i,j \in I \text{ with } \text{Dependencies}_{i,j}=1: \quad z_{i,m} \le z_{j,m}.
+\\[3mm]
+\textbf{(8) Domain Constraints:} \quad & \forall\, i \in I,\; \forall\, m \in M: \\
+& x_{i,m} \ge 0,\quad u_{i,m} \ge 0,\quad s_{i,m} \ge 0,\\[1mm]
+& z_{i,m} \in \{0,1\}.
+\end{align*}
+
+\textbf{Notes:}
+\begin{itemize}
+  \item The inventory balance (1) ensures that the amount of oil carried over in storage reflects past purchases and usage, and the final storage is fixed to the given initial levels.
+  \item The hardness constraints (4) use a weighted average formulation. (When no oil is processed in a month, these constraints are inactive.)
+  \item Constraint (5) ensures that if an oil is used (i.e. $z_{i,m}=1$) then at least $\text{MinUsage}_i$ tons must be processed.
+  \item Constraint (6) guarantees that in any month no more than three distinct oils are blended to form the final product.
+  \item Constraint (7) captures any technological dependencies among oils as given.
+  \item The objective maximizes the total profit earned over all months, accounting for raw material purchasing and storage costs against sales revenue.
+\end{itemize}
+
+This complete formulation reflects the full manufacturing and production problem with all the details provided, ensuring feasibility and boundedness without trivializing the product mix.
+
+Execution Results:
+SUCCESS:
+Optimal Objective Value = 100278.7037037037
+
+Month 1:
+  Oil 1: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 2: Purchase = 0.00, Refine = 200.00, Used = 1
+  Oil 3: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 4: Purchase = 0.00, Refine = 230.00, Used = 1
+  Oil 5: Purchase = 0.00, Refine = 20.00, Used = 1
+  Total refined: 450.00
+
+Month 2:
+  Oil 1: Purchase = 0.00, Refine = 85.19, Used = 1
+  Oil 2: Purchase = 0.00, Refine = 114.81, Used = 1
+  Oil 3: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 4: Purchase = 190.00, Refine = 0.00, Used = 0
+  Oil 5: Purchase = 0.00, Refine = 250.00, Used = 1
+  Total refined: 450.00
+
+Month 3:
+  Oil 1: Purchase = 0.00, Refine = 85.19, Used = 1
+  Oil 2: Purchase = 0.00, Refine = 114.81, Used = 1
+  Oil 3: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 4: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 5: Purchase = 40.00, Refine = 250.00, Used = 1
+  Total refined: 450.00
+
+Month 4:
+  Oil 1: Purchase = 0.00, Refine = 155.00, Used = 1
+  Oil 2: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 3: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 4: Purchase = 0.00, Refine = 230.00, Used = 1
+  Oil 5: Purchase = 0.00, Refine = 20.00, Used = 1
+  Total refined: 405.00
+
+Month 5:
+  Oil 1: Purchase = 0.00, Refine = 155.00, Used = 1
+  Oil 2: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 3: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 4: Purchase = 0.00, Refine = 230.00, Used = 1
+  Oil 5: Purchase = 540.00, Refine = 20.00, Used = 1
+  Total refined: 405.00
+
+Month 6:
+  Oil 1: Purchase = 480.37, Refine = 0.00, Used = 0
+  Oil 2: Purchase = 629.63, Refine = 200.00, Used = 1
+  Oil 3: Purchase = 0.00, Refine = 0.00, Used = 0
+  Oil 4: Purchase = 730.00, Refine = 230.00, Used = 1
+  Oil 5: Purchase = 0.00, Refine = 20.00, Used = 1
+  Total refined: 450.00
+
+Final storage for Oil 1:
+  Storage = 500.00
+
+Final storage for Oil 2:
+  Storage = 500.00
+
+Final storage for Oil 3:
+  Storage = 500.00
+
+Final storage for Oil 4:
+  Storage = 500.00
+
+Final storage for Oil 5:
+  Storage = 500.00
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 3000.0}

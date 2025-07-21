@@ -1,0 +1,43 @@
+Problem Name: 58_Linear_Regression_with_Minimax_Criterion
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Decision Variables:} \quad 
+& a \in \mathbb{R} \quad \text{(intercept of the line)},\\[1mm]
+& b \in \mathbb{R} \quad \text{(slope of the line)},\\[1mm]
+& d \in \mathbb{R},\ d \ge 0 \quad \text{(maximum absolute deviation, to be minimized)}.
+\\[2mm]
+\textbf{Parameters:} \quad 
+& \text{NumObs} \in \mathbb{Z}_{>0} \quad \text{(number of observations, here 19)},\\[1mm]
+& \{x_i\}_{i=1}^{\text{NumObs}} \quad \text{(observed values of } x \text{)},\\[1mm]
+& \{y_i\}_{i=1}^{\text{NumObs}} \quad \text{(observed values of } y \text{)}.
+\\[2mm]
+\textbf{Objective Function:} \quad 
+& \min \; d.
+\\[2mm]
+\textbf{Constraints:} \quad & \text{For each } i = 1,2,\ldots,\text{NumObs}:\\[1mm]
+& y_i - (b\,x_i + a) \leq d,\\[1mm]
+& -(y_i - (b\,x_i + a)) \leq d.\\[2mm]
+\textbf{Complete Mathematical Model:} \quad & 
+\begin{array}{rl}
+\min\limits_{a,b,d} & d\\[2mm]
+\text{s.t.}  & y_i - (b\, x_i + a) \le d, \quad i = 1,\ldots, \text{NumObs},\\[1mm]
+            & -(y_i - (b\, x_i + a)) \le d, \quad i = 1,\ldots, \text{NumObs},\\[1mm]
+            & d \ge 0,\\[1mm]
+            & a \in \mathbb{R}, \; b \in \mathbb{R}.
+\end{array}
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+a (Intercept): -0.40000000000000024
+b (Slope): 0.6250000000000001
+Maximum deviation d: 1.7250000000000005
+Objective value (minimized maximum deviation): 1.7250000000000005
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 10.45}

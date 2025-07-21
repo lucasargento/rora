@@ -1,0 +1,56 @@
+Problem Name: 132_nlp4lp_132
+
+# Problem Description:
+'''Problem description: A shoe company supplies shoes to stores via vans and trucks. A van can transport 50 pairs of shoes while a truck can transport 100 pairs of shoes. The company must supply a minimum of 2000 pairs of shoes around the city. Since most stores are small, the number of trucks used cannot exceed the number of vans used.  Find the minimum number of vans that can be used?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfVans": "float",
+    "NumberOfTrucks": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- VehicleTypes: set of vehicle types = {Van, Truck}
+
+Parameters:
+- van_capacity: capacity of a van in pairs of shoes = 50 pairs
+- truck_capacity: capacity of a truck in pairs of shoes = 100 pairs
+- minimum_supply: minimum number of pairs of shoes that must be supplied = 2000 pairs
+
+Variables:
+- NumberOfVans: number of vans used [integer, ≥ 0]
+- NumberOfTrucks: number of trucks used [integer, ≥ 0]
+
+Objective:
+- Minimize NumberOfVans  
+  (The goal is to use as few vans as possible while meeting the supply requirement.)
+
+Constraints:
+1. Supply Constraint:  
+   van_capacity * NumberOfVans + truck_capacity * NumberOfTrucks ≥ minimum_supply  
+   (This ensures the total number of shoes transported meets or exceeds 2000 pairs.)
+2. Vehicle Balance Constraint:  
+   NumberOfTrucks ≤ NumberOfVans  
+   (This ensures that the number of trucks used does not exceed the number of vans used.)
+
+Execution Results:
+SUCCESS:
+Results using OR-Tools Linear Solver:
+  NumberOfVans:  14.0
+  NumberOfTrucks:  13.0
+  Objective (Min NumberOfVans):  14.0
+
+Results using OR-Tools CP-SAT Model:
+  NumberOfVans:  14
+  NumberOfTrucks:  13
+  Objective (Min NumberOfVans):  14
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfVans': 14.0, 'NumberOfTrucks': 14.0}, 'objective': 14.0}

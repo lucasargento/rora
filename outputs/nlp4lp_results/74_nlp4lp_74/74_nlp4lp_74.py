@@ -1,0 +1,155 @@
+# Problem Description:
+'''Problem description: There are two chemical reactions, chemical reaction A and chemical reaction B. Chemical reaction A requires 5 units of rare inert gas and 6 units of treated water to produce 10 units of a rare compound. Chemical reaction B requires 7 units of rare inert gas and 3 units of treater water to produce 8 units of a rare compound. There are 1000 units of the rare inert gas and 800 units of treated water available in the lab. How many reactions of each type should be done to maximize the amount of rare compound produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberReactions": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Sets:
+- R: set of reaction types = {A, B}
+
+Parameters:
+- inert_gas_A: inert gas required for reaction A = 5 units per reaction [units/reaction]
+- water_A: treated water required for reaction A = 6 units per reaction [units/reaction]
+- compound_A: rare compound produced by reaction A = 10 units per reaction [units/reaction]
+- inert_gas_B: inert gas required for reaction B = 7 units per reaction [units/reaction]
+- water_B: treated water required for reaction B = 3 units per reaction [units/reaction]
+- compound_B: rare compound produced by reaction B = 8 units per reaction [units/reaction]
+- total_inert_gas: available inert gas = 1000 units [units]
+- total_water: available treated water = 800 units [units]
+
+Variables:
+- x_A: number of times reaction A is performed [nonnegative continuous variable; if reactions must be discrete, integer variable]
+- x_B: number of times reaction B is performed [nonnegative continuous variable; if reactions must be discrete, integer variable]
+
+Objective:
+- Maximize total_rare_compound = (compound_A * x_A) + (compound_B * x_B)
+  (This represents the total units of rare compound produced.)
+
+Constraints:
+1. Inert gas availability:
+   (inert_gas_A * x_A) + (inert_gas_B * x_B) ≤ total_inert_gas
+   [i.e., 5*x_A + 7*x_B ≤ 1000]
+
+2. Treated water availability:
+   (water_A * x_A) + (water_B * x_B) ≤ total_water
+   [i.e., 6*x_A + 3*x_B ≤ 800]
+
+Comments:
+- All parameters and variable units are assumed to be consistent with the problem statement.
+- The decision variables (x_A and x_B) represent the number of each reaction type performed. They can be modeled as integers if each reaction must occur whole, or as continuous variables if fractional reactions are acceptable.
+- This formulation uses a straightforward linear programming approach to maximize the rare compound output under the given resource constraints.'''
+
+# Generated Code:
+#!/usr/bin/env python3
+from ortools.linear_solver import pywraplp
+
+def solve_continuous():
+    # Create the linear solver with the GLOP backend for continuous LP.
+    solver = pywraplp.Solver.CreateSolver('GLOP')
+    if not solver:
+        print("Continuous solver not available.")
+        return None, None
+
+    # Decision variables: nonnegative continuous values for reactions.
+    x_A = solver.NumVar(0.0, solver.infinity(), 'x_A')
+    x_B = solver.NumVar(0.0, solver.infinity(), 'x_B')
+
+    # Constraints:
+    # 5*x_A + 7*x_B <= 1000 (rare inert gas availability)
+    solver.Add(5 * x_A + 7 * x_B <= 1000)
+    # 6*x_A + 3*x_B <= 800 (treated water availability)
+    solver.Add(6 * x_A + 3 * x_B <= 800)
+
+    # Objective: Maximize total rare compound produced: 10*x_A + 8*x_B
+    solver.Maximize(10 * x_A + 8 * x_B)
+
+    status = solver.Solve()
+
+    if status == pywraplp.Solver.OPTIMAL:
+        solution = {"0": x_A.solution_value(), "1": x_B.solution_value()}
+        objective_value = solver.Objective().Value()
+        return solution, objective_value
+    else:
+        return None, None
+
+def solve_integer():
+    # Create the mixed integer solver with CBC backend.
+    solver = pywraplp.Solver.CreateSolver('CBC_MIXED_INTEGER_PROGRAMMING')
+    if not solver:
+        print("Integer solver not available.")
+        return None, None
+
+    # Decision variables: nonnegative integer values for reactions.
+    x_A = solver.IntVar(0, solver.infinity(), 'x_A')
+    x_B = solver.IntVar(0, solver.infinity(), 'x_B')
+
+    # Constraints:
+    solver.Add(5 * x_A + 7 * x_B <= 1000)  # Inert gas constraint.
+    solver.Add(6 * x_A + 3 * x_B <= 800)     # Treated water constraint.
+
+    # Objective: Maximize rare compound produced: 10*x_A + 8*x_B.
+    solver.Maximize(10 * x_A + 8 * x_B)
+
+    status = solver.Solve()
+
+    if status == pywraplp.Solver.OPTIMAL:
+        solution = {"0": x_A.solution_value(), "1": x_B.solution_value()}
+        objective_value = solver.Objective().Value()
+        return solution, objective_value
+    else:
+        return None, None
+
+def main():
+    # Solve continuous LP formulation.
+    sol_cont, obj_cont = solve_continuous()
+    # Solve integer MIP formulation.
+    sol_int, obj_int = solve_integer()
+
+    print("Results:")
+    print("Continuous Model:")
+    if sol_cont:
+        print("  Variables:")
+        print(f"    NumberReactions -> x_A (reaction A): {sol_cont['0']}, x_B (reaction B): {sol_cont['1']}")
+        print(f"  Objective (Total rare compound produced): {obj_cont}")
+    else:
+        print("  No optimal solution found for the continuous model.")
+
+    print("\nInteger Model:")
+    if sol_int:
+        print("  Variables:")
+        print(f"    NumberReactions -> x_A (reaction A): {sol_int['0']}, x_B (reaction B): {sol_int['1']}")
+        print(f"  Objective (Total rare compound produced): {obj_int}")
+    else:
+        print("  No optimal solution found for the integer model.")
+
+if __name__ == '__main__':
+    main()
+
+'''Execution Results:
+SUCCESS:
+Results:
+Continuous Model:
+  Variables:
+    NumberReactions -> x_A (reaction A): 96.29629629629629, x_B (reaction B): 74.07407407407408
+  Objective (Total rare compound produced): 1555.5555555555557
+
+Integer Model:
+  Variables:
+    NumberReactions -> x_A (reaction A): 96.0, x_B (reaction B): 74.0
+  Objective (Total rare compound produced): 1552.0
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'NumberReactions': {'0': 96.2962962962963, '1': 74.07407407407406}}, 'objective': 1555.5555555555557}'''
+

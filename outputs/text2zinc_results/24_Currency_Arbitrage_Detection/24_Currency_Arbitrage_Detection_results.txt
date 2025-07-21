@@ -1,0 +1,51 @@
+Problem Name: 24_Currency_Arbitrage_Detection
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{Parameters:} \\[1mm]
+n &\in& \mathbb{Z}_{>0} \quad \text{(total number of currencies)} \\[1mm]
+m &\in& \mathbb{Z}_{>0} \quad \text{(number of exchange operations performed in the arbitrage loop)} \\[1mm]
+S &\in& \mathbb{R}_{>0} \quad \text{(initial amount in the base currency)} \\[1mm]
+r_{ij} &\in& \mathbb{R}_{>0} \quad \forall\, i,j\in\{1,\dots,n\} \quad \text{(exchange rate from currency }i\text{ to currency }j\text{)} \\[1mm]
+i_0 &\in& \{1,\dots,n\} \quad \text{(index of the given base currency)} \\[2mm]
+\textbf{Decision Variables:} \\[1mm]
+\sigma_k &\in& \{1,\dots,n\}, \quad k=0,1,\dots,m \\[1mm]
+&& \text{where } \sigma_k \text{ denotes the index of the currency chosen at position } k \text{ in the sequence.} \\[1mm]
+&& \text{In particular, } \sigma_0 \text{ is fixed to } i_0 \text{ (the base currency) and the cycle closes with } \sigma_m = \sigma_0. \\[2mm]
+\textbf{Product Yield:} \\[1mm]
+Y(\sigma) &=& \prod_{k=0}^{m-1} r_{\sigma_k\,\sigma_{k+1}}. \\[2mm]
+\textbf{Objective Function:} \\[1mm]
+\text{Maximize} \quad P(\sigma) &=& S \cdot Y(\sigma) - S, \\[1mm]
+&& \text{which is the net profit (i.e. final amount minus the initial amount)}. \\[2mm]
+\textbf{Constraints:} \\[1mm]
+\text{(1)} \quad & \sigma_0 &=& i_0, \\[1mm]
+\text{(2)} \quad & \sigma_m &=& \sigma_0, \\[1mm]
+\text{(3)} \quad & \sigma_k \neq \sigma_j, \quad & \forall\, 0 \le k < j \le m-1, \\
+&&& \text{(all intermediate currencies must be distinct)} \\[1mm]
+\text{(4)} \quad & S\cdot Y(\sigma) &\ge& S, \quad \text{or equivalently} \quad Y(\sigma)\ge 1, \\[1mm]
+&&& \text{(to ensure that the cycle constitutes an arbitrage, i.e. the conversion returns at least the amount started with)}.
+\end{array}
+\]
+
+A few remarks:
+• The decision vector \(\sigma = (\sigma_0,\sigma_1,\dots,\sigma_m)\) represents the arbitrage loop, where the loop starts at the base currency (given by \(\sigma_0=i_0\)) and must return to it (\(\sigma_m=\sigma_0\)).  
+• The product \(Y(\sigma) = \prod_{k=0}^{m-1} r_{\sigma_k\,\sigma_{k+1}}\) expresses the multiplicative effect of successive currency exchanges.  
+• The objective is to maximize the net profit \(P(\sigma)=S\cdot\big(Y(\sigma)-1\big)\).  
+• The constraint (3) enforces that, except for the closing return to the base currency, all currencies in the loop are distinct so that trivial self-loop repetitions are disallowed.  
+• Constraint (4) guarantees feasibility in the sense that only cycles with non‐negative net gain (or arbitrage) are considered.
+
+This complete mathematical formulation accurately captures the given finance and investment arbitrage problem without any simplifications.
+
+Execution Results:
+SUCCESS:
+Arbitrage loop: ['aud', 'sek', 'eur', 'aud']
+Product yield: 1.0105783362432
+Net profit: 10.578336 in base currency aud
+Total scaled log-sum: 10523
+
+
+Expected Output:
+Expected solution
+
+: {'y': [1, 5, 3, 1], 'profit': [0.183, 9.52381, 0.579840000000001, 0.0], 'z': 1.0105783362432, '_objective': 1.0105783362432}

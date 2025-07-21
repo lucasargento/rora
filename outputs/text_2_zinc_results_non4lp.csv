@@ -1,0 +1,46 @@
+,Unnamed: 0,Problema,name,Optimal Gen,Optimal Ground Truth,domain,objective,source,constraints,identifier
+0,0,0,P-Median Problem,"670,00","670,00",Transportation and Logistics,minimization,hakank,"['forall', 'sum', '=', '<=', '/\\']",non_linear_problem_9
+3,3,3,Aircraft Landing Problem,"556,00","14.915,00",Scheduling,minimization,ComplexOR,"['forall', '>=', 'sum', 'if', 'then', 'elseif', 'else', 'endif']",complexor_AircraftLanding
+5,5,5,Fill-a-Pix,"-1,00","-1,00",Puzzles and Games,satisfaction,hakank,"['sum', 'implies', '<=', '>', 'and', 'forall']",puzzles_problem_31
+7,7,7,Nonogram Solver,"-1,00","-1,00",Puzzles and Games,satisfaction,CSPLib,"['forall', 'make_automaton', 'regular']",CSPLib_12
+9,9,9,Aircraft Assignment Problem,"140,00","140,00",Transportation and Logistics,minimization,ComplexOR,"['forall', 'sum', '<=', '>=', '*']",complexor_AircraftAssignment
+10,10,10,Science Fair Table Optimization,"1.080,00","1.080,00",Mathematical Modeling,maximization,Prob_232,"['sum', '<=', '>=', 'maximization']",LPWP_232
+16,16,16,Solitaire Battleships,"-1,00","-1,00",Puzzles and Games,satisfaction,CSPLib,"['forall', 'if', 'then', 'endif', 'bool2int', 'alldifferent', 'sum', '=', '<=', '\\', '/']",CSPLib_14
+18,18,18,Bus Driver Scheduling,"7,00","7,00",Scheduling,minimization,CSPLib,"['sum', 'bool2int', '>=', '=']",CSPLib_22
+21,21,21,Golomb Rulers,"55,00","55,00",Mathematical Modeling,minimization,CSPLib,"['alldifferent', '<', 'forall']",CSPLib_6
+24,24,24,Currency Arbitrage Detection,"1,01","1,01",Finance and Investment,maximization,hakank,"['totalProfit >= 0.0', 'all_different', '=', 'forall', 'product']",non_linear_problem_23
+25,25,25,Vessel Loading,"-1,00","-1,00",Industrial Engineering and Design,satisfaction,CSPLib,"['forall', 'let', 'array', 'ElemWidth', 'ElemLength', 'Right', 'Left', 'Top', 'Bottom', 'orientation', 'separation', 'class', 'exists', 'fix']",CSPLib_8
+26,26,26,Dirichlet Problem for Laplace's Equation,"42,86","42,86",Mathematical Modeling,minimization,hakank,"['forall', '=', '+', '*', '4.0']",non_linear_problem_15
+27,27,27,Vehicle Routing Problem with Time Windows,"1,00","2,00",Transportation and Logistics,minimization,ComplexOR,"['forall', 'sum', '=', '<=', '>=', '/\\', '+', '*']",complexor_VRPTW
+28,28,28,Hand Sanitizer Production Optimization,"970,00","970,00",Mathematical Modeling,maximization,LPWP,"['sum', '<=', '>', 'maximization']",LPWP_128
+29,29,29,Coin Plating Optimization,"749,00","750,00",Mathematical Modeling,maximization,LPWP,"['sum', '<=', 'maximization']",LPWP_53
+30,30,30,Fishing Optimization,"150,00","150,00",Mathematical Modeling,maximization,Prob_85,"['sum', '<=', 'maximization']",LPWP_85
+31,31,31,Relief Effort Coordination,"178,00","18,00",Transportation and Logistics,minimization,hakank,"['forall', 'calculateDistance', 'min', 'sum', '<=']",OR_LP_IP_Scheduling_problem_4
+33,33,33,Carpool Fairness,"-1,00","-1,00",Transportation and Logistics,minimization,hakank,"['forall', 'sum', 'bool2int', '<=', 'abs', 'in']",combinatorial_problem_32
+35,35,35,Timetable Problem,"-1,00","-1,00",Scheduling,satisfaction,hakank,"['forall', '<=', '+', '=', 'sum']",OR_LP_IP_Scheduling_problem_2
+36,36,36,Programmer Job Assignment,"8,00","8,00",Scheduling,minimization,hakank,"['forall', 'sum', '=', 'minimize']",OR_LP_IP_Scheduling_problem_5
+43,43,43,N-Queens,"-1,00","-1,00",Puzzles and Games,satisfaction,CSPLib,['all_different'],CSPLib_54
+48,48,48,Place Numbers in Cross,"-1,00","-1,00",Puzzles and Games,satisfaction,hakank,"['==', '-', '*', '+']",puzzles_problem_12
+52,52,52,Job-Shop Scheduling,"138,00","138,00",Scheduling,minimization,hakank,"['forall', 'cumulative', 'before', 'after', '+', '<=', '>=', '<', '>']",OR_LP_IP_Scheduling_problem_31
+54,54,54,Balanced Academic Curriculum Problem,"20,00","20,00",Scheduling,minimization,CSPLib,"['forall', 'bool2int', '=', '>=', '<=', 'sum', '*', '<', 'let', 'in']",CSPLib_30
+55,55,55,Hidato,"-1,00","-1,00",Puzzles and Games,satisfaction,hakank,"['all_different', 'implies', 'forall', 'and', '=', '<=', '>=', '>']",puzzles_problem_13
+57,57,57,Rehearsal Scheduling Problem,"0,00","0,00",Scheduling,minimization,CSPLib,"['all_different', 'forall', 'sum', 'bool2int', '<', '>', '=']",CSPLib_39
+60,60,60,Minimize Shopping Cost,"35,01","35,01",Economic and Business Decisions,minimization,hakank,"['forall', '>', 'sum', '=', 'if', 'then', 'else', 'endif']",OR_LP_IP_Scheduling_problem_28
+61,61,61,Department City Assignment,"14,90","14,90",Economic and Business Decisions,maximization,hakank,"['forall', 'sum', '<=', '=', '-', '*', 'int2float']",non_linear_problem_10
+68,68,68,Project Selection Optimization,"2.310,00","149.000.000.000.001,00",Finance and Investment,maximization,hakank,"['<=', '+', '-', 'sum', 'forall']",OR_LP_IP_Scheduling_problem_18
+69,69,69,Template Design for Printing,"-1,00","-1,00",Mathematical Modeling,minimization,CSPLib,"['sum', 'forall', 'lex_lesseq', 'if', 'then', 'else', 'endif', 'int_search', 'minimize']",CSPLib_2
+74,74,74,Balanced Incomplete Block Design Generation,"1,00","1,00",Industrial Engineering and Design,satisfaction,CSPLib,"['forall', 'sum', 'bool2int', '=', '<', 'lex_lesseq', 'diff', 'max', '/\\', 'input_order', 'indomain_min', 'complete']",CSPLib_28
+78,78,78,Capacitated Facility Location,"95.090,00","95.090,00",Transportation and Logistics,minimization,ComplexOR,"['forall', 'sum', '=', '<=', '*']",complexor_CFLP
+79,79,79,Bakery Production Optimization,"1,00","2,00",Mathematical Modeling,minimization,LPWP,"['sum', '>=', '<=', 'ratio']",LPWP_66
+80,80,80,Car Selection Problem,"25,00","25,00",Transportation and Logistics,maximization,ComplexOR,"['forall', 'sum', '<=', '>=', 'maximize']",complexor_CarSelection
+81,81,81,Kidney Exchange Optimization,"6,00","6,00",Healthcare and Human Systems,maximization,hakank,"['alldifferent_except_0', 'forall', 'sum', '>', '=', 'in', 'bool2int']",combinatorial_problem_31
+83,83,83,Capacitated Warehouse Location,"88.241,00","88.241,00",Transportation and Logistics,minimization,ComplexOR,"['sum', '>=', '<=', 'forall', '=', '*', '<=']",complexor_CapacitatedWarehouseLocation
+87,87,87,Minimal Weekly Staffing Cost,"8.200,00","8.200,00",Scheduling,minimization,hakank,"['forall', 'let', 'array1d', 'sum', '>=', '<=']",OR_LP_IP_Scheduling_problem_8
+88,88,88,Maximum Flow Problem,"29,00","29,00",Network and Security,maximization,hakank,"['<=', 'sum', '=', '*']",OR_LP_IP_Scheduling_problem_6
+89,89,89,Ski Assignment Optimization,"7,00","7,00",Scheduling,minimization,hakank,"['all_different', 'abs', 'sum', 'minimize']",OR_LP_IP_Scheduling_problem_1
+93,93,93,Seam Carving,"13,00","13,00",Puzzles and Games,maximization,hakank,"['forall', 'abs']",puzzles_problem_1
+94,94,94,Distribute Partially Filled Bottles,"-1,00","-1,00",Puzzles and Games,satisfaction,hakank,"['forall', '<', '=', '+', '*', 'sum']",puzzles_problem_11
+96,96,96,Minimize Maximum Group Sum,"100,00","100,00",Mathematical Modeling,minimization,hakank,"['forall', 'sum', '=', 'increasing']",combinatorial_problem_1
+100,100,100,Warehouse Location Problem,"383,00","383,00",Transportation and Logistics,minimization,CSPLib,"['sum', 'bool2int', 'forall', 'exists', '<->', '<=', '=']",CSPLib_34
+104,104,104,Goods Transportation Optimization,"315,00","315,00",Transportation and Logistics,minimization,ComplexOR,"['forall', '<=', '=', 'sum', '*']",complexor_TSP
+108,108,108,Combinatorial Auction,"11,00","383,00",Economic and Business Decisions,maximization,hakank,"['sum', 'bool2int', '<=', 'forall']",combinatorial_problem_7

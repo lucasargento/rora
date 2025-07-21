@@ -1,0 +1,44 @@
+Problem Name: 31_Relief_Effort_Coordination
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Parameters:} \quad & i,j,p,q \in \{1,2,\ldots,n\}, \quad \text{with } n=10,\\[1mm]
+& h_{ij} \in \{0,1\} \quad \text{for } i,j=1,\ldots,n, \quad \text{(given by the "huts" array)}.\\[3mm]
+\textbf{Decision Variables:} \quad & x_{pq} \in \{0,1\} \quad \forall \, p,q \in \{1,\ldots,n\}, \\
+& \quad\quad\; \text{where } x_{pq}=1 \text{ if an airdrop is selected at grid cell } (p,q), \text{ and } 0 \text{ otherwise}. \\[1mm]
+& y_{ij}^{pq} \in \{0,1\} \quad \forall \, i,j,p,q \in \{1,\ldots,n\}, \\
+& \quad\quad\; \text{where } y_{ij}^{pq}=1 \text{ if the villager(s) (or hut) located at } (i,j) \\
+& \quad\quad\quad \text{is assigned to the drop location } (p,q), \text{ and } 0 \text{ otherwise}.\\[3mm]
+\textbf{Objective Function:}\\[1mm]
+\text{Minimize } \quad & Z = \sum_{i=1}^n \sum_{j=1}^n h_{ij} \; \sum_{p=1}^n \sum_{q=1}^n \left[ \left(i-p\right)^2+\left(j-q\right)^2 \right]\, y_{ij}^{pq}. \tag{Minimize total squared distance}\\[3mm]
+\textbf{Constraints:}\\[1mm]
+\text{(1) Exactly two airdrop locations are selected:} \quad & \sum_{p=1}^n \sum_{q=1}^n x_{pq} = 2. \tag{A}\\[2mm]
+\text{(2) Each hut (i.e. each grid cell with } h_{ij}=1 \text{) is assigned to exactly one drop location:} \quad & \sum_{p=1}^n \sum_{q=1}^n y_{ij}^{pq} = h_{ij},\quad \forall \, i,j \in \{1,\ldots,n\}. \tag{B}\\[2mm]
+\text{(3) A hut can only be assigned to a selected drop location:} \quad & y_{ij}^{pq} \leq x_{pq},\quad \forall \, i,j,p,q\in \{1,\ldots,n\}. \tag{C}\\[2mm]
+\textbf{Domain:} \quad & x_{pq} \in \{0,1\},\quad y_{ij}^{pq} \in \{0,1\},\quad \forall \, i,j,p,q \in \{1,\ldots,n\}. 
+\end{align*}
+
+Explanation:
+
+• The indices i,j denote the rows and columns for the villages (huts) with their corresponding need (1 if a hut is present, 0 otherwise).  
+• The indices p,q denote the candidate grid positions where an airdrop can be placed.  
+• Constraint (A) forces the selection of exactly two airdrop locations.  
+• Constraint (B) ensures that if a hut exists at cell (i,j), it must be assigned to one and only one drop location.  
+• Constraint (C) links the assignment to the selected airdrop locations, ensuring that a hut can only be assigned to a cell that has been chosen as an airdrop location.  
+• The objective minimizes the sum of squared Euclidean distances between each hut and its closest (assigned) airdrop location.
+
+This complete formulation accurately models the given transportation and logistics problem and is bounded and feasible under the stated assumptions.
+
+Execution Results:
+SUCCESS:
+Optimal drop locations (p,q):
+  Drop at cell (3, 2)
+  Drop at cell (4, 8)
+
+Objective value (total squared distance): 178.0
+
+
+Expected Output:
+Expected solution
+
+: {'x': [[4, 3], [5, 9]], 'distances': [[0, 0, 0, 0, 13, 0, 0, 0, 0, 0], [0, 0, 0, 0, 8, 0, 0, 0, 9, 10], [5, 0, 0, 0, 0, 10, 0, 5, 4, 5], [0, 1, 0, 0, 0, 0, 5, 0, 0, 2], [0, 2, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 2, 0, 0], [0, 10, 0, 0, 0, 0, 0, 0, 0, 0], [0, 17, 0, 0, 0, 18, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 26, 0, 26]], 'total_dist': 178, '_objective': 178}

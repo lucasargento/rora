@@ -1,0 +1,75 @@
+Problem Name: 24_nlp4lp_24
+
+# Problem Description:
+'''Problem description: A car manufacturer makes two types of car oils: Oil Max and Oil Max Pro. A container of Oil Max contains 46 grams of substance A, 43 grams of substance B and 56 grams of substance C. A container of Oil Max Pro contains 13 grams of substance A, 4 grams of substance B and 45 grams of substance C. The car manufacturer has 1345 grams of substance A, 346 grams of substance B, 1643 grams of substance C. In addition, the profit per container of Oil Max is $10 and the profit per container of Oil Max Pro is $15. How many containers of each of oil should the car manufacturer make to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "xOilType": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- OILS: set of oil types = {Oil_Max, Oil_Max_Pro}
+
+Parameters:
+- substance_A[o] = grams of substance A per container, where:
+  - substance_A[Oil_Max] = 46
+  - substance_A[Oil_Max_Pro] = 13
+- substance_B[o] = grams of substance B per container, where:
+  - substance_B[Oil_Max] = 43
+  - substance_B[Oil_Max_Pro] = 4
+- substance_C[o] = grams of substance C per container, where:
+  - substance_C[Oil_Max] = 56
+  - substance_C[Oil_Max_Pro] = 45
+- profit[o] = profit per container in USD, where:
+  - profit[Oil_Max] = 10
+  - profit[Oil_Max_Pro] = 15
+- available_A: total grams of substance A available = 1345
+- available_B: total grams of substance B available = 346
+- available_C: total grams of substance C available = 1643
+
+Variables:
+- x[o] for each oil type in OILS: number of containers produced of oil type o
+  - Type: integer
+  - Domain: x[o] ≥ 0
+  - Unit: containers
+
+Objective:
+- Maximize total profit = sum over o in OILS of (profit[o] * x[o])
+  - Interpretation: Total profit in USD from producing containers of oil.
+
+Constraints:
+- Constraint for Substance A: substance_A[Oil_Max] * x[Oil_Max] + substance_A[Oil_Max_Pro] * x[Oil_Max_Pro] ≤ available_A
+- Constraint for Substance B: substance_B[Oil_Max] * x[Oil_Max] + substance_B[Oil_Max_Pro] * x[Oil_Max_Pro] ≤ available_B
+- Constraint for Substance C: substance_C[Oil_Max] * x[Oil_Max] + substance_C[Oil_Max_Pro] * x[Oil_Max_Pro] ≤ available_C
+
+--------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "xOilType": [
+      "integer"
+    ]
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+========== Version 1 ==========
+Containers of Oil Max:  0
+Containers of Oil Max Pro:  36
+Optimal Profit: $ 540.0
+
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'xOilType': [0.0, 36.51111111111111]}, 'objective': 547.6666666666667}

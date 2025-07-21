@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving using OR-Tools Linear Solver (MIP)...\nLinear Solver Result:\n{'variables': {'NumberLongCables': 22.0, 'NumberShortCables': 111.0}, 'objective': 819.0}\n\nSolving using OR-Tools CP-SAT Solver...\nCP-SAT Solver Result:\n{'variables': {'NumberLongCables': 22, 'NumberShortCables': 111}, 'objective': 819}\n"
+}

@@ -1,0 +1,73 @@
+Problem Name: 33_Carpool_Fairness
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{Indices:} & & \\
+i &=& 1,\ldots, N \quad \text{(people)}\\[1mm]
+d &=& 1,\ldots, D \quad \text{(days)}\\[2mm]
+
+\textbf{Parameters:} & & \\
+p_{i,d} &\in& \{0,1\} \quad \text{for } i=1,\ldots,N,\; d=1,\ldots,D, \\
+&& \quad\text{(}p_{i,d}=1 \text{ if person } i \text{ participates on day } d,\; 0 \text{ otherwise)};\\[2mm]
+O_i &=& \displaystyle \sum_{d=1}^{D} \frac{p_{i,d}}{\sum_{j=1}^{N} p_{j,d}} \quad \text{for } i=1,\ldots,N,\\[2mm]
+
+\textbf{Decision Variables:} & & \\
+x_{i,d} &\in& \{0,1\} \quad \text{for } i=1,\ldots,N,\; d=1,\ldots,D, \\
+&& \quad\text{(}x_{i,d} = 1 \text{ if person } i \text{ is assigned as driver on day } d,\; 0 \text{ otherwise)};\\[2mm]
+z_i &\ge& 0 \quad \text{for } i=1,\ldots,N, \\
+&& \quad\text{(}z_i \text{ represents the absolute deviation between driving assignments and } O_i \text{)}.
+\end{array}
+\]
+
+\[
+\begin{array}{rcl}
+\textbf{Objective:} & & \\
+\min \quad & \displaystyle \sum_{i=1}^{N} z_i & \quad \text{(Minimize total fairness deviation)}.
+\end{array}
+\]
+
+\[
+\begin{array}{rcl}
+\textbf{Subject to:} & & \\[1mm]
+\text{(1) Exactly one driver per day:} & & \displaystyle \sum_{i=1}^{N} x_{i,d} = 1,\quad \forall\, d=1,\ldots, D, \\[2mm]
+\text{(2) Only a participating person can drive:} & & x_{i,d} \le p_{i,d},\quad \forall\, i=1,\ldots, N,\; \forall\, d=1,\ldots, D, \\[2mm]
+\text{(3) Absolute deviation constraints (fairness):} & & z_i \ge \displaystyle \sum_{d=1}^{D} x_{i,d} - O_i,\quad \forall\, i=1,\ldots, N, \\[2mm]
+& & z_i \ge O_i - \displaystyle \sum_{d=1}^{D} x_{i,d},\quad \forall\, i=1,\ldots, N.
+\end{array}
+\]
+
+\[
+\begin{array}{rcl}
+\textbf{Notes:} & & \\
+& & \text{For each day } d,\; \text{the term } \frac{1}{\sum_{j=1}^{N} p_{j,d}} \text{ represents the individual obligation } \\
+& & \text{if person } i \text{ participates (since there are } \sum_{j=1}^{N} p_{j,d} \text{ participants).}\\[2mm]
+& & \text{The model minimizes the total absolute difference between each person’s actual driving} \\
+& & \text{assignments } \left(\sum_{d} x_{i,d}\right) \text{ and their corresponding obligation } O_i.\\[2mm]
+& & \text{The constraints ensure feasibility (each day exactly one driver among the participants)} \\
+& & \text{and boundedness (all terms are finite since } 0\le x_{i,d} \le 1 \text{ and } 0 \le z_i \le D).
+\end{array}
+\]
+
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Objective (Total Deviation): 1.166666666666667
+
+Day 1: Person 1 drives
+Day 2: Person 3 drives
+Day 3: Person 2 drives
+Day 4: Person 3 drives
+Day 5: Person 4 drives
+
+Person 1: Drive count = 1.0, Obligation = 0.917, Deviation = 0.083
+Person 2: Drive count = 1.0, Obligation = 0.583, Deviation = 0.417
+Person 3: Drive count = 2.0, Obligation = 1.917, Deviation = 0.083
+Person 4: Drive count = 1.0, Obligation = 1.583, Deviation = 0.583
+
+
+Expected Output:
+Expected solution
+
+: {'driver': [1, 3, 2, 3, 4], 'num_drives': [1, 1, 2, 1], 'diffs': [0, 0, 0, 1], 'pdiff': 3, '_objective': 3}

@@ -1,0 +1,71 @@
+Problem Name: 51_Auto_Parts_Manufacturer_Profit_Maximization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Sets:}\quad & p \in \{1,2,\dots,P\} \quad (\text{Parts}), \quad m \in \{1,2,\dots,M\} \quad (\text{Machines}), \\[1mm]
+\\
+\textbf{Parameters:}\quad & \text{NumParts} = P,\quad \text{NumMachines} = M, \\[1mm]
+& T_{mp} \quad \text{(hours required on machine } m \text{ to produce one batch of part } p\text{)}, \\[1mm]
+& C_m \quad \text{(machine cost per operating hour for machine } m\text{)}, \\[1mm]
+& A_m \quad \text{(regular availability in hours for machine } m \text{ per month)}, \\[1mm]
+& O_m \quad \text{(overtime hours available for machine } m\text{ per month)}, \\[1mm]
+& R_p \quad \text{(revenue obtained from selling one batch of part } p\text{)}, \\[1mm]
+& B_p \quad \text{(minimum number of batches required for part } p\text{)}, \\[1mm]
+& S \quad \text{(standard labor cost per hour for machine } 1\text{)}, \quad
+L \quad \text{(overtime labor cost per hour for machine } 1\text{)}.
+\end{align*}
+
+\vspace{2mm}
+\noindent
+\textbf{Decision Variables:}
+\begin{align*}
+x_p &\in \mathbb{Z}_{+},\quad \forall p=1,\dots,P, && \text{(number of batches of part } p \text{ to produce)}; \\[1mm]
+y &\ge 0, && \text{(number of regular (standard) labor hours used on machine 1)}; \\[1mm]
+z &\ge 0, && \text{(number of overtime labor hours used on machine 1)}.
+\end{align*}
+
+\noindent
+\textbf{Model:}
+\begin{align*}
+\textbf{Maximize} \quad Z =\; & \underbrace{\sum_{p=1}^{P} R_p\, x_p}_\text{Total revenue} \;-\; \Bigg[ \underbrace{S\, y + L\, z}_{\substack{\text{Labor cost for outsourced } \\ \text{machine } 1}} \;+\; \underbrace{\sum_{m=2}^{M} C_m \left(\sum_{p=1}^{P} T_{mp}\, x_p\right)}_{\substack{\text{Operating cost for internal } \\ \text{machines } m=2,\dots,M} } \Bigg] \\
+\\[1mm]
+\textbf{subject to:} \quad 
+& \textbf{(1) Machine 1 labor splitting:} \quad y + z = \sum_{p=1}^{P} T_{1p}\, x_p, \\
+\\[1mm]
+& \textbf{(2) Standard hour limit for machine 1:} \quad y \le A_1, \quad \text{(even though machine 1 is outsourced,}\\
+& \quad\quad\quad\quad\quad\quad\text{the first } A_1 \text{ hours are charged at the lower (standard) rate)}; \\
+\\[1mm]
+& \textbf{(3) Overtime hour limit for machine 1:} \quad z \le O_1, \\
+\\[1mm]
+& \textbf{(4) Capacity constraints for internal machines:} \quad \sum_{p=1}^{P} T_{mp}\, x_p \le A_m + O_m, \quad \forall m=2,\dots,M, \\
+\\[1mm]
+& \textbf{(5) Minimum production requirements:} \quad x_p \ge B_p, \quad \forall p=1,\dots,P, \\
+\\[1mm]
+& \textbf{(6) Nonnegativity and integrality:} \quad x_p \in \mathbb{Z}_{+}, \; y \ge 0, \; z \ge 0.
+\end{align*}
+
+\noindent
+\textbf{Notes:}
+
+1. For machine 1 the usual availability constraint is not directly imposed on production because the machine is outsourced. Instead, its workload (i.e. the sum of production times over all parts) is partitioned into standard hours (up to availability $A_1$) and overtime hours (limited by $O_1$).  
+2. For machines $m = 2,\dots,M$, production must respect the sum of regular availability and allowed overtime.
+3. The decision variables $x_p$ (batches to produce) are enforced to meet the contractual minimums $B_p$, thus avoiding trivial production scenarios.
+4. All parameters and constraints are defined so that the model is both feasible and bounded.
+
+This complete formulation accurately represents the manufacturing and production optimization problem as described.
+
+Execution Results:
+SUCCESS:
+Optimal Objective Value = 103300.0
+Batches of part 1 = 106.0
+Batches of part 2 = 12.0
+Batches of part 3 = 118.0
+Batches of part 4 = 11.0
+Regular labor hours (y) = 199.99999999999997
+Overtime labor hours (z) = 400.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 5600.0}

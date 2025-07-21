@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n=== Solving with Linear Solver (MIP) ===\nLinear Solver (MIP) Solution:\n{'variables': {'SmallBottlesUsed': 134.0, 'LargeBottlesUsed': 66.0}, 'objective': 1990.0}\n\n=== Solving with CP-SAT Solver ===\nCP-SAT Solver Solution:\n{'variables': {'SmallBottlesUsed': 134, 'LargeBottlesUsed': 66}, 'objective': 1990.0}\n"
+}

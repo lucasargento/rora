@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults using OR-Tools Linear Solver (GLOP):\n{'variables': {'FertilizerQuantity': [2.592592592592592, 0.22222222222222232]}, 'objective': 5.851851851851851}\n\nResults using OR-Tools CP-SAT (discretized version):\n{'variables': {'FertilizerQuantity': [2.6, 0.22]}, 'objective': 5.86}\n"
+}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nContinuous Model Result:\n{'model': 'Continuous', 'variables': {'NumRegularBags': 2.045454545454546, 'NumPremiumBags': 0.5681818181818181}, 'objective': 60.795454545454554}\n\nInteger Model Result:\n{'model': 'Integer', 'variables': {'NumRegularBags': 0.0, 'NumPremiumBags': 2.0}, 'objective': 70.0}\n"
+}

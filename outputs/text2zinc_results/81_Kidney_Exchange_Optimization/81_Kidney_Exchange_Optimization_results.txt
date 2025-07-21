@@ -1,0 +1,47 @@
+Problem Name: 81_Kidney_Exchange_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Sets and Parameters:} \quad & I = \{1,2,\dots,n\} \quad \text{with } n = \text{num\_people} \quad \text{(here, } n=8\text{)},\\[1mm]
+& c_{ij} \in \{0,1\}\quad \forall\, i,j \in I, \quad \text{the compatibility matrix, where } c_{ij}=1 \text{ if person } i \text{ can donate to person } j,\\[1mm]
+& \text{and } c_{ij}=0 \text{ otherwise.}
+\\[2mm]
+\textbf{Decision Variables:} \quad & x_{ij} \in \{0,1\} \quad \forall\, i,j \in I, \\
+&\quad \text{with } x_{ij}=1 \text{ if person } i \text{ donates a kidney to person } j, \\
+&\quad \text{and } x_{ij}=0 \text{ otherwise.}
+\\[2mm]
+\textbf{Objective Function:} \quad & \text{Maximize the total number of kidney exchanges:} \\
+& \max \quad Z = \sum_{i\in I} \sum_{j\in I} x_{ij}.
+\\[2mm]
+\textbf{Constraints:} \quad
+& \textbf{(1) Compatibility: For each potential donation, only compatible pairs are allowed:}\\[1mm]
+& \quad x_{ij} \leq c_{ij} \quad \forall\, i,j \in I, \\[2mm]
+& \textbf{(2) No Self-Donation:}\\[1mm]
+& \quad x_{ii} = 0 \quad \forall\, i \in I, \\[2mm]
+& \textbf{(3) At most One Donation and One Reception per Person:}\\[1mm]
+& \quad \sum_{j\in I} x_{ij} \leq 1 \quad \forall\, i \in I, \quad \text{(each person can donate at most once)};\\[1mm]
+& \quad \sum_{j\in I} x_{ji} \leq 1 \quad \forall\, i \in I, \quad \text{(each person can receive at most once)}; \\[2mm]
+& \textbf{(4) Cycle/Exchange Validity Requirement: Every donor must also receive a kidney:}\\[1mm]
+& \quad \sum_{j\in I} x_{ij} = \sum_{j\in I} x_{ji} \quad \forall\, i \in I.
+\end{align*}
+
+This formulation models the kidney exchange program by 
+1. introducing binary decision variables for potential donor–recipient pairs (subject to compatibility),
+2. maximizing the total number of kidney transplants,
+3. and enforcing that each participating individual both donates and receives exactly one kidney, thereby ensuring a valid cycle exchange.
+
+Execution Results:
+SUCCESS:
+Optimal objective value = 6.0
+Person 2 donates to Person 6
+Person 3 donates to Person 7
+Person 5 donates to Person 2
+Person 6 donates to Person 5
+Person 7 donates to Person 8
+Person 8 donates to Person 3
+
+
+Expected Output:
+Expected solution
+
+: {'x': [0, 6, 7, 0, 2, 5, 8, 3], 'y': [[0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1]], '_objective': 6}

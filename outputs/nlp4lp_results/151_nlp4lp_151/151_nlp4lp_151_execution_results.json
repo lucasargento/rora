@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nInteger Programming Model Result:\n{'SeasonalVolunteers': 14.0, 'FullTimeVolunteers': 34.0, 'objective': 342.0}\n\nContinuous Linear Programming Model Result:\n{'SeasonalVolunteers': 14.634146341463412, 'FullTimeVolunteers': 34.146341463414636, 'objective': 346.3414634146342}\n"
+}

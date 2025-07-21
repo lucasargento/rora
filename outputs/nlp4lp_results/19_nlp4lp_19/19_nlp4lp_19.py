@@ -1,0 +1,156 @@
+# Problem Description:
+'''Problem description: A electronics store sells premium desktops with more power as well as regular desktops for everyday use. Each premium desktop costs the store $2000 to make and yields a profit of $500. Each regular desktop costs the store $1000 to make and yields a profit of $300. The store sells at most 200 desktops each month and wants to spend at most $300000 on making the desktops. How many of each should be made and sold to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumPremiumDesktops": "float",
+    "NumRegularDesktops": "float"
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Below is the five-element structured model for the given optimization problem.
+
+----------------------------------------------------------------
+Sets:
+- D = {Premium, Regular}  
+  (D represents the two desktop types being considered.)
+
+----------------------------------------------------------------
+Parameters:
+- cost_d: production cost per desktop type d  
+  • For Premium desktops: cost_Premium = 2000 (USD per unit)  
+  • For Regular desktops: cost_Regular = 1000 (USD per unit)
+- profit_d: profit per desktop type d (profit earned per unit sold)  
+  • For Premium desktops: profit_Premium = 500 (USD per unit)  
+  • For Regular desktops: profit_Regular = 300 (USD per unit)
+- max_total_units: maximum desktops that can be produced and sold per month = 200 (units)
+- max_production_budget: maximum expenditure on production per month = 300000 (USD)
+
+----------------------------------------------------------------
+Variables:
+- x_d: number of desktops to produce and sell of type d  
+  • x_Premium: number of Premium desktops (decision variable, assumed integer; may be considered as float per provided schema)  
+  • x_Regular: number of Regular desktops (decision variable, assumed integer; may be considered as float per provided schema)
+
+For clarity in implementation (and matching the expected output schema), let:
+  • NumPremiumDesktops = x_Premium  
+  • NumRegularDesktops = x_Regular
+
+----------------------------------------------------------------
+Objective:
+Maximize total profit, defined as:
+  Total Profit = profit_Premium * x_Premium + profit_Regular * x_Regular  
+Which, with values substituted, becomes:  
+  Maximize 500 * NumPremiumDesktops + 300 * NumRegularDesktops  
+(Note: This expression represents net profit based on sales performance. The production costs are taken into account via the production budget constraint.)
+
+----------------------------------------------------------------
+Constraints:
+1. Production Quantity Constraint  
+   The total number of desktops produced cannot exceed the monthly sales capacity:  
+     x_Premium + x_Regular ≤ max_total_units  
+   (That is, NumPremiumDesktops + NumRegularDesktops ≤ 200.)
+
+2. Production Budget Constraint  
+   The total manufacturing cost must not exceed the monthly production budget:  
+     cost_Premium * x_Premium + cost_Regular * x_Regular ≤ max_production_budget  
+   Substituting the given values:  
+     2000 * NumPremiumDesktops + 1000 * NumRegularDesktops ≤ 300000
+
+----------------------------------------------------------------
+Expected Output Schema (for clarity):
+
+{
+  "variables": {
+    "NumPremiumDesktops": "float",
+    "NumRegularDesktops": "float"
+  },
+  "objective": "float"
+}
+
+This completes the structured mathematical model for the problem.'''
+
+# Generated Code:
+from ortools.linear_solver import pywraplp
+
+def solve_with_linear_solver():
+    # Create the linear solver instance using the GLOP (linear programming) backend.
+    solver = pywraplp.Solver.CreateSolver('GLOP')
+    if not solver:
+        print("Linear solver not available.")
+        return None
+
+    # Define variables:
+    # Even though desktops are integer values, the expected output schema uses floats.
+    NumPremiumDesktops = solver.NumVar(0, solver.infinity(), 'NumPremiumDesktops')
+    NumRegularDesktops = solver.NumVar(0, solver.infinity(), 'NumRegularDesktops')
+
+    # Parameters
+    max_total_units = 200
+    max_production_budget = 300000
+    cost_Premium = 2000
+    cost_Regular = 1000
+    profit_Premium = 500
+    profit_Regular = 300
+
+    # Constraint 1: Production quantity constraint
+    solver.Add(NumPremiumDesktops + NumRegularDesktops <= max_total_units)
+
+    # Constraint 2: Production budget constraint
+    solver.Add(cost_Premium * NumPremiumDesktops + cost_Regular * NumRegularDesktops <= max_production_budget)
+
+    # Objective: Maximize total profit = 500 * NumPremiumDesktops + 300 * NumRegularDesktops
+    objective = solver.Objective()
+    objective.SetCoefficient(NumPremiumDesktops, profit_Premium)
+    objective.SetCoefficient(NumRegularDesktops, profit_Regular)
+    objective.SetMaximization()
+
+    # Solve the problem
+    status = solver.Solve()
+
+    # Prepare the result dictionary
+    results = {}
+    if status == pywraplp.Solver.OPTIMAL:
+        results['variables'] = {
+            "NumPremiumDesktops": NumPremiumDesktops.solution_value(),
+            "NumRegularDesktops": NumRegularDesktops.solution_value()
+        }
+        results['objective'] = objective.Value()
+    else:
+        results['error'] = "The problem does not have an optimal solution."
+
+    return results
+
+
+def main():
+    # Since only one formulation is provided, we solve using a linear programming model.
+    result_linear = solve_with_linear_solver()
+
+    # Print results in a structured way.
+    print("Results for Linear Programming Model:")
+    if 'error' in result_linear:
+        print("Error:", result_linear['error'])
+    else:
+        print("NumPremiumDesktops =", result_linear['variables']["NumPremiumDesktops"])
+        print("NumRegularDesktops =", result_linear['variables']["NumRegularDesktops"])
+        print("Objective (Total Profit) =", result_linear['objective'])
+
+if __name__ == '__main__':
+    main()
+
+'''Execution Results:
+SUCCESS:
+Results for Linear Programming Model:
+NumPremiumDesktops = 100.0
+NumRegularDesktops = 100.0
+Objective (Total Profit) = 80000.0
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'NumPremiumDesktops': 100.0, 'NumRegularDesktops': 100.0}, 'objective': 80000.0}'''
+

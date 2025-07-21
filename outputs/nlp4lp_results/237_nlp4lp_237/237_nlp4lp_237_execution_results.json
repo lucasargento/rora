@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nContinuous Model (Variables can be fractional):\n{'variables': {'NumberCamelCaravans': 7.5, 'NumberDesertTrucks': 7.5}, 'objective': 127.5}\n\nInteger Model (Variables are integers):\n{'variables': {'NumberCamelCaravans': 8.0, 'NumberDesertTrucks': 8.0}, 'objective': 136.0}\n"
+}

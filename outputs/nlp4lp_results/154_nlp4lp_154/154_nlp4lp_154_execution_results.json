@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Model 1 (Original constraint formulation):\n{'NumberOfBikes': 80.0, 'NumberOfCars': 53.0, 'objective': 80.0}\n\nResults for Model 2 (Simplified constraint formulation):\n{'NumberOfBikes': 80.0, 'NumberOfCars': 53.0, 'objective': 80.0}\n"
+}

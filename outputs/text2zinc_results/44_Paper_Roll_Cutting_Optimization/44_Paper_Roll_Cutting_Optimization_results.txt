@@ -1,0 +1,48 @@
+Problem Name: 44_Paper_Roll_Cutting_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Sets:} \quad & i \in \{1,2,\ldots,M\} \quad \text{(types of smaller rolls)}, \quad j \in \{1,2,\ldots,N\} \quad \text{(cutting patterns)}. \\[1mm]
+\textbf{Parameters:} \quad & M = 4, \quad N = 49, \\
+& \text{large\_roll\_width} \in \mathbb{R}_{+} \quad (=70), \\
+& d_i \in \mathbb{R}_{+} \quad \text{(demand for smaller roll of type } i\text{)}, \quad \forall i=1,\ldots,M, \\
+& w_i \in \mathbb{R}_{+} \quad \text{(width of smaller roll of type } i\text{)}, \quad \forall i=1,\ldots,M, \\
+& a_{ij} \in \mathbb{Z}_{+} \quad \text{(number of smaller rolls of type } i \text{ produced by pattern } j\text{)}, \quad \forall i=1,\ldots,M,\; j=1,\ldots,N. \\[1mm]
+\textbf{Additional Data Verification:} \quad & \text{For each pattern } j, \text{ it is assumed that} \\
+& \sum_{i=1}^{M} w_i\, a_{ij} \le \text{large\_roll\_width}. \\[2mm]
+\textbf{Decision Variables:} \quad & x_j \in \mathbb{Z}_{+} \quad \text{for each } j=1,\ldots,N, \quad \text{representing the number of large rolls cut using pattern } j. \\[2mm]
+\textbf{Objective Function:} \quad & \text{Minimize the total number of large rolls used:} \\
+\min \quad & Z = \sum_{j=1}^{N} x_j. \\[2mm]
+\textbf{Constraints:} \\[2mm]
+& \text{(a) Demand satisfaction for each type } i: \\
+& \sum_{j=1}^{N} a_{ij}\, x_j \ge d_i, \quad \forall\, i=1,\ldots,M. \\[2mm]
+& \text{(b) (Implicit) Feasibility of cutting patterns is assumed, i.e., for each } j: \\
+& \sum_{i=1}^{M} w_i\, a_{ij} \le \text{large\_roll\_width}. \\[2mm]
+& \text{(c) Non-negativity and integrality:} \\
+& x_j \in \mathbb{Z}_{+}, \quad \forall\, j=1,\ldots,N.
+\end{align*} 
+
+\vspace{2mm}
+This complete model accurately represents the manufacturing and production problem by:
+\\[1mm]
+1. Defining clear decision variables (the number of large rolls to cut with each available pattern).\\[1mm]
+2. Establishing the minimization objective of the total large rolls used.\\[1mm]
+3. Including constraints ensuring that the production using the selected cutting patterns meets or exceeds the customer demand for each type of smaller roll.\\[1mm]
+4. Confirming that each pre-defined pattern is feasible with respect to the large roll width.\\[1mm]
+5. Maintaining integrality and non-negativity to avoid trivial, infeasible or unbounded scenarios.
+
+
+Execution Results:
+SUCCESS:
+Optimal solution found!
+Total large rolls used = 45.0
+Pattern 6: Use 20 times
+Pattern 18: Use 6 times
+Pattern 42: Use 18 times
+Pattern 45: Use 1 times
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 45.0}

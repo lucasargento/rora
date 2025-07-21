@@ -1,0 +1,68 @@
+Problem Name: 46_Quadratic_Curve_Fitting
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Indices and Parameters:} \\
+\quad & k & = 1,\;2,\;\ldots,\;K, & \quad \text{where } K=19 \text{ is the number of data points}.\\[1mm]
+\quad & y^{(k)} & \in \mathbb{R}, & \quad \text{observed value of } y \text{ at data point } k,\\[1mm]
+\quad & x^{(k)} & \in \mathbb{R}, & \quad \text{observed value of } x \text{ at data point } k.\\[3mm]
+
+\textbf{Decision Variables:} \\
+\quad & a & \in \mathbb{R}, & \quad \text{constant term (intercept) of the quadratic curve},\\[1mm]
+\quad & b & \in \mathbb{R}, & \quad \text{linear coefficient of the quadratic curve},\\[1mm]
+\quad & c & \in \mathbb{R}, & \quad \text{quadratic coefficient of the quadratic curve},\\[1mm]
+\quad & \delta_k & \ge 0,\; \forall k=1,\ldots,K, & \quad \text{auxiliary variable representing the absolute deviation at data point } k.\\[3mm]
+
+\textbf{Mathematical Model:} \\[1mm]
+\begin{align*}
+\text{minimize} \quad & \sum_{k=1}^{K} \delta_k \\[2mm]
+\text{subject to} \quad 
+& \delta_k \ge y^{(k)} - \Bigl(a + b\,x^{(k)} + c\,\bigl(x^{(k)}\bigr)^2\Bigr), \quad && k = 1,\ldots,K, \\[1mm]
+& \delta_k \ge -\Bigl(y^{(k)} - \bigl(a + b\,x^{(k)} + c\,\bigl(x^{(k)}\bigr)^2\bigr)\Bigr), \quad && k = 1,\ldots,K, \\[1mm]
+& \delta_k \ge 0, \quad && k = 1,\ldots,K, \\[1mm]
+& a \in \mathbb{R}, \quad b \in \mathbb{R}, \quad c \in \mathbb{R}.
+\end{align*}
+\end{array}
+\]
+
+Explanation:
+1. Decision variables a, b, and c represent the coefficients of the quadratic curve y = c x^2 + b x + a.  
+2. For each data point k, the variable \(\delta_k\) captures the absolute deviation between the observed value \(y^{(k)}\) and the value predicted by the quadratic model.  
+3. The objective is to minimize the sum of these absolute deviations, ensuring the best quadratic fit in the sense of least absolute deviations (LAD).  
+4. The constraints ensure that \(\delta_k\) bounds the absolute residual \(\left| y^{(k)} - \left(a + b\,x^{(k)} + c\,\bigl(x^{(k)}\bigr)^2 \right) \right|\) for all k.
+
+This formulation is complete, self-contained, and reflects the entire problem with full accuracy.
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Objective value = 10.458964705882352
+a = 0.9823529411764703
+b = 0.29450980392156884
+c = 0.03372549019607841
+delta_0 = 0.01764705882352967
+delta_1 = 0.2380392156862744
+delta_2 = 0.6105882352941175
+delta_3 = 0.0
+delta_4 = 0.336329411764706
+delta_5 = 0.47058823529411703
+delta_6 = 1.0305882352941178
+delta_7 = 0.42627450980392156
+delta_8 = 0.0
+delta_9 = 0.5094117647058818
+delta_10 = 2.2980392156862752
+delta_11 = 0.37764705882352945
+delta_12 = 0.36352941176470605
+delta_13 = 1.6951999999999994
+delta_14 = 1.0035294117647056
+delta_15 = 0.568611764705882
+delta_16 = 0.07764705882353003
+delta_17 = 0.435294117647059
+delta_18 = 0.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 1.475}

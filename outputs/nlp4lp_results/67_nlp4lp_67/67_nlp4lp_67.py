@@ -1,0 +1,130 @@
+# Problem Description:
+'''Problem description: A scientist is conducting two experiments to produce electricity, experiment alpha and experiment beta. In experiment alpha, 3 units of metal and 5 units of acid are required to produce 8 units of electricity. In experiment beta, 5 units of metal and 4 units of acid are required to produced 10 units of electricity. The lab has 800 units of metal and 750 units of acid available. How many of each experiment should the scientist conduct to maximize the total amount of electricity produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "ConductExperiment": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Sets:
+- E: set of experiments = {alpha, beta}
+
+Parameters:
+- metal_usage: metal consumed per experiment, with metal_usage[alpha] = 3 (units/experiment), metal_usage[beta] = 5 (units/experiment)
+- acid_usage: acid consumed per experiment, with acid_usage[alpha] = 5 (units/experiment), acid_usage[beta] = 4 (units/experiment)
+- electricity: electricity produced per experiment, with electricity[alpha] = 8 (units/experiment), electricity[beta] = 10 (units/experiment)
+- available_metal: total available metal = 800 (units)
+- available_acid: total available acid = 750 (units)
+
+Variables:
+- x_e: number of experiments of type e to conduct, for e in E; where each x_e is a continuous variable with x_e ≥ 0
+  (Interpretation: x_alpha and x_beta represent how many times experiments alpha and beta are conducted, respectively.)
+
+Objective:
+- Maximize total electricity production defined as:
+  TotalElectricity = electricity[alpha] * x_alpha + electricity[beta] * x_beta
+
+Constraints:
+- Metal constraint: metal_usage[alpha] * x_alpha + metal_usage[beta] * x_beta ≤ available_metal  
+  (i.e., 3*x_alpha + 5*x_beta ≤ 800)
+- Acid constraint: acid_usage[alpha] * x_alpha + acid_usage[beta] * x_beta ≤ available_acid  
+  (i.e., 5*x_alpha + 4*x_beta ≤ 750)
+
+---
+
+Model Summary in Expected Output Schema:
+{
+  "variables": {
+    "ConductExperiment": {
+      "0": "float",  // corresponds to number of times experiment alpha is conducted (x_alpha)
+      "1": "float"   // corresponds to number of times experiment beta is conducted (x_beta)
+    }
+  },
+  "objective": "float"  // total electricity produced: 8*x_alpha + 10*x_beta
+}'''
+
+# Generated Code:
+#!/usr/bin/env python3
+from ortools.linear_solver import pywraplp
+
+def solve_experiment_optimization():
+    # Create the linear solver
+    solver = pywraplp.Solver.CreateSolver('GLOP')
+    if not solver:
+        print("Solver not created.")
+        return None
+
+    # Define variables:
+    # x[0] corresponds to experiment alpha, x[1] corresponds to experiment beta
+    x_alpha = solver.NumVar(0.0, solver.infinity(), 'x_alpha')
+    x_beta = solver.NumVar(0.0, solver.infinity(), 'x_beta')
+    
+    # Parameters
+    metal_usage_alpha = 3
+    metal_usage_beta = 5
+    acid_usage_alpha = 5
+    acid_usage_beta = 4
+    electricity_alpha = 8
+    electricity_beta = 10
+    available_metal = 800
+    available_acid = 750
+
+    # Constraints:
+    # Metal constraint: 3*x_alpha + 5*x_beta <= 800
+    solver.Add(metal_usage_alpha * x_alpha + metal_usage_beta * x_beta <= available_metal)
+    
+    # Acid constraint: 5*x_alpha + 4*x_beta <= 750
+    solver.Add(acid_usage_alpha * x_alpha + acid_usage_beta * x_beta <= available_acid)
+    
+    # Objective: maximize 8*x_alpha + 10*x_beta
+    objective = solver.Objective()
+    objective.SetCoefficient(x_alpha, electricity_alpha)
+    objective.SetCoefficient(x_beta, electricity_beta)
+    objective.SetMaximization()
+    
+    # Solve the problem
+    status = solver.Solve()
+    
+    result = {}
+    if status == pywraplp.Solver.OPTIMAL:
+        # Prepare the expected structured output
+        result["variables"] = {
+            "ConductExperiment": {
+                "0": x_alpha.solution_value(),
+                "1": x_beta.solution_value()
+            }
+        }
+        result["objective"] = objective.Value()
+    else:
+        result["error"] = "The problem does not have an optimal solution."
+    return result
+
+def main():
+    # Only one formulation was provided so we create one implementation.
+    solution_model1 = solve_experiment_optimization()
+    
+    # Print the results in a nicely structured way.
+    print("Results for Formulation 1:")
+    print(solution_model1)
+    
+if __name__ == '__main__':
+    main()
+
+'''Execution Results:
+SUCCESS:
+Results for Formulation 1:
+{'variables': {'ConductExperiment': {'0': 42.307692307692314, '1': 134.6153846153846}}, 'objective': 1684.6153846153848}
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'ConductExperiment': {'0': 42.30769230769231, '1': 134.6153846153846}}, 'objective': 1684.6153846153848}'''
+

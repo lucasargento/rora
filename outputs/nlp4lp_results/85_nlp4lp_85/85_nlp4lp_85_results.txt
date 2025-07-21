@@ -1,0 +1,76 @@
+Problem Name: 85_nlp4lp_85
+
+# Problem Description:
+'''Problem description: A cleaning company uses a cleansing chemical and odor-removing chemical to clean a house. Each unit of the cleansing chemical takes 4 units to be effective while each unit of the odor-removing chemical takes 6 minutes to be effective. The company must use at least 100 units of the cleansing chemical. In total, at least 300 units of chemicals can be used per house. Further, because the cleansing chemical is strong, there can be at most twice the amount of cleansing chemical as odor-removing chemical. How many units of each should be used to minimize the total time it takes for a house to be cleaned?
+
+Expected Output Schema:
+{
+  "variables": {
+    "CleansingChemicalUnits": "float",
+    "OdorRemovingChemicalUnits": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+The following is a complete formulation of the problem as a mathematical model using the five-element framework. In this formulation we assume that both chemicals are measured in "units" (each “unit” is an application measure) and the corresponding treatment times are measured in minutes. That is, one unit of cleansing chemical requires 4 minutes for effectiveness and one unit of odor‐removing chemical requires 6 minutes. We note that, although the problem states "units" for the cleansing chemical effectiveness and "minutes" for the odor-removing chemical, we assume that both are directly contributing to the overall cleaning time in minutes. If an alternative interpretation is required (for example, if the 4 in the cleansing case were a dimensionless cost factor rather than minutes), then the formulation can be adjusted accordingly. 
+
+Below is the main formulation:
+
+------------------------------------------------------------
+Sets:
+- ChemicalTypes: set of chemical types = {Cleansing, OdorRemoving}
+
+Parameters:
+- treatment_time_Cleansing: treatment time per unit of cleansing chemical = 4 minutes per unit 
+- treatment_time_OdorRemoving: treatment time per unit of odor-removing chemical = 6 minutes per unit
+- minimum_cleansing: minimum required units of cleansing chemical = 100 units
+- minimum_total_units: minimum total units of chemicals = 300 units
+- max_ratio: maximum ratio of cleansing to odor-removing chemical = 2   (i.e., CleansingUnits ≤ 2 * OdorRemovingUnits)
+
+Variables:
+- CleansingChemicalUnits (continuous, ≥ 0): Number of units of cleansing chemical to use [units]
+- OdorRemovingChemicalUnits (continuous, ≥ 0): Number of units of odor-removing chemical to use [units]
+
+Objective:
+- Minimize total cleaning time (in minutes) defined as:
+  total_cleaning_time = treatment_time_Cleansing * CleansingChemicalUnits + treatment_time_OdorRemoving * OdorRemovingChemicalUnits
+  That is, Minimize: 4 * CleansingChemicalUnits + 6 * OdorRemovingChemicalUnits
+
+Constraints:
+1. Cleansing chemical minimum usage:
+   CleansingChemicalUnits ≥ 100
+
+2. Minimum total chemical usage:
+   CleansingChemicalUnits + OdorRemovingChemicalUnits ≥ 300
+
+3. Ratio constraint (due to the strength of the cleansing chemical):
+   CleansingChemicalUnits ≤ 2 * OdorRemovingChemicalUnits
+
+------------------------------------------------------------
+
+For clarity, here is the expected output schema in JSON format as specified:
+
+{
+  "variables": {
+    "CleansingChemicalUnits": "float",
+    "OdorRemovingChemicalUnits": "float"
+  },
+  "objective": "float"
+}
+
+This model is now self-contained, logically consistent, and maps directly to a working implementation in code.
+
+Execution Results:
+SUCCESS:
+Model 1 (Direct Time Interpretation) Result:
+{'variables': {'CleansingChemicalUnits': 200.0, 'OdorRemovingChemicalUnits': 100.0}, 'objective': 1400.0}
+
+Model 2 (Alternative Interpretation) Result:
+{'variables': {'CleansingChemicalUnits': 200.0, 'OdorRemovingChemicalUnits': 100.0}, 'objective': 600.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'CleansingChemicalUnits': 100.0, 'OdorRemovingChemicalUnits': 50.0}, 'objective': 700.0}

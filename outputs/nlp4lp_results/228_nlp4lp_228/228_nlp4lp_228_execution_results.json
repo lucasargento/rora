@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for the Linear Program Model:\nStatus             : OPTIMAL\nNumberOfBloodTests : 237.0\nNumberOfEarTests   : 79.0\nObjective value    : 316.0\n"
+}

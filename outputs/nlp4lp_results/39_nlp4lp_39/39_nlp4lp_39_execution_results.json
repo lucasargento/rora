@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n=== Model 1: Linear Solver Implementation ===\nOptimal solution found:\nObjective value (total stores): 8.0\nNumber of dine-in stores (NumberStore[0]): 2.0\nNumber of food truck stores (NumberStore[1]): 6.0\n"
+}

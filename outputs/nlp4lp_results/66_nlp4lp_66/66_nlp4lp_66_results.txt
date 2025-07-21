@@ -1,0 +1,85 @@
+Problem Name: 66_nlp4lp_66
+
+# Problem Description:
+'''Problem description: An airport buys two types of vehicles, a 4-wheeler and 3-wheeler, to help move luggage. A 4-wheeler vehicle can move 60 luggage per day and produces 30 units of pollutant per day. A 3-wheeler vehicle can move 40 luggage per day and produces 15 units of pollutant per day. The airport needs to be able to move at least 1000 luggage per day. To avoid over-polluting the airport, they can produce at most 430 units of pollutant per day. How many of each vehicle should the airport buy to minimize the total number of vehicles needed.  
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfVehicles": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- V: set of vehicle types = {4-wheel, 3-wheel}
+
+Parameters:
+- luggage_capacity[4-wheel] = 60 (luggage moved per day per 4-wheeler)
+- luggage_capacity[3-wheel] = 40 (luggage moved per day per 3-wheeler)
+- pollutant[4-wheel] = 30 (pollutant units produced per day per 4-wheeler)
+- pollutant[3-wheel] = 15 (pollutant units produced per day per 3-wheeler)
+- required_luggage = 1000 (minimum luggage to be moved per day)
+- max_pollutant = 430 (maximum pollutant allowed per day)
+
+Variables:
+- x[v] for each v in V: number of vehicles of type v to buy [integer, nonnegative]
+  (Interpretation: x["4-wheel"] is the number of 4-wheeler vehicles; x["3-wheel"] is the number of 3-wheeler vehicles.)
+
+Objective:
+- Minimize the total number of vehicles, expressed as: 
+  TotalVehicles = x["4-wheel"] + x["3-wheel"]
+
+Constraints:
+1. Luggage movement requirement:
+  (luggage_capacity[4-wheel] * x["4-wheel"]) + (luggage_capacity[3-wheel] * x["3-wheel"]) ≥ required_luggage
+  (This ensures that at least 1000 luggage items are moved per day.)
+
+2. Pollutant limit requirement:
+  (pollutant[4-wheel] * x["4-wheel"]) + (pollutant[3-wheel] * x["3-wheel"]) ≤ max_pollutant
+  (This ensures that the total pollutant produced does not exceed 430 units per day.)
+
+--------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfVehicles": {
+      "0": "float",  // corresponds to number of 4-wheelers (decision variable x['4-wheel'])
+      "1": "float"   // corresponds to number of 3-wheelers (decision variable x['3-wheel'])
+    }
+  },
+  "objective": "float"  // total number of vehicles
+}
+
+Execution Results:
+SUCCESS:
+{
+  "LinearSolver": {
+    "variables": {
+      "NumberOfVehicles": {
+        "0": 6.0,
+        "1": 16.0
+      }
+    },
+    "objective": 22.0
+  },
+  "CpModel": {
+    "variables": {
+      "NumberOfVehicles": {
+        "0": 6,
+        "1": 16
+      }
+    },
+    "objective": 22.0
+  }
+}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfVehicles': {'0': 6.0, '1': 16.0}}, 'objective': 22.0}

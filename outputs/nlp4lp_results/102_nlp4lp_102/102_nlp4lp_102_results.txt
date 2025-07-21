@@ -1,0 +1,84 @@
+Problem Name: 102_nlp4lp_102
+
+# Problem Description:
+'''Problem description: A pharmacy has 3000 mg of morphine to make painkillers and sleeping pills. Each painkiller pill requires 10 mg of morphine and 3 units of digestive medicine. Each sleeping pill requires 6 mg of morphine and 5 units of digestive medicine. The pharmacy needs to make at least 50 painkiller pills. Since sleeping pills are more popular, at least 70% of the pills should be sleeping pills. How many of each should the pharmacy make to minimize the total amount of digestive medicine needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "PainkillerPills": "float",
+    "SleepingPills": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- PillTypes = {Painkiller, Sleeping}
+
+Parameters:
+- totalMorphineAvailable = 3000 mg (total morphine available)
+- morphinePerPainkiller = 10 mg (morphine needed per painkiller)
+- morphinePerSleeping = 6 mg (morphine needed per sleeping pill)
+- digestiveMedPerPainkiller = 3 units (digestive medicine needed per painkiller)
+- digestiveMedPerSleeping = 5 units (digestive medicine needed per sleeping pill)
+- minPainkillers = 50 (minimum number of painkiller pills required)
+- minSleepingRatio = 0.70 (sleeping pills must be at least 70% of total pills)
+
+Variables:
+- PainkillerPills: number of painkiller pills to produce [nonnegative integer, units: pills]
+- SleepingPills: number of sleeping pills to produce [nonnegative integer, units: pills]
+
+Objective:
+- Minimize total digestive medicine used, calculated as:
+  TotalDigestiveMedicine = digestiveMedPerPainkiller * PainkillerPills + digestiveMedPerSleeping * SleepingPills
+
+Constraints:
+1. Morphine Constraint:
+   morphinePerPainkiller * PainkillerPills + morphinePerSleeping * SleepingPills <= totalMorphineAvailable
+   (i.e., 10 * PainkillerPills + 6 * SleepingPills <= 3000)
+
+2. Minimum Painkiller Production:
+   PainkillerPills >= minPainkillers
+   (i.e., PainkillerPills >= 50)
+
+3. Sleeping Pills Minimum Ratio:
+   The fraction of sleeping pills among total pills must be at least 70%. This can be written as:
+   SleepingPills >= minSleepingRatio * (PainkillerPills + SleepingPills)
+   Rearranging the inequality:
+   SleepingPills - 0.7 * SleepingPills >= 0.7 * PainkillerPills
+   0.3 * SleepingPills >= 0.7 * PainkillerPills
+   Thus, SleepingPills >= (0.7 / 0.3) * PainkillerPills  or equivalently SleepingPills >= (7/3) * PainkillerPills
+
+Model Summary in Expected Output Schema:
+{
+  "variables": {
+    "PainkillerPills": "integer, number of painkiller pills to produce [pills]",
+    "SleepingPills": "integer, number of sleeping pills to produce [pills]"
+  },
+  "objective": "Minimize digestive medicine = 3 * PainkillerPills + 5 * SleepingPills"
+}
+
+Notes:
+- All units are consistent with the problem description.
+- Decision variables are defined as integers since you cannot produce fractional pills.
+- The sleeping pills ratio inequality has been reformulated for ease of implementation.
+- This model minimizes the total digestive medicine required, subject to morphine availability, a minimum production threshold for painkillers, and the requirement that sleeping pills form at least 70% of the total production.
+
+Execution Results:
+SUCCESS:
+---- Linear Solver (CBC Mixed Integer Programming) Result ----
+PainkillerPills: 50.0
+SleepingPills: 117.0
+Objective (Total Digestive Medicine): 735.0
+
+---- CP-SAT Solver Result ----
+PainkillerPills: 50
+SleepingPills: 117
+Objective (Total Digestive Medicine): 735.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'PainkillerPills': 50.0, 'SleepingPills': 116.66666666666663}, 'objective': 733.3333333333331}

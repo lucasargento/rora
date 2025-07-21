@@ -1,0 +1,65 @@
+Problem Name: 135_nlp4lp_135
+
+# Problem Description:
+'''Problem description: A meat shop ships their burger patties using refrigerated trucks and vans. Each truck can take 1000 patties at a cost of $300 per trip. Each van can take 500 patties at a cost of $100 per trip. Because the trucks have difficulty moving around in the city, the number of trucks must not exceed the number of vans. The meat shop has to ship at least 50000 patties and they have a budget of $12500. How should they plan their shipment to minimize the total number of trips?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumTrips": {
+      "0": "float",
+      "1": "float"
+    },
+    "NumVehicles": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- VehicleTypes: the set of available vehicle types = {truck, van}
+
+Parameters:
+- cap_truck: capacity of a truck per trip = 1000 patties per trip
+- cap_van: capacity of a van per trip = 500 patties per trip
+- cost_truck: shipping cost per truck trip = 300 USD per trip
+- cost_van: shipping cost per van trip = 100 USD per trip
+- demand: the minimum number of patties to ship = 50000 patties
+- budget: the maximum allowed shipping cost = 12500 USD
+
+Variables:
+- Let NumTrips["0"] be the number of truck trips (integer ≥ 0, measured in trips)
+- Let NumTrips["1"] be the number of van trips (integer ≥ 0, measured in trips)
+- Let NumVehicles["0"] be the number of trucks used (integer ≥ 0, measured in vehicles)
+- Let NumVehicles["1"] be the number of vans used (integer ≥ 0, measured in vehicles)
+  (Note: Since each trip uses one vehicle, we have NumVehicles["0"] = NumTrips["0"] and NumVehicles["1"] = NumTrips["1"].)
+
+Objective:
+- Minimize total trips = NumTrips["0"] + NumTrips["1"]
+
+Constraints:
+1. Shipping capacity constraint (patties shipped must meet or exceed demand):
+   1000 * NumTrips["0"] + 500 * NumTrips["1"] ≥ 50000
+2. Budget constraint (total shipping cost must not exceed the available budget):
+   300 * NumTrips["0"] + 100 * NumTrips["1"] ≤ 12500
+3. Vehicle routing constraint (number of truck trips must not exceed number of van trips):
+   NumTrips["0"] ≤ NumTrips["1"]
+
+Comments:
+- All costs are in USD per trip and capacities in patties per trip.
+- The demand and budget constraints use totals over all trips.
+- Although the model defines both NumTrips and NumVehicles, they represent the same counts since every trip uses one vehicle.
+- Decision variables are integers, as fractional trips are not allowed.
+
+Execution Results:
+SUCCESS:
+{'LinearSolverImplementation': {'model': 'LinearSolver', 'variables': {'NumTrips': {'0': 25.0, '1': 50.0}, 'NumVehicles': {'0': 25.0, '1': 50.0}}, 'objective': 75.0}, 'CpModelImplementation': {'model': 'CpModel', 'variables': {'NumTrips': {'0': 25, '1': 50}, 'NumVehicles': {'0': 25, '1': 50}}, 'objective': 75}}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumTrips': {'0': 25.0, '1': 50.0}, 'NumVehicles': {'0': 0.0, '1': -0.0}}, 'objective': 75.0}

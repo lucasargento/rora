@@ -1,0 +1,37 @@
+Problem Name: 64_Chebychev_Center_of_a_Set
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:} &\\[1mm]
+M &\in \mathbb{N}, \quad \text{number of linear inequalities defining } P,\\[1mm]
+N &\in \mathbb{N}, \quad \text{dimension of the ambient space } \mathbb{R}^N,\\[1mm]
+a_i &\in \mathbb{R}^N, \quad i = 1,\ldots, M, \quad \text{coefficient vectors in the constraints},\\[1mm]
+b_i &\in \mathbb{R}, \quad i = 1,\ldots, M, \quad \text{right-hand side constants in the constraints}.\\[3mm]
+\textbf{Decision Variables:} &\\[1mm]
+y &\in \mathbb{R}^N, \quad \text{the center of the ball},\\[1mm]
+r &\in \mathbb{R}, \quad r \geq 0, \quad \text{the radius of the ball}.
+\\[3mm]
+\textbf{Problem Description:} &\\[1mm]
+\text{Given the polyhedron } P &= \{ x \in \mathbb{R}^N \mid a_i^T x \leq b_i,\; i=1,\ldots,M \},\\[1mm]
+\text{find the ball } B(y,r) &= \{ x \in \mathbb{R}^N \mid \|x-y\|_2 \leq r \} \\
+&\text{of maximum radius } r \ge 0 \text{ such that } B(y,r) \subseteq P.
+\\[3mm]
+\textbf{Mathematical Model:} &\\[1mm]
+\underset{y\in \mathbb{R}^N,\; r\in \mathbb{R}}{\text{maximize}} \quad & r\\[2mm]
+\text{subject to} \quad & a_i^T y + \|a_i\|_2\, r \leq b_i, \quad i = 1,\ldots,M,\\[2mm]
+& r \geq 0.
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Optimal radius r = 2.0
+y[0] = 0.0
+y[1] = 1.0
+Optimal objective value = 2.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 2.0}

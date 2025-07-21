@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimal solutions:\nLinear_Solver_Model:\n  Variables (NumDoses):\n    Dose for pain killer 1: 26.666666666666668\n    Dose for pain killer 2: 0.0\n  Objective (Total back medicine delivered): 21.333333333333336\n"
+}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults:\nContinuous Model:\n  Variables:\n    NumberReactions -> x_A (reaction A): 96.29629629629629, x_B (reaction B): 74.07407407407408\n  Objective (Total rare compound produced): 1555.5555555555557\n\nInteger Model:\n  Variables:\n    NumberReactions -> x_A (reaction A): 96.0, x_B (reaction B): 74.0\n  Objective (Total rare compound produced): 1552.0\n"
+}

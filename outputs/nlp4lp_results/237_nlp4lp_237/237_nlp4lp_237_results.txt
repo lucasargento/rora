@@ -1,0 +1,61 @@
+Problem Name: 237_nlp4lp_237
+
+# Problem Description:
+'''Problem description: A company in the desert can transport goods to rural cities either by camel caravans or desert trucks. A camel caravan can deliver 50 units of goods per trip and takes 12 hours. A desert truck can deliver 150 units of goods per trip and takes 5 hours. However, due to the cost of fuel, the company prefers to have more camel caravans than desert trucks.  If the company needs to deliver 1500 units of goods, how many of each method of transportation should the company organize to minimize the total number of hours required?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberCamelCaravans": "float",
+    "NumberDesertTrucks": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- TransportationMethods: set of methods = {CamelCaravan, DesertTruck}
+
+Parameters:
+- CamelCaravan_capacity = 50 units per trip
+- DesertTruck_capacity = 150 units per trip
+- CamelCaravan_time = 12 hours per trip
+- DesertTruck_time = 5 hours per trip
+- Demand = 1500 units (total goods to be delivered)
+- Note: The company’s policy implies a preference constraint: the number of CamelCaravan trips should be at least as many as DesertTruck trips.
+
+Variables:
+- NumberCamelCaravans: number of camel caravan trips (decision variable, assumed nonnegative; can be modeled as continuous or integer)
+- NumberDesertTrucks: number of desert truck trips (decision variable, assumed nonnegative; can be modeled as continuous or integer)
+
+Objective:
+- Minimize TotalHours = (CamelCaravan_time * NumberCamelCaravans) + (DesertTruck_time * NumberDesertTrucks)
+
+Constraints:
+1. Demand constraint:
+   (CamelCaravan_capacity * NumberCamelCaravans) + (DesertTruck_capacity * NumberDesertTrucks) >= Demand
+2. Preference constraint:
+   NumberCamelCaravans >= NumberDesertTrucks
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberCamelCaravans": "float",
+    "NumberDesertTrucks": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Continuous Model (Variables can be fractional):
+{'variables': {'NumberCamelCaravans': 7.5, 'NumberDesertTrucks': 7.5}, 'objective': 127.5}
+
+Integer Model (Variables are integers):
+{'variables': {'NumberCamelCaravans': 8.0, 'NumberDesertTrucks': 8.0}, 'objective': 136.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberCamelCaravans': -0.0, 'NumberDesertTrucks': 10.0}, 'objective': 50.0}

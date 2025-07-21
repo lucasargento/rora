@@ -1,0 +1,73 @@
+Problem Name: 168_nlp4lp_168
+
+# Problem Description:
+'''Problem description: An international shipping company uses large and small ships to transport containers around the world. A large ship can carry 500 containers while a small ship can carry 200 containers. Because most ports are small, the number of large ships cannot exceed the number of small ships. If the company is under contract needs to transport at least 3000 containers, find the minimum number of ships that can be used.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberLargeShips": "float",
+    "NumberSmallShips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the complete mathematical model using the five‐element framework. In this model, all ship counts are assumed to be nonnegative integers, container capacities are in “containers per ship,” and the contract requirement is in “containers.” Note that the port limitation is modeled by requiring that the number of large ships does not exceed the number of small ships.
+
+───────────────────────────── 
+Sets:
+- S = {Large, Small} 
+  (A set that distinguishes the two types of ships)
+
+───────────────────────────── 
+Parameters:
+- capacity_Large = 500   [containers per large ship]
+- capacity_Small = 200   [containers per small ship]
+- minRequiredContainers = 3000   [containers]
+- Note: The “port constraint” is given by the condition that the number of large ships cannot exceed the number of small ships.
+
+───────────────────────────── 
+Variables:
+- NumberLargeShips: number of large ships to use (integer, ≥ 0)
+- NumberSmallShips: number of small ships to use (integer, ≥ 0)
+
+───────────────────────────── 
+Objective:
+- Minimize TotalShips  where TotalShips = NumberLargeShips + NumberSmallShips
+  (This minimizes the overall number of ships used.)
+
+───────────────────────────── 
+Constraints:
+1. Container Transport Capability:
+  500 * NumberLargeShips + 200 * NumberSmallShips ≥ 3000
+  (This constraint ensures that at least 3000 containers can be transported.)
+
+2. Port Size Constraint:
+  NumberLargeShips ≤ NumberSmallShips
+  (This reflects that “most ports are small” and limits the use of large ships.)
+
+───────────────────────────── 
+
+Below is the final output following the expected output schema:
+
+{
+  "variables": {
+    "NumberLargeShips": "integer >= 0 (number of large ships)",
+    "NumberSmallShips": "integer >= 0 (number of small ships)"
+  },
+  "objective": "minimize NumberLargeShips + NumberSmallShips"
+}
+
+Execution Results:
+SUCCESS:
+Model Implementation 1:
+Optimal Number of Large Ships: 4.0
+Optimal Number of Small Ships: 5.0
+Minimum Total Ships: 9.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberLargeShips': 4.0, 'NumberSmallShips': 5.0}, 'objective': 9.0}

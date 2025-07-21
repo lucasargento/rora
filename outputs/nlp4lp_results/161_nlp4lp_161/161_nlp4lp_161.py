@@ -1,0 +1,130 @@
+# Problem Description:
+'''Problem description: A construction company in the tropics uses cows and elephants to carry bricks. A cow can carry 20 bricks on its back while an elephant can carry 50 bricks on its back. To avoid having elephants create too much traffic, the number of elephant cannot exceed the number of cows. In addition, there can be at most twice the number of cows as elephants. If the company needs to transport at least 1000 bricks, find the minimum number of animals, cows and elephants, that can be used..
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfCows": "float",
+    "NumberOfElephants": "float"
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Sets:
+- A: set of animal types = {Cow, Elephant}
+
+Parameters:
+- capacityCow: number of bricks a cow can carry, with value 20 (bricks per cow)
+- capacityElephant: number of bricks an elephant can carry, with value 50 (bricks per elephant)
+- minBricks: minimum number of bricks to transport, with value 1000 (bricks)
+
+Variables:
+- NumberOfCows: number of cows used (nonnegative integer; decision variable, units: animals)
+- NumberOfElephants: number of elephants used (nonnegative integer; decision variable, units: animals)
+
+Objective:
+- Minimize totalAnimals = NumberOfCows + NumberOfElephants
+
+Constraints:
+1. Brick Capacity Constraint: capacityCow * NumberOfCows + capacityElephant * NumberOfElephants >= minBricks  
+   (i.e., 20 * NumberOfCows + 50 * NumberOfElephants >= 1000)
+2. Elephant Traffic Constraint: NumberOfElephants <= NumberOfCows  
+   (ensuring elephants do not outnumber cows to lessen traffic)
+3. Cow Ratio Constraint: NumberOfCows <= 2 * NumberOfElephants  
+   (ensuring the number of cows is at most twice the number of elephants)
+
+Note: Although cows and elephants are inherently integer choices, the provided expected output schema lists them as floats. They can be treated as integers in implementation if required.
+
+Output Format (as per expected output schema):
+{
+  "variables": {
+    "NumberOfCows": "float",
+    "NumberOfElephants": "float"
+  },
+  "objective": "float"
+}'''
+
+# Generated Code:
+#!/usr/bin/env python3
+from ortools.linear_solver import pywraplp
+
+def solve_with_linear_solver():
+    # Create the linear solver with the SCIP backend.
+    solver = pywraplp.Solver.CreateSolver('SCIP')
+    if not solver:
+        print("Solver not created.")
+        return None
+
+    # Parameters
+    capacityCow = 20
+    capacityElephant = 50
+    minBricks = 1000
+
+    # Variables: Although expected output is float, here we treat them as integers.
+    NumberOfCows = solver.IntVar(0.0, solver.infinity(), 'NumberOfCows')
+    NumberOfElephants = solver.IntVar(0.0, solver.infinity(), 'NumberOfElephants')
+
+    # Objective: Minimize total animals = NumberOfCows + NumberOfElephants
+    objective = solver.Objective()
+    objective.SetCoefficient(NumberOfCows, 1)
+    objective.SetCoefficient(NumberOfElephants, 1)
+    objective.SetMinimization()
+
+    # Constraint 1: Brick Capacity Constraint
+    # 20 * NumberOfCows + 50 * NumberOfElephants >= 1000
+    constraint1 = solver.Constraint(minBricks, solver.infinity())
+    constraint1.SetCoefficient(NumberOfCows, capacityCow)
+    constraint1.SetCoefficient(NumberOfElephants, capacityElephant)
+
+    # Constraint 2: Elephant Traffic Constraint: NumberOfElephants <= NumberOfCows
+    constraint2 = solver.Constraint(-solver.infinity(), 0)
+    constraint2.SetCoefficient(NumberOfElephants, 1)
+    constraint2.SetCoefficient(NumberOfCows, -1)
+
+    # Constraint 3: Cow Ratio Constraint: NumberOfCows <= 2 * NumberOfElephants
+    constraint3 = solver.Constraint(-solver.infinity(), 0)
+    constraint3.SetCoefficient(NumberOfCows, 1)
+    constraint3.SetCoefficient(NumberOfElephants, -2)
+
+    # Solve the model.
+    status = solver.Solve()
+
+    if status == pywraplp.Solver.OPTIMAL:
+        result = {
+            "variables": {
+                "NumberOfCows": float(NumberOfCows.solution_value()),
+                "NumberOfElephants": float(NumberOfElephants.solution_value())
+            },
+            "objective": float(objective.Value())
+        }
+        return result
+    else:
+        print("The problem does not have an optimal solution.")
+        return None
+
+def main():
+    # Since the mathematical formulation provided a unique formulation,
+    # we only create one implementation using the linear solver.
+    result_linear = solve_with_linear_solver()
+    
+    if result_linear is not None:
+        print("Solution using OR-Tools Linear Solver:")
+        print(result_linear)
+    else:
+        print("No solution found with the linear solver.")
+
+if __name__ == "__main__":
+    main()
+
+'''Execution Results:
+SUCCESS:
+Solution using OR-Tools Linear Solver:
+{'variables': {'NumberOfCows': 15.0, 'NumberOfElephants': 14.0}, 'objective': 29.0}
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfCows': 15.0, 'NumberOfElephants': 14.0}, 'objective': 29.0}'''
+

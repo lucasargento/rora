@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution using the Linear Solver formulation:\n{'variables': {'QuantityAlpha': 4.0, 'QuantityOmega': 2.0}, 'objective': 110.0}\n"
+}

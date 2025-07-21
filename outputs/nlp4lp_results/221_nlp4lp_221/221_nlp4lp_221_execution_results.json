@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving using OR-Tools Linear Solver (MIP):\nSolution:\n  AutoElectricJacksUsed = 8.0\n  GasPoweredJacksUsed   = 11.0\n  Total cars processed    = 84.0\n\nSolving using OR-Tools CP-SAT Solver:\nSolution:\n  AutoElectricJacksUsed = 8\n  GasPoweredJacksUsed   = 11\n  Total cars processed    = 84.0\n"
+}

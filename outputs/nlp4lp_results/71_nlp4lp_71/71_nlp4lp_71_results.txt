@@ -1,0 +1,67 @@
+Problem Name: 71_nlp4lp_71
+
+# Problem Description:
+'''Problem description: An accounting firm employs part time workers and full time workers. Full time workers work 8 hours per shift while part time workers work 4 hours per shift. In addition, full time workers are paid $300 per shift while part time workers are paid $100 per shift. Currently, the accounting firm has a project requiring 500 hours of labor. If the firm has a budget of $15000, how many of each type of worker should be scheduled to minimize the total number of workers.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumFullTimeWorkers": "float",
+    "NumPartTimeWorkers": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- WorkerTypes = {FullTime, PartTime}
+
+Parameters:
+- FullTimeShiftHours = 8  // hours of work per full-time worker shift
+- PartTimeShiftHours = 4  // hours of work per part-time worker shift
+- FullTimeCost = 300  // cost per full-time worker shift in USD
+- PartTimeCost = 100  // cost per part-time worker shift in USD
+- RequiredLaborHours = 500  // total labor hours needed for the project
+- AvailableBudget = 15000  // total available budget in USD
+
+Variables:
+- NumFullTimeWorkers: number of full-time workers scheduled (integer, ≥ 0)
+- NumPartTimeWorkers: number of part-time workers scheduled (integer, ≥ 0)
+
+Objective:
+- Minimize total number of workers = NumFullTimeWorkers + NumPartTimeWorkers
+
+Constraints:
+1. Labor Hours Constraint:
+  FullTimeShiftHours * NumFullTimeWorkers + PartTimeShiftHours * NumPartTimeWorkers ≥ RequiredLaborHours
+  → 8 * NumFullTimeWorkers + 4 * NumPartTimeWorkers ≥ 500
+
+2. Budget Constraint:
+  FullTimeCost * NumFullTimeWorkers + PartTimeCost * NumPartTimeWorkers ≤ AvailableBudget
+  → 300 * NumFullTimeWorkers + 100 * NumPartTimeWorkers ≤ 15000
+
+----------------------------------
+
+Following the Expected Output Schema, the key decision variables and the objective are represented as:
+
+{
+  "variables": {
+    "NumFullTimeWorkers": "float", 
+    "NumPartTimeWorkers": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+========== Optimization Results ==========
+Optimal Solution Found:
+ - Number of Full-Time Workers: 25.0
+ - Number of Part-Time Workers: 75.0
+ - Total Number of Workers (Objective Value): 100.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumFullTimeWorkers': 25.0, 'NumPartTimeWorkers': 75.0}, 'objective': 100.0}

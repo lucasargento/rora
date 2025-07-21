@@ -1,0 +1,36 @@
+Problem Name: 43_N-Queens
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:} \quad & n = 6 \\[1mm]
+\textbf{Decision Variables:} \quad & x_{ij} \in \{0,1\}, \quad \forall\, i,j \in \{1,2,\dots,n\}, \\
+& \text{where } x_{ij} = 
+\begin{cases}
+1, & \text{if a queen is placed on square } (i,j), \\
+0, & \text{otherwise.}
+\end{cases} \\[1mm]
+\textbf{Objective Function:}\\[0.5mm]
+& \min \; 0 \quad \text{(or equivalently, solve as a feasibility problem)} \\[1mm]
+\textbf{Constraints:}\\[0.5mm]
+\text{(1) Row Constraints:} \quad & \sum_{j=1}^{n} x_{ij} = 1, \quad \forall\, i \in \{1,2,\dots,n\}, \\
+\text{(2) Column Constraints:} \quad & \sum_{i=1}^{n} x_{ij} = 1, \quad \forall\, j \in \{1,2,\dots,n\}, \\[1mm]
+\text{(3) Major Diagonals Constraints:} \quad & \sum_{\substack{1 \leq i,j \leq n \\ i - j = k}} x_{ij} \leq 1, \quad \forall\, k \in \{-n+1, -n+2, \dots, n-1\}, \\[1mm]
+\text{(4) Minor Diagonals Constraints:} \quad & \sum_{\substack{1 \leq i,j \leq n \\ i + j = l}} x_{ij} \leq 1, \quad \forall\, l \in \{2,3,\dots,2n\}.
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Solution:
+ .  .  .  .  Q  . 
+ .  .  Q  .  .  . 
+ Q  .  .  .  .  . 
+ .  .  .  .  .  Q 
+ .  .  .  Q  .  . 
+ .  Q  .  .  .  . 
+Objective value: 0.0
+
+
+Expected Output:
+Expected solution
+
+: {'queens': [4, 1, 5, 2, 6, 3]}

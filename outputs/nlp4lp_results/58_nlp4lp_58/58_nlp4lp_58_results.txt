@@ -1,0 +1,101 @@
+Problem Name: 58_nlp4lp_58
+
+# Problem Description:
+'''Problem description: In order to make carbon dioxide, wood is burned using two processes, with a catalyst and without a catalyst. The process with a catalyst requires 10 units of wood and 20 units of oxygen to make 15 units of carbon dioxide. The process without a catalyst requires 15 units of wood and 12 units of oxygen to make 18 units of carbon dioxide. There are 300 units of wood and 300 units of oxygen available. How many of each process should be used to maximize the amount of carbon dioxide produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "ProcessUsage": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is a complete and self-contained mathematical model following the five-element structure.
+
+─────────────────────────────  
+Sets:
+• P: set of processes = {0, 1}
+  – 0 denotes the process with a catalyst.
+  – 1 denotes the process without a catalyst.
+
+─────────────────────────────  
+Parameters:
+• wood_required[p]:
+  – For p = 0 (with catalyst): 10 units of wood per process run.
+  – For p = 1 (without catalyst): 15 units of wood per process run.
+• oxygen_required[p]:
+  – For p = 0: 20 units of oxygen per process run.
+  – For p = 1: 12 units of oxygen per process run.
+• CO2_produced[p]:
+  – For p = 0: 15 units of carbon dioxide produced per process run.
+  – For p = 1: 18 units of carbon dioxide produced per process run.
+• total_wood: total available wood = 300 units.
+• total_oxygen: total available oxygen = 300 units.
+
+─────────────────────────────  
+Variables:
+• Let x[p] represent the number of times process p is used.
+  – x[p] must be a nonnegative number. (In many practical cases x[p] would be integer if processes cannot be fractional.)
+  For clarity, we denote:
+    – x[0] = number of runs using the catalyst.
+    – x[1] = number of runs without the catalyst.
+
+─────────────────────────────  
+Objective:
+• Maximize total carbon dioxide produced.
+  This is given by:
+    Total_CO2 = CO2_produced[0]*x[0] + CO2_produced[1]*x[1]
+             = 15*x[0] + 18*x[1].
+
+─────────────────────────────  
+Constraints:
+1. Wood Constraint:
+   The wood used by both processes cannot exceed the available wood.
+     => wood_required[0]*x[0] + wood_required[1]*x[1] ≤ total_wood
+     => 10*x[0] + 15*x[1] ≤ 300.
+2. Oxygen Constraint:
+   The oxygen used by both processes cannot exceed the available oxygen.
+     => oxygen_required[0]*x[0] + oxygen_required[1]*x[1] ≤ total_oxygen
+     => 20*x[0] + 12*x[1] ≤ 300.
+
+─────────────────────────────  
+Below is the model expressed in a JSON format matching the expected output schema:
+
+{
+  "variables": {
+    "ProcessUsage": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+
+In an implementation, x[0] and x[1] (or ProcessUsage[0] and ProcessUsage[1]) would be the decision variables, and the objective would be defined as 15*x[0] + 18*x[1] while ensuring that 10*x[0] + 15*x[1] ≤ 300 and 20*x[0] + 12*x[1] ≤ 300.
+
+Execution Results:
+SUCCESS:
+Solving the continuous model (variables can be fractional):
+Continuous Model Solution:
+ProcessUsage[0] (with catalyst) = 5.0000000000000036
+ProcessUsage[1] (without catalyst) = 16.666666666666664
+Total CO2 produced = 375.0
+
+------------------------------------
+
+Solving the integer model (variables are integers):
+Integer Model Solution:
+ProcessUsage[0] (with catalyst) = 3.0
+ProcessUsage[1] (without catalyst) = 18.0
+Total CO2 produced = 369.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'ProcessUsage': {'0': 5.0, '1': 16.666666666666668}}, 'objective': 375.0}

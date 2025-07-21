@@ -1,0 +1,82 @@
+Problem Name: 64_nlp4lp_64
+
+# Problem Description:
+'''Problem description: A mall buys two types of hand sanitizer machines, a motion activated one and a manual one. The motion activated one can deliver 50 drops per minute and consumes 30 kWh. The manual one can deliver 75 drops per minute and consumes 20 kWh. Since the motion activated one is more hygienic, at most 40% of the machines can be manual. In addition, at least 3 should be motion activated. If the mall must be able to deliver at least 1000 drops per minute and can use at most 500 kWh per minute, how many of each machine should they buy to minimize the total number of machines?
+
+Expected Output Schema:
+{
+  "variables": {
+    "ManualMachines": "float",
+    "MotionActivatedMachines": "float",
+    "TotalMachines": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- M: set of machine types = {Manual, MotionActivated}
+
+Parameters:
+- drops_per_min_manual = 75 [drops per minute per manual machine]
+- drops_per_min_motion = 50 [drops per minute per motion activated machine]
+- energy_per_min_manual = 20 [kWh per minute per manual machine]
+- energy_per_min_motion = 30 [kWh per minute per motion activated machine]
+- min_total_drops = 1000 [drops per minute required]
+- max_total_energy = 500 [kWh per minute allowed]
+- max_manual_ratio = 0.4 [maximum allowed fraction of manual machines in the total fleet]
+- min_motion_machines = 3 [minimum number of motion activated machines required]
+
+Variables:
+- ManualMachines: number of manual hand sanitizer machines [integer ≥ 0]
+- MotionActivatedMachines: number of motion activated hand sanitizer machines [integer ≥ min_motion_machines]
+- TotalMachines: total number of machines purchased, defined as ManualMachines + MotionActivatedMachines [integer]
+
+Objective:
+- Minimize TotalMachines = ManualMachines + MotionActivatedMachines
+
+Constraints:
+1. Hygiene Ratio Constraint:
+   - The fraction of manual machines must be at most 40% of the total machines:
+   - ManualMachines ≤ max_manual_ratio × (ManualMachines + MotionActivatedMachines)
+   (This can be algebraically rearranged to the linear form: ManualMachines ≤ (2/3) × MotionActivatedMachines.)
+
+2. Minimum Drops Delivery Constraint:
+   - The combined drops per minute must be at least min_total_drops:
+   - drops_per_min_motion × MotionActivatedMachines + drops_per_min_manual × ManualMachines ≥ min_total_drops
+
+3. Maximum Energy Consumption Constraint:
+   - The total energy consumption per minute cannot exceed max_total_energy:
+   - energy_per_min_motion × MotionActivatedMachines + energy_per_min_manual × ManualMachines ≤ max_total_energy
+
+4. Minimum Number of Motion Activated Machines:
+   - MotionActivatedMachines ≥ min_motion_machines
+
+Comments:
+- All parameters are assumed to be given per minute as stated in the problem.
+- Although the decision variables represent machine counts and thus are integer, the model focuses on the structure; an implementation may impose integrality explicitly.
+- The hygiene ratio constraint has been reformulated into a linear constraint for ease of implementation.
+
+This completes the structured mathematical model using the five-element framework.
+
+Execution Results:
+SUCCESS:
+Version A: Using reformulated hygiene ratio constraint (6*M <= 4*MotionActivatedMachines)
+Optimal solution found:
+  ManualMachines         = 6.0
+  MotionActivatedMachines= 11.0
+  TotalMachines          = 17.0
+  Objective (Total)      = 17.0
+
+Version B: Using explicit TotalMachines variable and original hygiene ratio constraint (ManualMachines <= 0.4 * TotalMachines)
+Optimal solution found:
+  ManualMachines         = 6.0
+  MotionActivatedMachines= 11.0
+  TotalMachines          = 17.0
+  Objective (Total)      = 17.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'ManualMachines': 6.0, 'MotionActivatedMachines': 11.0, 'TotalMachines': 17.0}, 'objective': 17.0}

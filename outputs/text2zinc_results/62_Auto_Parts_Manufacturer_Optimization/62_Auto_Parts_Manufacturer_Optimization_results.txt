@@ -1,0 +1,62 @@
+Problem Name: 62_Auto_Parts_Manufacturer_Optimization
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Indices:} & m & \in \{1,2,\ldots,M\} & \text{(machines)}\\[1mm]
+                 & p & \in \{1,2,\ldots,P\} & \text{(parts)}
+\end{array}
+\]
+
+\[
+\begin{array}{rcll}
+\textbf{Parameters:} & \\
+& \text{TimeRequired}_{m,p} & \ge 0, & \text{hours required on machine } m \text{ to produce one batch of part } p,\\[1mm]
+& \text{MachineCosts}_m & > 0, & \text{cost per operating hour on machine } m,\\[1mm]
+& \text{Availability}_m & > 0, & \text{available hours of machine } m \text{ per month},\\[1mm]
+& \text{Prices}_p & > 0, & \text{selling price per batch of part } p,\\[1mm]
+& \text{MinBatches}_p & \ge 0, & \text{minimum batches required for part } p,\\[1mm]
+& M & \text{(total number of machines)} & , \quad P \text{ (total number of parts).}
+\end{array}
+\]
+
+\[
+\begin{array}{rcll}
+\textbf{Decision Variables:} & \\
+& x_p \in \mathbb{Z}_{+}, & \forall\, p \in \{1,\dots,P\}, & \text{number of batches of part } p \text{ to produce.}
+\end{array}
+\]
+
+\[
+\begin{align*}
+\textbf{Maximize:} \quad Z &= \sum_{p=1}^{P} \text{Prices}_p\, x_p \;-\; \sum_{m=1}^{M} \text{MachineCosts}_m \left( \sum_{p=1}^{P} \text{TimeRequired}_{m,p}\, x_p \right) \\[2mm]
+\textbf{subject to:} \quad & \\
+\text{(Machine Capacity Constraints)} \quad & \sum_{p=1}^{P} \text{TimeRequired}_{m,p}\, x_p \; \le \; \text{Availability}_m, \quad \forall\, m = 1,\dots,M, \\[2mm]
+\text{(Minimum Production Constraints)} \quad & x_p \; \ge \; \text{MinBatches}_p, \quad \forall\, p = 1,\dots,P, \\[2mm]
+\text{(Nontrivial Production Mix)} \quad & \text{For each } p, \;x_p > 0, \quad \text{(in addition to the minimum)} \\[2mm]
+\textbf{and} \quad & x_p \in \mathbb{Z}_{+}, \quad \forall\, p=1,\dots,P.
+\end{align*}
+\]
+
+\noindent In this formulation:  
+- The decision variables xₚ represent the number of batches of part p to produce (where each batch consists of 100 parts).  
+- The objective is to maximize profit, computed as total sales revenue minus the total machine operating costs.  
+- The machine capacity constraints ensure that the cumulative processing time for all parts on each machine does not exceed its monthly available hours.  
+- The minimum production constraints guarantee that the contractual minimum number of batches for each part is met.  
+- The additional note on nontrivial production mix is included to avoid practical scenarios where only one product is produced.
+
+This complete formulation captures the full manufacturing and production optimization problem without any simplifications.
+
+Execution Results:
+SUCCESS:
+Optimal objective value = 9600.0
+x[0] (batches of part 1) = 61.0
+x[1] (batches of part 2) = 10.0
+x[2] (batches of part 3) = 16.0
+x[3] (batches of part 4) = 10.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 9600.0}

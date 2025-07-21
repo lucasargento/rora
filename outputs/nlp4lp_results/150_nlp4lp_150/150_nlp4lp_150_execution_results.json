@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nRunning model(s) for the recycling bins optimization problem:\nModel 1 (Linear Optimization) Solution:\n{'NumberSmallBins': 27.0, 'NumberLargeBins': 9.0, 'objective': 1215.0}\n\nFinal Solution for Linear Model:\nNumberSmallBins: 27.0\nNumberLargeBins: 9.0\nObjective (Total Capacity Collected): 1215.0\n"
+}

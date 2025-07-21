@@ -1,0 +1,70 @@
+Problem Name: 183_nlp4lp_183
+
+# Problem Description:
+'''Problem description: A flooring company produces engineered laminate planks and carpets. The chief marketer reports an expected demand of at least 15,000 square feet of laminate planks and 5,000 square feet of carpets each week. The shipping contract requires a total of at least 50,000 square feet of products each week. However, due to a shortage of raw materials, no more than 40,000 square feet of laminate planks and 20,000 square feet of carpets can be produced weekly. If a square foot of laminate planks produces a $2.1 profit and a square foot of carpets yields a $3.3 profit, how many of each type of product should be made weekly to maximize the company's profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "LaminateProduction": "float",
+    "CarpetProduction": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- P: set of products = {LaminatePlanks, Carpets}
+
+Parameters:
+- min_demand_Laminate: minimum square feet required for laminate planks per week = 15,000 [sq ft]
+- min_demand_Carpets: minimum square feet required for carpets per week = 5,000 [sq ft]
+- total_shipping_min: minimum total square feet required for shipping per week = 50,000 [sq ft]
+- max_capacity_Laminate: maximum production capacity for laminate planks per week = 40,000 [sq ft]
+- max_capacity_Carpets: maximum production capacity for carpets per week = 20,000 [sq ft]
+- profit_Laminate: profit per square foot for laminate planks = 2.1 [USD per sq ft]
+- profit_Carpets: profit per square foot for carpets = 3.3 [USD per sq ft]
+
+Variables:
+- LaminateProduction: weekly production of laminate planks [continuous, in sq ft] (>= 0)
+- CarpetProduction: weekly production of carpets [continuous, in sq ft] (>= 0)
+
+Objective:
+Maximize total profit defined as:
+   Total Profit = profit_Laminate * LaminateProduction + profit_Carpets * CarpetProduction
+
+Constraints:
+1. Laminate demand constraint: LaminateProduction >= min_demand_Laminate
+2. Carpets demand constraint: CarpetProduction >= min_demand_Carpets
+3. Total shipping constraint: LaminateProduction + CarpetProduction >= total_shipping_min
+4. Laminate production capacity constraint: LaminateProduction <= max_capacity_Laminate
+5. Carpets production capacity constraint: CarpetProduction <= max_capacity_Carpets
+
+-------------------------------------------------
+Output in the expected JSON schema:
+
+{
+  "variables": {
+    "LaminateProduction": "float (weekly sq ft produced for laminate planks)",
+    "CarpetProduction": "float (weekly sq ft produced for carpets)"
+  },
+  "objective": "2.1 * LaminateProduction + 3.3 * CarpetProduction"
+}
+
+Execution Results:
+SUCCESS:
+{
+  "LinearSolver": {
+    "variables": {
+      "LaminateProduction": "40000.0 (weekly sq ft produced for laminate planks)",
+      "CarpetProduction": "20000.0 (weekly sq ft produced for carpets)"
+    },
+    "objective": 150000.0
+  }
+}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'LaminateProduction': 40000.0, 'CarpetProduction': 20000.0}, 'objective': 150000.0}

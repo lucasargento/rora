@@ -1,0 +1,84 @@
+Problem Name: 141_nlp4lp_141
+
+# Problem Description:
+'''Problem description: A meal service company delivers meals to customers either on electric bikes or scooters. A bike can hold 8 meals and requires 3 units of charge. A scooter can hold 5 meals and requires 2 units of charge. Since the city is more friendly towards scooters, at most 30% of the electric vehicles can be bikes and at least 20 scooters must be used. If the company only has 200 units of charge available, how many of each vehicle should be used to maximize the number of meals that can be delivered?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfBikes": "float",
+    "NumberOfScooters": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the structured five‐element formulation for the problem.
+
+----------------------------------------------------------------
+Sets:
+- V = {Bike, Scooter} 
+  (the set of available electric vehicle types)
+
+----------------------------------------------------------------
+Parameters:
+- meal_capacity_Bike = 8 meals per Bike  
+- meal_capacity_Scooter = 5 meals per Scooter  
+- charge_required_Bike = 3 charge units per Bike  
+- charge_required_Scooter = 2 charge units per Scooter  
+- total_charge = 200 charge units available  
+- bike_percentage_limit = 0.30  
+  (at most 30% of the total electric vehicles can be Bikes)  
+- min_scooters = 20  
+  (minimum number of Scooters to be used)
+
+Note: The charge and capacity units for Bikes and Scooters are assumed consistent with the problem description.
+
+----------------------------------------------------------------
+Variables:
+- x_Bike: number of Bikes to use [integer, ≥ 0]  
+- x_Scooter: number of Scooters to use [integer, ≥ 0]
+
+----------------------------------------------------------------
+Objective:
+Maximize Total Meals Delivered =  
+   meal_capacity_Bike * x_Bike + meal_capacity_Scooter * x_Scooter  
+which evaluates to:  
+   8 * x_Bike + 5 * x_Scooter
+
+----------------------------------------------------------------
+Constraints:
+1. Charging Constraint:
+   charge_required_Bike * x_Bike + charge_required_Scooter * x_Scooter ≤ total_charge  
+   That is, 3 * x_Bike + 2 * x_Scooter ≤ 200
+
+2. Fleet Composition Constraint (30% limit on Bikes):
+   x_Bike ≤ bike_percentage_limit * (x_Bike + x_Scooter)  
+   In other words, the number of Bikes is at most 30% of the total vehicles.
+
+3. Minimum Scooter Constraint:
+   x_Scooter ≥ min_scooters  
+   That is, x_Scooter ≥ 20
+
+----------------------------------------------------------------
+
+This formulation is fully self-contained and unambiguous.
+
+Execution Results:
+SUCCESS:
+{
+    "Linear_Programming_Implementation": {
+        "model": "Linear Solver (CBC)",
+        "variables": {
+            "NumberOfBikes": 26.0,
+            "NumberOfScooters": 61.0
+        },
+        "objective": 513.0
+    }
+}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfBikes': 26.0, 'NumberOfScooters': 61.0}, 'objective': 513.0}

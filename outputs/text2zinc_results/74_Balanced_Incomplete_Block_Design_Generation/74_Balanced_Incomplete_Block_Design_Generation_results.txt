@@ -1,0 +1,40 @@
+Problem Name: 74_Balanced_Incomplete_Block_Design_Generation
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:} \quad & v = 4, \quad k = 2, \quad \lambda = 1, \\[1mm]
+& \text{Let } r = \frac{\lambda\,(v-1)}{k-1} = \frac{1\,(4-1)}{2-1} = 3, \quad
+b = \frac{v\,r}{k} = \frac{4\cdot 3}{2} = 6. \\[1mm]
+\intertext{\textbf{Decision Variables:} For each object $i=1,\dots,v$ and each block $j=1,\dots,b$,}
+& x_{ij} \in \{0,1\} \quad \text{where } x_{ij} = 
+\begin{cases}
+1, & \text{if object } i \text{ is assigned to block } j,\\[1mm]
+0, & \text{otherwise.}
+\end{cases} \\[1mm]
+\intertext{\textbf{Objective Function:}}
+& \text{Minimize } 0 \quad \text{(a feasibility model)}. \\[1mm]
+\intertext{\textbf{Constraints:}}
+\text{\underline{(1) Row (Object) Occurrence Constraints:} } \quad &
+\sum_{j=1}^{b} x_{ij} = r, \quad \forall \, i = 1,\dots,v. \\[1mm]
+\text{\underline{(2) Column (Block) Size Constraints:} } \quad &
+\sum_{i=1}^{v} x_{ij} = k, \quad \forall \, j = 1,\dots,b. \\[1mm]
+\text{\underline{(3) Pairwise Co-occurrence Constraints:} } \quad &
+\sum_{j=1}^{b} x_{ij}\,x_{hj} = \lambda, \quad \forall \, 1 \le i < h \le v.
+\end{align*} 
+
+This model completely represents the Balanced Incomplete Block Design (BIBD) problem for the given parameters, ensuring that each block contains exactly $k$ objects, every object appears in exactly $r$ blocks, and every pair of distinct objects appears together in exactly $\lambda$ blocks.
+
+Execution Results:
+SUCCESS:
+Solution:
+Object 1: 0 0 0 1 1 1
+Object 2: 0 1 1 0 0 1
+Object 3: 1 1 0 0 1 0
+Object 4: 1 0 1 1 0 0
+Objective value: 0.0
+
+
+Expected Output:
+Expected solution
+
+: {'m': [[False, False, False, True, True, True], [False, True, True, False, False, True], [True, False, True, False, True, False], [True, True, False, True, False, False]]}

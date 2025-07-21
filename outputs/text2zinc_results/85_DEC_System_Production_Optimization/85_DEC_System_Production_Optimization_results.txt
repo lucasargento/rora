@@ -1,0 +1,119 @@
+Problem Name: 85_DEC_System_Production_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Sets:} \quad & i \in \{1,2,\ldots,N\} \quad \text{with } N=5,\\[1mm]
+\text{Let } & \mathcal{GP} = \{ i : \text{system } i \text{ is General–Purpose, i.e. } \mathtt{IsWorkstation}_i = \text{False}\},\\[1mm]
+& \mathcal{WS} = \{ i : \text{system } i \text{ is a Workstation, i.e. } \mathtt{IsWorkstation}_i = \text{True}\},\\[1mm]
+& \mathcal{ALT} = \{ i : \text{alternative memory is compatible with system } i \, (\mathtt{AltCompatible}_i = \text{True})\}.
+\end{align*}
+
+\noindent
+\textbf{Decision Variables:}
+\begin{align*}
+x_i \quad &\ge 0,\quad \text{(continuous)} &&\text{Production quantity (number of systems) of type } i,\\[1mm]
+a_i \quad &\ge 0,\quad \text{(continuous)} &&\text{Quantity of systems of type } i\text{ that use alternative memory.}
+\end{align*}
+We require also that for every system:
+\begin{align*}
+a_i \le x_i,\quad \forall i=1,\ldots,N, \quad \text{and for } i\notin \mathcal{ALT}:\quad a_i = 0.
+\end{align*}
+
+\noindent
+\textbf{Parameters:} (Data provided)
+\begin{align*}
+\mathtt{Price}_i,\; \mathtt{DiskDrives}_i,\; \mathtt{MemoryBoards}_i,\; \mathtt{Demand}_i,\; \mathtt{Preorder}_i,\; \text{ for }i=1,\ldots,N;\\[1mm]
+\mathtt{MaxCpu} = 7000, \quad \mathtt{MinDisk} = 3000, \quad \mathtt{MaxDisk} = 7000,\\[1mm]
+\mathtt{MinMemory} = 8000, \quad \mathtt{MaxMemory} = 16000,\\[1mm]
+\mathtt{DemandGP} = 3800,\quad \mathtt{DemandWS} = 3200, \quad \mathtt{AltMemory} = 4000.
+\end{align*}
+
+\noindent
+\textbf{Objective Function:} Maximize total profit (in dollars)
+\begin{align*}
+\max_{x,a} \quad Z = \sum_{i=1}^{N} \mathtt{Price}_i\, x_i.
+\end{align*}
+
+\noindent
+\textbf{Constraints:}
+\begin{enumerate}
+    \item \textbf{CPU Availability:} Each system requires 1 CPU.
+    \begin{align*}
+    \sum_{i=1}^{N} x_i \le \mathtt{MaxCpu}.
+    \end{align*}
+    
+    \item \textbf{Disk Drive Supply:} Total disk drives used must be within the available bounds. Each system of type $i$ requires $\mathtt{DiskDrives}_i$ drives.
+    \begin{align*}
+    \mathtt{MinDisk} \le \sum_{i=1}^{N} \mathtt{DiskDrives}_i \, x_i \le \mathtt{MaxDisk}.
+    \end{align*}
+    
+    \item \textbf{Main (256K) Memory Supply:} Systems using main memory (i.e. not using alternative memory) draw $\mathtt{MemoryBoards}_i$ boards each. The total usage must lie within the available supply.
+    \begin{align*}
+    \mathtt{MinMemory} \le \sum_{i=1}^{N} \mathtt{MemoryBoards}_i \,(x_i - a_i) \le \mathtt{MaxMemory}.
+    \end{align*}
+    
+    \item \textbf{Alternative Memory Supply:} Only systems for which alternative memory is available may use it. The alternative memory board units required for such systems must not exceed $\mathtt{AltMemory}$.
+    \begin{align*}
+    \sum_{i \in \mathcal{ALT}} \mathtt{MemoryBoards}_i\, a_i \le \mathtt{AltMemory}.
+    \end{align*}
+    
+    \item \textbf{Individual System Demand:} For each system type, production cannot exceed its maximum estimated demand.
+    \begin{align*}
+    x_i \le \mathtt{Demand}_i,\quad \forall \, i=1,\ldots,N.
+    \end{align*}
+    
+    \item \textbf{Family Demand (General–Purpose and Workstations):}
+    \begin{align*}
+    \sum_{i \in \mathcal{GP}} x_i \le \mathtt{DemandGP},\quad \sum_{i \in \mathcal{WS}} x_i \le \mathtt{DemandWS}.
+    \end{align*}
+    
+    \item \textbf{Preorder Fulfillment:} Production must at least meet the number of preordered systems for each type.
+    \begin{align*}
+    x_i \ge \mathtt{Preorder}_i,\quad \forall \, i=1,\ldots,N.
+    \end{align*}
+    
+    \item \textbf{Alternative Memory Usage Validity:} For every system type:
+    \begin{align*}
+    a_i \le x_i,\quad \forall\, i=1,\ldots,N, \quad \text{and} \quad a_i = 0 \quad \forall\, i \notin \mathcal{ALT}.
+    \end{align*}
+    
+    \item \textbf{Nonnegativity:}
+    \begin{align*}
+    x_i \ge 0,\quad a_i \ge 0,\quad \forall\, i=1,\ldots,N.
+    \end{align*}
+\end{enumerate}
+
+\noindent
+\textbf{Final Model Summary:}
+\begin{align*}
+\max_{x,a}\quad & Z = \sum_{i=1}^{N} \mathtt{Price}_i\, x_i \\[1mm]
+\text{s.t.}\quad 
+& \sum_{i=1}^{N} x_i \le \mathtt{MaxCpu}, \\[1mm]
+& \mathtt{MinDisk} \le \sum_{i=1}^{N} \mathtt{DiskDrives}_i\, x_i \le \mathtt{MaxDisk}, \\[1mm]
+& \mathtt{MinMemory} \le \sum_{i=1}^{N} \mathtt{MemoryBoards}_i\,(x_i - a_i) \le \mathtt{MaxMemory}, \\[1mm]
+& \sum_{i \in \mathcal{ALT}} \mathtt{MemoryBoards}_i\, a_i \le \mathtt{AltMemory}, \\[1mm]
+& x_i \le \mathtt{Demand}_i, \quad \forall\, i=1,\ldots,N, \\[1mm]
+& \sum_{i \in \mathcal{GP}} x_i \le \mathtt{DemandGP}, \\[1mm]
+& \sum_{i \in \mathcal{WS}} x_i \le \mathtt{DemandWS}, \\[1mm]
+& x_i \ge \mathtt{Preorder}_i,\quad \forall\, i=1,\ldots,N, \\[1mm]
+& a_i \le x_i,\quad \forall\, i=1,\ldots,N, \quad \text{with } a_i=0 \text{ for } i\notin\mathcal{ALT}, \\[1mm]
+& x_i \ge 0,\quad a_i \ge 0,\quad \forall\, i=1,\ldots,N.
+\end{align*}
+
+This complete formulation accurately represents the manufacturing and production problem for DEC, incorporating production quantities, memory allocation (split between main and alternative supplies), disk drive usage, CPU availability, demand (individual, family‐and preorder) and resource bounds without any simplification.
+
+Execution Results:
+SUCCESS:
+Solution:
+Optimal objective value =  271250000.0
+System 0: Produce x = 1800.0, Alternative memory a = 237.50000000000023
+System 1: Produce x = 1700.0, Alternative memory a = 0.0
+System 2: Produce x = 300.0, Alternative memory a = 0.0
+System 3: Produce x = 2550.000000000001, Alternative memory a = 0.0
+System 4: Produce x = 649.9999999999992, Alternative memory a = 0.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 271250000.0}

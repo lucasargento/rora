@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Model 1 (using brownies >= 0.4*(brownies+lemon) constraint):\nOptimal NumberOfBrownies = 1.0\nOptimal NumberOfLemonSquares = 1.001\nOptimal Objective (Total Fiber) = 10.006\n\nResults for Model 2 (using lemon <= 1.5*brownies constraint):\nOptimal NumberOfBrownies = 1.0\nOptimal NumberOfLemonSquares = 1.001\nOptimal Objective (Total Fiber) = 10.006\n"
+}

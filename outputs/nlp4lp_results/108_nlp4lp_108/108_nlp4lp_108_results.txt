@@ -1,0 +1,51 @@
+Problem Name: 108_nlp4lp_108
+
+# Problem Description:
+'''Problem description: A clinic is conducting a throat or nasal swabs on each patient. A throat swab takes 5 minutes while a nasal swab takes 3 minutes. The clinic must administer at least 30 nasal swabs. Since the nasal swab is more uncomfortable, at least 4 times as many throat swabs must be done as nasal swabs. If the clinic is only operational for 20000 minutes, how many of each swab should be done to maximize the number of patients seen?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumThroatSwab": "float",
+    "NumNasalSwab": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- S: set of swab types = {Throat, Nasal}
+
+Parameters:
+- time_Throat: time required for one throat swab [minutes] = 5
+- time_Nasal: time required for one nasal swab [minutes] = 3
+- min_nasal: minimum number of nasal swabs [swabs] = 30
+- throat_ratio: minimum ratio of throat to nasal swabs = 4  (i.e., at least 4 times as many throat swabs as nasal swabs)
+- max_operational_time: total available operating time [minutes] = 20000
+
+Variables:
+- NumThroatSwab: number of throat swabs to be administered [integer ≥ 0] 
+- NumNasalSwab: number of nasal swabs to be administered [integer ≥ 0]
+
+Objective:
+- Maximize total number of patients served = NumThroatSwab + NumNasalSwab
+
+Constraints:
+1. Time constraint: 5 * NumThroatSwab + 3 * NumNasalSwab ≤ 20000
+2. Minimum nasal swabs constraint: NumNasalSwab ≥ 30
+3. Throat swab ratio constraint: NumThroatSwab ≥ 4 * NumNasalSwab
+
+Note:
+- Each patient receives exactly one swab.
+- Although the expected output schema lists the decision variables as floats, these represent counts and are naturally modeled as integers.
+- All time units are in minutes and the total available time is 20000 minutes.
+
+Execution Results:
+SUCCESS:
+{'LinearModel': {'variables': {'NumThroatSwab': 3478.0, 'NumNasalSwab': 869.0}, 'objective': 4347.0}}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumThroatSwab': 3479.0, 'NumNasalSwab': 868.0}, 'objective': 4347.0}

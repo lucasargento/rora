@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving the continuous model (variables can be fractional):\nContinuous Model Solution:\nProcessUsage[0] (with catalyst) = 5.0000000000000036\nProcessUsage[1] (without catalyst) = 16.666666666666664\nTotal CO2 produced = 375.0\n\n------------------------------------\n\nSolving the integer model (variables are integers):\nInteger Model Solution:\nProcessUsage[0] (with catalyst) = 3.0\nProcessUsage[1] (without catalyst) = 18.0\nTotal CO2 produced = 369.0\n"
+}

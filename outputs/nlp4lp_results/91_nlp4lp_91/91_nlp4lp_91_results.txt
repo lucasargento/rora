@@ -1,0 +1,76 @@
+Problem Name: 91_nlp4lp_91
+
+# Problem Description:
+'''Problem description: A sailor can eat either a crab cakes or a lobster roll for his meals. He needs to ensure he gets at least 80 units of vitamin A and 100 units of vitamin C. Each crab cake contains 5 units of vitamin A and 7 units of vitamin C. Each lobster roll contains 8 units of vitamin A and 4 units of vitamin C. In addition, since lobster is more expensive, at most 40% of his meals should be lobster rolls. If each crab cake contains 4 units of unsaturated fat and each lobster roll contains 6 units of unsaturated fat, how many of each should he eat to minimize his unsaturated fat intake?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityCrabCake": "float",
+    "QuantityLobsterRoll": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- M: set of meal types = {CrabCake, LobsterRoll}
+
+Parameters:
+- vitaminA_per_CrabCake = 5 [units of vitamin A per crab cake]
+- vitaminC_per_CrabCake = 7 [units of vitamin C per crab cake]
+- vitaminA_per_LobsterRoll = 8 [units of vitamin A per lobster roll]
+- vitaminC_per_LobsterRoll = 4 [units of vitamin C per lobster roll]
+- unsatFat_per_CrabCake = 4 [units of unsaturated fat per crab cake]
+- unsatFat_per_LobsterRoll = 6 [units of unsaturated fat per lobster roll]
+- required_vitaminA = 80 [units of vitamin A]
+- required_vitaminC = 100 [units of vitamin C]
+- max_lobster_ratio = 0.4 [maximum fraction of meals that can be lobster rolls]
+
+Variables:
+- QuantityCrabCake, a decision variable representing the number of crab cakes to consume [continuous nonnegative, assumed to be integer if meals must be whole units]
+- QuantityLobsterRoll, a decision variable representing the number of lobster rolls to consume [continuous nonnegative, assumed to be integer if meals must be whole units]
+
+Objective:
+- Minimize total unsaturated fat intake = (unsatFat_per_CrabCake * QuantityCrabCake) + (unsatFat_per_LobsterRoll * QuantityLobsterRoll)
+
+Constraints:
+1. Vitamin A requirement: (vitaminA_per_CrabCake * QuantityCrabCake) + (vitaminA_per_LobsterRoll * QuantityLobsterRoll) >= required_vitaminA
+2. Vitamin C requirement: (vitaminC_per_CrabCake * QuantityCrabCake) + (vitaminC_per_LobsterRoll * QuantityLobsterRoll) >= required_vitaminC
+3. Lobster roll meal ratio constraint: QuantityLobsterRoll <= max_lobster_ratio * (QuantityCrabCake + QuantityLobsterRoll)
+
+Notes:
+- All parameter units are consistent with the meal description.
+- Decision variables may be modeled as integers if fractional meals are not allowed.
+- This model minimizes the consumption of unsaturated fat while satisfying the nutritional constraints and the meal composition guideline.
+
+---
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityCrabCake": "float",
+    "QuantityLobsterRoll": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Continuous Model Result:
+Solution:
+QuantityCrabCake = 13.333333333333332
+QuantityLobsterRoll = 1.6666666666666676
+Objective (Total Unsaturated Fat) = 63.333333333333336
+
+Integer Model Result:
+Solution:
+QuantityCrabCake = 16.0
+QuantityLobsterRoll = 0.0
+Objective (Total Unsaturated Fat) = 64.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityCrabCake': 13.333333333333332, 'QuantityLobsterRoll': 1.6666666666666665}, 'objective': 63.33333333333333}

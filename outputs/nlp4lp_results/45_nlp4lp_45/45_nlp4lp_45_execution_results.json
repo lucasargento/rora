@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimal solutions for all implementations:\nImplementation 1: {'variables': {'GlassJarsFilled': 23.0, 'PlasticJarsFilled': 47.0}, 'objective': 70.0}\n"
+}

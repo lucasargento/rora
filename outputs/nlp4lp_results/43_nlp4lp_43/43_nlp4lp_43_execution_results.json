@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{'Continuous Model': {'NumberOfWraps': 535.7142857142856, 'NumberOfPlatters': 178.57142857142853, 'objective': 6785.7142857142835}, 'Integer Model': {'NumberOfWraps': 537.0, 'NumberOfPlatters': 178.0, 'objective': 6794.0}}\n"
+}

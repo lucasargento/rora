@@ -1,0 +1,64 @@
+Problem Name: 191_nlp4lp_191
+
+# Problem Description:
+'''Problem description: A printing company sells math workbooks and English workbooks. To meet demand, they must make at least 40 math workbooks and at least 60 English workbooks. However, they can make at most 140 math workbooks and at most 170 English workbooks. The company has a contract with a school to send at least 200 workbooks of either type. If the profit per math workbook is $15 and the profit per English workbook is $17, how many of each should the company make to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityMathWorkbooks": "float",
+    "QuantityEnglishWorkbooks": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Workbooks: {Math, English}
+
+Parameters:
+- profit_math: Profit per math workbook (15 USD per unit)
+- profit_english: Profit per English workbook (17 USD per unit)
+- min_math: Minimum number of math workbooks (40 units)
+- max_math: Maximum number of math workbooks (140 units)
+- min_english: Minimum number of English workbooks (60 units)
+- max_english: Maximum number of English workbooks (170 units)
+- school_contract_min: Minimum total workbooks required by the school contract (200 units)
+  (All quantity units refer to individual workbooks produced.)
+
+Variables:
+- QuantityMathWorkbooks: Number of math workbooks produced [integer ≥ 0]
+- QuantityEnglishWorkbooks: Number of English workbooks produced [integer ≥ 0]
+
+Objective:
+- Maximize total profit = (profit_math * QuantityMathWorkbooks) + (profit_english * QuantityEnglishWorkbooks)
+
+Constraints:
+1. Math production lower bound: QuantityMathWorkbooks ≥ min_math
+2. Math production upper bound: QuantityMathWorkbooks ≤ max_math
+3. English production lower bound: QuantityEnglishWorkbooks ≥ min_english
+4. English production upper bound: QuantityEnglishWorkbooks ≤ max_english
+5. School contract requirement: QuantityMathWorkbooks + QuantityEnglishWorkbooks ≥ school_contract_min
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityMathWorkbooks": "float",
+    "QuantityEnglishWorkbooks": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Solving using Linear Solver (ortools.linear_solver):
+{'variables': {'QuantityMathWorkbooks': 140.0, 'QuantityEnglishWorkbooks': 170.0}, 'objective': 4990.0}
+
+Solving using CP-SAT Solver (ortools.sat.python.cp_model):
+{'variables': {'QuantityMathWorkbooks': 140, 'QuantityEnglishWorkbooks': 170}, 'objective': 4990.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityMathWorkbooks': 140.0, 'QuantityEnglishWorkbooks': 170.0}, 'objective': 4990.0}

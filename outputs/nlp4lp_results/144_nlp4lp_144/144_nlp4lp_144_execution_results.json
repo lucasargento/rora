@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Model 1 (Linear/MIP formulation):\nvariables: {'NumScooters': 75.0, 'NumRickshaws': 50.0}\nobjective: 75.0\n"
+}

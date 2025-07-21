@@ -1,0 +1,75 @@
+Problem Name: 88_nlp4lp_88
+
+# Problem Description:
+'''Problem description: A pharmaceutical company makes skin cream in batches, a regular batch and premium batch, to sell to hospitals. The regular batch requires 50 units of medicinal ingredients and 40 units of rehydration product. A premium batch requires 40 units of medicinal ingredients and 60 units of rehydration product. The company has available 3000 units of medicinal ingredients and 3500 units of rehydration product. Since the premium batch sells better, the number of regular batches must be less than the number of premium batches. In addition, the company must make at least 10 regular batches. If a regular batch can treat 50 people and a premium batch can treat 30 people, how many of each batch should be made to maximize the number of people that can be treated?
+
+Expected Output Schema:
+{
+  "variables": {
+    "RegularBatches": "float",
+    "PremiumBatches": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Batches: a set with two elements {Regular, Premium} representing the two types of skin cream batches.
+
+Parameters:
+- medicinal_req_regular: 50 (units of medicinal ingredients needed per regular batch)
+- medicinal_req_premium: 40 (units of medicinal ingredients needed per premium batch)
+- rehydration_req_regular: 40 (units of rehydration product needed per regular batch)
+- rehydration_req_premium: 60 (units of rehydration product needed per premium batch)
+- medicinal_avail: 3000 (total available units of medicinal ingredients)
+- rehydration_avail: 3500 (total available units of rehydration product)
+- treats_regular: 50 (number of people treated by one regular batch)
+- treats_premium: 30 (number of people treated by one premium batch)
+- min_regular_batches: 10 (minimum number of regular batches that must be produced)
+- note: All units are assumed consistent (ingredients and treated people per batch).
+
+Variables:
+- x_regular: number of regular batches produced [integer ≥ 0]
+- x_premium: number of premium batches produced [integer ≥ 0]
+
+Objective:
+Maximize total people treated:
+   maximize_total_people = treats_regular * x_regular + treats_premium * x_premium
+   i.e., maximize 50 * x_regular + 30 * x_premium
+
+Constraints:
+1. Medicinal ingredient constraint:
+   medicinal_req_regular * x_regular + medicinal_req_premium * x_premium ≤ medicinal_avail
+   i.e., 50 * x_regular + 40 * x_premium ≤ 3000
+
+2. Rehydration product constraint:
+   rehydration_req_regular * x_regular + rehydration_req_premium * x_premium ≤ rehydration_avail
+   i.e., 40 * x_regular + 60 * x_premium ≤ 3500
+
+3. Batch comparison constraint (regular batches must be less than premium batches):
+   x_regular < x_premium
+
+4. Minimum production requirement for regular batches:
+   x_regular ≥ min_regular_batches
+   i.e., x_regular ≥ 10
+
+5. Domain of decision variables:
+   x_regular and x_premium are non-negative integers.
+
+This complete model provides a clear mapping from the problem description into the five-element mathematical optimization formulation.
+
+Execution Results:
+SUCCESS:
+Results:
+-----------
+Model 1: Linear Solver
+{'variables': {'RegularBatches': 32.0, 'PremiumBatches': 35.0}, 'objective': 2649.9999999999995}
+-----------
+Model 2: CP-SAT
+{'variables': {'RegularBatches': 32, 'PremiumBatches': 35}, 'objective': 2650.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'RegularBatches': 32.0, 'PremiumBatches': 35.0}, 'objective': 2650.0}

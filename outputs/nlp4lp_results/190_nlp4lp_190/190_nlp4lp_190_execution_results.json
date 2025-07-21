@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nModel: LP_Model\nOptimal decision variables:\n  RegularTacosProduced: 30.0\n  DeluxeTacosProduced: 40.0\nOptimal objective value: 217.0\n"
+}

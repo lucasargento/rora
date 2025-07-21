@@ -1,0 +1,202 @@
+# Problem Description:
+'''Problem description: Lucy has a dog and she wants his food to be mixed.  In order to keep the dog healthy but also keep the food tasty, the mix needs to have a minimum of 15 units of calcium, 20 units of vitamin mix, and 20 units of protein. A regular brand costs $20 per bag and contains 4 units of calcium, 7 units of vitamin mix, and 10 units of protein. A premium brand costs $35 per bag and contains 12 units of calcium, 10 units of vitamin mix, and 16 units of protein. How many bags of each brand should Lucy mix in order to minimize cost while also meeting the taste and health requirements.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumRegularBags": "float",
+    "NumPremiumBags": "float"
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Sets:
+- B: set of bag types = {Regular, Premium}
+
+Parameters:
+- cost[b]: cost per bag for bag type b [USD per bag], where cost[Regular] = 20 and cost[Premium] = 35.
+- calcium[b]: calcium units per bag for bag type b [units per bag], where calcium[Regular] = 4 and calcium[Premium] = 12.
+- vitamin[b]: vitamin mix units per bag for bag type b [units per bag], where vitamin[Regular] = 7 and vitamin[Premium] = 10.
+- protein[b]: protein units per bag for bag type b [units per bag], where protein[Regular] = 10 and protein[Premium] = 16.
+- req_calcium: minimum required calcium in the mix [units] = 15.
+- req_vitamin: minimum required vitamin mix in the mix [units] = 20.
+- req_protein: minimum required protein in the mix [units] = 20.
+
+Variables:
+- NumBags[b]: number of bags of type b to use in the mix. Decision variables are non-negative integers (or continuous if fractional bags are allowed, but typically integer) for each b in B.
+  * For clarity, we denote:
+    - NumRegularBags = NumBags[Regular]
+    - NumPremiumBags = NumBags[Premium]
+
+Objective:
+- Minimize total cost = cost[Regular] * NumRegularBags + cost[Premium] * NumPremiumBags.
+  Expressed as: minimize TotalCost = 20 * NumRegularBags + 35 * NumPremiumBags.
+
+Constraints:
+1. Calcium requirement: 4 * NumRegularBags + 12 * NumPremiumBags ≥ req_calcium (15 units)
+2. Vitamin mix requirement: 7 * NumRegularBags + 10 * NumPremiumBags ≥ req_vitamin (20 units)
+3. Protein requirement: 10 * NumRegularBags + 16 * NumPremiumBags ≥ req_protein (20 units)
+4. Nonnegativity: NumRegularBags ≥ 0, NumPremiumBags ≥ 0  
+   (Additionally, if integer decisions are required, then NumRegularBags and NumPremiumBags are integers.)
+
+Comments:
+- The parameters units are consistent: each bag contributes specified units of nutrients and costs dollars per bag.
+- This formulation directly minimizes cost while ensuring that the total nutrient units in the mix meet the minimum health requirements.'''
+
+# Generated Code:
+#!/usr/bin/env python3
+from ortools.linear_solver import pywraplp
+
+def solve_continuous_model():
+    # Create the solver using the GLOP (linear programming) backend.
+    solver = pywraplp.Solver.CreateSolver('GLOP')
+    if not solver:
+        print("Could not create GLOP solver for continuous model.")
+        return None
+
+    # Parameters
+    cost_regular = 20
+    cost_premium = 35
+    calcium_regular = 4
+    calcium_premium = 12
+    vitamin_regular = 7
+    vitamin_premium = 10
+    protein_regular = 10
+    protein_premium = 16
+
+    req_calcium = 15
+    req_vitamin = 20
+    req_protein = 20
+
+    # Decision Variables: Continuous nonnegative.
+    NumRegularBags = solver.NumVar(0.0, solver.infinity(), 'NumRegularBags')
+    NumPremiumBags = solver.NumVar(0.0, solver.infinity(), 'NumPremiumBags')
+
+    # Objective: Minimize total cost = 20 * NumRegularBags + 35 * NumPremiumBags.
+    objective = solver.Objective()
+    objective.SetCoefficient(NumRegularBags, cost_regular)
+    objective.SetCoefficient(NumPremiumBags, cost_premium)
+    objective.SetMinimization()
+
+    # Constraints:
+    # 1. Calcium: 4*NumRegularBags + 12*NumPremiumBags >= 15
+    solver.Add(calcium_regular * NumRegularBags + calcium_premium * NumPremiumBags >= req_calcium)
+    # 2. Vitamin mix: 7*NumRegularBags + 10*NumPremiumBags >= 20
+    solver.Add(vitamin_regular * NumRegularBags + vitamin_premium * NumPremiumBags >= req_vitamin)
+    # 3. Protein: 10*NumRegularBags + 16*NumPremiumBags >= 20
+    solver.Add(protein_regular * NumRegularBags + protein_premium * NumPremiumBags >= req_protein)
+
+    status = solver.Solve()
+
+    result = {}
+    if status == pywraplp.Solver.OPTIMAL:
+        result = {
+            "model": "Continuous",
+            "variables": {
+                "NumRegularBags": NumRegularBags.solution_value(),
+                "NumPremiumBags": NumPremiumBags.solution_value()
+            },
+            "objective": objective.Value()
+        }
+    else:
+        result = {
+            "model": "Continuous",
+            "status": "No optimal solution found."
+        }
+    return result
+
+def solve_integer_model():
+    # Create the solver using the CBC_MIXED_INTEGER_PROGRAMMING backend.
+    solver = pywraplp.Solver.CreateSolver('CBC_MIXED_INTEGER_PROGRAMMING')
+    if not solver:
+        print("Could not create CBC_MIXED_INTEGER_PROGRAMMING solver for integer model.")
+        return None
+
+    # Parameters
+    cost_regular = 20
+    cost_premium = 35
+    calcium_regular = 4
+    calcium_premium = 12
+    vitamin_regular = 7
+    vitamin_premium = 10
+    protein_regular = 10
+    protein_premium = 16
+
+    req_calcium = 15
+    req_vitamin = 20
+    req_protein = 20
+
+    # Decision Variables: Integer nonnegative.
+    NumRegularBags = solver.IntVar(0, solver.infinity(), 'NumRegularBags')
+    NumPremiumBags = solver.IntVar(0, solver.infinity(), 'NumPremiumBags')
+
+    # Objective: Minimize total cost = 20 * NumRegularBags + 35 * NumPremiumBags.
+    objective = solver.Objective()
+    objective.SetCoefficient(NumRegularBags, cost_regular)
+    objective.SetCoefficient(NumPremiumBags, cost_premium)
+    objective.SetMinimization()
+
+    # Constraints:
+    # 1. Calcium: 4*NumRegularBags + 12*NumPremiumBags >= 15
+    solver.Add(calcium_regular * NumRegularBags + calcium_premium * NumPremiumBags >= req_calcium)
+    # 2. Vitamin mix: 7*NumRegularBags + 10*NumPremiumBags >= 20
+    solver.Add(vitamin_regular * NumRegularBags + vitamin_premium * NumPremiumBags >= req_vitamin)
+    # 3. Protein: 10*NumRegularBags + 16*NumPremiumBags >= 20
+    solver.Add(protein_regular * NumRegularBags + protein_premium * NumPremiumBags >= req_protein)
+
+    status = solver.Solve()
+
+    result = {}
+    if status == pywraplp.Solver.OPTIMAL:
+        result = {
+            "model": "Integer",
+            "variables": {
+                "NumRegularBags": NumRegularBags.solution_value(),
+                "NumPremiumBags": NumPremiumBags.solution_value()
+            },
+            "objective": objective.Value()
+        }
+    else:
+        result = {
+            "model": "Integer",
+            "status": "No optimal solution found."
+        }
+    return result
+
+def main():
+    # Solve Continuous Model
+    continuous_result = solve_continuous_model()
+    # Solve Integer Model
+    integer_result = solve_integer_model()
+
+    # Print results in structured way
+    print("Continuous Model Result:")
+    if continuous_result:
+        print(continuous_result)
+    else:
+        print("Continuous model did not yield a result.")
+
+    print("\nInteger Model Result:")
+    if integer_result:
+        print(integer_result)
+    else:
+        print("Integer model did not yield a result.")
+
+if __name__ == '__main__':
+    main()
+
+'''Execution Results:
+SUCCESS:
+Continuous Model Result:
+{'model': 'Continuous', 'variables': {'NumRegularBags': 2.045454545454546, 'NumPremiumBags': 0.5681818181818181}, 'objective': 60.795454545454554}
+
+Integer Model Result:
+{'model': 'Integer', 'variables': {'NumRegularBags': 0.0, 'NumPremiumBags': 2.0}, 'objective': 70.0}
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'NumRegularBags': 0.0, 'NumPremiumBags': 2.0}, 'objective': 70.0}'''
+

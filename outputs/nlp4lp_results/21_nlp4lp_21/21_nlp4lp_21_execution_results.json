@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving the Office Desk Optimization Problem using OR-Tools Linear Solver\n\nLinear Model Optimal Solution:\nVariables (NumDesks):\n  Long Desks (x_long): -0.0\n  Short Desks (x_short): 20.0\nObjective (Maximum Seating Capacity): 40.0\n"
+}

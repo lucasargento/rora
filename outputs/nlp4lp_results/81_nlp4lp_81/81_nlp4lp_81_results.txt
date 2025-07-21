@@ -1,0 +1,65 @@
+Problem Name: 81_nlp4lp_81
+
+# Problem Description:
+'''Problem description: A man on a strict diet only drinks meal replacement drinks from two brands, alpha and omega. The alpha brand drink contains 30 grams of protein, 20 grams of sugar, and 350 calories per bottle. The omega brand drink contains 20 grams of protein, 15 grams of sugar, and 300 calories per bottle. The man wants to get at least 100 grams of protein and 2000 calories. In addition, because the omega brand drink contains tiny amounts of caffeine, at most 35% of the drink should be omega brand. How many bottles of each should he drink to minimize his sugar intake?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityAlpha": "float",
+    "QuantityOmega": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- B: set of drink brands = {alpha, omega}
+
+Parameters:
+- protein[b]: grams of protein per bottle for brand b, with protein[alpha] = 30 and protein[omega] = 20
+- sugar[b]: grams of sugar per bottle for brand b, with sugar[alpha] = 20 and sugar[omega] = 15
+- calories[b]: calories per bottle for brand b, with calories[alpha] = 350 and calories[omega] = 300
+- required_protein: minimum required protein in grams, 100
+- required_calories: minimum required calories, 2000
+- max_omega_fraction: maximum allowable fraction of omega bottles, 0.35  
+  (Note: This limit is with respect to the total number of bottles consumed)
+
+Variables:
+- QuantityAlpha: number of alpha brand bottles to drink (nonnegative integer; units: bottles)
+- QuantityOmega: number of omega brand bottles to drink (nonnegative integer; units: bottles)
+
+Objective:
+- Minimize total sugar intake = (sugar[alpha] * QuantityAlpha) + (sugar[omega] * QuantityOmega)
+  (Units: grams of sugar)
+
+Constraints:
+1. Protein requirement:
+   (protein[alpha] * QuantityAlpha) + (protein[omega] * QuantityOmega) >= required_protein
+2. Calorie requirement:
+   (calories[alpha] * QuantityAlpha) + (calories[omega] * QuantityOmega) >= required_calories
+3. Omega fraction constraint:
+   QuantityOmega <= max_omega_fraction * (QuantityAlpha + QuantityOmega)
+   (This ensures that at most 35% of the total bottles are omega brand)
+
+---
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityAlpha": "float",
+    "QuantityOmega": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Solution using the Linear Solver formulation:
+{'variables': {'QuantityAlpha': 4.0, 'QuantityOmega': 2.0}, 'objective': 110.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityAlpha': 3.909774436090226, 'QuantityOmega': 2.1052631578947367}, 'objective': 109.77443609022556}

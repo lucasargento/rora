@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving Problem using Linear Solver (CBC):\nOptimal solution found:\n  NumFixtures:\n    LED:           210.0\n    Fluorescence:  90.0\n  Objective (Total light changes): 990.0\n\nSolving Problem using CP-SAT Model:\nSolution found (optimal):\n  NumFixtures:\n    LED:           210\n    Fluorescence:  90\n  Objective (Total light changes): 990.0\n"
+}

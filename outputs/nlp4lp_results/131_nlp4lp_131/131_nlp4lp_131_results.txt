@@ -1,0 +1,65 @@
+Problem Name: 131_nlp4lp_131
+
+# Problem Description:
+'''Problem description: An aquarium does shows using otters and dolphins. An otter will do 3 tricks at a time and requires 3 treats to do so. A dolphin will do 1 trick at a time and requires 5 treats to do so. Since dolphins are more popular, at least 10 dolphins must be used and at most 30% of the performers can be otters. If the aquarium only has 200 treats available, maximize the total number of tricks that can be preformed.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfDolphins": "float",
+    "NumberOfOtters": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- S: set of performer types = {Otter, Dolphin}
+
+Parameters:
+- tricks_per_otter = 3       [tricks per performance]
+- treats_per_otter = 3       [total treats per otter performance]
+- tricks_per_dolphin = 1      [tricks per performance]
+- treats_per_dolphin = 5      [total treats per dolphin performance]
+- min_dolphins = 10         [minimum number of dolphins required]
+- treats_available = 200     [total available treats]
+- max_otter_fraction = 0.30     [maximum fraction of performers that can be otters]
+
+Variables:
+- NumberOfOtters: number of otters to include in the show [continuous, nonnegative, ideally integer]
+- NumberOfDolphins: number of dolphins to include in the show [continuous, nonnegative, ideally integer]
+
+Objective:
+- Maximize total_tricks = tricks_per_otter * NumberOfOtters + tricks_per_dolphin * NumberOfDolphins
+
+Constraints:
+1. Treats constraint: treats_per_otter * NumberOfOtters + treats_per_dolphin * NumberOfDolphins ≤ treats_available
+2. Minimum dolphins constraint: NumberOfDolphins ≥ min_dolphins
+3. Otter fraction constraint: NumberOfOtters ≤ max_otter_fraction * (NumberOfOtters + NumberOfDolphins)
+
+Note:
+- All treat and trick units are consistent with the problem statement.
+- Although the variables are naturally integer values, they are modeled as continuous in this formulation. In an implementation, integrality restrictions might be added if needed.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfDolphins": "float",
+    "NumberOfOtters": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Solving Continuous Model:
+{'NumberOfOtters': 13.636363636363638, 'NumberOfDolphins': 31.81818181818182, 'objective': 72.72727272727273}
+
+Solving Integer Model:
+{'NumberOfOtters': 13.0, 'NumberOfDolphins': 32.0, 'objective': 71.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfDolphins': 32.0, 'NumberOfOtters': 13.0}, 'objective': 71.0}

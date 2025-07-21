@@ -1,0 +1,67 @@
+Problem Name: 221_nlp4lp_221
+
+# Problem Description:
+'''Problem description: An autobody shop needs to purchase two types of car jacks, an automatic electric one, or a gas-powered one. The automatic electric one can process 5 cars every hour and uses 6 units of electricity whereas the gas-powered one can process 4 cars each hour using 7 units of gas. Since there is a limit to how many automatic electric ones there can be due to the limited number of power outlets, the shop must use less than 15 automatic electric ones. The shop can use at most 50 units of electricity and 80 units of gas. How many of each type of jack should the shop purchase to maximize the amount of cars processed every hour?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AutoElectricJacksUsed": "float",
+    "GasPoweredJacksUsed": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- J: set of jack types = {AutoElectric, GasPowered}
+
+Parameters:
+- processing_rate_AutoElectric: number of cars processed per hour by one automatic electric jack = 5 [cars/hour]
+- processing_rate_GasPowered: number of cars processed per hour by one gas-powered jack = 4 [cars/hour]
+- electricity_consumption_AutoElectric: units of electricity used per automatic electric jack = 6 [electricity units per jack]
+- gas_consumption_GasPowered: units of gas used per gas-powered jack = 7 [gas units per jack]
+- max_electricity: total available units of electricity = 50 [electricity units]
+- max_gas: total available units of gas = 80 [gas units]
+- max_AutoElectric_units: maximum allowed number of automatic electric jacks (due to outlet limitations) = 14 [jacks]
+  (Note: "less than 15" is interpreted as at most 14 units)
+
+Variables:
+- AutoElectricJacksUsed: number of automatic electric jacks to purchase [integer, ≥ 0]
+- GasPoweredJacksUsed: number of gas-powered jacks to purchase [integer, ≥ 0]
+
+Objective:
+- Maximize total_cars_processed = (processing_rate_AutoElectric * AutoElectricJacksUsed) + (processing_rate_GasPowered * GasPoweredJacksUsed)
+  [cars processed per hour]
+
+Constraints:
+1. Outlet constraint for automatic electric jacks:
+   AutoElectricJacksUsed ≤ max_AutoElectric_units
+2. Electricity availability constraint:
+   electricity_consumption_AutoElectric * AutoElectricJacksUsed ≤ max_electricity
+3. Gas availability constraint:
+   gas_consumption_GasPowered * GasPoweredJacksUsed ≤ max_gas
+4. Non-negativity and integrality:
+   AutoElectricJacksUsed, GasPoweredJacksUsed are integer and ≥ 0
+
+This completes the structured mathematical model for the autobody shop problem.
+
+Execution Results:
+SUCCESS:
+Solving using OR-Tools Linear Solver (MIP):
+Solution:
+  AutoElectricJacksUsed = 8.0
+  GasPoweredJacksUsed   = 11.0
+  Total cars processed    = 84.0
+
+Solving using OR-Tools CP-SAT Solver:
+Solution:
+  AutoElectricJacksUsed = 8
+  GasPoweredJacksUsed   = 11
+  Total cars processed    = 84.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'AutoElectricJacksUsed': 8.0, 'GasPoweredJacksUsed': 11.0}, 'objective': 84.0}

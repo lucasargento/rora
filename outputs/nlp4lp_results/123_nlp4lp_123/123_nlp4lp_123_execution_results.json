@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nModel1 Results:\nVariables:\n  BeamBridges: 20.0\n  TrussBridges: 0.0\nObjective Value (Total Mass Supported in grams): 800.0\n"
+}

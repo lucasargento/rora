@@ -1,0 +1,74 @@
+Problem Name: 23_nlp4lp_23
+
+# Problem Description:
+'''Problem description: Sleep inducing medicine and anti-inflammatory medicine is found in two pills, pill A and pill B. One pill A contains 3 units of sleep inducing medicine and 5 units of anti-inflammatory medicine. One pill B contains 6 units of sleep-inducing medicine and 1 unit of anti-inflammatory medicine. The cost per pill for pill A is $4 and the cost per pill for pill B is $5. A patient must consume these two pills to get at least 40 units of sleep-inducing medicine and 50 units of anti-inflammatory medicine. Formulate a LP to minimize the cost for the patient.
+
+Expected Output Schema:
+{
+  "variables": {
+    "PillsSelected": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+{
+  "Sets": {
+    "Pills": ["A", "B"]
+  },
+  "Parameters": {
+    "sleepContent": {
+      "A": 3,    /* units of sleep inducing medicine per pill A */
+      "B": 6     /* units of sleep inducing medicine per pill B */
+    },
+    "antiContent": {
+      "A": 5,    /* units of anti-inflammatory medicine per pill A */
+      "B": 1     /* units of anti-inflammatory medicine per pill B */
+    },
+    "pillCost": {
+      "A": 4,    /* cost in USD per pill A */
+      "B": 5     /* cost in USD per pill B */
+    },
+    "minSleepRequired": 40,        /* minimum required units of sleep inducing medicine */
+    "minAntiRequired": 50          /* minimum required units of anti-inflammatory medicine */
+  },
+  "Variables": {
+    "x": {
+      "description": "Number of each pill selected (non-negative integer)",
+      "A": "integer >= 0",
+      "B": "integer >= 0"
+    }
+  },
+  "Objective": "Minimize total cost = pillCost[A]*x[A] + pillCost[B]*x[B]",
+  "Constraints": [
+    {
+      "name": "Sleep Medicine Constraint",
+      "expression": "sleepContent[A]*x[A] + sleepContent[B]*x[B] >= minSleepRequired",
+      "comment": "Ensures at least 40 units of sleep inducing medicine are obtained"
+    },
+    {
+      "name": "Anti-inflammatory Medicine Constraint",
+      "expression": "antiContent[A]*x[A] + antiContent[B]*x[B] >= minAntiRequired",
+      "comment": "Ensures at least 50 units of anti-inflammatory medicine are obtained"
+    }
+  ]
+}
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+------------------------------------------------
+Model Version: Formulation_Version1
+Pill A (index 0): 10.0
+Pill B (index 1): 2.0
+Objective Value (Total Cost): 50.0
+------------------------------------------------
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'PillsSelected': {'0': 9.62962962962963, '1': 1.8518518518518519}}, 'objective': 47.77777777777778}

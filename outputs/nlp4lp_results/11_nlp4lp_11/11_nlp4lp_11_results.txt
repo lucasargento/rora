@@ -1,0 +1,74 @@
+Problem Name: 11_nlp4lp_11
+
+# Problem Description:
+'''Problem description: A souvenir shop makes wooden elephants and tigers with plastic ornaments. Each elephant requires 50 grams of wood and 20 grams of plastic. Each tiger requires 40 grams of wood and 30 grams of plastic. In a week, 5000 grams of wood and 4000 grams of plastic are available. The profit per elephant sold is $5 and the profit per tiger sold is $4. How many of each should be made in order to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "Production": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- A: set of products = {Elephant, Tiger}
+
+Parameters:
+- profit_Animal: profit per unit of each animal produced [USD per unit]
+  • profit_Animal[Elephant] = 5
+  • profit_Animal[Tiger] = 4
+- wood_req_Animal: grams of wood required per unit [grams per unit]
+  • wood_req_Animal[Elephant] = 50
+  • wood_req_Animal[Tiger] = 40
+- plastic_req_Animal: grams of plastic required per unit [grams per unit]
+  • plastic_req_Animal[Elephant] = 20
+  • plastic_req_Animal[Tiger] = 30
+- available_wood: total available wood per week [grams] = 5000
+- available_plastic: total available plastic per week [grams] = 4000
+
+Variables:
+- x_Animal: number of units of animal to produce [integer ≥ 0]
+  • x_Animal[Elephant] represents the number of elephants produced.
+  • x_Animal[Tiger] represents the number of tigers produced.
+
+Objective:
+- Maximize total profit = profit_Animal[Elephant] * x_Animal[Elephant] + profit_Animal[Tiger] * x_Animal[Tiger]
+
+Constraints:
+1. Wood constraint: wood_req_Animal[Elephant] * x_Animal[Elephant] + wood_req_Animal[Tiger] * x_Animal[Tiger] ≤ available_wood
+2. Plastic constraint: plastic_req_Animal[Elephant] * x_Animal[Elephant] + plastic_req_Animal[Tiger] * x_Animal[Tiger] ≤ available_plastic
+
+-------------------------------------------------------
+Mapping to Expected Output Schema:
+
+{
+  "variables": {
+    "Production": {
+      "0": "Number of elephants produced (x_Animal[Elephant], integer, units)",
+      "1": "Number of tigers produced (x_Animal[Tiger], integer, units)"
+    }
+  },
+  "objective": "Maximize profit = 5 * (number of elephants) + 4 * (number of tigers)"
+}
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+Model: LinearSolver
+Variables:
+  Production:
+    0: Number of elephants produced (x_Animal[Elephant], integer, units) = 0.0
+    1: Number of tigers produced (x_Animal[Tiger], integer, units) = 125.0
+Objective Value: 500.0
+----------------------------------------
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'Production': {'0': 100.0, '1': 0.0}}, 'objective': 500.0}

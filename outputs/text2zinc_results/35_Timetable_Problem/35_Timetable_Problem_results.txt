@@ -1,0 +1,62 @@
+Problem Name: 35_Timetable_Problem
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{Indices:} &:& i = 1,\ldots,C \quad (\text{courses}), \quad p = 1,\ldots,P \quad (\text{periods}), \\[1mm]
+&& \text{with } C \text{ representing the number of courses and } P \text{ the number of periods.} \\[2mm]
+
+\textbf{Parameters:} &:& 
+\begin{array}{rl}
+  available_{ip} & \in \{0,1\}, \quad \text{where } available_{ip}=1 \text{ if course } i \text{ is available in period } p, \\[1mm]
+  conflict_{ij} & \in \{0,1\}, \quad \text{where } conflict_{ij}=1 \text{ if courses } i \text{ and } j \text{ cannot be scheduled simultaneously}, \\[1mm]
+  requirement_i & \in \mathbb{Z}_+, \quad \text{the number of lectures required for course } i, \\[1mm]
+  R & \in \mathbb{Z}_+, \quad \text{the number of rooms available per period.}
+\end{array} \\[2mm]
+
+\textbf{Decision Variables:} &:&
+\begin{array}{rl}
+  y_{ip} & \in \{0,1\}, \quad \text{for all } i=1,\ldots,C, \; p=1,\ldots,P, \\[1mm]
+  && \quad \text{where } y_{ip}=1 \text{ if course } i \text{ is scheduled in period } p, \\
+  && \quad \text{and } y_{ip}=0 \text{ otherwise.}
+\end{array} \\[4mm]
+
+\textbf{Objective Function:} &:&
+\begin{array}{rl}
+  \min\; & 0, \quad \text{(This is a feasibility problem, so the objective is a dummy objective.)}
+\end{array} \\[4mm]
+
+\textbf{Constraints:} &:&
+\begin{array}{rl}
+  \text{(1) Lecture Requirement:} & \displaystyle \sum_{p=1}^{P} y_{ip} = requirement_i, \quad \forall \; i=1,\ldots,C, \\[2mm]
+  \text{(2) Availability:} & y_{ip} \leq available_{ip}, \quad \forall \; i=1,\ldots,C,\; \forall \; p=1,\ldots,P, \\[2mm]
+  \text{(3) Room Capacity per Period:} & \displaystyle \sum_{i=1}^{C} y_{ip} \leq R, \quad \forall \; p=1,\ldots,P, \\[2mm]
+  \text{(4) Conflict Avoidance:} & y_{ip} + y_{jp} \leq 1, \quad \forall \; p=1,\ldots,P,\; \forall \; (i,j) \text{ with } i < j \text{ and } conflict_{ij}=1.
+\end{array}
+\end{array}
+\]
+
+This model fully represents the Timetable scheduling problem: 
+
+• Each course i must have exactly requirement₍ᵢ₎ lectures scheduled over the available periods.  
+• A course can only be scheduled in a period if it is available during that period.  
+• The total number of lectures scheduled in any period cannot exceed the number of available rooms R.  
+• Conflicting courses cannot have lectures scheduled simultaneously in the same period.
+
+All constraints and parameters are included to ensure the problem is both feasible and bounded.
+
+Execution Results:
+SUCCESS:
+Solution:
+Course 1: Scheduled periods -> [3, 4, 6, 8, 19, 20]
+Course 2: Scheduled periods -> [1, 2, 5, 7, 10, 11, 12, 13, 17, 18]
+Course 3: Scheduled periods -> [4, 5, 6, 7, 9, 10, 11, 12, 14, 15, 16, 17, 19, 20]
+Course 4: Scheduled periods -> [3, 8, 9, 14, 15, 16]
+Course 5: Scheduled periods -> [1, 2, 13, 18]
+Objective value: 0.0
+
+
+Expected Output:
+Expected solution
+
+: {'timetable': [[0, 0, 1, 1, 1, 1, 0, 1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 1, 0, 0, 0, 0, 0, 0, 0, 1, 1, 1, 1, 0, 1, 0, 0, 1, 1, 1], [0, 0, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1, 1, 1, 0, 1, 1], [0, 0, 1, 0, 0, 0, 1, 1, 0, 0, 0, 0, 0, 1, 0, 1, 1, 0, 0, 0], [1, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0]]}

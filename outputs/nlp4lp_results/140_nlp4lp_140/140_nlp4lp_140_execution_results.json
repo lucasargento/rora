@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults:\n---------\nLinear Solver Result:\n{'model': 'LinearSolver', 'variables': {'SmallContainers': 48.0, 'LargeContainers': 16.0}, 'objective': 1760.0}\n---------\nCP-SAT Result:\n{'model': 'CPSat', 'variables': {'SmallContainers': 48, 'LargeContainers': 16}, 'objective': 1760}\n"
+}

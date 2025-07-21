@@ -1,0 +1,62 @@
+Problem Name: 0_P-Median_Problem
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Indices:} & & & \\
+i &=& \text{Customers}, & i = 1,2,\dots,\text{num\_customers} \\
+j &=& \text{Candidate Warehouses}, & j = 1,2,\dots,\text{num\_warehouses} \\[10pt]
+
+\textbf{Parameters:} & & & \\
+P &=& \text{Number of warehouses to open}, & P \in \mathbb{Z}^+ \\
+D_i &=& \text{Demand of customer } i, & i = 1,2,\dots,\text{num\_customers} \\
+c_{ij} &=& \text{Distance from customer } i \text{ to warehouse } j, & \forall \, i,j \\[10pt]
+
+\textbf{Decision Variables:} & & & \\
+y_j &\in& \{0,1\}, & \text{where } y_j = 
+\begin{cases}
+1, & \text{if warehouse } j \text{ is opened}, \\
+0, & \text{otherwise},
+\end{cases} \quad j = 1,2,\dots,\text{num\_warehouses} \\[8pt]
+x_{ij} &\in& \{0,1\}, & \text{where } x_{ij} = 
+\begin{cases}
+1, & \text{if customer } i \text{ is assigned to warehouse } j, \\
+0, & \text{otherwise},
+\end{cases} \quad \forall \, i,j \\[10pt]
+
+\textbf{Objective Function:} & & & \\
+\min \quad Z &=& \displaystyle \sum_{i=1}^{\text{num\_customers}} \sum_{j=1}^{\text{num\_warehouses}} D_i \, c_{ij} \, x_{ij} \\[10pt]
+
+\textbf{Constraints:} & & & \\
+\text{(1)} \quad \sum_{j=1}^{\text{num\_warehouses}} x_{ij} &=& 1, & \forall \, i = 1,2,\dots,\text{num\_customers} \quad \text{(Each customer is assigned to exactly one warehouse)} \\[8pt]
+\text{(2)} \quad x_{ij} &\leq& y_j, & \forall \, i = 1,2,\dots,\text{num\_customers}, \; j = 1,2,\dots,\text{num\_warehouses} \quad \text{(A customer may only be assigned to an open warehouse)} \\[8pt]
+\text{(3)} \quad \sum_{j=1}^{\text{num\_warehouses}} y_j &=& P, & \quad \text{(Exactly } P \text{ warehouses are opened)} \\[8pt]
+\textbf{Variable Domains:} & & & \\
+x_{ij} &\in& \{0,1\}, & \forall \, i,j \\
+y_j &\in& \{0,1\}, & \forall \, j 
+\end{array}
+\]
+
+This formulation fully captures the P-Median problem for the given transportation and logistics scenario.
+
+Execution Results:
+SUCCESS:
+Optimal Solution Found:
+Objective value (total demand-weighted distance): 670.0
+
+Warehouse decisions:
+  Warehouse 0 is open
+  Warehouse 1 is closed
+  Warehouse 2 is open
+
+Customer assignments:
+  Customer 0 is assigned to Warehouse 0
+  Customer 1 is assigned to Warehouse 0
+  Customer 2 is assigned to Warehouse 2
+  Customer 3 is assigned to Warehouse 2
+
+
+Expected Output:
+Expected solution
+
+: {'OpenWarehouse': [1, 0, 1], 'ShipToCustomer': [[1, 0, 0], [1, 0, 0], [0, 0, 1], [0, 0, 1]], '_objective': 670.0}

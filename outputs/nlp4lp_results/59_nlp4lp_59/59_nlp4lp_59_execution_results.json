@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nContinuous LP Model:\nAcres Used: {'Traditional': 300.0000000000001, 'Modern': 199.9999999999999}\nObjective (Total Tea Leaves Picked): 17000.0\n\nInteger MIP Model:\nAcres Used: {'Traditional': 300.0, 'Modern': 200.0}\nObjective (Total Tea Leaves Picked): 17000.0\n"
+}

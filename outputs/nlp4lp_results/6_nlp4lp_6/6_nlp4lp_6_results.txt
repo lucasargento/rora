@@ -1,0 +1,75 @@
+Problem Name: 6_nlp4lp_6
+
+# Problem Description:
+'''Problem description: A farmer wants to mix his animal feeds, Feed A and Feed B, in such a way that the mixture will contain a minimum of 30 units of protein and 50 units of fat. Feed A costs $100 per kilogram and contains 10 units of protein and 8 units of fat. Feed B costs $80 per kilogram and contains 7 units of protein and 15 units of fat. Determine the minimum cost of the mixture.
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityFeedA": "float",
+    "QuantityFeedB": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the complete five-element structured mathematical model for the problem:
+
+------------------------------------------------------------
+Sets:
+- F = {FeedA, FeedB} 
+  (Each element in F represents a type of animal feed.)
+
+Parameters:
+- cost[FeedA] = 100 USD per kilogram  
+- cost[FeedB] = 80 USD per kilogram  
+- protein[FeedA] = 10 units protein per kilogram  
+- protein[FeedB] = 7 units protein per kilogram  
+- fat[FeedA] = 8 units fat per kilogram  
+- fat[FeedB] = 15 units fat per kilogram  
+- min_protein = 30 units (minimum required total protein)  
+- min_fat = 50 units (minimum required total fat)  
+  (All feed quantities are measured in kilograms. Protein and fat units are assumed to be consistent across feeds.)
+
+Variables:
+- QuantityFeedA: quantity of Feed A to use (continuous, in kilograms, QuantityFeedA ≥ 0)
+- QuantityFeedB: quantity of Feed B to use (continuous, in kilograms, QuantityFeedB ≥ 0)
+
+Objective:
+- Minimize total cost = (cost[FeedA] * QuantityFeedA) + (cost[FeedB] * QuantityFeedB)
+  (This represents the total expenditure in USD for the feed mixture.)
+
+Constraints:
+1. Protein requirement: (protein[FeedA] * QuantityFeedA) + (protein[FeedB] * QuantityFeedB) ≥ min_protein  
+   (At least 30 units of protein must be present in the mixture.)
+
+2. Fat requirement: (fat[FeedA] * QuantityFeedA) + (fat[FeedB] * QuantityFeedB) ≥ min_fat  
+   (At least 50 units of fat must be present in the mixture.)
+
+------------------------------------------------------------
+
+Note:  
+- The units across all parameters are consistent (USD per kilogram, units per kilogram, etc.).  
+- No additional data has been assumed beyond what is specified.  
+- This structure and variable naming are intended for a clear implementation in Python or OR-Tools.
+
+The expected output schema corresponding to the model is:
+
+{
+  "variables": {
+    "QuantityFeedA": "float",
+    "QuantityFeedB": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Result using ortools.linear_solver (Linear Programming):
+{'variables': {'QuantityFeedA': 1.0638297872340425, 'QuantityFeedB': 2.765957446808511}, 'objective': 327.6595744680851}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityFeedA': 1.0638297872340428, 'QuantityFeedB': 2.765957446808511}, 'objective': 327.6595744680851}

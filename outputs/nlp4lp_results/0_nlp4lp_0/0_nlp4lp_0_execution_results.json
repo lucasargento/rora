@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution for LP using ortools.linear_solver:\nInvestment in Condos: $152000.00\nInvestment in Detached Houses: $608000.00\nTotal Profit: $684000.00\n"
+}

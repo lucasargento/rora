@@ -1,0 +1,84 @@
+Problem Name: 214_nlp4lp_214
+
+# Problem Description:
+'''Problem description: A metal-working shop has access to two types of metal-working equipment, a chop saw and a steel cutter. A chop saw can work 25 pounds of steel and generates 25 units of waste every day. A steel cutter can only cut 5 pounds of steel and generates 3 units of waste every day.  The metal-working shop is expecting an increase in demand and must cut 520 pounds of metal every day. However, there is a waste limitation due to the fines that may be in place if too much heavy metal is discarded and they may at most produce 400 units of waste every day. How should the metal-working shop purchase their metal-working equipment to decrease the total number of metal-working equipment needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfChopSaws": "float",
+    "NumberOfSteelCutters": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the structured formulation using the five-element framework.
+
+------------------------------------------------------------
+Sets:
+- E: set of equipment types = {ChopSaw, SteelCutter}
+
+------------------------------------------------------------
+Parameters:
+- pounds_per_ChopSaw = 25 (pounds of steel cut by one Chop Saw per day)
+- pounds_per_SteelCutter = 5 (pounds of steel cut by one Steel Cutter per day)
+- waste_per_ChopSaw = 25 (waste units produced by one Chop Saw per day)
+- waste_per_SteelCutter = 3 (waste units produced by one Steel Cutter per day)
+- required_steel = 520 (pounds of steel to be cut per day)
+- max_waste = 400 (maximum waste units allowed per day)
+
+------------------------------------------------------------
+Variables:
+- NumberOfChopSaws (integer, ≥ 0): number of Chop Saws purchased
+- NumberOfSteelCutters (integer, ≥ 0): number of Steel Cutters purchased
+
+------------------------------------------------------------
+Objective:
+Minimize TotalEquipment = NumberOfChopSaws + NumberOfSteelCutters  
+(This reflects the goal of decreasing the total number of metal-working equipment needed.)
+
+------------------------------------------------------------
+Constraints:
+1. Metal Cutting Requirement:  
+   (pounds_per_ChopSaw * NumberOfChopSaws) + (pounds_per_SteelCutter * NumberOfSteelCutters) ≥ required_steel  
+   i.e., 25 * NumberOfChopSaws + 5 * NumberOfSteelCutters ≥ 520
+
+2. Waste Limitation:  
+   (waste_per_ChopSaw * NumberOfChopSaws) + (waste_per_SteelCutter * NumberOfSteelCutters) ≤ max_waste  
+   i.e., 25 * NumberOfChopSaws + 3 * NumberOfSteelCutters ≤ 400
+
+------------------------------------------------------------
+Notes:
+- Although equipment numbers must be whole numbers (integers), the expected output schema lists them as floats. When implementing the model, consider enforcing integer decisions.
+- All units are assumed consistent (pounds for steel and waste units for waste), based on the problem description.
+- The decision variables indicate the daily operational capacity based on the capacities and waste production rates of the equipment.
+
+The resulting model is thus complete and self-contained for the given optimization problem.
+
+------------------------------------------------------------
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfChopSaws": "float", 
+    "NumberOfSteelCutters": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Solving Integer Model (MIP) with CBC:
+Integer Model Optimal Solution:
+{'variables': {'NumberOfChopSaws': 8.0, 'NumberOfSteelCutters': 64.0}, 'objective': 72.0}
+
+Solving Relaxed Model (LP) with GLOP:
+Relaxed Model Optimal Solution:
+{'variables': {'NumberOfChopSaws': 8.800000000000002, 'NumberOfSteelCutters': 59.999999999999986}, 'objective': 68.79999999999998}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfChopSaws': 8.0, 'NumberOfSteelCutters': 64.0}, 'objective': 72.0}

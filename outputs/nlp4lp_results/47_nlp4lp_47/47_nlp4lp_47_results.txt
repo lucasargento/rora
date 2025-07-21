@@ -1,0 +1,65 @@
+Problem Name: 47_nlp4lp_47
+
+# Problem Description:
+'''Problem description: A city employs seasonal and permanent snow removers. A seasonal snow remover works 6 hours per shift and gets paid $120. A permanent snow remover works 10 hours per shift and gets paid $250. Currently the city needs 300 hours of snow remover labor after a heavy snowfall. If the city has a budget of $6500, how many of each type of worker should be hired to minimize the total number of snow removers?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberSeasonal": "float",
+    "NumberPermanent": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- W: set of worker types = {Seasonal, Permanent}
+
+Parameters:
+- HoursPerShift_Seasonal = 6 (hours per shift for a seasonal snow remover)
+- HoursPerShift_Permanent = 10 (hours per shift for a permanent snow remover)
+- CostPerShift_Seasonal = 120 (USD per seasonal snow remover shift)
+- CostPerShift_Permanent = 250 (USD per permanent snow remover shift)
+- RequiredLaborHours = 300 (total snow removal labor hours needed)
+- TotalBudget = 6500 (USD available for payment)
+
+Variables:
+- NumberSeasonal: number of seasonal snow removers hired (float ≥ 0; in practice, an integer count)
+- NumberPermanent: number of permanent snow removers hired (float ≥ 0; in practice, an integer count)
+
+Objective:
+- Minimize TotalWorkers = NumberSeasonal + NumberPermanent
+
+Constraints:
+1. Labor Hours Constraint: 
+   HoursPerShift_Seasonal * NumberSeasonal + HoursPerShift_Permanent * NumberPermanent ≥ RequiredLaborHours
+   (i.e., 6 * NumberSeasonal + 10 * NumberPermanent ≥ 300)
+
+2. Budget Constraint:
+   CostPerShift_Seasonal * NumberSeasonal + CostPerShift_Permanent * NumberPermanent ≤ TotalBudget
+   (i.e., 120 * NumberSeasonal + 250 * NumberPermanent ≤ 6500)
+
+----------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "NumberSeasonal": "float",
+    "NumberPermanent": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Continuous (Linear Solver) Model Result:
+{'variables': {'NumberSeasonal': 33.33333333333333, 'NumberPermanent': 10.0}, 'objective': 43.33333333333333}
+
+Integer (CP-SAT) Model Result:
+{'variables': {'NumberSeasonal': 35, 'NumberPermanent': 9}, 'objective': 44}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberSeasonal': 35.0, 'NumberPermanent': 9.0}, 'objective': 44.0}

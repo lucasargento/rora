@@ -1,0 +1,72 @@
+Problem Name: 90_nlp4lp_90
+
+# Problem Description:
+'''Problem description: A patient with a sore throat can drink two syrups, syrup 1 and syrup 2 for treatment. Per serving, syrup 1 delivers 0.5 units of medicine to the throat and 0.4 units of medicine to the lungs. Per serving, syrup 2 delivers 0.2 units of medicine to the throat and 0.5 units of medicine to the lungs. Furthermore, syrup 1 contains 0.5 units of sugar while syrup 2 contains 0.3 units of sugar per serving. The patient can get at most 5 units of medicine for the throat and at least 4 units of medicine to the lungs. How many servings of each should the patient take to minimize his sugar intake?
+
+Expected Output Schema:
+{
+  "variables": {
+    "Servings": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Syrups: the set of available syrups = {Syrup1, Syrup2}
+
+Parameters:
+- throat_medicine: amount of medicine delivered to the throat per serving
+  - For Syrup1: 0.5 units per serving
+  - For Syrup2: 0.2 units per serving
+- lung_medicine: amount of medicine delivered to the lungs per serving
+  - For Syrup1: 0.4 units per serving
+  - For Syrup2: 0.5 units per serving
+- sugar: amount of sugar per serving in the syrup (in sugar units)
+  - For Syrup1: 0.5 units per serving
+  - For Syrup2: 0.3 units per serving
+- max_throat_medicine: maximum allowed medicine for the throat = 5 units
+- min_lung_medicine: minimum required medicine for the lungs = 4 units
+
+Variables:
+- servings_Syrup1: number of servings of Syrup1 (continuous, ≥ 0) [servings]
+- servings_Syrup2: number of servings of Syrup2 (continuous, ≥ 0) [servings]
+
+Objective:
+- Minimize total sugar intake = 0.5 * servings_Syrup1 + 0.3 * servings_Syrup2
+
+Constraints:
+1. Throat medicine constraint (upper bound):
+   0.5 * servings_Syrup1 + 0.2 * servings_Syrup2 ≤ max_throat_medicine
+2. Lung medicine constraint (lower bound):
+   0.4 * servings_Syrup1 + 0.5 * servings_Syrup2 ≥ min_lung_medicine
+
+Comments:
+- All units are assumed consistent: medicine units per serving and sugar units per serving.
+- Decision variables are continuous as fractional servings are allowed unless otherwise specified.
+- The constraint on throat medicine is an upper limit while the lung medicine requirement is a lower limit.
+
+Expected Output Schema Example:
+{
+  "variables": {
+    "Servings": {
+      "0": "servings_Syrup1 (float)",
+      "1": "servings_Syrup2 (float)"
+    }
+  },
+  "objective": "Minimize 0.5 * servings_Syrup1 + 0.3 * servings_Syrup2"
+}
+
+Execution Results:
+SUCCESS:
+Solution for Implementation 1:
+{'variables': {'Servings': {'0': 0.0, '1': 8.0}}, 'objective': 2.4}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'Servings': {'0': 0.0, '1': 8.0}}, 'objective': 2.4}

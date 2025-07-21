@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n===== Linear/MIP Model Optimal Solution =====\nVariables:\n  NumSmallCrates = 45.0\n  NumLargeCrates = 15.0\nObjective:\n  Total Grapes Transported = 16500.0\n"
+}

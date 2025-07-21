@@ -1,0 +1,65 @@
+Problem Name: 42_nlp4lp_42
+
+# Problem Description:
+'''Problem description: A farmer has 200 acres of land on which he must process hay using either a windrower or hay harvester. For each acre of land, the windrower can process 10 kg of hay while the hay harvester can process 8 kg of hay. Per acre, the windrower produces 5 kg of methane gas and requires 2 kg of fuel. On the other hand, the hay harvester produces 3 kg of methane gas per acre and requires 1 kg of fuel. There are 300 kg of fuel available and the farmer can produce at most 800 kg of methane gas. For how many acres should each machine be used to maximize the amount of hay processed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AcresAllocated": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Machines: set of machine types = {Windrower, HayHarvester}
+
+Parameters:
+- available_acres: total acres available = 200 acres
+- fuel_available: total fuel available = 300 kg
+- methane_limit: maximum allowable methane gas produced = 800 kg
+- hay_per_acre:
+  - Windrower: 10 kg hay processed per acre
+  - HayHarvester: 8 kg hay processed per acre
+- fuel_req:
+  - Windrower: 2 kg fuel required per acre
+  - HayHarvester: 1 kg fuel required per acre
+- methane_prod:
+  - Windrower: 5 kg methane produced per acre
+  - HayHarvester: 3 kg methane produced per acre
+
+Variables:
+- acres_allocated[m in Machines]: number of acres on which machine m is used [continuous, >= 0] (unit: acres)
+
+Objective:
+- Maximize total hay processed = (10 * acres_allocated[Windrower]) + (8 * acres_allocated[HayHarvester])
+  (unit: kg hay)
+
+Constraints:
+1. Land constraint: acres_allocated[Windrower] + acres_allocated[HayHarvester] ≤ available_acres (200 acres)
+2. Fuel constraint: (2 * acres_allocated[Windrower]) + (1 * acres_allocated[HayHarvester]) ≤ fuel_available (300 kg)
+3. Methane constraint: (5 * acres_allocated[Windrower]) + (3 * acres_allocated[HayHarvester]) ≤ methane_limit (800 kg methane)
+
+--------------------------------------------------
+Output Schema (for reference):
+{
+  "variables": {
+    "AcresAllocated": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+{'LinearSolver_Result': {'model': 'LinearSolver (Continuous)', 'variables': {'AcresAllocated': [{'machine': 'Windrower', 'value': 100.00000000000001}, {'machine': 'HayHarvester', 'value': 99.99999999999997}]}, 'objective': 1800.0}, 'CP_SAT_Result': {'model': 'CP-SAT (Integer)', 'variables': {'AcresAllocated': [{'machine': 'Windrower', 'value': 100}, {'machine': 'HayHarvester', 'value': 100}]}, 'objective': 1800.0}}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'AcresAllocated': [100.0, 100.0]}, 'objective': 1800.0}

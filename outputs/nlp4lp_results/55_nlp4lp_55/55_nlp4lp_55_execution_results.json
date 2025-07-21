@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults from ortools.linear_solver:\n{'variables': {'NumTopLoading': 0.0, 'NumFrontLoading': 67.0}, 'objective': 67.0}\n\nResults from ortools.sat.python.cp_model:\n{'variables': {'NumTopLoading': 0, 'NumFrontLoading': 67}, 'objective': 67}\n"
+}

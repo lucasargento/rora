@@ -1,0 +1,43 @@
+Problem Name: 98_Consultant_Assignment_Optimization
+
+Mathematical Formulation:
+\[
+\begin{array}{rll}
+\textbf{Indices and Sets:} & i \in I = \{1,2,\dots,5\} & \quad \text{(projects)}\\[1mm]
+                         & j \in J = \{1,2,\dots,3\} & \quad \text{(consultants)}\\[2mm]
+\textbf{Parameters:}    & \text{FixedCosts}_j, & \quad j \in J, \quad \text{fixed cost for hiring consultant } j,\\[1mm]
+                         & \text{AdditionalCosts}_{ij}, & \quad (i,j) \in I \times J, \quad \text{cost for assigning consultant } j \text{ to project } i,\\[1mm]
+                         & M, & \quad \text{MaxProjectsPerConsultant (here, } M=3 \text{)}.\\[2mm]
+\textbf{Decision Variables:} & x_{ij} \in \{0,1\}, & \quad \forall (i,j) \in I \times J,\; \text{where } x_{ij}=1 \text{ if project } i \text{ is assigned to consultant } j,\\[1mm]
+                         & y_j \in \{0,1\}, & \quad \forall j \in J,\; \text{where } y_j=1 \text{ if consultant } j \text{ is hired.}\\[2mm]
+\textbf{Objective:}     & \displaystyle \min \quad Z = \sum_{j \in J} \text{FixedCosts}_j \, y_j + \sum_{i \in I}\sum_{j \in J} \text{AdditionalCosts}_{ij} \, x_{ij}. & \\[2mm]
+\textbf{Subject to:}    & \displaystyle \sum_{j \in J} x_{ij} = 1, & \quad \forall i \in I, \quad \text{(each project must be assigned to exactly one consultant)}\\[2mm]
+                         & \displaystyle \sum_{i \in I} x_{ij} \leq M, & \quad \forall j \in J, \quad \text{(each consultant can handle at most } M \text{ projects)}\\[2mm]
+                         & \displaystyle x_{ij} \leq y_j, & \quad \forall (i,j) \in I \times J, \quad \text{(a consultant must be hired to be assigned a project)}.
+\end{array}
+\]
+
+This formulation fully captures the assignment problem by defining the binary decision variables, the objective function (minimizing total cost), and all the necessary constraints ensuring every project is assigned and that a consultant’s project load does not exceed the maximum allowed.
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Total Cost = 290.0
+
+Consultant Hiring Decisions:
+  Consultant 1 is hired (Fixed cost = 100)
+  Consultant 2 is hired (Fixed cost = 150)
+  Consultant 3 is not hired
+
+Project Assignments:
+  Project 1 is assigned to Consultant 1 (Additional cost = 10)
+  Project 2 is assigned to Consultant 2 (Additional cost = 8)
+  Project 3 is assigned to Consultant 2 (Additional cost = 8)
+  Project 4 is assigned to Consultant 2 (Additional cost = 6)
+  Project 5 is assigned to Consultant 1 (Additional cost = 8)
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 290.0}

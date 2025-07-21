@@ -1,0 +1,51 @@
+Problem Name: 23_Cafeteria_Staff_Scheduling
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:} \quad &\\[1mm]
+N &\in \mathbb{N} \quad &&\text{Number of days in the recurring period, with } n = 1, 2, \dots, N.\\[1mm]
+\text{Num}_n &\in \mathbb{N} \quad &&\text{Number of employees required on day } n, \; n=1,\dots,N.\\[1mm]
+W &\in \mathbb{N} \quad &&\text{Number of consecutive working days (WorkingDays).}\\[1mm]
+R &\in \mathbb{N} \quad &&\text{Number of consecutive resting days (RestingDays).}\\[1mm]
+P &= W + R \quad &&\text{Length of the individual employee cycle (period).}\\[2mm]
+\textbf{Decision Variables:} \quad &\\[1mm]
+x_s &\in \mathbb{Z}_+ \quad &&\text{Number of employees with cycle offset } s, \quad s = 0,1,\dots,P-1.
+\intertext{Each employee’s cycle is assumed to start at day } s, \text{ and such an employee is scheduled to work on day } n \text{ if}
+\left[(n-s) \bmod P < W\right] &= 1, \quad \text{and is off otherwise. Here, } [\cdot] \text{ is the Iverson bracket, i.e., }
+\\[2mm]
+\textbf{Objective Function:} \quad &\\[1mm]
+\min \quad Z &= \sum_{s=0}^{P-1} x_s.
+\intertext{The objective is to minimize the total number of employees hired.}
+\intertext{%
+\textbf{Constraints:} \quad &\\[1mm]
+\text{For each day } n=1,\dots,N, \quad &\\[1mm]
+\sum_{s=0}^{P-1} \left[ \,(n-s) \bmod P < W \,\right] \, x_s &\geq \text{Num}_n.
+\end{align*}
+
+\textbf{Explanation:}  
+\begin{itemize}
+    \item The index $s \in \{0,1,\dots,P-1\}$ denotes the starting offset in the $P$–day cycle for an employee. An employee with offset $s$ is on duty on day $n$ if and only if the remainder of $(n-s)$ modulo $P$ is less than $W$, i.e., in their working period.
+    \item The constraint for each day $n$ ensures that the sum of all employees working on that day (across all cycle offsets) meets or exceeds the required staffing level $\text{Num}_n$.
+    \item The decision variables $x_s$ are nonnegative integers.
+    \item The model is feasible and bounded provided that the staffing requirements $\text{Num}_n$ and cycle parameters $W,R$ are such that a cyclic schedule can cover the demands.
+\end{itemize}
+
+This formulation fully captures the scheduling problem with a recurring cycle and the corresponding coverage constraints.
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Total number of employees: 10
+Employees with cycle offset 0: 0
+Employees with cycle offset 1: 0
+Employees with cycle offset 2: 3
+Employees with cycle offset 3: 0
+Employees with cycle offset 4: 0
+Employees with cycle offset 5: 0
+Employees with cycle offset 6: 7
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 15.0}

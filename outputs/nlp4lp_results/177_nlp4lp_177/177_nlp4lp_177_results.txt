@@ -1,0 +1,65 @@
+Problem Name: 177_nlp4lp_177
+
+# Problem Description:
+'''Problem description: Bob wants to design a diet consisting of protein bars and noodles. Assume that each serving of noodles costs $5 and contains 600 calories and 1.5 grams of protein. Assume that each serving of protein bar costs $2.5 and contains 250 calories and 5 grams of protein. He's interested in spending as little money as possible but he wants to ensure that his meals have at least 2000 calories and at least 16 grams of protein per day. Formulate a linear programming problem that will help minimize the cost of the diet.
+
+Expected Output Schema:
+{
+  "variables": {
+    "ServingsNoodles": "float",
+    "ServingsProteinBars": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Items: {Noodles, ProteinBars}
+
+Parameters:
+- cost_Noodles: 5 (USD per serving of noodles)
+- cost_ProteinBars: 2.5 (USD per serving of protein bars)
+- calories_Noodles: 600 (calories per serving of noodles)
+- calories_ProteinBars: 250 (calories per serving of protein bars)
+- protein_Noodles: 1.5 (grams of protein per serving of noodles)
+- protein_ProteinBars: 5 (grams of protein per serving of protein bars)
+- calorie_requirement: 2000 (minimum total calories per day)
+- protein_requirement: 16 (minimum total grams of protein per day)
+
+Variables:
+- ServingsNoodles: number of servings of noodles (continuous, non-negative)
+- ServingsProteinBars: number of servings of protein bars (continuous, non-negative)
+
+Objective:
+- Minimize total cost = cost_Noodles * ServingsNoodles + cost_ProteinBars * ServingsProteinBars
+
+Constraints:
+- Calorie constraint: calories_Noodles * ServingsNoodles + calories_ProteinBars * ServingsProteinBars ≥ calorie_requirement
+- Protein constraint: protein_Noodles * ServingsNoodles + protein_ProteinBars * ServingsProteinBars ≥ protein_requirement
+
+------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "ServingsNoodles": "float",
+    "ServingsProteinBars": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Version 1 (LP Model):
+Variables:
+  ServingsNoodles: 2.2857142857142856
+  ServingsProteinBars: 2.5142857142857142
+Objective Value:
+  17.71428571428571
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'ServingsNoodles': 2.2857142857142856, 'ServingsProteinBars': 2.5142857142857142}, 'objective': 17.71428571428571}

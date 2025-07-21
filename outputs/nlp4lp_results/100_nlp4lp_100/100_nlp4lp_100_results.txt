@@ -1,0 +1,63 @@
+Problem Name: 100_nlp4lp_100
+
+# Problem Description:
+'''Problem description: A travelling salesman only eats ramen and fries. Each pack of ramen contains 400 calories, 20 grams of protein, and 100 mg of sodium. Each pack of fries contains 300 calories, 10 grams of protein, and 75 mg of sodium. Since fries are easier to eat while driving, at most 30% of his meals can be ramen. The salesman wants to ensure he eats at least 3000 calories and 80 grams of protein. How many of each should he eat to minimize his sodium intake?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumRamenPacks": "float",
+    "NumFriesPacks": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- F: set of food types = {Ramen, Fries}
+
+Parameters:
+- calorie_ramen = 400 (calories per ramen pack)
+- protein_ramen = 20 (grams per ramen pack)
+- sodium_ramen = 100 (mg sodium per ramen pack)
+- calorie_fries = 300 (calories per fries pack)
+- protein_fries = 10 (grams per fries pack)
+- sodium_fries = 75 (mg sodium per fries pack)
+- cal_requirement = 3000 (minimum total calories required)
+- protein_requirement = 80 (minimum total grams of protein required)
+- max_fraction_ramen = 0.3 (maximum fraction of meals that can be ramen packs)
+
+Variables:
+- NumRamenPacks: the number of ramen packs consumed (float, ≥ 0)
+- NumFriesPacks: the number of fries packs consumed (float, ≥ 0)
+
+Objective:
+- Minimize total sodium intake = (sodium_ramen * NumRamenPacks) + (sodium_fries * NumFriesPacks)
+
+Constraints:
+1. Calorie constraint: (calorie_ramen * NumRamenPacks) + (calorie_fries * NumFriesPacks) ≥ cal_requirement
+2. Protein constraint: (protein_ramen * NumRamenPacks) + (protein_fries * NumFriesPacks) ≥ protein_requirement
+3. Ramen fraction constraint: NumRamenPacks ≤ max_fraction_ramen * (NumRamenPacks + NumFriesPacks)
+   - This can be equivalently rearranged as: 7 * NumRamenPacks ≤ 3 * NumFriesPacks
+4. Nonnegativity: NumRamenPacks, NumFriesPacks ≥ 0
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumRamenPacks": "float",
+    "NumFriesPacks": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Running optimization model:
+Linear Programming Model (Google OR-Tools - Linear Solver) Results:
+{'variables': {'NumRamenPacks': 2.7272727272727275, 'NumFriesPacks': 6.363636363636364}, 'objective': 750.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumRamenPacks': 0.0, 'NumFriesPacks': 10.0}, 'objective': 750.0}

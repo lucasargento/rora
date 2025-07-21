@@ -1,0 +1,32 @@
+Problem Name: 29_Coin_Plating_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Decision Variables:} \quad
+& x_A \in \mathbb{Z}^+, \quad x_B \in \mathbb{Z}^+ \quad \text{with} \quad x_A \ge 1, \; x_B \ge 1, \\
+& \text{where } x_A \text{ is the number of times Process A is executed, and} \\
+& \quad\quad\quad x_B \text{ is the number of times Process B is executed.} \\[1em]
+\textbf{Parameters:} \quad
+& \text{GoldPerA} = 3,\quad \text{WiresPerA} = 2,\quad \text{CoinsPerA} = 5, \\
+& \text{GoldPerB} = 5,\quad \text{WiresPerB} = 3,\quad \text{CoinsPerB} = 7, \\
+& \text{TotalGold} = 500,\quad \text{TotalWires} = 300. \\[1em]
+\textbf{Objective Function:} \quad
+& \text{Maximize } Z = 5\, x_A + 7\, x_B, \\
+& \quad \text{which represents the total number of coins plated.} \\[1em]
+\textbf{Constraints:} \quad
+& \text{Gold Constraint:} \quad 3\, x_A + 5\, x_B \le 500, \\
+& \text{Wires Constraint:} \quad 2\, x_A + 3\, x_B \le 300.
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Process A must be run: 147 times
+Process B must be run: 2 times
+Maximum coins plated: 749
+
+
+Expected Output:
+Expected solution
+
+: {'ProcessA': 150, 'ProcessB': 0, 'TotalCoins': 750, '_objective': 750}

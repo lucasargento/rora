@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution from Linear Solver (MIP):\n{'variables': {'NumContainers': 40.0, 'NumTrucks': 20.0}, 'objective': 60.000000000000014}\n\nSolution from CP-SAT Model:\n{'variables': {'NumContainers': 40, 'NumTrucks': 20}, 'objective': 60}\n"
+}

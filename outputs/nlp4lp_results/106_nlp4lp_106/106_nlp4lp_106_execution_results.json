@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nContinuous Model Output:\nmodel: Continuous\nvariables: {'NutServings': {'0': 28.57142857142858, '1': 14.28571428571429}}\nobjective: 600.0000000000002\n\nInteger Model Output:\nmodel: Integer\nvariables: {'NutServings': {'0': 29.0, '1': 14.0}}\nobjective: 603.0\n"
+}

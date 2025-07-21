@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Model Version 1 (using x_Labrador <= 0.6*(x_Labrador + x_GoldenRetriever)):\n{'variables': {'ServicesDelivered': {'0': 0.0, '1': 2500.0}, 'NumGoldenRetrievers': 250.0, 'NumLabradors': 0.0}, 'objective': 2500.0}\n\nResults for Model Version 2 (using x_Labrador <= 1.5*x_GoldenRetriever):\n{'variables': {'ServicesDelivered': {'0': 0.0, '1': 2500.0}, 'NumGoldenRetrievers': 250.0, 'NumLabradors': 0.0}, 'objective': 2500.0}\n"
+}

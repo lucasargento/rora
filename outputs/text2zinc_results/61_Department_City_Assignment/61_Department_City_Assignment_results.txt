@@ -1,0 +1,46 @@
+Problem Name: 61_Department_City_Assignment
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Sets:} \quad & i,k \in \{1,\dots, \text{ndepts}\} \quad (\text{departments}), \quad j,\ell \in \{1,\dots, \text{ncities}\} \quad (\text{cities}).\\[1mm]
+\textbf{Parameters:} \quad & \text{ndepts} \quad (\text{number of departments}),\\[0.5mm]
+& \text{ncities} \quad (\text{number of cities}),\\[0.5mm]
+& \text{benefit}_{ij} \quad (\text{benefit in £k of locating department } i \text{ in city } j),\\[0.5mm]
+& \text{dist}_{j\ell} \quad (\text{communication cost per unit between city } j \text{ and city } \ell),\\[0.5mm]
+& \text{comm}_{ik} \quad (\text{quantity of communication in k units between department } i \text{ and } k).\\[2mm]
+\textbf{Decision Variables:} \quad & x_{ij} \in \{0,1\} \quad \forall i=1,\dots,\text{ndepts},\quad j=1,\dots,\text{ncities},\\[0.5mm]
+&\quad \text{where} \quad x_{ij} = 
+  \begin{cases}
+    1, & \text{if department } i \text{ is located in city } j,\\[0.5mm]
+    0, & \text{otherwise.}
+  \end{cases}\\[2mm]
+\textbf{Objective Function:}\\[0.5mm]
+\text{Maximize} \quad & Z = \underbrace{\sum_{i=1}^{\text{ndepts}}\sum_{j=1}^{\text{ncities}} \text{benefit}_{ij}\, x_{ij}}_{\text{total benefit}} 
+- \underbrace{\sum_{1 \le i < k \le \text{ndepts}} \sum_{j=1}^{\text{ncities}} \sum_{\ell=1}^{\text{ncities}} \text{comm}_{ik}\, \text{dist}_{j\ell}\, x_{ij}\, x_{k\ell}}_{\text{total communication costs}}.
+\\[2mm]
+\textbf{Constraints:}\\[0.5mm]
+& \textbf{(1) Each department is assigned to exactly one city:} \\
+& \quad \sum_{j=1}^{\text{ncities}} x_{ij} = 1 \quad \forall\, i = 1,\dots,\text{ndepts}. \\[1mm]
+& \textbf{(2) City capacity: at most 3 departments per city:} \\
+& \quad \sum_{i=1}^{\text{ndepts}} x_{ij} \le 3 \quad \forall\, j = 1,\dots,\text{ncities}. \\[1mm]
+& \textbf{(3) Binary requirement:} \\
+& \quad x_{ij} \in \{0,1\} \quad \forall\, i=1,\dots,\text{ndepts},\ j=1,\dots,\text{ncities}.
+\end{align*}
+
+\vspace{2mm}
+This formulation fully captures the problem of locating departments in cities with associated relocation benefits and communication costs. The goal is to choose an assignment (i.e., values of the binary variables $x_{ij}$) so as to maximize the total savings (benefit minus the communication-related costs) subject to each department being located exactly once and each city accommodating at most 3 departments. This model is both feasible and bounded as required.
+
+Execution Results:
+SUCCESS:
+Objective value = 14.900000000000004
+Department 0 in city 0
+Department 1 in city 1
+Department 2 in city 1
+Department 3 in city 0
+Department 4 in city 1
+
+
+Expected Output:
+Expected solution
+
+: {'d': [[1, 0, 0], [0, 1, 0], [0, 1, 0], [1, 0, 0], [0, 1, 0]], 'g': [[[[0, 0, 0], [0, 1, 0], [0, 1, 0], [1, 0, 0], [0, 1, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]], [[[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 1, 0], [1, 0, 0], [0, 1, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]], [[[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0], [1, 0, 0], [0, 1, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]], [[[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 1, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]], [[[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]], [[0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0], [0, 0, 0]]]], '_objective': 14.9000000000001}

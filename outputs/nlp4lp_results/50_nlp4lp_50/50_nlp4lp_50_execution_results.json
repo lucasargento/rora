@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n=== Continuous Model (Fractional Container Use Allowed) ===\nOptimal number of small containers (x_small): 39.999999999999986\nOptimal number of large containers (x_large): 5.000000000000007\nMaximum paste produced: 950.0\n\n=== Integer Model (Discrete Container Use) ===\nOptimal number of small containers (x_small): 40\nOptimal number of large containers (x_large): 5\nMaximum paste produced: 950.0\n"
+}

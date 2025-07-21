@@ -1,0 +1,62 @@
+Problem Name: 94_nlp4lp_94
+
+# Problem Description:
+'''Problem description: Both fertilizer and seeds need to be added to a lawn. One unit of fertilizer takes 0.5 minutes to be effective while one unit of seeds takes 1.5 minutes to be effective. There can be at most 300 units of fertilizer and seeds combined added to the lawn. In addition at least 50 units of fertilizer need to be added. Since the lawn is really patchy, there can be at most twice the amount of fertilizer as seeds. How many units of each should be added to minimize the total time it takes for the lawn to be ready?
+
+Expected Output Schema:
+{
+  "variables": {
+    "FertilizerUnits": "float",
+    "SeedsUnits": "float",
+    "TotalTime": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Ingredient: A set representing the two types of lawn treatment inputs = {Fertilizer, Seeds}
+
+Parameters:
+- time_per_fertilizer: 0.5 (minutes per unit of Fertilizer)
+- time_per_seeds: 1.5 (minutes per unit of Seeds)
+- max_total_units: 300 (maximum combined units of Fertilizer and Seeds allowed)
+- min_fertilizer_units: 50 (minimum units of Fertilizer required)
+- fertilizer_to_seeds_ratio: 2 (Fertilizer units can be at most twice the Seeds units)
+
+Variables:
+- FertilizerUnits: continuous variable representing the number of Fertilizer units to add (units, ≥ 0)
+- SeedsUnits: continuous variable representing the number of Seeds units to add (units, ≥ 0)
+- TotalTime: continuous variable representing the total time required for the lawn to be ready (minutes)
+
+Objective:
+- Minimize TotalTime, which is computed as (time_per_fertilizer * FertilizerUnits) + (time_per_seeds * SeedsUnits)
+
+Constraints:
+1. Total Units Constraint: FertilizerUnits + SeedsUnits ≤ max_total_units  
+   (Ensures that the combined units of inputs do not exceed 300 units)
+
+2. Minimum Fertilizer Constraint: FertilizerUnits ≥ min_fertilizer_units  
+   (Guarantees that at least 50 units of Fertilizer are added)
+
+3. Fertilizer-to-Seeds Ratio Constraint: FertilizerUnits ≤ fertilizer_to_seeds_ratio * SeedsUnits  
+   (Limits the Fertilizer to at most twice the number of Seeds)
+
+Additional Model Comments:
+- All units are assumed to be in the same measurement (units for inputs and minutes for time), ensuring consistency.  
+- The decision variables are treated as continuous because fractional units may be acceptable unless the context requires integer amounts.  
+- TotalTime is a calculated quantity that directly reflects the weighted sum of the units selected for each treatment input.
+
+Execution Results:
+SUCCESS:
+Solving using Model A (with explicit TotalTime variable):
+{'model': 'A', 'variables': {'FertilizerUnits': 50.0, 'SeedsUnits': 25.0, 'TotalTime': 62.5}, 'objective': 62.5}
+
+Solving using Model B (computing TotalTime implicitly):
+{'model': 'B', 'variables': {'FertilizerUnits': 50.0, 'SeedsUnits': 25.0, 'TotalTime': 62.5}, 'objective': 62.5}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'FertilizerUnits': 50.0, 'SeedsUnits': 25.0, 'TotalTime': 37.5}, 'objective': 37.5}

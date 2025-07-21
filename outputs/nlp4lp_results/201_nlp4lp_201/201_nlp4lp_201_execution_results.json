@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n==== Solution using OR-Tools Linear Solver (CBC) ====\n{'NumberCalciumPills': 90.0, 'NumberVitaminDPills': 40.0, 'TotalTime': 690.0, 'IsCalciumTaken': 1.0, 'IsVitaminDTaken': 1.0, 'objective': 690.0}\n\n==== Solution using OR-Tools CP-SAT Solver ====\n{'NumberCalciumPills': 90, 'NumberVitaminDPills': 40, 'TotalTime': 690, 'IsCalciumTaken': 1, 'IsVitaminDTaken': 1, 'objective': 690.0}\n"
+}

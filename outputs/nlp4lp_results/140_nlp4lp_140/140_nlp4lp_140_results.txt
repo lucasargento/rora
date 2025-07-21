@@ -1,0 +1,70 @@
+Problem Name: 140_nlp4lp_140
+
+# Problem Description:
+'''Problem description: A sand company delivers sand for playgrounds in small and large containers. A small container requires 1 person to unload and can hold 20 units of sand. A large container requires 3 people to unload and can hold 50 units of sand. Since most playgrounds are small, the number of small containers used must be thrice the number of large containers used. In addition, there must be at least 5 small containers and 3 large containers used. If the company has 100 people available, maximize the amount of sand that they can deliver.
+
+Expected Output Schema:
+{
+  "variables": {
+    "SmallContainers": "float",
+    "LargeContainers": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- C: set of container types = {Small, Large}
+
+Parameters:
+- unload_req_Small: persons required to unload one small container = 1 (person/container)
+- unload_req_Large: persons required to unload one large container = 3 (persons/container)
+- capacity_Small: sand capacity of one small container = 20 (units/container)
+- capacity_Large: sand capacity of one large container = 50 (units/container)
+- available_persons: total number of available people = 100 (persons)
+- min_Small: minimum number of small containers to use = 5 (containers)
+- min_Large: minimum number of large containers to use = 3 (containers)
+- ratio_Small_to_Large: required ratio of small to large containers = 3 (i.e., SmallContainers must equal 3 * LargeContainers)
+
+Variables:
+- SmallContainers: number of small containers used (continuous or integer; if containers must be whole, then integer) [units: containers]
+- LargeContainers: number of large containers used (continuous or integer; if containers must be whole, then integer) [units: containers]
+
+Objective:
+- Maximize total sand delivered, defined as 
+  TotalSand = capacity_Small * SmallContainers + capacity_Large * LargeContainers 
+  (units: sand units)
+
+Constraints:
+1. Personnel constraint: 
+   unload_req_Small * SmallContainers + unload_req_Large * LargeContainers <= available_persons
+   (i.e., 1 * SmallContainers + 3 * LargeContainers <= 100)
+
+2. Ratio constraint for container usage:
+   SmallContainers = ratio_Small_to_Large * LargeContainers
+   (i.e., SmallContainers = 3 * LargeContainers)
+
+3. Minimum containers constraints:
+   - SmallContainers >= min_Small 
+   - LargeContainers >= min_Large
+
+Comments:
+- It is assumed that containers are indivisible; hence, the decision variables can be modeled as integers in an actual implementation.
+- This formulation uses consistent units: persons for unloading constraints and container capacity in sand units.
+- The objective is to maximize the total delivered sand given the available unloading capacity and container requirements.
+
+Execution Results:
+SUCCESS:
+Results:
+---------
+Linear Solver Result:
+{'model': 'LinearSolver', 'variables': {'SmallContainers': 48.0, 'LargeContainers': 16.0}, 'objective': 1760.0}
+---------
+CP-SAT Result:
+{'model': 'CPSat', 'variables': {'SmallContainers': 48, 'LargeContainers': 16}, 'objective': 1760}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallContainers': 48.0, 'LargeContainers': 16.0}, 'objective': 1760.0}

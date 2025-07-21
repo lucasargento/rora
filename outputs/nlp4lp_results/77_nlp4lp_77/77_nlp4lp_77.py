@@ -1,0 +1,150 @@
+# Problem Description:
+'''Problem description: An office is buying printers for their headquarters, a premium model and regular model. The premium model can print 30 pages per minute while the regular model can print 20 pages per minute. In addition, the premium model requires 4 units of ink per minute while the regular model requires 3 units of ink per minute. The office wants to make sure that at least 200 pages can be printed per minute and that at most 35 units of ink are used per minute.  Since the premium model is more user friendly, the number regular printers must be less than the number of premium printers. How many of each printer should be bought to minimize the total number of printers in the office?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumPrinters": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Sets:
+- PrinterTypes: {Premium, Regular}
+
+Parameters:
+- pages_per_printer:
+  • Premium: 30 pages per minute
+  • Regular: 20 pages per minute
+- ink_usage_per_printer:
+  • Premium: 4 units per minute
+  • Regular: 3 units per minute
+- min_print_capacity: 200 pages per minute (minimum printing requirement)
+- max_ink_usage: 35 units per minute (maximum ink consumption)
+- note: All units are per minute.
+
+Variables:
+- NumPrinters[Premium]: number of premium printers to purchase (integer, ≥ 0)
+- NumPrinters[Regular]: number of regular printers to purchase (integer, ≥ 0)
+
+Objective:
+- Minimize total_printers = NumPrinters[Premium] + NumPrinters[Regular]
+
+Constraints:
+1. Printing capacity constraint:
+   30 * NumPrinters[Premium] + 20 * NumPrinters[Regular] ≥ min_print_capacity
+2. Ink usage constraint:
+   4 * NumPrinters[Premium] + 3 * NumPrinters[Regular] ≤ max_ink_usage
+3. User-friendliness constraint (premium preference):
+   NumPrinters[Regular] < NumPrinters[Premium]
+
+Comments:
+- The decision variables are assumed to be integers since fractional printers are not realistic.
+- All units in the parameters are per minute, ensuring consistency in the model.
+- The objective minimizes the total number of printers purchased, aligning with the office’s goal to optimize equipment count.
+
+---
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumPrinters": {
+      "Premium": "integer",
+      "Regular": "integer"
+    }
+  },
+  "objective": "Minimize total_printers = NumPrinters[Premium] + NumPrinters[Regular]"
+}'''
+
+# Generated Code:
+#!/usr/bin/env python3
+from ortools.linear_solver import pywraplp
+
+def solve_model():
+    # Create the linear solver using CBC.
+    solver = pywraplp.Solver.CreateSolver('CBC')
+    if not solver:
+        print("Solver not created.")
+        return {"message": "Solver not available"}
+
+    # Define decision variables.
+    # NumPrinters['Premium']: number of premium printers (integer, ≥ 0)
+    # NumPrinters['Regular']: number of regular printers (integer, ≥ 0)
+    premium = solver.IntVar(0, solver.infinity(), 'premium')
+    regular = solver.IntVar(0, solver.infinity(), 'regular')
+
+    # Constraints:
+    # 1. Printing Capacity Constraint:
+    #    30 * premium + 20 * regular >= 200
+    solver.Add(30 * premium + 20 * regular >= 200)
+
+    # 2. Ink Usage Constraint:
+    #    4 * premium + 3 * regular <= 35
+    solver.Add(4 * premium + 3 * regular <= 35)
+
+    # 3. User-Friendliness Constraint (premium preference):
+    #    Number of regular printers is strictly less than premium printers.
+    #    This is represented as: regular + 1 <= premium.
+    solver.Add(regular + 1 <= premium)
+
+    # Objective:
+    # Minimize the total number of printers purchased.
+    # total_printers = premium + regular
+    objective = solver.Objective()
+    objective.SetCoefficient(premium, 1)
+    objective.SetCoefficient(regular, 1)
+    objective.SetMinimization()
+
+    status = solver.Solve()
+
+    solution = {}
+    if status == pywraplp.Solver.OPTIMAL:
+        solution = {
+            "NumPrinters": {
+                "Premium": int(premium.solution_value()),
+                "Regular": int(regular.solution_value())
+            },
+            "objective": premium.solution_value() + regular.solution_value()
+        }
+    else:
+        solution["message"] = "No optimal solution found."
+    return solution
+
+def main():
+    print("-----------------------------------------------------")
+    print("Optimization Model Using OR-Tools Linear Solver")
+    print("-----------------------------------------------------")
+    result = solve_model()
+    if "message" in result:
+        print(result["message"])
+    else:
+        print("Optimal Number of Printers:")
+        print("  Premium:", result["NumPrinters"]["Premium"])
+        print("  Regular:", result["NumPrinters"]["Regular"])
+        print("Minimum Total Printers (Objective Value):", result["objective"])
+    print("-----------------------------------------------------")
+
+if __name__ == "__main__":
+    main()
+
+'''Execution Results:
+SUCCESS:
+-----------------------------------------------------
+Optimization Model Using OR-Tools Linear Solver
+-----------------------------------------------------
+Optimal Number of Printers:
+  Premium: 7
+  Regular: 0
+Minimum Total Printers (Objective Value): 7.0
+-----------------------------------------------------
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'NumPrinters': {'0': 7.0, '1': -0.0}}, 'objective': 7.0}'''
+

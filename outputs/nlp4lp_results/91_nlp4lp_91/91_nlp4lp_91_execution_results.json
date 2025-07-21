@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nContinuous Model Result:\nSolution:\nQuantityCrabCake = 13.333333333333332\nQuantityLobsterRoll = 1.6666666666666676\nObjective (Total Unsaturated Fat) = 63.333333333333336\n\nInteger Model Result:\nSolution:\nQuantityCrabCake = 16.0\nQuantityLobsterRoll = 0.0\nObjective (Total Unsaturated Fat) = 64.0\n"
+}

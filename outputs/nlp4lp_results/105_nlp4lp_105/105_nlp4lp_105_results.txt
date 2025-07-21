@@ -1,0 +1,78 @@
+Problem Name: 105_nlp4lp_105
+
+# Problem Description:
+'''Problem description: A pharmacy makes eye cream and foot cream using two different machines, machine 1 and machine 2. Machine 1 can  make 30 ml of eye cream and 60 ml of foot cream per hour. Machine 2 can make 45 ml of eye cream and 30 ml of foot cream per hour. Furthermore, machine 1 requires 20 ml of distilled water per hour while machine 2 requires 15 ml of distilled water per hour. The pharmacy has available 1200 ml of distilled water. If the pharmacy needs to make at least 1300 ml of eye cream and 1500 ml of foot cream, how many hours should each machine be used to minimize the total time needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "OperatingTime": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is one valid formulation using the five-element structured model.
+
+----------------------------------------------------------------
+Sets:
+- M: set of machines = {1, 2}
+
+Parameters:
+- eyeProd[1] = 30      (ml of eye cream produced per hour by machine 1)
+- eyeProd[2] = 45      (ml of eye cream produced per hour by machine 2)
+- footProd[1] = 60     (ml of foot cream produced per hour by machine 1)
+- footProd[2] = 30     (ml of foot cream produced per hour by machine 2)
+- waterUse[1] = 20     (ml of water consumed per hour by machine 1)
+- waterUse[2] = 15     (ml of water consumed per hour by machine 2)
+
+- minEyeCream = 1300   (minimum required ml of eye cream)
+- minFootCream = 1500  (minimum required ml of foot cream)
+- availWater = 1200    (total available ml of distilled water)
+
+Comments:
+- All production numbers are in milliliters (ml) per hour.
+- Operating times are measured in hours.
+- The water constraint uses the same unit (ml).
+
+Variables:
+- OperatingTime[i] for each machine i in M, where OperatingTime[i] is a continuous variable representing the number of hours machine i is used.
+  • OperatingTime[1] ≥ 0
+  • OperatingTime[2] ≥ 0
+
+Objective:
+- Minimize TotalTime = OperatingTime[1] + OperatingTime[2]
+  (This minimizes the total machine operating time in hours.)
+
+Constraints:
+1. Eye Cream Production Constraint:
+   - eyeProd[1] * OperatingTime[1] + eyeProd[2] * OperatingTime[2] ≥ minEyeCream
+   - (30 * OperatingTime[1] + 45 * OperatingTime[2] ≥ 1300)
+
+2. Foot Cream Production Constraint:
+   - footProd[1] * OperatingTime[1] + footProd[2] * OperatingTime[2] ≥ minFootCream
+   - (60 * OperatingTime[1] + 30 * OperatingTime[2] ≥ 1500)
+
+3. Water Availability Constraint:
+   - waterUse[1] * OperatingTime[1] + waterUse[2] * OperatingTime[2] ≤ availWater
+   - (20 * OperatingTime[1] + 15 * OperatingTime[2] ≤ 1200)
+
+----------------------------------------------------------------
+This complete model clearly defines the decision variables, objective, and constraints using the five-element framework.
+
+Execution Results:
+SUCCESS:
+Results using ortools.linear_solver (GLOP):
+{'OperatingTime': {'0': 15.833333333333332, '1': 18.333333333333336}, 'objective': 34.16666666666667}
+
+Results using ortools.sat.python.cp_model (scaled integer formulation):
+{'OperatingTime': {'0': 15.83, '1': 18.34}, 'objective': 34.17}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'OperatingTime': {'0': 15.833333333333334, '1': 18.333333333333332}}, 'objective': 34.166666666666664}

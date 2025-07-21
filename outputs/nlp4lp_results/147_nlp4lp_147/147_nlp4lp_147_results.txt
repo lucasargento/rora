@@ -1,0 +1,75 @@
+Problem Name: 147_nlp4lp_147
+
+# Problem Description:
+'''Problem description: A mail delivery service in an island village delivers mail by regular and speed boats. A regular boat can carry 20 pieces of mail per trip and uses 10 liters of gas. A speed boat can carry 30 pieces of mail per trip and uses 20 liters of gas. There can be at most 20 regular boat trips. Since customers want their mail as fast as possible, at least 50% of the trips must be made by speed boats. If the service needs to deliver 1000 pieces of mail, how many trips of each should be made to minimize the total amount of gas consumed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "RegularBoatTrips": "float",
+    "SpeedBoatTrips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- BoatTypes: {Regular, Speed}
+
+Parameters:
+- mailCapacity_Regular: Number of mail pieces that a regular boat carries per trip = 20 [pieces per trip]
+- mailCapacity_Speed: Number of mail pieces that a speed boat carries per trip = 30 [pieces per trip]
+- gasConsumption_Regular: Gas used by a regular boat per trip = 10 [liters per trip]
+- gasConsumption_Speed: Gas used by a speed boat per trip = 20 [liters per trip]
+- maxRegularTrips: Maximum allowable trips using a regular boat = 20 [trips]
+- totalMailRequired: Total mail pieces to be delivered = 1000 [pieces]
+- minSpeedTripsFraction: Minimum fraction of trips that must be done by speed boats = 0.5 [fraction]
+
+Variables:
+- RegularBoatTrips: Number of trips made by regular boats, defined as a nonnegative integer [trips]
+- SpeedBoatTrips: Number of trips made by speed boats, defined as a nonnegative integer [trips]
+
+Objective:
+- Minimize total gas consumption = (gasConsumption_Regular * RegularBoatTrips) + (gasConsumption_Speed * SpeedBoatTrips)  
+  (Units: liters)
+
+Constraints:
+1. Mail delivery requirement:
+   (mailCapacity_Regular * RegularBoatTrips) + (mailCapacity_Speed * SpeedBoatTrips) >= totalMailRequired
+
+2. Regular boat trip limit:
+   RegularBoatTrips <= maxRegularTrips
+
+3. Minimum speed boat trips requirement:
+   SpeedBoatTrips >= minSpeedTripsFraction * (RegularBoatTrips + SpeedBoatTrips)
+   (This can be rearranged to: SpeedBoatTrips >= RegularBoatTrips)
+
+4. Domain restrictions:
+   RegularBoatTrips >= 0 and integer  
+   SpeedBoatTrips >= 0 and integer
+
+---------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "RegularBoatTrips": "integer (>= 0)",
+    "SpeedBoatTrips": "integer (>= 0)"
+  },
+  "objective": "Minimize total gas consumption in liters = 10 * RegularBoatTrips + 20 * SpeedBoatTrips"
+}
+
+Execution Results:
+SUCCESS:
+Optimal solution using formulation:
+RegularBoatTrips = 20
+SpeedBoatTrips = 20
+Total gas consumption (liters) = 600.0
+
+Structured Output:
+{'variables': {'RegularBoatTrips': 'integer (>= 0)', 'SpeedBoatTrips': 'integer (>= 0)'}, 'objective': 'Minimize total gas consumption in liters = 10 * RegularBoatTrips + 20 * SpeedBoatTrips'}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'RegularBoatTrips': 20.0, 'SpeedBoatTrips': 20.0}, 'objective': 600.0}

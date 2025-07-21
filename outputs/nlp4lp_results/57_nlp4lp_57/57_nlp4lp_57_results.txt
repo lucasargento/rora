@@ -1,0 +1,62 @@
+Problem Name: 57_nlp4lp_57
+
+# Problem Description:
+'''Problem description: A shipping company can purchase regular and hybrid vans to make deliveries. A regular van can deliver 500 packages per day and produces 200 units of pollutants. A hybrid van can deliver 300 packages per day and produces 100 units of pollutants. Due to a new environmental law, they can produce at most 7000 units of pollutants per day. However, the company needs to be able to deliver at least 20000 packages per day. How many of each type of van should they buy to minimize the total number of vans needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "RegularVans": "float",
+    "HybridVans": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- V: set of van types = {Regular, Hybrid}
+
+Parameters:
+- delivery_capacity[v] (packages per day): delivery_capacity[Regular] = 500, delivery_capacity[Hybrid] = 300
+- pollutant_emission[v] (pollutant units per day): pollutant_emission[Regular] = 200, pollutant_emission[Hybrid] = 100
+- max_pollutants (pollutant units per day) = 7000
+- min_packages (packages per day) = 20000
+
+Variables:
+- x[v]: number of vans to purchase of type v (integer, nonnegative)
+  - x[Regular]: number of regular vans
+  - x[Hybrid]: number of hybrid vans
+
+Objective:
+- Minimize total vans = x[Regular] + x[Hybrid]
+
+Constraints:
+- Package delivery constraint: delivery_capacity[Regular] * x[Regular] + delivery_capacity[Hybrid] * x[Hybrid] >= min_packages
+- Pollutant constraint: pollutant_emission[Regular] * x[Regular] + pollutant_emission[Hybrid] * x[Hybrid] <= max_pollutants
+
+--------------------------------------------------------------------------------
+
+Comments:
+- All units are per day.
+- Both decision variables are assumed integer though they are represented as float in the expected output schema.
+- The model assumes each van works at full capacity every day.
+- Alternative interpretation:
+   If the van numbers are allowed to be fractional (due to leasing or averaging over days), then the variables can be continuous. Otherwise, they should be integer.
+
+Execution Results:
+SUCCESS:
+Integer Model (Mixed-Integer Programming) Solution:
+RegularVans: 10.0
+HybridVans: 50.0
+Total Vans (objective): 60.0
+
+Continuous Model (Fractional Variables) Solution:
+RegularVans: 9.999999999999973
+HybridVans: 50.00000000000005
+Total Vans (objective): 60.00000000000002
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'RegularVans': 10.0, 'HybridVans': 50.0}, 'objective': 60.0}

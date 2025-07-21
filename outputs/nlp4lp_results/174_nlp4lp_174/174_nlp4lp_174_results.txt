@@ -1,0 +1,67 @@
+Problem Name: 174_nlp4lp_174
+
+# Problem Description:
+'''Problem description: An office company makes desks and drawers. Each desk requires 40 minutes of assembly and 20 minutes of sanding. Each drawer requires 30 minutes of assembly and 10 minutes of sanding. The company has available 4000 minutes for assembly and 3500 minutes for sanding. If the profit per desk is $100 and the profit per drawer is $90, how many of each should the company make to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfDesks": "float",
+    "NumberOfDrawers": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Product: set of office products = {Desk, Drawer}
+
+Parameters:
+- profit_desk: profit per desk (USD/unit) = 100
+- profit_drawer: profit per drawer (USD/unit) = 90
+- assembly_time_desk: assembly time required per desk (minutes/unit) = 40
+- assembly_time_drawer: assembly time required per drawer (minutes/unit) = 30
+- sanding_time_desk: sanding time required per desk (minutes/unit) = 20
+- sanding_time_drawer: sanding time required per drawer (minutes/unit) = 10
+- max_assembly_time: total available assembly time (minutes) = 4000
+- max_sanding_time: total available sanding time (minutes) = 3500
+
+Variables:
+- x_desk: number of desks to produce (float ≥ 0) [units]
+- x_drawer: number of drawers to produce (float ≥ 0) [units]
+
+Objective:
+- Maximize total profit = (profit_desk * x_desk) + (profit_drawer * x_drawer)
+  (This equals 100 * x_desk + 90 * x_drawer)
+
+Constraints:
+1. Assembly time constraint: (assembly_time_desk * x_desk) + (assembly_time_drawer * x_drawer) ≤ max_assembly_time  
+   (i.e., 40 * x_desk + 30 * x_drawer ≤ 4000)
+2. Sanding time constraint: (sanding_time_desk * x_desk) + (sanding_time_drawer * x_drawer) ≤ max_sanding_time  
+   (i.e., 20 * x_desk + 10 * x_drawer ≤ 3500)
+3. Non-negativity constraints: x_desk ≥ 0 and x_drawer ≥ 0
+
+Additional Comments:
+- All time parameters are expressed in minutes, and capacity constraints are given in minutes.
+- Profits are in USD per unit produced.
+- Although production counts are typically integer, the expected output schema declares the decision variables as float.
+  
+This completes the structured mathematical model using the five-element framework.
+
+Execution Results:
+SUCCESS:
+Continuous Model Solution:
+NumberOfDesks: 0.0
+NumberOfDrawers: 133.33333333333331
+objective: 11999.999999999998
+
+Integer Model Solution:
+NumberOfDesks: 1.0
+NumberOfDrawers: 132.0
+objective: 11980.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfDesks': 0.0, 'NumberOfDrawers': 133.33333333333334}, 'objective': 12000.0}

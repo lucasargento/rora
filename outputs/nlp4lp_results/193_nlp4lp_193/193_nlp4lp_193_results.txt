@@ -1,0 +1,53 @@
+Problem Name: 193_nlp4lp_193
+
+# Problem Description:
+'''Problem description: Platinum Database sells two types of subscription software packages: a personal license and a commercial license which will cost $550 and $2000 to generate respectively. The marketing department estimates that they can sell at most 300 licenses for both versions combined a month. The profit per personal license is $450 and the profit per commercial version is $1200. If the company does not want to spend more than $400000, how many of each software package should they produce to maximize the profits.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfPersonalLicenses": "float",
+    "NumberOfCommercialLicenses": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- L: set of license types = {Personal, Commercial}
+
+Parameters:
+- cost_Personal = 550 (USD per personal license produced)
+- cost_Commercial = 2000 (USD per commercial license produced)
+- profit_Personal = 450 (USD profit per personal license)
+- profit_Commercial = 1200 (USD profit per commercial license)
+- max_total_licenses = 300 (maximum licenses that can be sold per month)
+- max_production_budget = 400000 (USD available for production cost)
+
+Variables:
+- NumberOfPersonalLicenses: number of personal licenses to produce (integer ≥ 0)
+- NumberOfCommercialLicenses: number of commercial licenses to produce (integer ≥ 0)
+
+Objective:
+- Maximize total profit = (profit_Personal * NumberOfPersonalLicenses) + (profit_Commercial * NumberOfCommercialLicenses)
+  (Note: The profit here is the margin per license after subtracting production costs from revenue or directly given as profit per package.)
+
+Constraints:
+1. Sales Constraint: NumberOfPersonalLicenses + NumberOfCommercialLicenses ≤ max_total_licenses
+   (This limits the total number of licenses sold per month.)
+2. Production Budget Constraint: (cost_Personal * NumberOfPersonalLicenses) + (cost_Commercial * NumberOfCommercialLicenses) ≤ max_production_budget
+   (This ensures that the total production cost does not exceed the available USD 400,000 budget.)
+
+Execution Results:
+SUCCESS:
+Solution from Linear Programming Model:
+------------------------------------------------
+NumberOfPersonalLicenses: 138.0
+NumberOfCommercialLicenses: 162.0
+Maximum Profit: 256500.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfPersonalLicenses': 138.0, 'NumberOfCommercialLicenses': 162.0}, 'objective': 256500.0}

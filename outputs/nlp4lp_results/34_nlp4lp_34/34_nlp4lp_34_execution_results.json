@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults from Linear Solver (CBC_MIP):\n{'status': 'OPTIMAL', 'objective': 1060.0, 'variables': {'Batch': {'0': 29.0, '1': 12.0}}}\n\nResults from CP-SAT Solver:\n{'status': 'OPTIMAL', 'objective': 1060.0, 'variables': {'Batch': {'0': 29, '1': 12}}}\n"
+}

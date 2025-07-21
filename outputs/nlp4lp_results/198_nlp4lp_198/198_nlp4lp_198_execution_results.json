@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nContinuous Model (variables as float):\n{'variables': {'NumberOfCarts': 25.200000000000003, 'NumberOfTrolleys': 12.0}, 'objective': 98.4}\n\nInteger Model (variables as integer):\n{'variables': {'NumberOfCarts': 26.0, 'NumberOfTrolleys': 12.0}, 'objective': 100.0}\n"
+}

@@ -1,0 +1,69 @@
+Problem Name: 2_nlp4lp_2
+
+# Problem Description:
+'''Problem description: There is 1000 mg of gold available that is needed to make long and short cables. Long cables require 10 mg of gold while short cables require 7 mg of gold. Because of their compact size, at least 5 times the number of short cables are needed than the long cables. In addition, there needs to be at least 10 long cables made. If each long cable sold results in a $12 profit and each short cable sold results in a $5 profit, how many of each type of cable should be made to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberLongCables": "float",
+    "NumberShortCables": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Cables: {Long, Short}
+
+Parameters:
+- TotalGold (mg): 1000            // Total available gold in milligrams.
+- GoldPerLong (mg): 10            // Gold required per long cable.
+- GoldPerShort (mg): 7            // Gold required per short cable.
+- ProfitLong (USD): 12            // Profit per long cable produced.
+- ProfitShort (USD): 5            // Profit per short cable produced.
+- MinLongCables (units): 10       // Minimum required number of long cables.
+- ShortToLongRatio: 5             // At least 5 short cables per each long cable.
+
+Variables:
+- NumberLongCables: integer, ≥ 0  // Number of long cables produced.
+- NumberShortCables: integer, ≥ 0 // Number of short cables produced.
+
+Objective:
+- Maximize TotalProfit defined as:
+  TotalProfit = ProfitLong * NumberLongCables + ProfitShort * NumberShortCables
+  // That is, maximize (12 * NumberLongCables + 5 * NumberShortCables).
+
+Constraints:
+1. Gold Constraint:
+   GoldPerLong * NumberLongCables + GoldPerShort * NumberShortCables ≤ TotalGold
+   => 10 * NumberLongCables + 7 * NumberShortCables ≤ 1000
+
+2. Minimum Long Cables Constraint:
+   NumberLongCables ≥ MinLongCables
+   => NumberLongCables ≥ 10
+
+3. Short-to-Long Ratio Constraint:
+   NumberShortCables ≥ ShortToLongRatio * NumberLongCables
+   => NumberShortCables ≥ 5 * NumberLongCables
+
+Comments:
+- All quantities are assumed to be integers since the cables can only be produced in whole units.
+- The units for gold are in milligrams (mg) and profits are in US dollars (USD).
+- This model is self-contained, using a simple linear formulation suitable for implementation in Python or OR-Tools.
+
+Execution Results:
+SUCCESS:
+Solving using OR-Tools Linear Solver (MIP)...
+Linear Solver Result:
+{'variables': {'NumberLongCables': 22.0, 'NumberShortCables': 111.0}, 'objective': 819.0}
+
+Solving using OR-Tools CP-SAT Solver...
+CP-SAT Solver Result:
+{'variables': {'NumberLongCables': 22, 'NumberShortCables': 111}, 'objective': 819}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberLongCables': 22.0, 'NumberShortCables': 111.0}, 'objective': 819.0}

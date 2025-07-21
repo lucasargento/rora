@@ -1,0 +1,58 @@
+Problem Name: 144_nlp4lp_144
+
+# Problem Description:
+'''Problem description: A theme park transports its visitors around the park either by scooter or rickshaw. A scooter can carry 2 people while a rickshaw can carry 3 people. To avoid excessive pollution, at most 40% of the vehicles used can be rickshaws. If the park needs to transport at least 300 visitors, minimize the total number of scooters used.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumScooters": "float",
+    "NumRickshaws": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- V: set of vehicle types = {Scooter, Rickshaw}  
+  (Note: Though vehicles have different capacities, we separate them by type.)
+
+Parameters:
+- capacity_Scooter: passenger capacity of one scooter = 2 visitors per scooter  
+- capacity_Rickshaw: passenger capacity of one rickshaw = 3 visitors per rickshaw  
+- min_passengers: minimum number of visitors to transport = 300 visitors  
+- max_rickshaw_fraction: maximum fraction of vehicles that can be rickshaws = 0.40 (or 40%)
+
+Variables:
+- NumScooters: number of scooters to deploy [continuous integer variable; units: vehicles]  
+- NumRickshaws: number of rickshaws to deploy [continuous integer variable; units: vehicles]
+
+Objective:
+- Minimize NumScooters  
+  (Interpretation: The goal is to reduce the number of scooters used while still transporting at least 300 visitors and observing the pollution constraint on rickshaws.)
+
+Constraints:
+1. Passenger Capacity Constraint:  
+   (capacity_Scooter * NumScooters) + (capacity_Rickshaw * NumRickshaws) ≥ min_passengers  
+   (Ensures that at least 300 visitors are transported.)
+
+2. Rickshaw Ratio Constraint:  
+   NumRickshaws ≤ max_rickshaw_fraction * (NumScooters + NumRickshaws)  
+   (Ensures that at most 40% of all vehicles are rickshaws.)
+
+Comments:
+- All units are assumed consistent in visitors per vehicle and vehicles count.  
+- Decision variables are assumed to be integers. If fractional vehicles are not allowed in implementation, the variable type should be set to integer.  
+- The objective solely minimizes the number of scooters used, which indirectly encourages maximizing the use of rickshaws without breaching the rickshaw fraction limit.
+
+Execution Results:
+SUCCESS:
+Results for Model 1 (Linear/MIP formulation):
+variables: {'NumScooters': 75.0, 'NumRickshaws': 50.0}
+objective: 75.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumScooters': 0.0, 'NumRickshaws': 2000000000.0}, 'objective': 0.0}

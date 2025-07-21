@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{\n  \"LinearSolver\": {\n    \"variables\": {\n      \"LaminateProduction\": \"40000.0 (weekly sq ft produced for laminate planks)\",\n      \"CarpetProduction\": \"20000.0 (weekly sq ft produced for carpets)\"\n    },\n    \"objective\": 150000.0\n  }\n}\n"
+}

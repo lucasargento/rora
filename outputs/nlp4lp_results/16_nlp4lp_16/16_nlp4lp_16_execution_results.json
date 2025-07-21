@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Model Version 1 (using y >= 0.8*(x+y)):\nNumberOfPhones: 0.0\nNumberOfLaptops: 59.99999999999999\nObjective (Total Profit): 2399.9999999999995\n\nResults for Model Version 2 (using y >= 4*x):\nNumberOfPhones: 0.0\nNumberOfLaptops: 60.00000000000001\nObjective (Total Profit): 2400.0000000000005\n"
+}

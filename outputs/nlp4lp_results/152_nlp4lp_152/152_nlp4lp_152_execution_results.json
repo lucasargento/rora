@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n=== Solution using ortools.linear_solver (MIP) ===\n{'variables': {'NumberOfSmallJars': 400.0, 'NumberOfLargeJars': 400.0}, 'objective': 800.0}\n\n=== Solution using ortools.sat.python.cp_model (CP-SAT) ===\n{'variables': {'NumberOfSmallJars': 400, 'NumberOfLargeJars': 400}, 'objective': 800}\n"
+}

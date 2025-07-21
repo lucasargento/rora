@@ -1,0 +1,67 @@
+Problem Name: 118_nlp4lp_118
+
+# Problem Description:
+'''Problem description: A body builder buys pre prepared meals, a turkey dinner and a tuna salad sandwich. The turkey dinner contains 20 grams of protein, 30 grams of carbs, and 12 grams of fat. The tuna salad sandwich contains 18 grams of protein, 25 grams of carbs, and 8 grams of fat. The bodybuilder wants to get at least 150 grams of protein and 200 grams of carbs. In addition because the turkey dinner is expensive, at most 40% of the meals should be turkey dinner. How many of each meal should he eat if he wants to minimize his fat intake?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityTurkey": "float",
+    "QuantityTuna": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the structured model using the five-element framework.
+
+------------------------------------------------------------
+Sets:
+- M: set of meal types = {TurkeyDinner, TunaSaladSandwich}
+
+Parameters:
+- protein[m]: grams of protein per meal m
+  • protein[TurkeyDinner] = 20 (grams per meal)
+  • protein[TunaSaladSandwich] = 18 (grams per meal)
+- carbs[m]: grams of carbohydrates per meal m
+  • carbs[TurkeyDinner] = 30 (grams per meal)
+  • carbs[TunaSaladSandwich] = 25 (grams per meal)
+- fat[m]: grams of fat per meal m
+  • fat[TurkeyDinner] = 12 (grams per meal)
+  • fat[TunaSaladSandwich] = 8 (grams per meal)
+- min_protein: minimum total protein required = 150 (grams)
+- min_carbs: minimum total carbohydrates required = 200 (grams)
+- max_turkey_ratio: maximum fraction of turkey dinner = 0.4
+
+Variables:
+- QuantityTurkey: number of turkey dinners to buy [continuous, ≥ 0] [meals]
+- QuantityTuna: number of tuna salad sandwiches to buy [continuous, ≥ 0] [meals]
+
+Objective:
+- Minimize total fat intake = (12 * QuantityTurkey) + (8 * QuantityTuna)
+  (Units: grams of fat)
+
+Constraints:
+1. Protein requirement:
+  20 * QuantityTurkey + 18 * QuantityTuna ≥ min_protein
+2. Carbohydrate requirement:
+  30 * QuantityTurkey + 25 * QuantityTuna ≥ min_carbs
+3. Turkey meal limitation (ensuring turkey dinners are at most 40% of total meals):
+  QuantityTurkey ≤ max_turkey_ratio * (QuantityTurkey + QuantityTuna)
+
+------------------------------------------------------------
+This structured model fully represents the original problem with clear sets, parameters, decision variables, objective, and constraints.
+
+Execution Results:
+SUCCESS:
+---- Linear Solver Model ----
+Optimal Solution:
+QuantityTurkey = 0.0
+QuantityTuna   = 8.333333333333334
+Objective Value (Total Fat) = 66.66666666666667
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityTurkey': 0.0, 'QuantityTuna': 8.333333333333334}, 'objective': 66.66666666666667}

@@ -1,0 +1,90 @@
+Problem Name: 218_nlp4lp_218
+
+# Problem Description:
+'''Problem description: A candle-making company can move their inventory of candles using freight and air. Freight can transport 5 tons per trip while using air can transport 3 tons per trip. Since freight take longer, the cost for each freight trip is $300 while the cost over air for each trip is $550. The company needs to transport at least 200 tons of candles and they have a budget of $20000. Additionally, due to some urgent orders, at least 30% of tons of candles must be transported through air. There must also be at least 5 trips through freight. How many of trip by each should be scheduled to minimize the total number of trips?
+
+Expected Output Schema:
+{
+  "variables": {
+    "FreightTrips": "float",
+    "AirTrips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is a complete formulation of the problem using the five‐element structure.
+
+------------------------------------------------------------
+Sets:
+- TransportModes: the set of transportation modes = {Freight, Air}
+
+------------------------------------------------------------
+Parameters:
+- freightCapacity = 5   (tons per freight trip)
+- airCapacity = 3       (tons per air trip)
+- freightCost = 300     (dollars per freight trip)
+- airCost = 550         (dollars per air trip)
+- requiredTons = 200    (minimum total tons to transport)
+- budget = 20000        (maximum total dollars available for transportation)
+- airPercentage = 0.30  (minimum fraction of total tons that must be transported by air)
+- minFreightTrips = 5   (minimum number of freight trips to schedule)
+
+------------------------------------------------------------
+Variables:
+- FreightTrips: number of trips scheduled by freight (integer ≥ 0)
+- AirTrips: number of trips scheduled by air (integer ≥ 0)
+
+------------------------------------------------------------
+Objective:
+Minimize totalTrips = FreightTrips + AirTrips  
+(The aim is to minimize the total number of trips scheduled)
+
+------------------------------------------------------------
+Constraints:
+1. Inventory Transport Constraint (tons requirement):
+   (freightCapacity * FreightTrips) + (airCapacity * AirTrips) ≥ requiredTons  
+   i.e., 5*FreightTrips + 3*AirTrips ≥ 200
+
+2. Budget Constraint:
+   (freightCost * FreightTrips) + (airCost * AirTrips) ≤ budget  
+   i.e., 300*FreightTrips + 550*AirTrips ≤ 20000
+
+3. Air Transportation Minimum Percentage Constraint:
+   Tons transported by air must be at least airPercentage of total transport:
+   airCapacity * AirTrips ≥ airPercentage * [(freightCapacity * FreightTrips) + (airCapacity * AirTrips)]
+   i.e., 3*AirTrips ≥ 0.30*(5*FreightTrips + 3*AirTrips)
+   (This can be rearranged if needed for implementation.)
+
+4. Minimum Freight Trips Constraint:
+   FreightTrips ≥ minFreightTrips  
+   i.e., FreightTrips ≥ 5
+
+------------------------------------------------------------
+Note:
+- All units are consistent: tons for capacity, dollars for cost, and trips (assumed integer) for number of trips.
+- Decision variables are integers since the number of trips cannot be fractional.
+- In the air percentage constraint, we compare the tons moved by air (3 tons each trip) with 30% of total tons moved by both modes.
+ 
+------------------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "FreightTrips": "integer >= 0",
+    "AirTrips": "integer >= 0"
+  },
+  "objective": "Minimize totalTrips, where totalTrips = FreightTrips + AirTrips"
+}
+
+Execution Results:
+SUCCESS:
+Linear Solver Optimal Solution:
+FreightTrips = 28.0
+AirTrips = 20.0
+Total Trips (Objective) = 48.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'FreightTrips': 28.0, 'AirTrips': 20.0}, 'objective': 48.0}

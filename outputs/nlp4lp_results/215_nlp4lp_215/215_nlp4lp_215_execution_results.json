@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Model Version 1 (using the constraint NumberSmallTrips ≥ 0.4*(NumberLargeTrips+NumberSmallTrips)):\n{'NumberLargeTrips': 7.0, 'NumberSmallTrips': 8.0, 'objective': 260.0}\n\nResults for Model Version 2 (using the equivalent constraint NumberSmallTrips ≥ (2/3)*NumberLargeTrips):\n{'NumberLargeTrips': 7.0, 'NumberSmallTrips': 8.0, 'objective': 260.0}\n"
+}

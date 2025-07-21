@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n=== Linear Solver Model Output ===\nOptimal solution found:\n  Batches of Hams    : 0.00\n  Batches of PorkRibs: 1142.86\n  Objective (Profit) : 342857.14\n\nStructured Output:\n{'variables': {'BatchesProduced': {'0': 0.0, '1': 1142.857142857143}}, 'objective': 342857.14285714284}\n"
+}

@@ -1,0 +1,29 @@
+Problem Name: 21_Golomb_Rulers
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices:} \quad & i,j,k,l \in \{1,2,\dots,m\}, \text{ with } 1 \le i < j \le m \text{ and } 1 \le k < l \le m.\\[1ex]
+\textbf{Decision Variables:} \quad & a_i \in \mathbb{Z}_{\ge 0}, \quad i=1,\dots,m, \quad \text{with } a_1 = 0,\\[1ex]
+& \text{and define } d_{ij} = a_j - a_i, \quad \forall\, 1 \le i < j \le m.\\[1ex]
+\textbf{Objective Function:} \quad & \min \quad L, \quad \text{where } L = a_m.\\[1ex]
+\textbf{Constraints:}\\[0.5ex]
+\text{(1) Order of marks:} \quad & a_1 = 0,\quad a_1 < a_2 < a_3 < \cdots < a_m.\\[1ex]
+\text{(2) Distinct differences:} \quad & \text{For all } (i,j) \neq (k,l) \text{ with } 1\le i<j\le m \text{ and } 1\le k<l\le m,\\[0.5ex]
+& \quad d_{ij} \neq d_{kl}, \quad \text{that is,} \quad a_j - a_i \neq a_l - a_k.\\[1ex]
+\text{(3) Symmetry removal:} \quad & a_2 - a_1 < a_m - a_{m-1}.\\[1ex]
+\textbf{Parameter:} \quad & m = 10.
+\end{align*} 
+
+\noindent This model precisely encapsulates the problem of finding the Golomb ruler with 10 marks of minimum length, ensuring that every difference between two marks is unique and the symmetry is removed by enforcing the condition on the first and last differences.
+
+Execution Results:
+SUCCESS:
+Optimal Golomb ruler with 10 marks:
+Marks: [0, 1, 6, 10, 23, 26, 34, 41, 53, 55]
+Length (a[m]): 55
+
+
+Expected Output:
+Expected solution
+
+: {'mark': [0, 1, 6, 10, 23, 26, 34, 41, 53, 55], '_objective': 55}

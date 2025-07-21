@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nLinear Programming Model Results:\n{\n  \"variables\": {\n    \"NumberOfSaws\": {\n      \"0\": 15.0,\n      \"1\": 11.0\n    }\n  },\n  \"objective\": 26.0\n}\n"
+}

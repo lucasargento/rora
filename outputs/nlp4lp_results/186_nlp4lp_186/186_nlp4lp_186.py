@@ -1,0 +1,158 @@
+# Problem Description:
+'''Problem description: A woman has $100000 to gamble on two sports bets: a basketball tournament, a horse race, and a soccer game. Based on simple analysis, the woman determines her chance of losing her money would be 50% for basketball tournament, 25% for horse race, and 10% for the soccer game. The payout for each dollar put on each bet will be $1.2 for basketball tournament, $0.5 for horse race, and $0.1 for the soccer game. Knowing herself, she limits her average chance of losing her money should be at most 30%. Could you help her determine how much to money to put on each sport bet to maximize her average payout?
+
+Expected Output Schema:
+{
+  "variables": {
+    "Allocation": {
+      "0": "float",
+      "1": "float",
+      "2": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Below is one complete formulation of the problem using the five‐element framework. Note that in this formulation we assume the following interpretation:
+
+- The three bets are indexed as follows: 0 for the basketball tournament, 1 for the horse race, and 2 for the soccer game.
+- The woman has a fixed total budget of 100000 dollars and must allocate this money among the three bets.
+- For each bet the chance of losing the wagered amount is given (50% for basketball, 25% for horse race, and 10% for soccer). In order to incorporate her risk aversion, we impose that the weighted average loss probability (which is the total “risk exposure” in dollars divided by the total budget) is at most 30%. Equivalently, the sum of (loss probability × allocated dollars) must not exceed 0.30 times the total budget (i.e. 30000 dollars).
+- The payout value for each dollar allocated is given ($1.2, $0.5, and $0.1, respectively). The objective is to maximize the total expected payout.
+
+If a different interpretation (for example, considering expected net profit per bet that would account for both the chance of retrieving the wager and the payout) is needed, then the formulation could be adjusted. The model below, however, faithfully represents the description provided.
+
+---------------------------------------------------------
+Sets:
+• S = {0, 1, 2} where
+  – 0 stands for the basketball tournament,
+  – 1 stands for the horse race,
+  – 2 stands for the soccer game.
+
+---------------------------------------------------------
+Parameters:
+• total_budget = 100000 dollars  
+• loss_prob[0] = 0.50 (basketball tournament loss probability)
+• loss_prob[1] = 0.25 (horse race loss probability)
+• loss_prob[2] = 0.10 (soccer game loss probability)
+• payout[0] = 1.2 dollars per dollar bet (basketball tournament)
+• payout[1] = 0.5 dollars per dollar bet (horse race)
+• payout[2] = 0.1 dollars per dollar bet (soccer game)
+• max_avg_loss_prob = 0.30  
+  (This imposes the constraint: (loss_prob[0]*x0 + loss_prob[1]*x1 + loss_prob[2]*x2) / total_budget ≤ 0.30, which is equivalent to: loss_prob[0]*x0 + loss_prob[1]*x1 + loss_prob[2]*x2 ≤ 30000)
+
+---------------------------------------------------------
+Variables:
+• Let x[i] be the amount (in dollars) allocated to bet i, for each i in S.
+  – Domain: x[i] is a continuous variable and must satisfy x[i] ≥ 0.
+
+---------------------------------------------------------
+Objective:
+• Maximize total expected payout = payout[0]*x[0] + payout[1]*x[1] + payout[2]*x[2].
+
+---------------------------------------------------------
+Constraints:
+1. Budget constraint:  
+   x[0] + x[1] + x[2] = total_budget
+
+2. Risk (loss probability) constraint:  
+   loss_prob[0]*x[0] + loss_prob[1]*x[1] + loss_prob[2]*x[2] ≤ max_avg_loss_prob * total_budget  
+   (Numerically: 0.50*x[0] + 0.25*x[1] + 0.10*x[2] ≤ 30000)
+
+---------------------------------------------------------
+Below is the expected output schema in JSON format (with "Allocation" array corresponding to bets 0, 1, and 2, and "objective" representing the total expected payout):
+
+{
+  "variables": {
+    "Allocation": {
+      "0": "float",  // dollars allocated to the basketball tournament bet
+      "1": "float",  // dollars allocated to the horse race bet
+      "2": "float"   // dollars allocated to the soccer game bet
+    }
+  },
+  "objective": "float"  // total expected payout = 1.2*Allocation[0] + 0.5*Allocation[1] + 0.1*Allocation[2]"
+}
+
+This model is self-contained and unambiguous for a working implementation in Python or OR-Tools.'''
+
+# Generated Code:
+#!/usr/bin/env python3
+from ortools.linear_solver import pywraplp
+
+def solve_linear_model():
+    # Create the GLOP linear solver.
+    solver = pywraplp.Solver.CreateSolver('GLOP')
+    if not solver:
+        print("GLOP solver unavailable.")
+        return None
+
+    # Total budget and risk limit.
+    total_budget = 100000.0
+    max_total_risk = 0.30 * total_budget  # 30000
+
+    # Loss probabilities for each bet: index 0: basketball, 1: horse race, 2: soccer.
+    loss_prob = [0.50, 0.25, 0.10]
+    # Payout multipliers for each bet.
+    payout = [1.2, 0.5, 0.1]
+
+    # Create decision variables: Allocation[i] is the dollars allocated to bet i.
+    x0 = solver.NumVar(0.0, solver.infinity(), "x0")
+    x1 = solver.NumVar(0.0, solver.infinity(), "x1")
+    x2 = solver.NumVar(0.0, solver.infinity(), "x2")
+
+    # Constraint 1: Budget constraint.
+    solver.Add(x0 + x1 + x2 == total_budget)
+
+    # Constraint 2: Risk constraint: (loss_prob[0]*x0 + loss_prob[1]*x1 + loss_prob[2]*x2) <= 30000.
+    solver.Add(loss_prob[0] * x0 + loss_prob[1] * x1 + loss_prob[2] * x2 <= max_total_risk)
+
+    # Objective: maximize total expected payout.
+    objective = solver.Objective()
+    objective.SetCoefficient(x0, payout[0])
+    objective.SetCoefficient(x1, payout[1])
+    objective.SetCoefficient(x2, payout[2])
+    objective.SetMaximization()
+
+    # Solve the linear programming problem.
+    status = solver.Solve()
+
+    # Process and return the solution, if optimal.
+    if status == pywraplp.Solver.OPTIMAL:
+        solution = {
+            "variables": {
+                "Allocation": {
+                    "0": x0.solution_value(),
+                    "1": x1.solution_value(),
+                    "2": x2.solution_value()
+                }
+            },
+            "objective": objective.Value()
+        }
+        return solution
+    else:
+        print("The problem does not have an optimal solution.")
+        return None
+
+def main():
+    # In this implementation, only one formulation is provided.
+    model1_result = solve_linear_model()
+
+    print("Model 1 (Linear Programming Formulation) Result:")
+    if model1_result is not None:
+        print(model1_result)
+
+if __name__ == "__main__":
+    main()
+
+'''Execution Results:
+SUCCESS:
+Model 1 (Linear Programming Formulation) Result:
+{'variables': {'Allocation': {'0': 49999.99999999999, '1': 0.0, '2': 50000.000000000015}}, 'objective': 64999.999999999985}
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'Allocation': {'0': 20000.0, '1': 80000.0, '2': 0.0}}, 'objective': 42000.0}'''
+

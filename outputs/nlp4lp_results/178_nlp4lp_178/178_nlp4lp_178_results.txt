@@ -1,0 +1,114 @@
+Problem Name: 178_nlp4lp_178
+
+# Problem Description:
+'''Problem description: A toy store sells plush toys and dolls. Each plush toy costs the store $3 and each doll costs the store $2. The store owner can spend at most $700 on inventory. Each plush toy is then sold for a profit of $4 while each doll is sold for a profit of $2. The owner estimates that at least 90 plush toys but at most 190 plush toys are sold each month. He also estimates that the number of dolls sold is at most twice the amount of plush toys sold. How many of each should be bought and sold to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberPlushToys": "float",
+    "NumberDolls": "float",
+    "NumberPlushToysSold": "float",
+    "NumberDollsSold": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is one clear formulation of the problem using the five‐element framework. Note that we distinguish between the quantity bought (the inventory decision) and the quantity sold (the sales decision). In an optimal solution (without further market considerations such as unsold inventory costs apart from the purchase cost) the purchased quantities would typically equal the sold quantities. However, the model below leaves open the possibility that not all purchased items are sold, by explicitly linking sales to available inventory.
+
+-----------------------------------------------------------
+Sets:
+• Types = {PlushToys, Dolls}
+
+-----------------------------------------------------------
+Parameters:
+• cost_Plush = 3 (US Dollars per plush toy purchased)
+• cost_Doll = 2 (US Dollars per doll purchased)
+• profit_Plush = 4 (US Dollars profit per plush toy sold)
+• profit_Doll = 2 (US Dollars profit per doll sold)
+• inventory_budget = 700 (US Dollars available for purchasing inventory)
+• plush_sales_lower = 90 (minimum number of plush toys sold per month)
+• plush_sales_upper = 190 (maximum number of plush toys sold per month)
+• doll_to_plush_ratio = 2 (the number of dolls sold is at most twice the plush toys sold)
+
+-----------------------------------------------------------
+Variables (all decision variables are assumed to be nonnegative integers):
+• NumberPlushToys: number of plush toys bought [units]
+• NumberDolls: number of dolls bought [units]
+• NumberPlushToysSold: number of plush toys sold [units]
+• NumberDollsSold: number of dolls sold [units]
+
+-----------------------------------------------------------
+Objective:
+Maximize total net profit given by:
+  Total Profit = (profit_Plush × NumberPlushToysSold) + (profit_Doll × NumberDollsSold)
+
+That is, maximize: 4 × NumberPlushToysSold + 2 × NumberDollsSold
+
+-----------------------------------------------------------
+Constraints:
+1. Inventory Budget Constraint:
+  (cost_Plush × NumberPlushToys) + (cost_Doll × NumberDolls) ≤ inventory_budget
+  That is, 3 × NumberPlushToys + 2 × NumberDolls ≤ 700
+
+2. Sales Cannot Exceed Inventory (feasibility constraints):
+  NumberPlushToysSold ≤ NumberPlushToys 
+  NumberDollsSold ≤ NumberDolls
+
+3. Demand Range for Plush Toys:
+  plush_sales_lower ≤ NumberPlushToysSold ≤ plush_sales_upper 
+  That is, 90 ≤ NumberPlushToysSold ≤ 190
+
+4. Sales Ratio Constraint for Dolls:
+  NumberDollsSold ≤ doll_to_plush_ratio × NumberPlushToysSold 
+  That is, NumberDollsSold ≤ 2 × NumberPlushToysSold
+
+-----------------------------------------------------------
+Additional Comments:
+• The economic interpretation is that the store must decide how many plush toys and dolls to purchase under a limited inventory budget, and then how many of these to sell in order to maximize profit. The profit is computed only on sold items.
+• It is assumed that unsold inventory does not generate profit and that additional costs (e.g., storage, spoilage) are not considered.
+• All monetary parameters are expressed in US Dollars per unit, and all quantities are expressed in number of units.
+• If desired, one could enforce that the sales variables equal the purchase variables. Here, we allow the possibility of having extra purchased units that are not sold, by ensuring only that sales do not exceed purchases.
+
+-----------------------------------------------------------
+Expected Output Schema (as expressed in a JSON-like structure):
+
+{
+  "variables": {
+    "NumberPlushToys": "integer, nonnegative, number of plush toys bought [units]",
+    "NumberDolls": "integer, nonnegative, number of dolls bought [units]",
+    "NumberPlushToysSold": "integer, nonnegative, number of plush toys sold [units]",
+    "NumberDollsSold": "integer, nonnegative, number of dolls sold [units]"
+  },
+  "objective": "4 * NumberPlushToysSold + 2 * NumberDollsSold (maximize total profit in US Dollars)"
+}
+
+This structured model fully describes the original real-world problem in a way that can be directly mapped to implementations in Python, OR-Tools, or similar optimization frameworks.
+
+Execution Results:
+SUCCESS:
+Solving both model versions...
+
+Model: Version 1 (Separate Inventory and Sales Decisions)
+Optimal Variables:
+   NumberPlushToys = 190.0
+   NumberDolls = 65.0
+   NumberPlushToysSold = 190.0
+   NumberDollsSold = 65.0
+Optimal Objective Value: 890.0
+--------------------------------------------------
+Model: Version 2 (Purchase equals Sales)
+Optimal Variables:
+   NumberPlushToys = 190.0
+   NumberDolls = 65.0
+   NumberPlushToysSold = 190.0
+   NumberDollsSold = 65.0
+Optimal Objective Value: 890.0
+--------------------------------------------------
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberPlushToys': 190.0, 'NumberDolls': 65.0, 'NumberPlushToysSold': 190.0, 'NumberDollsSold': 65.0}, 'objective': 890.0}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n--------------------------------------------------\nContinuous LP Model Result:\nmodel: Continuous LP Model\nvariables: {'ExecuteProcessA': 149.99999999999997, 'ExecuteProcessB': 0.0}\nobjective: 749.9999999999999\n--------------------------------------------------\nInteger MIP Model Result:\nmodel: Integer MIP Model\nvariables: {'ExecuteProcessA': 150.0, 'ExecuteProcessB': 0.0}\nobjective: 750.0\n"
+}

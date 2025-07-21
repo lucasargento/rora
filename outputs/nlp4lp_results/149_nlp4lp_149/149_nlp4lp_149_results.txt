@@ -1,0 +1,73 @@
+Problem Name: 149_nlp4lp_149
+
+# Problem Description:
+'''Problem description: Children can go to school either by van or by minibus. A van can take 6 kids and produces 7 units of pollution. A minibus can take 10 kids and produced 10 units of pollution. There are at least 150 kids than need to go to school and at most 10 minibuses can be used. In addition, the number of vans used must exceed the number of minibuses. How many of each should be used to minimize the total amount of pollution produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfVans": "float",
+    "NumberOfMinibuses": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Vehicles: {Van, Minibus}
+
+Parameters:
+- VanCapacity: 6 kids per van
+- MinibusCapacity: 10 kids per minibus
+- VanPollution: 7 pollution units per van
+- MinibusPollution: 10 pollution units per minibus
+- MinimumKids: 150 kids (total required)
+- MaxMinibuses: 10 minibuses (upper limit)
+
+Variables:
+- NumberOfVans: integer ≥ 0 (number of vans used)
+- NumberOfMinibuses: integer ≥ 0 (number of minibuses used)
+
+Objective:
+- Minimize TotalPollution = (VanPollution * NumberOfVans) + (MinibusPollution * NumberOfMinibuses)
+
+Constraints:
+1. Kid Transportation Coverage:
+   - (VanCapacity * NumberOfVans) + (MinibusCapacity * NumberOfMinibuses) ≥ MinimumKids
+2. Limit on Number of Minibuses:
+   - NumberOfMinibuses ≤ MaxMinibuses
+3. Van Usage Exceeds Minibus Usage:
+   - NumberOfVans ≥ NumberOfMinibuses + 1
+   
+Note:
+- The constraint "NumberOfVans ≥ NumberOfMinibuses + 1" replaces the strict inequality "NumberOfVans > NumberOfMinibuses" to ensure integer variable feasibility.
+- All pollution and capacity parameters are assumed to be in consistent units (per vehicle).
+
+For clarity, the expected output schema is:
+{
+  "variables": {
+    "NumberOfVans": "integer ≥ 0",
+    "NumberOfMinibuses": "integer ≥ 0"
+  },
+  "objective": "Minimize (7 * NumberOfVans) + (10 * NumberOfMinibuses)"
+}
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Method: LinearSolver
+NumberOfVans: 10
+NumberOfMinibuses: 9
+Total Pollution: 160.0
+
+Method: CPSAT
+NumberOfVans: 10
+NumberOfMinibuses: 9
+Total Pollution: 160.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfVans': 10.0, 'NumberOfMinibuses': 9.0}, 'objective': 160.0}

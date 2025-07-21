@@ -1,0 +1,75 @@
+Problem Name: 72_nlp4lp_72
+
+# Problem Description:
+'''Problem description: A factory has two machines, A and B. Each day, machine A can make 30 items and consumes 100 kWh. Machine B can make 50 items and consumes 120 kWh per day. The factory must produce at least 1000 items per day and has 3000 kWh of electricity available per day. Since there are not many workers that can operate both machines, at most 30% of the machines must be of type B. Further, at least 5 machines of type A should be used. How many of each machine should be used to minimize the total number of machines?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberA": "float",
+    "NumberB": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Machines: set of machine types = {A, B}
+
+Parameters:
+- Production_A: number of items produced per machine A per day = 30 items/day
+- Production_B: number of items produced per machine B per day = 50 items/day
+- Energy_A: electricity consumed by one machine A per day = 100 kWh/day
+- Energy_B: electricity consumed by one machine B per day = 120 kWh/day
+- Demand: minimum required items per day = 1000 items/day
+- Energy_limit: maximum available electricity per day = 3000 kWh/day
+- B_ratio_limit: maximum allowed proportion of type B machines = 0.3 (i.e., at most 30% of all machines)
+- Min_A: minimum number of machine A = 5
+
+Variables:
+- NumberA: number of machine A used [integer, lower bound 5]
+- NumberB: number of machine B used [integer, lower bound 0]
+
+Objective:
+- Minimize total machines = NumberA + NumberB
+
+Constraints:
+1. Production constraint: (Production_A * NumberA) + (Production_B * NumberB) >= Demand  
+   (i.e., 30*NumberA + 50*NumberB >= 1000)
+
+2. Electricity constraint: (Energy_A * NumberA) + (Energy_B * NumberB) <= Energy_limit  
+   (i.e., 100*NumberA + 120*NumberB <= 3000)
+
+3. Machine type ratio constraint: NumberB <= B_ratio_limit * (NumberA + NumberB)  
+   This can be rearranged as: (NumberA + NumberB) >= (NumberB / 0.3) or equivalently 0.7*NumberB <= 0.3*NumberA
+
+4. Minimum machine A constraint: NumberA >= Min_A
+
+---------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "NumberA": "integer (>=5)",
+    "NumberB": "integer (>=0)"
+  },
+  "objective": "Minimize total machines = NumberA + NumberB"
+}
+
+Execution Results:
+SUCCESS:
+Results:
+----------------------------------------
+Method: LinearSolver
+Optimal Variables: {'NumberA': 20, 'NumberB': 8}
+Objective Value: 28.0
+----------------------------------------
+Method: CPSAT
+Optimal Variables: {'NumberA': 20, 'NumberB': 8}
+Objective Value: 28
+----------------------------------------
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberA': 20.0, 'NumberB': 8.0}, 'objective': 28.0}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults using OR-Tools Linear Solver:\n  NumberOfVans:  14.0\n  NumberOfTrucks:  13.0\n  Objective (Min NumberOfVans):  14.0\n\nResults using OR-Tools CP-SAT Model:\n  NumberOfVans:  14\n  NumberOfTrucks:  13\n  Objective (Min NumberOfVans):  14\n"
+}

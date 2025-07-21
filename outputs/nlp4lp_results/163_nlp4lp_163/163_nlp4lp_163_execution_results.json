@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nLinear Solver Model (MIP) optimal solution:\n  Number of Taxi Rides = 78.0\n  Number of Company Car Rides = 115.0\n  Objective (Minimized Taxi Rides) = 78.0\n\nFinal Results:\n{'LinearSolverModel': {'variables': {'NumberOfTaxiRides': 78.0, 'NumberOfCompanyCarRides': 115.0}, 'objective': 78.0}}\n"
+}

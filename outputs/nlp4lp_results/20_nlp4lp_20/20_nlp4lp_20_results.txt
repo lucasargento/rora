@@ -1,0 +1,66 @@
+Problem Name: 20_nlp4lp_20
+
+# Problem Description:
+'''Problem description: A car manufacturer makes two versions of the same car, a regular model and a premium model. They make x1 regular models per day and x2 premium models per day. The profit per regular model is $5000 and the profit per premium model is $8500 (x1 and x2 are unknown values both greater than or equal to 0). The daily demand for these cars is limited to and most 8 regular models and 6 premium models. In addition, the manufacturer can make a maximum of 12 cars of either type per day. How many cars of each model should the manufacturer make in order to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "RegularModelsProduced": "float",
+    "PremiumModelsProduced": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- M: set of car models = {Regular, Premium}
+
+Parameters:
+- profit_Regular: profit per regular model produced [USD per car] = 5000
+- profit_Premium: profit per premium model produced [USD per car] = 8500
+- max_demand_Regular: maximum daily demand for regular models [cars/day] = 8
+- max_demand_Premium: maximum daily demand for premium models [cars/day] = 6
+- max_total_production: maximum number of cars that can be produced per day, regardless of model [cars/day] = 12
+
+Variables:
+- RegularModelsProduced (x1): number of regular models produced per day [nonnegative integer or float; ideally integer]
+- PremiumModelsProduced (x2): number of premium models produced per day [nonnegative integer or float; ideally integer]
+
+Objective:
+- Maximize total profit = (profit_Regular * RegularModelsProduced) + (profit_Premium * PremiumModelsProduced)
+
+Constraints:
+1. Demand constraint for regular models: RegularModelsProduced ≤ max_demand_Regular  
+2. Demand constraint for premium models: PremiumModelsProduced ≤ max_demand_Premium  
+3. Total production capacity constraint: RegularModelsProduced + PremiumModelsProduced ≤ max_total_production  
+4. Non-negativity constraints: RegularModelsProduced ≥ 0, PremiumModelsProduced ≥ 0
+
+------------------------------------------------------------
+The following JSON output uses the expected output schema:
+
+{
+  "variables": {
+    "RegularModelsProduced": "float",
+    "PremiumModelsProduced": "float"
+  },
+  "objective": "5000 * RegularModelsProduced + 8500 * PremiumModelsProduced"
+}
+
+Execution Results:
+SUCCESS:
+{
+    "LinearProgrammingSolution": {
+        "variables": {
+            "RegularModelsProduced": 6.0,
+            "PremiumModelsProduced": 6.0
+        },
+        "objective": 81000.0
+    }
+}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'RegularModelsProduced': 6.0, 'PremiumModelsProduced': 6.0}, 'objective': 81000.0}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{\n    \"Model1\": {\n        \"description\": \"Dessert Preference Constraint: x_Orange >= x_Matcha + 1\",\n        \"result\": {\n            \"MatchaIceCream\": 0.21428571428571433,\n            \"OrangeSorbet\": 1.2142857142857144,\n            \"objective\": 5.2857142857142865\n        }\n    },\n    \"Model2\": {\n        \"description\": \"Dessert Preference Constraint: x_Orange >= x_Matcha\",\n        \"result\": {\n            \"MatchaIceCream\": 0.0,\n            \"OrangeSorbet\": 0.0,\n            \"objective\": 0.0\n        }\n    }\n}\n"
+}

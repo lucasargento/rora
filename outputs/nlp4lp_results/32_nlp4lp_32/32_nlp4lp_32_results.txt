@@ -1,0 +1,77 @@
+Problem Name: 32_nlp4lp_32
+
+# Problem Description:
+'''Problem description: John has a 300 acre berry farm on which to plant blueberries and raspberries. John has $10000 to spend on watering and 575 days worth of labor available. For each acre of blueberries, 6 days worth of labor and $22 in watering costs is required. For each acre of raspberries, 3 days worth of labor and $25 in watering costs is required. The profit per acre of blueberries is $56 and the profit per acre of raspberries is $75. Formulate an LP problem in order to maximize profit.
+
+Expected Output Schema:
+{
+  "variables": {
+    "Acreage": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- B: set of berry types = {Blueberries, Raspberries}
+
+Parameters:
+- total_acres: total available farmland [acres] = 300
+- total_watering_budget: total available watering funds [USD] = 10000
+- total_labor_days: total available labor days [days] = 575
+- water_cost[b] for b in B:
+  - water_cost[Blueberries] = 22 [USD per acre]
+  - water_cost[Raspberries] = 25 [USD per acre]
+- labor_requirement[b] for b in B:
+  - labor_requirement[Blueberries] = 6 [days per acre]
+  - labor_requirement[Raspberries] = 3 [days per acre]
+- profit[b] for b in B:
+  - profit[Blueberries] = 56 [USD per acre]
+  - profit[Raspberries] = 75 [USD per acre]
+
+Variables:
+- x[b] for b in B: acres planted with berry type b [continuous, with x[b] ≥ 0] 
+  (Interpretation: number of acres allocated to each berry type)
+
+Objective:
+- Maximize total profit = profit[Blueberries] * x[Blueberries] + profit[Raspberries] * x[Raspberries]
+
+Constraints:
+1. Land constraint:
+   - x[Blueberries] + x[Raspberries] ≤ total_acres
+2. Watering cost constraint:
+   - water_cost[Blueberries] * x[Blueberries] + water_cost[Raspberries] * x[Raspberries] ≤ total_watering_budget
+3. Labor days constraint:
+   - labor_requirement[Blueberries] * x[Blueberries] + labor_requirement[Raspberries] * x[Raspberries] ≤ total_labor_days
+
+Comments:
+- All monetary values are in US dollars.
+- Acres can be assumed continuous unless integer acreage is required.
+- The model assumes that planting an acre is the smallest decision unit.
+
+Expected Output Schema:
+{
+  "variables": {
+    "Acreage": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: LP_Model
+Acres of Blueberries: 0.0
+Acres of Raspberries: 191.66666666666663
+Optimal Total Profit: 14374.999999999996
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'Acreage': [0.0, 191.66666666666666]}, 'objective': 14375.0}

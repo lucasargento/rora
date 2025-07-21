@@ -1,0 +1,4348 @@
+Problem 0: 0_nlp4lp_0
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for LP using ortools.linear_solver:
+Investment in Condos: $152000.00
+Investment in Detached Houses: $608000.00
+Total Profit: $684000.00
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'InvestmentCondos': 152000.0, 'InvestmentDetachedHouses': 608000.0}, 'objective': 684000.0}
+
+================================================================================
+
+Problem 1: 1_nlp4lp_1
+- Proposed solution:
+Execution Results:
+SUCCESS:
+OR-Tools Linear Solver Solution:
+Optimal number of regular sandwiches (0): 20.0
+Optimal number of special sandwiches (1): 0.0
+Maximum profit: 60.0
+
+Structured Output:
+{'variables': {'NumSandwiches': {'0': 20.0, '1': 0.0}}, 'objective': 60.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumSandwiches': {'0': 20.0, '1': 0.0}}, 'objective': 60.0}
+
+================================================================================
+
+Problem 2: dummydemo_2
+- Proposed solution:
+Execution Results:
+SUCCESS:
+----- Solving using ortools.linear_solver (GLOP) -----
+Optimal solution found using Linear Solver.
+Solution:
+  x = 0.0
+  y = 10.0
+Objective value = 20.0
+
+----- Solving using ortools.sat.python.cp_model (CP-SAT) -----
+Optimal solution found using CP-SAT Model.
+Solution:
+  x = 0
+  y = 10
+Objective value = 20.0
+- Expected solution:
+Expected Output:
+SAPEEEE solution: x = 0, y = 10
+Optimal objective value: 20
+
+================================================================================
+
+Problem 3: 3_nlp4lp_3
+- Proposed solution:
+Execution Results:
+SUCCESS:
+=== Model 1 ===
+Optimal solution found:
+NumberOfSeniorCitizens = 37.0
+NumberOfYoungAdults = 13.0
+Total Weekly Wage Cost = $ 28250.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfSeniorCitizens': 37.0, 'NumberOfYoungAdults': 13.0}, 'objective': 28250.0}
+
+================================================================================
+
+Problem 4: 4_nlp4lp_4
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+{'Version1': {'variables': {'NumberAdsZTube': 10.0, 'NumberAdsSoorchle': 0.0, 'NumberAdsWassa': 0.0}, 'objective': 4000000.0}, 'Version2': {'variables': {'xZ': 10.0, 'xS': 0.0, 'xW': 0.0}, 'objective': 4000000.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberAdsZTube': -0.0, 'NumberAdsSoorchle': -0.0, 'NumberAdsWassa': -0.0, 'xZ': 1e+30, 'xS': 1e+30, 'xW': 9.999985000007499e+29}, 'objective': 4.0799999550000226e+35}
+
+================================================================================
+
+Problem 5: 5_nlp4lp_5
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving Elm Furniture Production Problem
+
+Continuous Model (Fractional Production Allowed):
+{'NumberOfChairs': 5.5, 'NumberOfDressers': 0.0, 'objective': 236.5}
+
+Integer Model (Whole Units Production):
+{'NumberOfChairs': 4.0, 'NumberOfDressers': 1.0, 'objective': 224.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfChairs': 4.0, 'NumberOfDressers': 1.0}, 'objective': 224.0}
+
+================================================================================
+
+Problem 6: 6_nlp4lp_6
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Result using ortools.linear_solver (Linear Programming):
+{'variables': {'QuantityFeedA': 1.0638297872340425, 'QuantityFeedB': 2.765957446808511}, 'objective': 327.6595744680851}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityFeedA': 1.0638297872340428, 'QuantityFeedB': 2.765957446808511}, 'objective': 327.6595744680851}
+
+================================================================================
+
+Problem 7: 7_nlp4lp_7
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from Linear/MIP formulation using ortools.linear_solver:
+Optimal Solution:
+x_thin (number of thin jars, integer ≥ 0) = 1
+x_stubby (number of stubby jars, integer ≥ 0) = 26
+Maximum Profit: 239.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumJars': {'0': 0.0, '1': 26.666666666666668}}, 'objective': 240.0}
+
+================================================================================
+
+Problem 8: 8_nlp4lp_8
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for Pure Linear Model:
+Banana-haters package count (x_BH): 0.0
+Combo package count (x_Combo): 2.0
+Maximum Profit: 14.0
+
+Structured Solution Output:
+{'variables': {'PackageCount': {'0': 0.0, '1': 2.0}}, 'objective': 14.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'PackageCount': {'0': -0.0, '1': 2.0}}, 'objective': 14.0}
+
+================================================================================
+
+Problem 9: 9_nlp4lp_9
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model Result:
+{'variables': {'BreadQuantity': 0.0, 'CookiesQuantity': 3000.0}, 'objective': 9000.0}
+
+Integer Model Result:
+{'variables': {'BreadQuantity': 0.0, 'CookiesQuantity': 3000.0}, 'objective': 9000.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'BreadQuantity': 0.0, 'CookiesQuantity': 3000.0}, 'objective': 9000.0}
+
+================================================================================
+
+Problem 10: 10_nlp4lp_10
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: LinearSolver
+Variables:
+  QuantityRegular: 59.99999999999999
+  QuantityTempered: 0.0
+Objective Value: 479.99999999999994
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityRegular': 60.0, 'QuantityTempered': 0.0}, 'objective': 480.0}
+
+================================================================================
+
+Problem 11: 11_nlp4lp_11
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+Model: LinearSolver
+Variables:
+  Production:
+    0: Number of elephants produced (x_Animal[Elephant], integer, units) = 0.0
+    1: Number of tigers produced (x_Animal[Tiger], integer, units) = 125.0
+Objective Value: 500.0
+----------------------------------------
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Production': {'0': 100.0, '1': 0.0}}, 'objective': 500.0}
+
+================================================================================
+
+Problem 12: 12_nlp4lp_12
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Art Pieces Production Problem (Version 1):
+-------------------------------------------------------
+NumberLarge: 5.0
+NumberSmall: 22.0
+Maximum Profit: 480.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberLarge': 5.2, 'NumberSmall': 22.0}, 'objective': 486.0}
+
+================================================================================
+
+Problem 13: 13_nlp4lp_13
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Investment Optimization Model:
+InvestmentApartments = 200000.0
+InvestmentTownhouses = 400000.0
+Optimal Profit = 80000.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'InvestmentApartments': 200000.0, 'InvestmentTownhouses': 400000.0}, 'objective': 80000.0}
+
+================================================================================
+
+Problem 14: 14_nlp4lp_14
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution Results:
+-----------------
+Continuous LP Formulation:
+   QuantityZodiac = 2.7659574468085113
+   QuantitySunny  = 1.1702127659574466
+   Objective Value = 6.276595744680851
+
+Integer MILP Formulation:
+   QuantityZodiac = 4.0
+   QuantitySunny  = 1.0
+   Objective Value = 7.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityZodiac': 4.0, 'QuantitySunny': 1.0}, 'objective': 7.0}
+
+================================================================================
+
+Problem 15: 15_nlp4lp_15
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear model solution:
+{'variables': {'NumberOfTrains': 20.000000000000004, 'NumberOfPlanes': 14.999999999999993}, 'objective': 310.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfTrains': 20.0, 'NumberOfPlanes': 15.0}, 'objective': 310.0}
+
+================================================================================
+
+Problem 16: 16_nlp4lp_16
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model Version 1 (using y >= 0.8*(x+y)):
+NumberOfPhones: 0.0
+NumberOfLaptops: 59.99999999999999
+Objective (Total Profit): 2399.9999999999995
+
+Results for Model Version 2 (using y >= 4*x):
+NumberOfPhones: 0.0
+NumberOfLaptops: 60.00000000000001
+Objective (Total Profit): 2400.0000000000005
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfPhones': 0.0, 'NumberOfLaptops': 60.0}, 'objective': 2400.0}
+
+================================================================================
+
+Problem 17: 17_nlp4lp_17
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+  "LinearProgram": {
+    "variables": {
+      "ProductionMix": {
+        "0": 94.28571428571428,
+        "1": 45.71428571428571
+      }
+    },
+    "objective": 511.4285714285714
+  }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ProductionMix': {'0': 94.28571428571428, '1': 45.71428571428571}}, 'objective': 511.4285714285714}
+
+================================================================================
+
+Problem 18: 18_nlp4lp_18
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results for Factory Layout Problem
+--------------------------------------------------
+Model Version 1 (Maximize net revenue):
+Solution: {'AllocatedSpace': {'0': 0.0, '1': 100.0}}
+Objective Value (Total Net Revenue): 7000.0
+
+--------------------------------------------------
+Model Version 2 (Maximize Total Revenue - Total Cost):
+Solution: {'AllocatedSpace': {'0': 0.0, '1': 100.0}}
+Objective Value (Net Objective): 5500.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AllocatedSpace': {'0': 0.0, '1': 100.0}}, 'objective': 7000.0}
+
+================================================================================
+
+Problem 19: 19_nlp4lp_19
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Linear Programming Model:
+NumPremiumDesktops = 100.0
+NumRegularDesktops = 100.0
+Objective (Total Profit) = 80000.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumPremiumDesktops': 100.0, 'NumRegularDesktops': 100.0}, 'objective': 80000.0}
+
+================================================================================
+
+Problem 20: 20_nlp4lp_20
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+    "LinearProgrammingSolution": {
+        "variables": {
+            "RegularModelsProduced": 6.0,
+            "PremiumModelsProduced": 6.0
+        },
+        "objective": 81000.0
+    }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'RegularModelsProduced': 6.0, 'PremiumModelsProduced': 6.0}, 'objective': 81000.0}
+
+================================================================================
+
+Problem 21: 21_nlp4lp_21
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving the Office Desk Optimization Problem using OR-Tools Linear Solver
+
+Linear Model Optimal Solution:
+Variables (NumDesks):
+  Long Desks (x_long): -0.0
+  Short Desks (x_short): 20.0
+Objective (Maximum Seating Capacity): 40.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumDesks': {'0': -0.0, '1': 20.0}}, 'objective': 40.0}
+
+================================================================================
+
+Problem 22: 22_nlp4lp_22
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results using OR-Tools Linear Solver (GLOP):
+{'variables': {'FertilizerQuantity': [2.592592592592592, 0.22222222222222232]}, 'objective': 5.851851851851851}
+
+Results using OR-Tools CP-SAT (discretized version):
+{'variables': {'FertilizerQuantity': [2.6, 0.22]}, 'objective': 5.86}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'FertilizerQuantity': [2.5925925925925926, 0.22222222222222224]}, 'objective': 5.851851851851852}
+
+================================================================================
+
+Problem 23: 23_nlp4lp_23
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+------------------------------------------------
+Model Version: Formulation_Version1
+Pill A (index 0): 10.0
+Pill B (index 1): 2.0
+Objective Value (Total Cost): 50.0
+------------------------------------------------
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'PillsSelected': {'0': 9.62962962962963, '1': 1.8518518518518519}}, 'objective': 47.77777777777778}
+
+================================================================================
+
+Problem 24: 24_nlp4lp_24
+- Proposed solution:
+Execution Results:
+SUCCESS:
+========== Version 1 ==========
+Containers of Oil Max:  0
+Containers of Oil Max Pro:  36
+Optimal Profit: $ 540.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'xOilType': [0.0, 36.51111111111111]}, 'objective': 547.6666666666667}
+
+================================================================================
+
+Problem 25: 25_nlp4lp_25
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+    "Model_1": {
+        "variables": {
+            "QuantityMango": 150.0,
+            "QuantityGuava": 50.0,
+            "MangosSold": 150.0,
+            "GuavasSold": 50.0
+        },
+        "objective": 650.0
+    },
+    "Model_2": {
+        "variables": {
+            "QuantityMango": 3970.0,
+            "QuantityGuava": 50.0,
+            "MangosSold": 150.0,
+            "GuavasSold": 50.0
+        },
+        "objective": 650.0
+    }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityMango': -0.0, 'QuantityGuava': -0.0, 'MangosSold': 150.0, 'GuavasSold': 50.0}, 'objective': 650.0}
+
+================================================================================
+
+Problem 26: 26_nlp4lp_26
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'Model1': {'variables': {'GallonsChocolateProduced': 10.0, 'GallonsVanillaProduced': 8.0}, 'objective': 4400.0}, 'Model2': {'variables': {'GallonsChocolateProduced': 10.0, 'GallonsVanillaProduced': 8.0, 'WorkersChocolate': 4.0, 'WorkersVanilla': 2.0}, 'objective': 4400.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'GallonsChocolateProduced': 10.0, 'GallonsVanillaProduced': 8.0}, 'objective': 4400.0}
+
+================================================================================
+
+Problem 27: 27_nlp4lp_27
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from the Linear Programming formulation:
+Optimal Acres for Potatoes: 16.666666666666668
+Optimal Acres for Cucumbers: 33.333333333333336
+Maximum Profit: 30000.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AcresPotatoes': 16.666666666666668, 'AcresCucumbers': 33.33333333333333}, 'objective': 30000.0}
+
+================================================================================
+
+Problem 28: 28_nlp4lp_28
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'variables': {'ProductionHardwood': 50000.0, 'ProductionVinyl': 30000.0}, 'objective': 215000.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ProductionHardwood': 50000.0, 'ProductionVinyl': 30000.0}, 'objective': 215000.0}
+
+================================================================================
+
+Problem 29: 29_nlp4lp_29
+- Proposed solution:
+Execution Results:
+SUCCESS:
+----- Continuous LP Model -----
+Optimal days operated at old farm: 4.333333333333333
+Optimal days operated at new farm: 0.33333333333333326
+Total operating cost: $ 1366.6666666666667
+
+----- Integer LP Model -----
+Optimal days operated at old farm: 4.0
+Optimal days operated at new farm: 1.0
+Total operating cost: $ 1400.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'DaysOperated': [4.333333333333333, 0.3333333333333335]}, 'objective': 1366.6666666666667}
+
+================================================================================
+
+Problem 30: 30_nlp4lp_30
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Diet Optimization Results:
+{'variables': {'ServingsRice': 7.333333333333335, 'ServingsKebab': 0.0}, 'objective': 22.000000000000004}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ServingsRice': 0.0, 'ServingsKebab': 11.0}, 'objective': 22.0}
+
+================================================================================
+
+Problem 31: 31_nlp4lp_31
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for the Linear Programming model:
+{'variables': {'NumberOfScooters': 2000.0, 'NumberOfBikes': 0.0}, 'objective': 400000.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfScooters': 2000.0, 'NumberOfBikes': 0.0}, 'objective': 400000.0}
+
+================================================================================
+
+Problem 32: 32_nlp4lp_32
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: LP_Model
+Acres of Blueberries: 0.0
+Acres of Raspberries: 191.66666666666663
+Optimal Total Profit: 14374.999999999996
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Acreage': [0.0, 191.66666666666666]}, 'objective': 14375.0}
+
+================================================================================
+
+Problem 33: 33_nlp4lp_33
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimal Solution (Linear Programming Model):
+{'variables': {'VegetableServings': 10.0, 'FruitServings': 1.6062967656290216e-15}, 'objective': 30.000000000000007}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'VegetableServings': 10.0, 'FruitServings': 0.0}, 'objective': 30.0}
+
+================================================================================
+
+Problem 34: 34_nlp4lp_34
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from Linear Solver (CBC_MIP):
+{'status': 'OPTIMAL', 'objective': 1060.0, 'variables': {'Batch': {'0': 29.0, '1': 12.0}}}
+
+Results from CP-SAT Solver:
+{'status': 'OPTIMAL', 'objective': 1060.0, 'variables': {'Batch': {'0': 29, '1': 12}}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Batch': {'0': 28.8, '1': 12.4}}, 'objective': 1072.0}
+
+================================================================================
+
+Problem 35: 35_nlp4lp_35
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Version1:
+  Optimal RunningTimes:
+    Factory 1: 5.0
+    Factory 2: 0.0
+  Objective Value: 1500.0
+
+Version2:
+  Optimal RunningTimes:
+    Factory 0: 5.0
+    Factory 1: 0.0
+  Objective Value: 1500.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'RunningTime': {'0': 5.0, '1': 0.0}}, 'objective': 1500.0}
+
+================================================================================
+
+Problem 36: 36_nlp4lp_36
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Model 1 (Linear Programming Optimization) Results:
+{'variables': {'LandTurnips': 124.99999999999997, 'LandPumpkins': 375.00000000000006}, 'objective': 206250.00000000003}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'LandTurnips': 125.0, 'LandPumpkins': 375.0}, 'objective': 206250.0}
+
+================================================================================
+
+Problem 37: 37_nlp4lp_37
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimal Solutions for the Teacher Hiring Problem:
+
+Implementation_1:
+Variables:
+  NumStaffShifts: 66.0
+  NumSubstituteShifts: 202.0
+  NumStaffTeachers: 66.0
+  NumSubstituteTeachers: 202.0
+Objective (Total teachers): 268.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumStaffShifts': 0.0, 'NumSubstituteShifts': 400.0, 'NumStaffTeachers': -0.0, 'NumSubstituteTeachers': -0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 38: 38_nlp4lp_38
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: LinearSolver
+Solution:
+  HighDrills = 7.0
+  LowDrills  = 15.0
+Objective (Total drills) = 22.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'HighDrills': 7.0, 'LowDrills': 15.0}, 'objective': 22.0}
+
+================================================================================
+
+Problem 39: 39_nlp4lp_39
+- Proposed solution:
+Execution Results:
+SUCCESS:
+=== Model 1: Linear Solver Implementation ===
+Optimal solution found:
+Objective value (total stores): 8.0
+Number of dine-in stores (NumberStore[0]): 2.0
+Number of food truck stores (NumberStore[1]): 6.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberStore': {'0': 2.0, '1': 6.0}}, 'objective': 8.0}
+
+================================================================================
+
+Problem 40: 40_nlp4lp_40
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+--------------------------------------------------
+Continuous LP Model Result:
+model: Continuous LP Model
+variables: {'ExecuteProcessA': 149.99999999999997, 'ExecuteProcessB': 0.0}
+objective: 749.9999999999999
+--------------------------------------------------
+Integer MIP Model Result:
+model: Integer MIP Model
+variables: {'ExecuteProcessA': 150.0, 'ExecuteProcessB': 0.0}
+objective: 750.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ExecuteProcessA': 150.0, 'ExecuteProcessB': 0.0}, 'objective': 750.0}
+
+================================================================================
+
+Problem 41: 41_nlp4lp_41
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Programming Model Results:
+{
+  "variables": {
+    "NumberOfSaws": {
+      "0": 15.0,
+      "1": 11.0
+    }
+  },
+  "objective": 26.0
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfSaws': {'0': 15.0, '1': 11.0}}, 'objective': 26.0}
+
+================================================================================
+
+Problem 42: 42_nlp4lp_42
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'LinearSolver_Result': {'model': 'LinearSolver (Continuous)', 'variables': {'AcresAllocated': [{'machine': 'Windrower', 'value': 100.00000000000001}, {'machine': 'HayHarvester', 'value': 99.99999999999997}]}, 'objective': 1800.0}, 'CP_SAT_Result': {'model': 'CP-SAT (Integer)', 'variables': {'AcresAllocated': [{'machine': 'Windrower', 'value': 100}, {'machine': 'HayHarvester', 'value': 100}]}, 'objective': 1800.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AcresAllocated': [100.0, 100.0]}, 'objective': 1800.0}
+
+================================================================================
+
+Problem 43: 43_nlp4lp_43
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'Continuous Model': {'NumberOfWraps': 535.7142857142856, 'NumberOfPlatters': 178.57142857142853, 'objective': 6785.7142857142835}, 'Integer Model': {'NumberOfWraps': 537.0, 'NumberOfPlatters': 178.0, 'objective': 6794.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfWraps': 535.7142857142857, 'NumberOfPlatters': 178.57142857142856}, 'objective': 6785.714285714285}
+
+================================================================================
+
+Problem 44: 44_nlp4lp_44
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from both implementations:
+Implementation_1: {'variables': {'NumCashMachines': 10.0, 'NumCardMachines': 10.0}, 'objective': 20.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumCashMachines': 10.0, 'NumCardMachines': 10.0}, 'objective': 20.0}
+
+================================================================================
+
+Problem 45: 45_nlp4lp_45
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimal solutions for all implementations:
+Implementation 1: {'variables': {'GlassJarsFilled': 23.0, 'PlasticJarsFilled': 47.0}, 'objective': 70.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'GlassJarsFilled': 20.0, 'PlasticJarsFilled': 50.0}, 'objective': 70.0}
+
+================================================================================
+
+Problem 46: 46_nlp4lp_46
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for Bubble Tea Production Problem (Formulation 1):
+---------------------------------------------------------
+NumberOfMangoBubbleTeas: 2.9999999999999996
+NumberOfLycheeBubbleTeas: 1.9999999999999996
+Total Tea Used (Objective Value): 35.99999999999999
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfMangoBubbleTeas': 0.0, 'NumberOfLycheeBubbleTeas': 0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 47: 47_nlp4lp_47
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous (Linear Solver) Model Result:
+{'variables': {'NumberSeasonal': 33.33333333333333, 'NumberPermanent': 10.0}, 'objective': 43.33333333333333}
+
+Integer (CP-SAT) Model Result:
+{'variables': {'NumberSeasonal': 35, 'NumberPermanent': 9}, 'objective': 44}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberSeasonal': 35.0, 'NumberPermanent': 9.0}, 'objective': 44.0}
+
+================================================================================
+
+Problem 48: 48_nlp4lp_48
+- Proposed solution:
+Execution Results:
+SUCCESS:
+MILP Model (using ortools.linear_solver) Optimal Solution:
+  Rural factories: 20
+  Urban factories: 5
+  Objective (total factories): 25.0
+
+Output Schema:
+{
+    "variables": {
+        "FactoriesBuilt": {
+            "0": 20.0,
+            "1": 5.0
+        }
+    },
+    "objective": 25.0
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'FactoriesBuilt': {'0': 20.0, '1': 5.0}}, 'objective': 25.0}
+
+================================================================================
+
+Problem 49: 49_nlp4lp_49
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using OR-Tools Linear Solver (MIP formulation):
+MachinesCounterTop:  0.0
+MachinesFridge:  7.0
+Objective (Total Machines):  7.0
+
+Solution using OR-Tools CP-SAT model:
+MachinesCounterTop:  0
+MachinesFridge:  7
+Objective (Total Machines):  7.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'MachinesCounterTop': 0.0, 'MachinesFridge': 7.0}, 'objective': 7.0}
+
+================================================================================
+
+Problem 50: 50_nlp4lp_50
+- Proposed solution:
+Execution Results:
+SUCCESS:
+=== Continuous Model (Fractional Container Use Allowed) ===
+Optimal number of small containers (x_small): 39.999999999999986
+Optimal number of large containers (x_large): 5.000000000000007
+Maximum paste produced: 950.0
+
+=== Integer Model (Discrete Container Use) ===
+Optimal number of small containers (x_small): 40
+Optimal number of large containers (x_large): 5
+Maximum paste produced: 950.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumUsedContainers': [40.0, 5.0]}, 'objective': 950.0}
+
+================================================================================
+
+Problem 51: 51_nlp4lp_51
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+    "LinearSolverModel": {
+        "model_type": "Linear Programming using ortools.linear_solver",
+        "variables": {
+            "LandAllocated": {
+                "small": 0.0,
+                "large": 225.00000000000003
+            }
+        },
+        "objective": 1125.0000000000002
+    }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'LandAllocated': {'0': 0.0, '1': 225.0}}, 'objective': 1125.0}
+
+================================================================================
+
+Problem 52: 52_nlp4lp_52
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Croissant Production Problem (Implementation 1):
+Status: OPTIMAL
+Quantity Almond Croissant: 0
+Quantity Pistachio Croissant: 0
+Total Production Time: 0.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityAlmondCroissant': -0.0, 'QuantityPistachioCroissant': -0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 53: 53_nlp4lp_53
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model 1 (using brownies >= 0.4*(brownies+lemon) constraint):
+Optimal NumberOfBrownies = 1.0
+Optimal NumberOfLemonSquares = 1.001
+Optimal Objective (Total Fiber) = 10.006
+
+Results for Model 2 (using lemon <= 1.5*brownies constraint):
+Optimal NumberOfBrownies = 1.0
+Optimal NumberOfLemonSquares = 1.001
+Optimal Objective (Total Fiber) = 10.006
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfBrownies': 2.0000000000000004, 'NumberOfLemonSquares': 3.0000000000000004}, 'objective': 26.000000000000007}
+
+================================================================================
+
+Problem 54: 54_nlp4lp_54
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving Model Version 1 (Using shift variables only):
+{'variables': {'NumberOfNurseShifts': 0.0, 'NumberOfPharmacistShifts': 29.0, 'NumberOfNurses': 0.0, 'NumberOfPharmacists': 29.0}, 'objective': 29.0}
+
+Solving Model Version 2 (Using separate shift and worker variables with linking constraints):
+{'variables': {'NumberOfNurseShifts': 0.0, 'NumberOfPharmacistShifts': 29.0, 'NumberOfNurses': 0.0, 'NumberOfPharmacists': 29.0}, 'objective': 29.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfNurseShifts': 12.0, 'NumberOfPharmacistShifts': 20.0, 'NumberOfNurses': -0.0, 'NumberOfPharmacists': -0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 55: 55_nlp4lp_55
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from ortools.linear_solver:
+{'variables': {'NumTopLoading': 0.0, 'NumFrontLoading': 67.0}, 'objective': 67.0}
+
+Results from ortools.sat.python.cp_model:
+{'variables': {'NumTopLoading': 0, 'NumFrontLoading': 67}, 'objective': 67}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumTopLoading': -0.0, 'NumFrontLoading': 67.0}, 'objective': 67.0}
+
+================================================================================
+
+Problem 56: 56_nlp4lp_56
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Solver (MIP) Implementation Result:
+{'variables': {'SmallBranches': 0.0, 'LargeBranches': 12.0}, 'objective': 12.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallBranches': -0.0, 'LargeBranches': 12.0}, 'objective': 12.0}
+
+================================================================================
+
+Problem 57: 57_nlp4lp_57
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Integer Model (Mixed-Integer Programming) Solution:
+RegularVans: 10.0
+HybridVans: 50.0
+Total Vans (objective): 60.0
+
+Continuous Model (Fractional Variables) Solution:
+RegularVans: 9.999999999999973
+HybridVans: 50.00000000000005
+Total Vans (objective): 60.00000000000002
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'RegularVans': 10.0, 'HybridVans': 50.0}, 'objective': 60.0}
+
+================================================================================
+
+Problem 58: 58_nlp4lp_58
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving the continuous model (variables can be fractional):
+Continuous Model Solution:
+ProcessUsage[0] (with catalyst) = 5.0000000000000036
+ProcessUsage[1] (without catalyst) = 16.666666666666664
+Total CO2 produced = 375.0
+
+------------------------------------
+
+Solving the integer model (variables are integers):
+Integer Model Solution:
+ProcessUsage[0] (with catalyst) = 3.0
+ProcessUsage[1] (without catalyst) = 18.0
+Total CO2 produced = 369.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ProcessUsage': {'0': 5.0, '1': 16.666666666666668}}, 'objective': 375.0}
+
+================================================================================
+
+Problem 59: 59_nlp4lp_59
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Continuous LP Model:
+Acres Used: {'Traditional': 300.0000000000001, 'Modern': 199.9999999999999}
+Objective (Total Tea Leaves Picked): 17000.0
+
+Integer MIP Model:
+Acres Used: {'Traditional': 300.0, 'Modern': 200.0}
+Objective (Total Tea Leaves Picked): 17000.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AcresUsed': [300.0, 200.0]}, 'objective': 17000.0}
+
+================================================================================
+
+Problem 60: 60_nlp4lp_60
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous LP (using ortools.linear_solver) solution:
+{'variables': {'LightSandwiches': 0.0, 'HeavySandwiches': 0.0}, 'objective': 0.0}
+
+Integer CP-SAT (using ortools.sat.python.cp_model) solution:
+{'variables': {'LightSandwiches': 0, 'HeavySandwiches': 0}, 'objective': 0.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'LightSandwiches': 0.0, 'HeavySandwiches': 0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 61: 61_nlp4lp_61
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+Model: Linear Model
+Optimal Number of SingleStampMachines: 5.0
+Optimal Number of DualStampMachines: 3.0
+Objective (Total Machines): 8.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SingleStampMachines': 5.0, 'DualStampMachines': 3.0}, 'objective': 8.0}
+
+================================================================================
+
+Problem 62: 62_nlp4lp_62
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model Solution:
+{'NumberOfChocolateCrepes': 4.999999999999999e-07, 'NumberOfPeanutButterCrepes': 1.4999999999999998e-06, 'Objective': 1.35e-05}
+
+Integer Model Solution:
+{'NumberOfChocolateCrepes': 1.0, 'NumberOfPeanutButterCrepes': 2.0, 'Objective': 20.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfChocolateCrepes': 1.0, 'NumberOfPeanutButterCrepes': 2.0}, 'objective': 20.0}
+
+================================================================================
+
+Problem 63: 63_nlp4lp_63
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Result from the Linear Programming Model:
+Optimal Variables (ShiftsPerType):
+  Regular (index '0'): 15.0
+  Emergency (index '1'): 25.0
+Objective Value (Total number of fire fighters): 40.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ShiftsPerType': {'0': 15.0, '1': 25.0}}, 'objective': 40.0}
+
+================================================================================
+
+Problem 64: 64_nlp4lp_64
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Version A: Using reformulated hygiene ratio constraint (6*M <= 4*MotionActivatedMachines)
+Optimal solution found:
+  ManualMachines         = 6.0
+  MotionActivatedMachines= 11.0
+  TotalMachines          = 17.0
+  Objective (Total)      = 17.0
+
+Version B: Using explicit TotalMachines variable and original hygiene ratio constraint (ManualMachines <= 0.4 * TotalMachines)
+Optimal solution found:
+  ManualMachines         = 6.0
+  MotionActivatedMachines= 11.0
+  TotalMachines          = 17.0
+  Objective (Total)      = 17.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ManualMachines': 6.0, 'MotionActivatedMachines': 11.0, 'TotalMachines': 17.0}, 'objective': 17.0}
+
+================================================================================
+
+Problem 65: 65_nlp4lp_65
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Solver Model Solution:
+Status: OPTIMAL
+NumberOfSmallShops = 1.0
+NumberOfLargeShops = 7.0
+Total shops (Objective) = 8.0
+
+Final Structured Output:
+{'LinearSolver': {'variables': {'NumberOfSmallShops': 1.0, 'NumberOfLargeShops': 7.0}, 'objective': 8.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfSmallShops': 1.0, 'NumberOfLargeShops': 7.0}, 'objective': 8.0}
+
+================================================================================
+
+Problem 66: 66_nlp4lp_66
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+  "LinearSolver": {
+    "variables": {
+      "NumberOfVehicles": {
+        "0": 6.0,
+        "1": 16.0
+      }
+    },
+    "objective": 22.0
+  },
+  "CpModel": {
+    "variables": {
+      "NumberOfVehicles": {
+        "0": 6,
+        "1": 16
+      }
+    },
+    "objective": 22.0
+  }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfVehicles': {'0': 6.0, '1': 16.0}}, 'objective': 22.0}
+
+================================================================================
+
+Problem 67: 67_nlp4lp_67
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Formulation 1:
+{'variables': {'ConductExperiment': {'0': 42.307692307692314, '1': 134.6153846153846}}, 'objective': 1684.6153846153848}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ConductExperiment': {'0': 42.30769230769231, '1': 134.6153846153846}}, 'objective': 1684.6153846153848}
+
+================================================================================
+
+Problem 68: 68_nlp4lp_68
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Linear Solver Implementation:
+AcresNet: 124.99999999999991
+AcresLine: 100.00000000000014
+Total Fish Caught (Objective): 1500.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AcresNet': 50.0, 'AcresLine': 200.0}, 'objective': 1400.0}
+
+================================================================================
+
+Problem 69: 69_nlp4lp_69
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using ortools.linear_solver:
+{'variables': {'NumMocha': 0.0, 'NumRegularCoffee': 0.0}, 'objective': 0.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumMocha': -0.0, 'NumRegularCoffee': -0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 70: 70_nlp4lp_70
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution from OR-Tools Linear Solver Model:
+{'PlasticBottles': 273.0, 'GlassBottles': 90.0, 'objective': 363.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'PlasticBottles': 274.0, 'GlassBottles': 89.0}, 'objective': 363.0}
+
+================================================================================
+
+Problem 71: 71_nlp4lp_71
+- Proposed solution:
+Execution Results:
+SUCCESS:
+========== Optimization Results ==========
+Optimal Solution Found:
+ - Number of Full-Time Workers: 25.0
+ - Number of Part-Time Workers: 75.0
+ - Total Number of Workers (Objective Value): 100.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumFullTimeWorkers': 25.0, 'NumPartTimeWorkers': 75.0}, 'objective': 100.0}
+
+================================================================================
+
+Problem 72: 72_nlp4lp_72
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+----------------------------------------
+Method: LinearSolver
+Optimal Variables: {'NumberA': 20, 'NumberB': 8}
+Objective Value: 28.0
+----------------------------------------
+Method: CPSAT
+Optimal Variables: {'NumberA': 20, 'NumberB': 8}
+Objective Value: 28
+----------------------------------------
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberA': 20.0, 'NumberB': 8.0}, 'objective': 28.0}
+
+================================================================================
+
+Problem 73: 73_nlp4lp_73
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+
+Implementation_1:
+  Status: Optimal
+  Solution: {'NumberOfFactories': {'0': 5.0, '1': 0.0}, 'objective': 5.0}
+  ObjectiveValue: 5.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfFactories': {'0': 5.0, '1': -0.0}}, 'objective': 5.0}
+
+================================================================================
+
+Problem 74: 74_nlp4lp_74
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+Continuous Model:
+  Variables:
+    NumberReactions -> x_A (reaction A): 96.29629629629629, x_B (reaction B): 74.07407407407408
+  Objective (Total rare compound produced): 1555.5555555555557
+
+Integer Model:
+  Variables:
+    NumberReactions -> x_A (reaction A): 96.0, x_B (reaction B): 74.0
+  Objective (Total rare compound produced): 1552.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberReactions': {'0': 96.2962962962963, '1': 74.07407407407406}}, 'objective': 1555.5555555555557}
+
+================================================================================
+
+Problem 75: 75_nlp4lp_75
+- Proposed solution:
+Execution Results:
+SUCCESS:
+----- Linear Solver (ORTools) Results -----
+{'variables': {'LandAllocated': {'0': 10.000000000000002, '1': 0.0}}, 'objective': 30.000000000000007}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'LandAllocated': {'0': 10.0, '1': 0.0}}, 'objective': 30.0}
+
+================================================================================
+
+Problem 76: 76_nlp4lp_76
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Integer Formulation Solution:
+{'MilkBars': 0.0, 'DarkBars': 0.0, 'objective': 0.0}
+
+Continuous Formulation Solution:
+{'MilkBars': 0.0, 'DarkBars': 0.0, 'objective': 0.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'MilkBars': -0.0, 'DarkBars': -0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 77: 77_nlp4lp_77
+- Proposed solution:
+Execution Results:
+SUCCESS:
+-----------------------------------------------------
+Optimization Model Using OR-Tools Linear Solver
+-----------------------------------------------------
+Optimal Number of Printers:
+  Premium: 7
+  Regular: 0
+Minimum Total Printers (Objective Value): 7.0
+-----------------------------------------------------
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumPrinters': {'0': 7.0, '1': -0.0}}, 'objective': 7.0}
+
+================================================================================
+
+Problem 78: 78_nlp4lp_78
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results using OR-Tools Linear Solver:
+{'variables': {'NumberVintageBottles': 28.571428571428573, 'NumberRegularBottles': 114.28571428571429}, 'objective': 142.85714285714286}
+
+Results using OR-Tools CP-SAT Model:
+{'variables': {'NumberVintageBottles': 28, 'NumberRegularBottles': 114}, 'objective': 142}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberVintageBottles': 28.0, 'NumberRegularBottles': 114.0}, 'objective': 142.0}
+
+================================================================================
+
+Problem 79: 79_nlp4lp_79
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for Model 1 (Linear Formulation):
+NumberOfPeachPacks = 2.0
+NumberOfCherryPacks = 1.0
+Optimal Total Syrup Used = 14.0
+
+Structured Output for Model 1:
+{
+  "variables": {
+    "NumberOfPeachPacks": "float (nonnegative, ideally integer)",
+    "NumberOfCherryPacks": "float (nonnegative, ideally integer)"
+  },
+  "objective": "Minimize 5 * NumberOfPeachPacks + 4 * NumberOfCherryPacks (minimizes total syrup used)"
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfPeachPacks': 0.0, 'NumberOfCherryPacks': 0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 80: 80_nlp4lp_80
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for Model Version 1:
+{'variables': {'NumberOfPills': {'0': 4.2857142857142865, '1': 8.57142857142857}}, 'objective': 2.142857142857143}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfPills': {'0': 5.0, '1': 8.0}}, 'objective': 2.3}
+
+================================================================================
+
+Problem 81: 81_nlp4lp_81
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using the Linear Solver formulation:
+{'variables': {'QuantityAlpha': 4.0, 'QuantityOmega': 2.0}, 'objective': 110.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityAlpha': 3.909774436090226, 'QuantityOmega': 2.1052631578947367}, 'objective': 109.77443609022556}
+
+================================================================================
+
+Problem 82: 82_nlp4lp_82
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+----------
+Linear Solver Implementation:
+variables: {'FlourUsedPerBeaker': {'0': -0.0, '1': 15.0}}
+objective: 45.0
+
+CP-SAT Model Implementation:
+variables: {'FlourUsedPerBeaker': {'0': 0, '1': 15}}
+objective: 45
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'FlourUsedPerBeaker': {'0': 0.0, '1': 15.0}}, 'objective': 45.0}
+
+================================================================================
+
+Problem 83: 83_nlp4lp_83
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results using Linear Solver (MIP):
+{'variables': {'SmallBones': 30.0, 'LargeBones': 30.0}, 'objective': 810.0}
+
+Results using CP-SAT Model:
+{'variables': {'SmallBones': 30, 'LargeBones': 30}, 'objective': 810.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallBones': 30.0, 'LargeBones': 30.0}, 'objective': 810.0}
+
+================================================================================
+
+Problem 84: 84_nlp4lp_84
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for the juice optimization problem (using ortools.linear_solver):
+{'variables': {'NumberOfAppleJuiceBoxes': 46.0, 'NumberOfOrangeJuiceBoxes': 3.0}, 'objective': 582.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfAppleJuiceBoxes': 46.0, 'NumberOfOrangeJuiceBoxes': 3.0}, 'objective': 582.0}
+
+================================================================================
+
+Problem 85: 85_nlp4lp_85
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Model 1 (Direct Time Interpretation) Result:
+{'variables': {'CleansingChemicalUnits': 200.0, 'OdorRemovingChemicalUnits': 100.0}, 'objective': 1400.0}
+
+Model 2 (Alternative Interpretation) Result:
+{'variables': {'CleansingChemicalUnits': 200.0, 'OdorRemovingChemicalUnits': 100.0}, 'objective': 600.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'CleansingChemicalUnits': 100.0, 'OdorRemovingChemicalUnits': 50.0}, 'objective': 700.0}
+
+================================================================================
+
+Problem 86: 86_nlp4lp_86
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for the Linear Programming Formulation:
+------------------------------------------------
+Factory1 Operating Hours (x[Factory1]): 33.33 hours
+Factory2 Operating Hours (x[Factory2]): 3.33 hours
+Total Operating Hours (MaxOperatingHours): 36.67 hours
+Objective Value (Minimized Total Time): 36.67 hours
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'OperationalLevel': {'0': 27.5, '1': 15.0}, 'MaxOperatingHours': 27.5}, 'objective': 27.5}
+
+================================================================================
+
+Problem 87: 87_nlp4lp_87
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results using Linear Solver (Continuous LP formulation):
+{'variables': {'FishMeals': 4.285714285714285, 'ChickenMeals': 8.571428571428571}, 'objective': 115.7142857142857}
+
+Results using CP-SAT (Integer approximation formulation):
+{'variables': {'FishMeals': 4, 'ChickenMeals': 9}, 'objective': 118.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'FishMeals': 4.0, 'ChickenMeals': 9.0}, 'objective': 118.0}
+
+================================================================================
+
+Problem 88: 88_nlp4lp_88
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+-----------
+Model 1: Linear Solver
+{'variables': {'RegularBatches': 32.0, 'PremiumBatches': 35.0}, 'objective': 2649.9999999999995}
+-----------
+Model 2: CP-SAT
+{'variables': {'RegularBatches': 32, 'PremiumBatches': 35}, 'objective': 2650.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'RegularBatches': 32.0, 'PremiumBatches': 35.0}, 'objective': 2650.0}
+
+================================================================================
+
+Problem 89: 89_nlp4lp_89
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using OR-Tools Linear Solver (GLOP):
+{'variables': {'AutomaticPatients': 500.0, 'ManualPatients': 999.9999999999999}, 'objective': 1500.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AutomaticPatients': 500.0, 'ManualPatients': 1000.0}, 'objective': 1500.0}
+
+================================================================================
+
+Problem 90: 90_nlp4lp_90
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for Implementation 1:
+{'variables': {'Servings': {'0': 0.0, '1': 8.0}}, 'objective': 2.4}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Servings': {'0': 0.0, '1': 8.0}}, 'objective': 2.4}
+
+================================================================================
+
+Problem 91: 91_nlp4lp_91
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model Result:
+Solution:
+QuantityCrabCake = 13.333333333333332
+QuantityLobsterRoll = 1.6666666666666676
+Objective (Total Unsaturated Fat) = 63.333333333333336
+
+Integer Model Result:
+Solution:
+QuantityCrabCake = 16.0
+QuantityLobsterRoll = 0.0
+Objective (Total Unsaturated Fat) = 64.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityCrabCake': 13.333333333333332, 'QuantityLobsterRoll': 1.6666666666666665}, 'objective': 63.33333333333333}
+
+================================================================================
+
+Problem 92: 92_nlp4lp_92
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for the Linear Programming Model using ortools.linear_solver:
+Demonstrations (Demo 1, Demo 2): [5.000000000000001, 0.0]
+Total Minty Foam Produced = 125.00000000000003
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'DemonstrationUsed': [5.0, 0.0]}, 'objective': 125.0}
+
+================================================================================
+
+Problem 93: 93_nlp4lp_93
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results using ortools.linear_solver:
+{'variables': {'AppleServings': 15, 'CarrotServings': 5}, 'objective': 50.0}
+
+Results using ortools.sat.python.cp_model:
+{'variables': {'AppleServings': 15, 'CarrotServings': 5}, 'objective': 50}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AppleServings': 16.666666666666668, 'CarrotServings': 5.555555555555556}, 'objective': 55.55555555555556}
+
+================================================================================
+
+Problem 94: 94_nlp4lp_94
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving using Model A (with explicit TotalTime variable):
+{'model': 'A', 'variables': {'FertilizerUnits': 50.0, 'SeedsUnits': 25.0, 'TotalTime': 62.5}, 'objective': 62.5}
+
+Solving using Model B (computing TotalTime implicitly):
+{'model': 'B', 'variables': {'FertilizerUnits': 50.0, 'SeedsUnits': 25.0, 'TotalTime': 62.5}, 'objective': 62.5}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'FertilizerUnits': 50.0, 'SeedsUnits': 25.0, 'TotalTime': 37.5}, 'objective': 37.5}
+
+================================================================================
+
+Problem 95: 95_nlp4lp_95
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'SequentialModel': {'variables': {'ProductionMatrix': {'(0, 0)': 800.0, '(0, 1)': 1000.0000000000001, '(1, 0)': 0.0, '(1, 1)': 0.0}, 'MaxOperatingHours': 66.66666666666667}, 'objective': 66.66666666666667, 'model': 'Sequential Model (Total Time = t0 + t1)'}, 'ParallelModel': {'variables': {'ProductionMatrix': {'(0, 0)': 480.0, '(0, 1)': 600.0, '(1, 0)': 800.0, '(1, 1)': 400.0}, 'MaxOperatingHours': 40.0}, 'objective': 40.0, 'model': 'Parallel Model (Makespan: max(t0, t1))'}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ProductionMatrix': {'(0, 0)': 1200.0, '(0, 1)': 1000.0, '(1, 0)': 0.0, '(1, 1)': 0.0}, 'MaxOperatingHours': 0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 96: 96_nlp4lp_96
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimal Solution for the Linear Model:
+Burgers = 5
+PizzaSlices = 10
+Objective value (Total Cholesterol) = 160.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Burgers': 5.0, 'PizzaSlices': 10.0}, 'objective': 160.0}
+
+================================================================================
+
+Problem 97: 97_nlp4lp_97
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: LinearSolver
+  BatchesShots: 10.0
+  BatchesPills: 18.0
+  Objective Value (Total People Supplied): 226.0
+
+Model: CPSAT
+  BatchesShots: 10
+  BatchesPills: 18
+  Objective Value (Total People Supplied): 226.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'BatchesShots': 10.0, 'BatchesPills': 18.0}, 'objective': 226.0}
+
+================================================================================
+
+Problem 98: 98_nlp4lp_98
+- Proposed solution:
+Execution Results:
+SUCCESS:
+----- Integer Model (Patients counted as integers) -----
+ElectronicReadings: 3750.0
+RegularReadings: 1875.0
+Total Patients (Objective): 5625.0
+
+----- Continuous Model (Relaxation) -----
+ElectronicReadings: 3750.0
+RegularReadings: 1875.0
+Total Patients (Objective): 5625.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ElectronicReadings': 3750.0, 'RegularReadings': 1875.0}, 'objective': 5625.0}
+
+================================================================================
+
+Problem 99: 99_nlp4lp_99
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Model Solution:
+{'variables': {'Machine1OperatingTime': 4.999999999999999, 'Machine2OperatingTime': 0.0}, 'objective': 1.4999999999999998}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Machine1OperatingTime': 5.0, 'Machine2OperatingTime': 0.0}, 'objective': 1.5}
+
+================================================================================
+
+Problem 100: 100_nlp4lp_100
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Running optimization model:
+Linear Programming Model (Google OR-Tools - Linear Solver) Results:
+{'variables': {'NumRamenPacks': 2.7272727272727275, 'NumFriesPacks': 6.363636363636364}, 'objective': 750.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumRamenPacks': 0.0, 'NumFriesPacks': 10.0}, 'objective': 750.0}
+
+================================================================================
+
+Problem 101: 101_nlp4lp_101
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from Linear Solver Implementation:
+variables: {'BoxesProduced': [25.0, 0.0]}
+objective: 200.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'BoxesProduced': [25.0, 0.0]}, 'objective': 200.0}
+
+================================================================================
+
+Problem 102: 102_nlp4lp_102
+- Proposed solution:
+Execution Results:
+SUCCESS:
+---- Linear Solver (CBC Mixed Integer Programming) Result ----
+PainkillerPills: 50.0
+SleepingPills: 117.0
+Objective (Total Digestive Medicine): 735.0
+
+---- CP-SAT Solver Result ----
+PainkillerPills: 50
+SleepingPills: 117
+Objective (Total Digestive Medicine): 735.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'PainkillerPills': 50.0, 'SleepingPills': 116.66666666666663}, 'objective': 733.3333333333331}
+
+================================================================================
+
+Problem 103: 103_nlp4lp_103
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Programming Model Solution:
+{'variables': {'NumberOfGummies': 54.54545454545455, 'NumberOfPills': 18.181818181818183}, 'objective': 309.0909090909091}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfGummies': 54.54545454545455, 'NumberOfPills': 18.181818181818187}, 'objective': 309.0909090909091}
+
+================================================================================
+
+Problem 104: 104_nlp4lp_104
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model (Float Variables):
+  AnxietyUnits: 66.66666666666667
+  AntidepressantUnits: 33.333333333333336
+  Objective (Total Time): 366.6666666666667
+
+Integer Model (Integer Variables):
+  AnxietyUnits: 66.0
+  AntidepressantUnits: 34.0
+  Objective (Total Time): 368.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AnxietyUnits': 66.66666666666667, 'AntidepressantUnits': 33.333333333333336}, 'objective': 366.6666666666667}
+
+================================================================================
+
+Problem 105: 105_nlp4lp_105
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results using ortools.linear_solver (GLOP):
+{'OperatingTime': {'0': 15.833333333333332, '1': 18.333333333333336}, 'objective': 34.16666666666667}
+
+Results using ortools.sat.python.cp_model (scaled integer formulation):
+{'OperatingTime': {'0': 15.83, '1': 18.34}, 'objective': 34.17}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'OperatingTime': {'0': 15.833333333333334, '1': 18.333333333333332}}, 'objective': 34.166666666666664}
+
+================================================================================
+
+Problem 106: 106_nlp4lp_106
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Continuous Model Output:
+model: Continuous
+variables: {'NutServings': {'0': 28.57142857142858, '1': 14.28571428571429}}
+objective: 600.0000000000002
+
+Integer Model Output:
+model: Integer
+variables: {'NutServings': {'0': 29.0, '1': 14.0}}
+objective: 603.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NutServings': {'0': 28.571428571428573, '1': 14.285714285714286}}, 'objective': 600.0}
+
+================================================================================
+
+Problem 107: 107_nlp4lp_107
+- Proposed solution:
+Execution Results:
+SUCCESS:
+=== Linear Solver Optimization Results ===
+Status    : OPTIMAL
+Liquid Production: 19.0
+Foam Production  : 20.0
+Max Hands Cleaned: 970.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Production': [42.0, 0.0]}, 'objective': 1260.0}
+
+================================================================================
+
+Problem 108: 108_nlp4lp_108
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'LinearModel': {'variables': {'NumThroatSwab': 3478.0, 'NumNasalSwab': 869.0}, 'objective': 4347.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumThroatSwab': 3479.0, 'NumNasalSwab': 868.0}, 'objective': 4347.0}
+
+================================================================================
+
+Problem 109: 109_nlp4lp_109
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimal solutions:
+Linear_Solver_Model:
+  Variables (NumDoses):
+    Dose for pain killer 1: 26.666666666666668
+    Dose for pain killer 2: 0.0
+  Objective (Total back medicine delivered): 21.333333333333336
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumDoses': {'0': 0.0, '1': 11.428571428571429}}, 'objective': 6.857142857142857}
+
+================================================================================
+
+Problem 110: 110_nlp4lp_110
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results (Linear Formulation):
+XBanana = 30.946882217090067
+XMango = 15.242494226327947
+Objective (Minimized Sugar) = 431.4087759815243
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'XBanana': 32.0, 'XMango': 15.0}, 'objective': 440.0}
+
+================================================================================
+
+Problem 111: 111_nlp4lp_111
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution from Linear Solver Implementation:
+{'variables': {'Production': {'0': 15.0, '1': 0.0}}, 'objective': 60.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Production': {'0': 15.0, '1': 0.0}}, 'objective': 60.0}
+
+================================================================================
+
+Problem 112: 112_nlp4lp_112
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Programming Model Result:
+{'variables': {'CheesecakeSlices': 46.25, 'CaramelCakeSlices': 3.0}, 'objective': 2000.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'CheesecakeSlices': 45.0, 'CaramelCakeSlices': 4.0}, 'objective': 2000.0}
+
+================================================================================
+
+Problem 113: 113_nlp4lp_113
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model Version 1:
+  SulfateUnits       = 266.66666666666663
+  GingerUnits        = 133.33333333333331
+  SulfateAddedFirst  = 0.0
+  Objective Value    = 233.33333333333331
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SulfateUnits': 266.0, 'GingerUnits': 134.0, 'SulfateAddedFirst': 1.0}, 'objective': 233.5}
+
+================================================================================
+
+Problem 114: 114_nlp4lp_114
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using OR-Tools Linear Solver:
+{'variables': {'NumberOfOranges': 15.0, 'NumberOfGrapefruits': 5.0}, 'objective': 105.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfOranges': 15.0, 'NumberOfGrapefruits': 5.0}, 'objective': 105.0}
+
+================================================================================
+
+Problem 115: 115_nlp4lp_115
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model with Strict Inequality (DosesB >= DosesA + epsilon with epsilon=1):
+{'variables': {'DosesA': 3.0, 'DosesB': 5.0}, 'objective': 76.0}
+
+Results for Model with Non-Strict Inequality (DosesB >= DosesA):
+{'variables': {'DosesA': 4.0, 'DosesB': 4.0}, 'objective': 80.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'DosesA': 3.7142857142857144, 'DosesB': 4.714285714285714}, 'objective': 82.28571428571428}
+
+================================================================================
+
+Problem 116: 116_nlp4lp_116
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Solver Model Solution:
+{'variables': {'NumberOfSpitTests': 770.0, 'NumberOfSwabTests': 20.0}, 'objective': 790.0}
+
+CP-SAT Model Solution:
+{'variables': {'NumberOfSpitTests': 770.0, 'NumberOfSwabTests': 20.0}, 'objective': 790.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfSpitTests': 770.0, 'NumberOfSwabTests': 20.0}, 'objective': 790.0}
+
+================================================================================
+
+Problem 117: 117_nlp4lp_117
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+LinearSolverModel:
+  MinutesBeam1: 0.0
+  MinutesBeam2: 7.499999999999999
+  objective: 1.5
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'MinutesBeam1': 0.0, 'MinutesBeam2': 7.5}, 'objective': 1.5}
+
+================================================================================
+
+Problem 118: 118_nlp4lp_118
+- Proposed solution:
+Execution Results:
+SUCCESS:
+---- Linear Solver Model ----
+Optimal Solution:
+QuantityTurkey = 0.0
+QuantityTuna   = 8.333333333333334
+Objective Value (Total Fat) = 66.66666666666667
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityTurkey': 0.0, 'QuantityTuna': 8.333333333333334}, 'objective': 66.66666666666667}
+
+================================================================================
+
+Problem 119: 119_nlp4lp_119
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Solver Model Result:
+{'variables': {'ExperimentPerformed': [10.0, 0.0]}, 'objective': 50.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ExperimentPerformed': [1.0, 1.0]}, 'objective': 11.0}
+
+================================================================================
+
+Problem 120: 120_nlp4lp_120
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'LinearSolver': {'model': 'Linear Solver (MIP)', 'variables': {'PillsProduced': {'0': 100.0, '1': 150.0}}, 'objective': 350.0}, 'CPSAT': {'model': 'CP-SAT Solver', 'variables': {'PillsProduced': {'0': 100, '1': 150}}, 'objective': 350}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'PillsProduced': {'0': 100.0, '1': 150.0}}, 'objective': 350.0}
+
+================================================================================
+
+Problem 122: 122_nlp4lp_122
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'Linear_Solver_Implementation': {'variables': {'NumberOfBlueberryPacks': 15, 'NumberOfStrawberryPacks': 45}, 'objective': 390.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfBlueberryPacks': 15.0, 'NumberOfStrawberryPacks': 45.0}, 'objective': 390.0}
+
+================================================================================
+
+Problem 123: 123_nlp4lp_123
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model1 Results:
+Variables:
+  BeamBridges: 20.0
+  TrussBridges: 0.0
+Objective Value (Total Mass Supported in grams): 800.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'BeamBridges': 20.0, 'TrussBridges': 0.0}, 'objective': 800.0}
+
+================================================================================
+
+Problem 124: 124_nlp4lp_124
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using Linear Solver:
+{'NumberOfPills': 142.0, 'NumberOfShots': 429.0, 'objective': 571.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfPills': 142.0, 'NumberOfShots': 429.0}, 'objective': 571.0}
+
+================================================================================
+
+Problem 125: 125_nlp4lp_125
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimal Solutions:
+{'LinearSolver': {'variables': {'VanTrips': 14.0, 'TruckTrips': 10.0}, 'objective': 24.0}, 'CpSatSolver': {'variables': {'VanTrips': 13.0, 'TruckTrips': 11.0}, 'objective': 24.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'VanTrips': 13.0, 'TruckTrips': 11.0}, 'objective': 24.0}
+
+================================================================================
+
+Problem 126: 126_nlp4lp_126
+- Proposed solution:
+Execution Results:
+SUCCESS:
+=== Solving with Linear Solver (MIP) ===
+Linear Solver (MIP) Solution:
+{'variables': {'SmallBottlesUsed': 134.0, 'LargeBottlesUsed': 66.0}, 'objective': 1990.0}
+
+=== Solving with CP-SAT Solver ===
+CP-SAT Solver Solution:
+{'variables': {'SmallBottlesUsed': 134, 'LargeBottlesUsed': 66}, 'objective': 1990.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallBottlesUsed': 134.0, 'LargeBottlesUsed': 66.0}, 'objective': 1990.0}
+
+================================================================================
+
+Problem 127: 127_nlp4lp_127
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Integer Model Solution:
+ShipTrips: 12.0
+PlaneTrips: 1.0
+Objective (Total Fuel): 6300.0 liters
+
+Continuous Model Solution:
+ShipTrips: 12.50
+PlaneTrips: 0.00
+Objective (Total Fuel): 6250.00 liters
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ShipTrips': 12.0, 'PlaneTrips': 1.0}, 'objective': 6300.0}
+
+================================================================================
+
+Problem 128: 128_nlp4lp_128
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving Integer Model (Trips as integers):
+{'variables': {'BoatTrips': 12.0, 'CanoeTrips': 23.0}, 'objective': 1160.0}
+
+Solving Continuous Model (Trips as floats):
+{'variables': {'BoatTrips': 12.0, 'CanoeTrips': 22.5}, 'objective': 1140.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'BoatTrips': 12.0, 'CanoeTrips': 23.0}, 'objective': 1160.0}
+
+================================================================================
+
+Problem 129: 129_nlp4lp_129
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from Linear Solver Implementation:
+Optimal Number of Old Vans: 26.0
+Optimal Number of New Vans: 30.0
+Minimum Total Pollution: 2200.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfOldVans': 26.0, 'NumberOfNewVans': 30.0}, 'objective': 2200.0}
+
+================================================================================
+
+Problem 130: 130_nlp4lp_130
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from Linear Solver:
+{'variables': {'SmallTeams': 40.0, 'LargeTeams': 6.0}, 'objective': 2480.0}
+
+Results from CP-SAT Solver:
+{'variables': {'SmallTeams': 40, 'LargeTeams': 6}, 'objective': 2480.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallTeams': 40.0, 'LargeTeams': 6.0}, 'objective': 2480.0}
+
+================================================================================
+
+Problem 131: 131_nlp4lp_131
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving Continuous Model:
+{'NumberOfOtters': 13.636363636363638, 'NumberOfDolphins': 31.81818181818182, 'objective': 72.72727272727273}
+
+Solving Integer Model:
+{'NumberOfOtters': 13.0, 'NumberOfDolphins': 32.0, 'objective': 71.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfDolphins': 32.0, 'NumberOfOtters': 13.0}, 'objective': 71.0}
+
+================================================================================
+
+Problem 132: 132_nlp4lp_132
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results using OR-Tools Linear Solver:
+  NumberOfVans:  14.0
+  NumberOfTrucks:  13.0
+  Objective (Min NumberOfVans):  14.0
+
+Results using OR-Tools CP-SAT Model:
+  NumberOfVans:  14
+  NumberOfTrucks:  13
+  Objective (Min NumberOfVans):  14
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfVans': 14.0, 'NumberOfTrucks': 14.0}, 'objective': 14.0}
+
+================================================================================
+
+Problem 133: 133_nlp4lp_133
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution from Linear Solver (MIP):
+{'variables': {'NumContainers': 40.0, 'NumTrucks': 20.0}, 'objective': 60.000000000000014}
+
+Solution from CP-SAT Model:
+{'variables': {'NumContainers': 40, 'NumTrucks': 20}, 'objective': 60}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumContainers': 40.0, 'NumTrucks': 20.0}, 'objective': 60.0}
+
+================================================================================
+
+Problem 134: 134_nlp4lp_134
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Model 1 (Constraint: NumberLargeBuses <= 0.2*(Total Buses)) solution:
+{'NumberSmallBuses': 16, 'NumberLargeBuses': 4, 'objective': 20}
+
+Model 2 (Constraint: NumberSmallBuses >= 4*NumberLargeBuses) solution:
+{'NumberSmallBuses': 16, 'NumberLargeBuses': 4, 'objective': 20}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberSmallBuses': 16.0, 'NumberLargeBuses': 4.0}, 'objective': 20.0}
+
+================================================================================
+
+Problem 135: 135_nlp4lp_135
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'LinearSolverImplementation': {'model': 'LinearSolver', 'variables': {'NumTrips': {'0': 25.0, '1': 50.0}, 'NumVehicles': {'0': 25.0, '1': 50.0}}, 'objective': 75.0}, 'CpModelImplementation': {'model': 'CpModel', 'variables': {'NumTrips': {'0': 25, '1': 50}, 'NumVehicles': {'0': 25, '1': 50}}, 'objective': 75}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumTrips': {'0': 25.0, '1': 50.0}, 'NumVehicles': {'0': 0.0, '1': -0.0}}, 'objective': 75.0}
+
+================================================================================
+
+Problem 136: 136_nlp4lp_136
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Bouquet Transportation Problem Results:
+SmallBouquets = 46.666666666666664
+LargeBouquets = 23.333333333333332
+Total Flowers Transported = 466.66666666666663
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallBouquets': 47.0, 'LargeBouquets': 23.0}, 'objective': 465.0}
+
+================================================================================
+
+Problem 137: 137_nlp4lp_137
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model_Version1:
+TripsNewCompany: 2
+TripsOldCompany: 13
+Total Diesel Consumption (Objective): 580.0
+
+Model_Version2:
+TripsNewCompany: 2
+TripsOldCompany: 13
+Total Diesel Consumption (Objective): 580.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'TripsNewCompany': 2.0, 'TripsOldCompany': 13.0}, 'objective': 580.0}
+
+================================================================================
+
+Problem 138: 138_nlp4lp_138
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving with Linear Solver (MIP):
+{'variables': {'BusTrips': 10.0, 'CarTrips': 17.0}, 'objective': 555.0}
+
+Solving with CP-SAT Model:
+{'variables': {'BusTrips': 10, 'CarTrips': 17}, 'objective': 555.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'BusTrips': 9.0, 'CarTrips': 20.0}, 'objective': 570.0}
+
+================================================================================
+
+Problem 139: 139_nlp4lp_139
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model Solution:
+Optimal number of Helicopter Trips: 8.0
+Optimal number of Truck Trips: 8.0
+Minimum Total Pollution: 120.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumHelicopterTrips': 8.0, 'NumTruckTrips': 8.0}, 'objective': 120.0}
+
+================================================================================
+
+Problem 140: 140_nlp4lp_140
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+---------
+Linear Solver Result:
+{'model': 'LinearSolver', 'variables': {'SmallContainers': 48.0, 'LargeContainers': 16.0}, 'objective': 1760.0}
+---------
+CP-SAT Result:
+{'model': 'CPSat', 'variables': {'SmallContainers': 48, 'LargeContainers': 16}, 'objective': 1760}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallContainers': 48.0, 'LargeContainers': 16.0}, 'objective': 1760.0}
+
+================================================================================
+
+Problem 141: 141_nlp4lp_141
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+    "Linear_Programming_Implementation": {
+        "model": "Linear Solver (CBC)",
+        "variables": {
+            "NumberOfBikes": 26.0,
+            "NumberOfScooters": 61.0
+        },
+        "objective": 513.0
+    }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfBikes': 26.0, 'NumberOfScooters': 61.0}, 'objective': 513.0}
+
+================================================================================
+
+Problem 142: 142_nlp4lp_142
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+{
+  "variables": {
+    "NumLargePlanes": 7.0,
+    "NumSmallPlanes": 9.0
+  },
+  "objective": 16.0
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumLargePlanes': 7.0, 'NumSmallPlanes': 9.0}, 'objective': 16.0}
+
+================================================================================
+
+Problem 143: 143_nlp4lp_143
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for the Mixed Integer Linear Programming model:
+SmallWagons = 45.0
+LargeWagons = 22.0
+Total number of wagons = 67.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallWagons': 45.0, 'LargeWagons': 22.0}, 'objective': 67.0}
+
+================================================================================
+
+Problem 144: 144_nlp4lp_144
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model 1 (Linear/MIP formulation):
+variables: {'NumScooters': 75.0, 'NumRickshaws': 50.0}
+objective: 75.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumScooters': 0.0, 'NumRickshaws': 2000000000.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 145: 145_nlp4lp_145
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'LinearModel': {'variables': {'NumberOfCamels': 12.0, 'NumberOfHorses': 7.0}, 'objective': 19.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfCamels': 12.0, 'NumberOfHorses': 7.0}, 'objective': 19.0}
+
+================================================================================
+
+Problem 146: 146_nlp4lp_146
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Method: LinearSolver
+  Solution: {'SmallSuitcasesUsed': 47.0, 'LargeSuitcasesUsed': 23.0}
+  TotalSnacksDelivered: 4190.0
+
+Method: CPSolver
+  Solution: {'SmallSuitcasesUsed': 47, 'LargeSuitcasesUsed': 23}
+  TotalSnacksDelivered: 4190
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallSuitcasesUsed': 47.0, 'LargeSuitcasesUsed': 23.0}, 'objective': 4190.0}
+
+================================================================================
+
+Problem 147: 147_nlp4lp_147
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimal solution using formulation:
+RegularBoatTrips = 20
+SpeedBoatTrips = 20
+Total gas consumption (liters) = 600.0
+
+Structured Output:
+{'variables': {'RegularBoatTrips': 'integer (>= 0)', 'SpeedBoatTrips': 'integer (>= 0)'}, 'objective': 'Minimize total gas consumption in liters = 10 * RegularBoatTrips + 20 * SpeedBoatTrips'}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'RegularBoatTrips': 20.0, 'SpeedBoatTrips': 20.0}, 'objective': 600.0}
+
+================================================================================
+
+Problem 148: 148_nlp4lp_148
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'LinearSolver_Model': {'variables': {'NumberOfBusTrips': 6, 'NumberOfCarTrips': 15}, 'objective': 34.5}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfBusTrips': 7.0, 'NumberOfCarTrips': 13.0}, 'objective': 33.5}
+
+================================================================================
+
+Problem 149: 149_nlp4lp_149
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Method: LinearSolver
+NumberOfVans: 10
+NumberOfMinibuses: 9
+Total Pollution: 160.0
+
+Method: CPSAT
+NumberOfVans: 10
+NumberOfMinibuses: 9
+Total Pollution: 160.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfVans': 10.0, 'NumberOfMinibuses': 9.0}, 'objective': 160.0}
+
+================================================================================
+
+Problem 150: 150_nlp4lp_150
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Running model(s) for the recycling bins optimization problem:
+Model 1 (Linear Optimization) Solution:
+{'NumberSmallBins': 27.0, 'NumberLargeBins': 9.0, 'objective': 1215.0}
+
+Final Solution for Linear Model:
+NumberSmallBins: 27.0
+NumberLargeBins: 9.0
+Objective (Total Capacity Collected): 1215.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberSmallBins': 27.0, 'NumberLargeBins': 9.0}, 'objective': 1215.0}
+
+================================================================================
+
+Problem 151: 151_nlp4lp_151
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Integer Programming Model Result:
+{'SeasonalVolunteers': 14.0, 'FullTimeVolunteers': 34.0, 'objective': 342.0}
+
+Continuous Linear Programming Model Result:
+{'SeasonalVolunteers': 14.634146341463412, 'FullTimeVolunteers': 34.146341463414636, 'objective': 346.3414634146342}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SeasonalVolunteers': 14.0, 'FullTimeVolunteers': 34.0}, 'objective': 342.0}
+
+================================================================================
+
+Problem 152: 152_nlp4lp_152
+- Proposed solution:
+Execution Results:
+SUCCESS:
+=== Solution using ortools.linear_solver (MIP) ===
+{'variables': {'NumberOfSmallJars': 400.0, 'NumberOfLargeJars': 400.0}, 'objective': 800.0}
+
+=== Solution using ortools.sat.python.cp_model (CP-SAT) ===
+{'variables': {'NumberOfSmallJars': 400, 'NumberOfLargeJars': 400}, 'objective': 800}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfSmallJars': 400.0, 'NumberOfLargeJars': 400.0}, 'objective': 800.0}
+
+================================================================================
+
+Problem 153: 153_nlp4lp_153
+- Proposed solution:
+Execution Results:
+SUCCESS:
+===================================
+Results for Model Implementation 1:
+===================================
+Model Description: Linear Model using ortools.linear_solver
+Solution:
+  NumberOfTractorsUsed = 6.0
+  NumberOfCarsUsed     = 13.0
+  CornTractor         = 240.0 kg
+  CornCar             = 260.0 kg
+  Objective Value     = 19.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfCarsUsed': 13.0, 'NumberOfTractorsUsed': 6.0, 'CornTractor': 240.0, 'CornCar': 260.0}, 'objective': 19.0}
+
+================================================================================
+
+Problem 154: 154_nlp4lp_154
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model 1 (Original constraint formulation):
+{'NumberOfBikes': 80.0, 'NumberOfCars': 53.0, 'objective': 80.0}
+
+Results for Model 2 (Simplified constraint formulation):
+{'NumberOfBikes': 80.0, 'NumberOfCars': 53.0, 'objective': 80.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfBikes': 80.0, 'NumberOfCars': 53.0}, 'objective': 80.0}
+
+================================================================================
+
+Problem 155: 155_nlp4lp_155
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+  "variables": {
+    "PlaneTrips": 11.0,
+    "TruckTrips": 15.0
+  },
+  "objective": 26.0
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'PlaneTrips': 12.0, 'TruckTrips': 14.0}, 'objective': 26.0}
+
+================================================================================
+
+Problem 156: 156_nlp4lp_156
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using OR-Tools Linear Solver:
+{'variables': {'NumSmallKegsUsed': 17.0, 'NumLargeKegsUsed': 8.0}, 'objective': 1480.0}
+
+Solution using OR-Tools CP-SAT Model:
+{'variables': {'NumSmallKegsUsed': 17.0, 'NumLargeKegsUsed': 8.0}, 'objective': 1480.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumSmallKegsUsed': 17.0, 'NumLargeKegsUsed': 8.0}, 'objective': 1480.0}
+
+================================================================================
+
+Problem 157: 157_nlp4lp_157
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'LinearSolver': {'variables': {'HelicopterTrips': 4.0, 'CarTrips': 9.0}, 'objective': 430.0}, 'CPSAT': {'variables': {'HelicopterTrips': 4, 'CarTrips': 9}, 'objective': 430}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'HelicopterTrips': 4.0, 'CarTrips': 9.0}, 'objective': 430.0}
+
+================================================================================
+
+Problem 158: 158_nlp4lp_158
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Solver Implementation Result:
+Optimal solution:
+  BalloonRides = 10.0
+  GondolaLifts = 5.0
+  Objective (Total Pollution) = 175.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'BalloonRides': 1.0, 'GondolaLifts': 11.0}, 'objective': 175.0}
+
+================================================================================
+
+Problem 159: 159_nlp4lp_159
+- Proposed solution:
+Execution Results:
+SUCCESS:
+----- Results from OR-Tools Linear Solver -----
+Optimal solution:
+NumberMediumCarts = 18.0
+NumberLargeCarts = 6.0
+Total Rice Transported = 960.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberMediumCarts': 18.0, 'NumberLargeCarts': 6.0}, 'objective': 960.0}
+
+================================================================================
+
+Problem 160: 160_nlp4lp_160
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model Version 1 (using x_Labrador <= 0.6*(x_Labrador + x_GoldenRetriever)):
+{'variables': {'ServicesDelivered': {'0': 0.0, '1': 2500.0}, 'NumGoldenRetrievers': 250.0, 'NumLabradors': 0.0}, 'objective': 2500.0}
+
+Results for Model Version 2 (using x_Labrador <= 1.5*x_GoldenRetriever):
+{'variables': {'ServicesDelivered': {'0': 0.0, '1': 2500.0}, 'NumGoldenRetrievers': 250.0, 'NumLabradors': 0.0}, 'objective': 2500.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ServicesDelivered': {'0': -0.0, '1': 250.0}, 'NumGoldenRetrievers': 50.0, 'NumLabradors': -0.0}, 'objective': 2500.0}
+
+================================================================================
+
+Problem 161: 161_nlp4lp_161
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using OR-Tools Linear Solver:
+{'variables': {'NumberOfCows': 15.0, 'NumberOfElephants': 14.0}, 'objective': 29.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfCows': 15.0, 'NumberOfElephants': 14.0}, 'objective': 29.0}
+
+================================================================================
+
+Problem 162: 162_nlp4lp_162
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving using Linear Solver (CBC):
+{'variables': {'FerryTrips': 6.0, 'LightRailTrips': 26.0}, 'objective': 32.0}
+
+Solving using CP-SAT Model:
+{'variables': {'FerryTrips': 4, 'LightRailTrips': 28}, 'objective': 32}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'FerryTrips': 6.0, 'LightRailTrips': 26.0}, 'objective': 32.0}
+
+================================================================================
+
+Problem 163: 163_nlp4lp_163
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Solver Model (MIP) optimal solution:
+  Number of Taxi Rides = 78.0
+  Number of Company Car Rides = 115.0
+  Objective (Minimized Taxi Rides) = 78.0
+
+Final Results:
+{'LinearSolverModel': {'variables': {'NumberOfTaxiRides': 78.0, 'NumberOfCompanyCarRides': 115.0}, 'objective': 78.0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfTaxiRides': 0.0, 'NumberOfCompanyCarRides': 2000000000.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 164: 164_nlp4lp_164
+- Proposed solution:
+Execution Results:
+SUCCESS:
+===== Linear/MIP Model Optimal Solution =====
+Variables:
+  NumSmallCrates = 45.0
+  NumLargeCrates = 15.0
+Objective:
+  Total Grapes Transported = 16500.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumSmallCrates': 45.0, 'NumLargeCrates': 15.0}, 'objective': 16500.0}
+
+================================================================================
+
+Problem 165: 165_nlp4lp_165
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+  "Model1_SubstitutedExpressions": {
+    "HelicopterTrips": 24.0,
+    "BusTrips": 0.0,
+    "PatientsHelicopter": 120.0,
+    "PatientsBus": 0.0,
+    "objective": 24.0,
+    "status": "Optimal"
+  },
+  "Model2_WithLinkingVariables": {
+    "HelicopterTrips": 24.0,
+    "BusTrips": 0.0,
+    "PatientsHelicopter": 120.0,
+    "PatientsBus": 0.0,
+    "objective": 24.0,
+    "status": "Optimal"
+  }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'HelicopterTrips': 24.0, 'BusTrips': 0.0, 'PatientsHelicopter': -0.0, 'PatientsBus': -0.0}, 'objective': 24.0}
+
+================================================================================
+
+Problem 166: 166_nlp4lp_166
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using ortools.linear_solver:
+{'variables': {'xCars': 55.0, 'xBuses': 4.0}, 'objective': 670.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'xCars': 55.0, 'xBuses': 4.0}, 'objective': 670.0}
+
+================================================================================
+
+Problem 167: 167_nlp4lp_167
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Optimization Problem (Magic School Letters):
+
+Version 1 (Owl ratio as NumOwls <= 0.40*(NumPigeons+NumOwls)):
+  NumPigeons = 158.0
+  NumOwls    = 105.0
+  Total Letters Sent = 841.0
+
+Version 2 (Owl ratio as NumOwls <= (2/3)*NumPigeons):
+  NumPigeons = 158.0
+  NumOwls    = 105.0
+  Total Letters Sent = 841.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumPigeons': 158.0, 'NumOwls': 105.0}, 'objective': 841.0}
+
+================================================================================
+
+Problem 168: 168_nlp4lp_168
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Model Implementation 1:
+Optimal Number of Large Ships: 4.0
+Optimal Number of Small Ships: 5.0
+Minimum Total Ships: 9.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberLargeShips': 4.0, 'NumberSmallShips': 5.0}, 'objective': 9.0}
+
+================================================================================
+
+Problem 169: 169_nlp4lp_169
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from Linear Solver (MIP):
+{'variables': {'NumberOfCanoes': 67.0, 'NumberOfDieselBoats': 22.0}, 'objective': 89.0}
+
+Results from CP-SAT Model:
+{'variables': {'NumberOfCanoes': 67, 'NumberOfDieselBoats': 22}, 'objective': 89}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfCanoes': 67.0, 'NumberOfDieselBoats': 22.0}, 'objective': 89.0}
+
+================================================================================
+
+Problem 170: 170_nlp4lp_170
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+  "Model1": {
+    "NumberOfVans": 15.0,
+    "NumberOfCars": 37.0,
+    "objective": 37.0
+  },
+  "Model2": {
+    "NumberOfVans": 15.0,
+    "NumberOfCars": 37.0,
+    "objective": 37.0
+  }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfVans': 2000000000.0, 'NumberOfCars': 0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 171: 171_nlp4lp_171
+- Proposed solution:
+Execution Results:
+SUCCESS:
+----- MIP Model (Integer Variables) Solution -----
+Number of Hamburgers:  3.0
+Number of Chicken Wraps:  1.0
+Total Cost:  23.5
+
+----- LP Relaxation Model (Continuous Variables) Solution -----
+Number of Hamburgers:  3.5
+Number of Chicken Wraps:  0.0
+Total Cost:  22.75
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Quantity': {'0': 3.5, '1': 0.0}}, 'objective': 22.75}
+
+================================================================================
+
+Problem 172: 172_nlp4lp_172
+- Proposed solution:
+Execution Results:
+SUCCESS:
+=== Linear Solver Model Output ===
+Optimal solution found:
+  Batches of Hams    : 0.00
+  Batches of PorkRibs: 1142.86
+  Objective (Profit) : 342857.14
+
+Structured Output:
+{'variables': {'BatchesProduced': {'0': 0.0, '1': 1142.857142857143}}, 'objective': 342857.14285714284}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'BatchesProduced': {'0': 0.0, '1': 1142.857142857143}}, 'objective': 342857.14285714284}
+
+================================================================================
+
+Problem 173: 173_nlp4lp_173
+- Proposed solution:
+Execution Results:
+SUCCESS:
+----- Solution using ortools.linear_solver (CBC) -----
+Optimal decision variables: {'QuantityOfProduct': {'0': 333.0, '1': 0.0}}
+Optimal objective value: 133200.0
+
+----- Solution using ortools.sat.python.cp_model -----
+Optimal decision variables: {'QuantityOfProduct': {'0': 333, '1': 0}}
+Optimal objective value: 133200.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityOfProduct': {'0': 333.3333333333333, '1': 0.0}}, 'objective': 133333.3333333333}
+
+================================================================================
+
+Problem 174: 174_nlp4lp_174
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model Solution:
+NumberOfDesks: 0.0
+NumberOfDrawers: 133.33333333333331
+objective: 11999.999999999998
+
+Integer Model Solution:
+NumberOfDesks: 1.0
+NumberOfDrawers: 132.0
+objective: 11980.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfDesks': 0.0, 'NumberOfDrawers': 133.33333333333334}, 'objective': 12000.0}
+
+================================================================================
+
+Problem 175: 175_nlp4lp_175
+- Proposed solution:
+Execution Results:
+SUCCESS:
+---- Linear Solver (Continuous Variables) ----
+Optimal Production Plan:
+  black: 50.00 bottles
+  matcha: 0.00 bottles
+Maximum Profit: $375.00
+
+---- CP-SAT Solver (Integer Variables) ----
+Optimal Production Plan:
+  black: 50 bottles
+  matcha: 0 bottles
+Maximum Profit: $375.00
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Produce': {'0': 50.0, '1': 0.0}}, 'objective': 375.0}
+
+================================================================================
+
+Problem 176: 176_nlp4lp_176
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using OR-Tools Linear Solver (GLOP):
+{'variables': {'MilkAmount': 2.5, 'VegetablesAmount': 0.0}, 'objective': 2.5}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'MilkAmount': 2.5, 'VegetablesAmount': 0.0}, 'objective': 2.5}
+
+================================================================================
+
+Problem 177: 177_nlp4lp_177
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Version 1 (LP Model):
+Variables:
+  ServingsNoodles: 2.2857142857142856
+  ServingsProteinBars: 2.5142857142857142
+Objective Value:
+  17.71428571428571
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ServingsNoodles': 2.2857142857142856, 'ServingsProteinBars': 2.5142857142857142}, 'objective': 17.71428571428571}
+
+================================================================================
+
+Problem 178: 178_nlp4lp_178
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving both model versions...
+
+Model: Version 1 (Separate Inventory and Sales Decisions)
+Optimal Variables:
+   NumberPlushToys = 190.0
+   NumberDolls = 65.0
+   NumberPlushToysSold = 190.0
+   NumberDollsSold = 65.0
+Optimal Objective Value: 890.0
+--------------------------------------------------
+Model: Version 2 (Purchase equals Sales)
+Optimal Variables:
+   NumberPlushToys = 190.0
+   NumberDolls = 65.0
+   NumberPlushToysSold = 190.0
+   NumberDollsSold = 65.0
+Optimal Objective Value: 890.0
+--------------------------------------------------
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberPlushToys': 190.0, 'NumberDolls': 65.0, 'NumberPlushToysSold': 190.0, 'NumberDollsSold': 65.0}, 'objective': 890.0}
+
+================================================================================
+
+Problem 179: 179_nlp4lp_179
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from Linear Solver (Continuous LP):
+{'variables': {'ProductionQuantity': {'Graph': 0.0, 'Music': 116.66666666666666}}, 'objective': 291.66666666666663}
+
+Results from CP-SAT Model (Integer variables, scaled formulation):
+{'variables': {'ProductionQuantity': {'Graph': 2, 'Music': 113}}, 'objective': 290.5}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ProductionQuantity': {'0': 0.0, '1': 116.66666666666667}}, 'objective': 291.6666666666667}
+
+================================================================================
+
+Problem 180: 180_nlp4lp_180
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for the Linear Programming formulation:
+Optimal Servings of Supplement A (index '0'): 0.0000
+Optimal Servings of Supplement B (index '1'): 6.6667
+Minimized Total Cost (objective): 166.6667
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Servings': {'0': 0.0, '1': 6.666666666666667}}, 'objective': 166.66666666666669}
+
+================================================================================
+
+Problem 181: 181_nlp4lp_181
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model Result:
+{'model': 'Continuous', 'variables': {'NumRegularBags': 2.045454545454546, 'NumPremiumBags': 0.5681818181818181}, 'objective': 60.795454545454554}
+
+Integer Model Result:
+{'model': 'Integer', 'variables': {'NumRegularBags': 0.0, 'NumPremiumBags': 2.0}, 'objective': 70.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumRegularBags': 0.0, 'NumPremiumBags': 2.0}, 'objective': 70.0}
+
+================================================================================
+
+Problem 182: 182_nlp4lp_182
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Optimization (GLOP) Solution:
+{'variables': {'NumTanksProcessed': {'0': 33.33333333333334, '1': 24.999999999999996, '2': 0.0}}, 'objective': 37083.333333333336}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumTanksProcessed': {'0': 33.333333333333336, '1': 25.0, '2': 0.0}}, 'objective': 37083.333333333336}
+
+================================================================================
+
+Problem 183: 183_nlp4lp_183
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+  "LinearSolver": {
+    "variables": {
+      "LaminateProduction": "40000.0 (weekly sq ft produced for laminate planks)",
+      "CarpetProduction": "20000.0 (weekly sq ft produced for carpets)"
+    },
+    "objective": 150000.0
+  }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'LaminateProduction': 40000.0, 'CarpetProduction': 20000.0}, 'objective': 150000.0}
+
+================================================================================
+
+Problem 184: 184_nlp4lp_184
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Running optimization for the supplements problem...
+
+----- OR-Tools Linear Solver (CBC_MIXED_INTEGER_PROGRAMMING) Solution -----
+Number of pills supplement A: 8
+Number of pills supplement B: 0
+Minimum cost: 16.0
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumPillsSupplement": {
+      "A": "integer ≥ 0",
+      "B": "integer ≥ 0"
+    }
+  },
+  "objective": "total_cost (minimize): 2 * NumPillsSupplement[A] + 3 * NumPillsSupplement[B]"
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumPillsSupplement': {'0': 8.0, '1': 0.0}}, 'objective': 16.0}
+
+================================================================================
+
+Problem 185: 185_nlp4lp_185
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for Linear Model:
+NumberRegularHandbags: 0.0
+NumberPremiumHandbags: 475.0
+Optimal objective value (Total Profit): 85500.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberRegularHandbags': -0.0, 'NumberPremiumHandbags': 475.0}, 'objective': 85500.0}
+
+================================================================================
+
+Problem 186: 186_nlp4lp_186
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Model 1 (Linear Programming Formulation) Result:
+{'variables': {'Allocation': {'0': 49999.99999999999, '1': 0.0, '2': 50000.000000000015}}, 'objective': 64999.999999999985}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Allocation': {'0': 20000.0, '1': 80000.0, '2': 0.0}}, 'objective': 42000.0}
+
+================================================================================
+
+Problem 187: 187_nlp4lp_187
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Formulation 1 (Strict Synchronization):
+{'WashingMachinesInspected': 0.0, 'WashingMachinesRepaired': 0.0, 'FreezersInspected': 160.0, 'FreezersRepaired': 160.0, 'objective': 60000.0}
+
+Results for Formulation 2 (Decoupled Inspection & Repair):
+{'WashingMachinesInspected': 60.0, 'WashingMachinesRepaired': 0.0, 'FreezersInspected': 160.0, 'FreezersRepaired': 160.0, 'objective': 60000.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'WashingMachinesInspected': 0.0, 'FreezersInspected': 0.0, 'WashingMachinesRepaired': -0.0, 'FreezersRepaired': 160.0}, 'objective': 60000.0}
+
+================================================================================
+
+Problem 188: 188_nlp4lp_188
+- Proposed solution:
+Execution Results:
+SUCCESS:
+=== Optimization Results ===
+
+Model:  ORTools Linear Solver (CBC)
+Optimal Total Profit: 648.00
+Decision Variables (UnitsToProduce):
+  Cake type 0: 14
+  Cake type 1: 0
+  Cake type 2: 32
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'UnitsToProduce': {'0': 14.0, '1': 0.0, '2': 32.0}}, 'objective': 648.0}
+
+================================================================================
+
+Problem 189: 189_nlp4lp_189
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving Super Shop Snack Mix Optimization Problem using OR-Tools Linear Solver
+
+Linear Solver Model Solution:
+Mix1 (kg): 30.0000
+Mix2 (kg): 40.0000
+Total Profit (USD): 960.0000
+
+Output Schema:
+{'variables': {'Mix1': 29.99999999999998, 'Mix2': 40.00000000000002}, 'objective': 960.0000000000001}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'Mix1': 1.0, 'Mix2': 0.0}, 'objective': 12.0}
+
+================================================================================
+
+Problem 190: 190_nlp4lp_190
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: LP_Model
+Optimal decision variables:
+  RegularTacosProduced: 30.0
+  DeluxeTacosProduced: 40.0
+Optimal objective value: 217.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'RegularTacosProduced': 30.0, 'DeluxeTacosProduced': 40.0}, 'objective': 217.0}
+
+================================================================================
+
+Problem 191: 191_nlp4lp_191
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving using Linear Solver (ortools.linear_solver):
+{'variables': {'QuantityMathWorkbooks': 140.0, 'QuantityEnglishWorkbooks': 170.0}, 'objective': 4990.0}
+
+Solving using CP-SAT Solver (ortools.sat.python.cp_model):
+{'variables': {'QuantityMathWorkbooks': 140, 'QuantityEnglishWorkbooks': 170}, 'objective': 4990.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityMathWorkbooks': 140.0, 'QuantityEnglishWorkbooks': 170.0}, 'objective': 4990.0}
+
+================================================================================
+
+Problem 192: 192_nlp4lp_192
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Production Formulation Results:
+{'variables': {'QuantityFullWeighted': 5.000000000000001, 'QuantitySemiWeighted': 0.0}, 'objective': 14000.000000000002}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityFullWeighted': 5.0, 'QuantitySemiWeighted': 0.0}, 'objective': 14000.0}
+
+================================================================================
+
+Problem 193: 193_nlp4lp_193
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution from Linear Programming Model:
+------------------------------------------------
+NumberOfPersonalLicenses: 138.0
+NumberOfCommercialLicenses: 162.0
+Maximum Profit: 256500.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfPersonalLicenses': 138.0, 'NumberOfCommercialLicenses': 162.0}, 'objective': 256500.0}
+
+================================================================================
+
+Problem 194: 194_nlp4lp_194
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model Solution:
+{'variables': {'NumStrawberryCookies': 20.0, 'NumSugarCookies': 80.0}, 'objective': 1070.0}
+
+Integer Model Solution:
+{'variables': {'NumStrawberryCookies': 20.0, 'NumSugarCookies': 80.0}, 'objective': 1070.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumStrawberryCookies': 20.0, 'NumSugarCookies': 80.0}, 'objective': 1070.0}
+
+================================================================================
+
+Problem 195: 195_nlp4lp_195
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimal Solutions:
+Model: LinearSolver
+  NumberPiTV: 3.0
+  NumberBetaVideo: 8.0
+  NumberGammaLive: 0.0
+  Objective Value (Total Audience Reach): 46000.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberPiTV': 3.0, 'NumberBetaVideo': 8.0, 'NumberGammaLive': 0.0}, 'objective': 46000.0}
+
+================================================================================
+
+Problem 196: 196_nlp4lp_196
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+{'variables': {'TemperatureChecks': 10775.0, 'BloodTests': 45.0, 'PatientsSeen': 10820.0}, 'objective': 10820.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'TemperatureChecks': 10775.0, 'BloodTests': 45.0, 'PatientsSeen': 10820.0}, 'objective': 10820.0}
+
+================================================================================
+
+Problem 197: 197_nlp4lp_197
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+  "LinearSolver": {
+    "status": "Optimal",
+    "result": {
+      "variables": {
+        "WidePipes": 13,
+        "NarrowPipes": 39
+      },
+      "objective": 52
+    }
+  },
+  "CPSolver": {
+    "status": "Optimal",
+    "result": {
+      "variables": {
+        "WidePipes": 12,
+        "NarrowPipes": 40
+      },
+      "objective": 52
+    }
+  }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'WidePipes': 12.0, 'NarrowPipes': 40.0}, 'objective': 52.0}
+
+================================================================================
+
+Problem 198: 198_nlp4lp_198
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model (variables as float):
+{'variables': {'NumberOfCarts': 25.200000000000003, 'NumberOfTrolleys': 12.0}, 'objective': 98.4}
+
+Integer Model (variables as integer):
+{'variables': {'NumberOfCarts': 26.0, 'NumberOfTrolleys': 12.0}, 'objective': 100.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfCarts': 4.0, 'NumberOfTrolleys': 12.0}, 'objective': 56.0}
+
+================================================================================
+
+Problem 199: 199_nlp4lp_199
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Formulation 1 (Using constraint: 7 * TopsoilBags <= 3 * SubsoilBags):
+{'SubsoilBags': 24.0, 'TopsoilBags': 10.0, 'objective': 300.0}
+
+Results for Formulation 2 (Using constraint: TopsoilBags <= 0.3*(SubsoilBags + TopsoilBags)):
+{'SubsoilBags': 24.0, 'TopsoilBags': 10.0, 'objective': 300.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SubsoilBags': 24.0, 'TopsoilBags': 10.0}, 'objective': 300.0}
+
+================================================================================
+
+Problem 200: 200_nlp4lp_200
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution for the Ski Lift Problem (Minimize Total Lifts):
+{'variables': {'LooselySeatedLift': 5, 'DenselySeatedLift': 20}, 'objective': 25.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'LooselySeatedLift': 5.0, 'DenselySeatedLift': 20.0}, 'objective': 25.0}
+
+================================================================================
+
+Problem 201: 201_nlp4lp_201
+- Proposed solution:
+Execution Results:
+SUCCESS:
+==== Solution using OR-Tools Linear Solver (CBC) ====
+{'NumberCalciumPills': 90.0, 'NumberVitaminDPills': 40.0, 'TotalTime': 690.0, 'IsCalciumTaken': 1.0, 'IsVitaminDTaken': 1.0, 'objective': 690.0}
+
+==== Solution using OR-Tools CP-SAT Solver ====
+{'NumberCalciumPills': 90, 'NumberVitaminDPills': 40, 'TotalTime': 690, 'IsCalciumTaken': 1, 'IsVitaminDTaken': 1, 'objective': 690.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberCalciumPills': 2000000000.0, 'NumberVitaminDPills': 40.0, 'TotalTime': 0.0, 'IsCalciumTaken': 1.0, 'IsVitaminDTaken': 1.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 202: 202_nlp4lp_202
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Model Implementation 1:
+Optimal solution:
+  ThrowingGames = 42.0
+  ClimbingGames = 5.0
+Maximum total customers per hour = 670.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ThrowingGames': 42.0, 'ClimbingGames': 5.0}, 'objective': 670.0}
+
+================================================================================
+
+Problem 203: 203_nlp4lp_203
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from Linear Solver Model:
+{'variables': {'CircularTables': 60.0, 'RectangularTables': 50.0}, 'objective': 1080.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'CircularTables': 60.0, 'RectangularTables': 50.0}, 'objective': 1080.0}
+
+================================================================================
+
+Problem 204: 204_nlp4lp_204
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+--- LinearSolverImplementation ---
+HighVolumePipes: 5
+LowVolumePipes: 20
+Total Pipes (Objective Value): 25.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'HighVolumePipes': 5.0, 'LowVolumePipes': 20.0}, 'objective': 25.0}
+
+================================================================================
+
+Problem 205: 205_nlp4lp_205
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+Linear Programming Model:
+  NumberMolars   = 45.0
+  NumberCanines  = 67.5
+  Objective (minimized pain killer usage) = 290.25
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberMolars': 45.0, 'NumberCanines': 68.0}, 'objective': 291.4}
+
+================================================================================
+
+Problem 206: 206_nlp4lp_206
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving the Food Delivery Optimization Problem using Linear Programming (OR-Tools)...
+Optimal solution found:
+BikeShifts  = 35.0
+ScooterShifts = 5.0
+Maximum Tips = $ 1965.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'BikeShifts': 35.0, 'ScooterShifts': 5.0}, 'objective': 1965.0}
+
+================================================================================
+
+Problem 207: 207_nlp4lp_207
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using OR-Tools Linear Solver:
+NumPopConcerts: 40
+NumRnBConcerts: 25
+TotalConcerts (Objective Value): 65
+
+==================================================
+
+Solution using OR-Tools CP Model:
+NumPopConcerts: 40
+NumRnBConcerts: 25
+TotalConcerts (Objective Value): 65
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumPopConcerts': 40.0, 'NumRnBConcerts': 25.0}, 'objective': 65.0}
+
+================================================================================
+
+Problem 208: 208_nlp4lp_208
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: Linear_Solver_Model
+Variables:
+  NumberLargePizzas: 629.0
+  NumberMediumPizzas: 314.0
+Objective Value: 10060.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberLargePizzas': 629.0, 'NumberMediumPizzas': 314.0}, 'objective': 10060.0}
+
+================================================================================
+
+Problem 209: 209_nlp4lp_209
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Model 1 Results:
+{'variables': {'NumLimousines': 21.0, 'PeopleLimousines': 252.0, 'NumBuses': 9.0, 'PeopleBuses': 162.0}, 'objective': 30.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumLimousines': 22.0, 'PeopleLimousines': 264.0, 'NumBuses': 8.0, 'PeopleBuses': 144.0}, 'objective': 30.0}
+
+================================================================================
+
+Problem 210: 210_nlp4lp_210
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'LinearSolverModel': {'NumPreventionPills': 583.3333333333334, 'NumTreatmentPills': 50.0, 'ObjectiveValue': 633.3333333333334}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumPreventionPills': 362.0, 'NumTreatmentPills': 181.0}, 'objective': 181.0}
+
+================================================================================
+
+Problem 211: 211_nlp4lp_211
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using Linear Solver (continuous variables):
+{'NumberOfCartDeliveryServers': 53.5, 'NumberOfHandDeliveryServers': 3.0, 'objective': 327.5}
+
+Solution using CP-SAT Model (integer variables):
+{'NumberOfCartDeliveryServers': 45, 'NumberOfHandDeliveryServers': 10, 'objective': 425.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfCartDeliveryServers': 54.0, 'NumberOfHandDeliveryServers': 3.0}, 'objective': 330.0}
+
+================================================================================
+
+Problem 212: 212_nlp4lp_212
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results Summary:
+-------------------------------------------------
+Implementation1:
+Status    : OPTIMAL
+Variables:
+  Salmon bowls (index 0): 4.615384615384616
+  Eggs bowls   (index 1): 3.076923076923077
+Objective : 430.76923076923083 (minimum total sodium intake in mg)
+-------------------------------------------------
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumMealsPerFoodType': {'0': 0.0, '1': 12.0}}, 'objective': 240.0}
+
+================================================================================
+
+Problem 213: 213_nlp4lp_213
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Model 1: Linear Programming Formulation using GLOP
+Optimal solution:
+{'variables': {'OriginalMeals': 0.0, 'ExperimentalMeals': 0.0}, 'objective': 0.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'OriginalMeals': -0.0, 'ExperimentalMeals': -0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 214: 214_nlp4lp_214
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving Integer Model (MIP) with CBC:
+Integer Model Optimal Solution:
+{'variables': {'NumberOfChopSaws': 8.0, 'NumberOfSteelCutters': 64.0}, 'objective': 72.0}
+
+Solving Relaxed Model (LP) with GLOP:
+Relaxed Model Optimal Solution:
+{'variables': {'NumberOfChopSaws': 8.800000000000002, 'NumberOfSteelCutters': 59.999999999999986}, 'objective': 68.79999999999998}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfChopSaws': 8.0, 'NumberOfSteelCutters': 64.0}, 'objective': 72.0}
+
+================================================================================
+
+Problem 215: 215_nlp4lp_215
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model Version 1 (using the constraint NumberSmallTrips ≥ 0.4*(NumberLargeTrips+NumberSmallTrips)):
+{'NumberLargeTrips': 7.0, 'NumberSmallTrips': 8.0, 'objective': 260.0}
+
+Results for Model Version 2 (using the equivalent constraint NumberSmallTrips ≥ (2/3)*NumberLargeTrips):
+{'NumberLargeTrips': 7.0, 'NumberSmallTrips': 8.0, 'objective': 260.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberLargeTrips': 7.0, 'NumberSmallTrips': 8.0}, 'objective': 260.0}
+
+================================================================================
+
+Problem 216: 216_nlp4lp_216
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving Problem using Linear Solver (CBC):
+Optimal solution found:
+  NumFixtures:
+    LED:           210.0
+    Fluorescence:  90.0
+  Objective (Total light changes): 990.0
+
+Solving Problem using CP-SAT Model:
+Solution found (optimal):
+  NumFixtures:
+    LED:           210
+    Fluorescence:  90
+  Objective (Total light changes): 990.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumFixtures': {'0': 0.0, '1': 0.0}, 'NumFluorescenceFixtures': 2000000000.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 217: 217_nlp4lp_217
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+Linear Formulation Solution:
+{'NumberRetailStores': 6.0, 'NumberFactoryOutlets': 0.0, 'objective': 6.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberRetailStores': 6.0, 'NumberFactoryOutlets': -0.0}, 'objective': 6.0}
+
+================================================================================
+
+Problem 218: 218_nlp4lp_218
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Linear Solver Optimal Solution:
+FreightTrips = 28.0
+AirTrips = 20.0
+Total Trips (Objective) = 48.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'FreightTrips': 28.0, 'AirTrips': 20.0}, 'objective': 48.0}
+
+================================================================================
+
+Problem 219: 219_nlp4lp_219
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving production transportation problem using two formulations.
+
+Integer Model (Vehicles as Integers):
+  NumberLargeUnits = 15
+  NumberSmallUnits = 5
+  Total Parking Spots = 35.0
+
+---------------------------
+
+Continuous Model (Vehicles as Continuous Variables):
+  NumberLargeUnits = 15.0
+  NumberSmallUnits = 5.0
+  Total Parking Spots = 35.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberLargeUnits': 15.0, 'NumberSmallUnits': 5.0}, 'objective': 35.0}
+
+================================================================================
+
+Problem 220: 220_nlp4lp_220
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Version 1 (Linear Programming Model) Optimal Solution:
+{'variables': {'NumberSmallBoxes': 21.0, 'NumberLargeBoxes': 5.0}, 'objective': 26.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberSmallBoxes': 21.0, 'NumberLargeBoxes': 5.0}, 'objective': 26.0}
+
+================================================================================
+
+Problem 221: 221_nlp4lp_221
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solving using OR-Tools Linear Solver (MIP):
+Solution:
+  AutoElectricJacksUsed = 8.0
+  GasPoweredJacksUsed   = 11.0
+  Total cars processed    = 84.0
+
+Solving using OR-Tools CP-SAT Solver:
+Solution:
+  AutoElectricJacksUsed = 8
+  GasPoweredJacksUsed   = 11
+  Total cars processed    = 84.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AutoElectricJacksUsed': 8.0, 'GasPoweredJacksUsed': 11.0}, 'objective': 84.0}
+
+================================================================================
+
+Problem 222: 222_nlp4lp_222
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Solution using Linear Programming (ortools.linear_solver):
+{'variables': {'NumberOfTrams': 6.666666666666666, 'NumberOfTrains': 3.3333333333333335}, 'objective': 10.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfTrams': 8.0, 'NumberOfTrains': 3.0}, 'objective': 11.0}
+
+================================================================================
+
+Problem 223: 223_nlp4lp_223
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results from the Linear Programming Model:
+{'variables': {'CatalystUsage': {'0': 5.172413793103451, '1': 18.620689655172413}}, 'objective': 100.3448275862069}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'CatalystUsage': {'0': 5.172413793103448, '1': 18.620689655172413}}, 'objective': 100.34482758620689}
+
+================================================================================
+
+Problem 224: 224_nlp4lp_224
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model Result:
+{'ProcessUnit': {'0': 0.0, '1': 249.99999999999994}, 'objective': 2249.9999999999995}
+
+Integer Model Result:
+{'ProcessUnit': {'0': 0.0, '1': 250.0}, 'objective': 2250.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ProcessUnit': {'0': 0.0, '1': 250.0}}, 'objective': 2250.0}
+
+================================================================================
+
+Problem 225: 225_nlp4lp_225
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results:
+LinearModel: {'variables': {'NumberEscalators': 18.0, 'NumberElevators': 5.0}, 'objective': 100.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberEscalators': 18.0, 'NumberElevators': 5.0}, 'objective': 100.0}
+
+================================================================================
+
+Problem 226: 226_nlp4lp_226
+- Proposed solution:
+Execution Results:
+SUCCESS:
+----- Linear Solver (OR-Tools Linear) Results -----
+Optimal Variables:
+  OperationTime:
+    Method A: 0.0
+    Method B: 40.0
+  Total Time: 40.0
+Optimal Objective (TotalTime): 40.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'OperationTime': {'0': 0.0, '1': 53.84615384615385}, 'TotalTime': 0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 227: 227_nlp4lp_227
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Running Model Version 1 (Fractional Constraint)...
+Version 1 (Fractional Constraint) Optimal Solution:
+{'KayakTrips': 107.0, 'MotorboatTrips': 25.0, 'objective': 610.0}
+
+Running Model Version 2 (Algebraic Constraint)...
+Version 2 (Algebraic Constraint) Optimal Solution:
+{'KayakTrips': 107.0, 'MotorboatTrips': 25.0, 'objective': 610.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'KayakTrips': 107.0, 'MotorboatTrips': 25.0}, 'objective': 610.0}
+
+================================================================================
+
+Problem 228: 228_nlp4lp_228
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for the Linear Program Model:
+Status             : OPTIMAL
+NumberOfBloodTests : 237.0
+NumberOfEarTests   : 79.0
+Objective value    : 316.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfBloodTests': 237.0, 'NumberOfEarTests': 79.0}, 'objective': 316.0}
+
+================================================================================
+
+Problem 229: 229_nlp4lp_229
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+--------------------------------------------------
+Model 1 (Original Constraint):
+  SpecializedHours: 166.6667
+  CommonHours:      0.0000
+  Total Cost:       16666.6667 USD
+--------------------------------------------------
+Model 2 (Simplified Constraint):
+  SpecializedHours: 166.6667
+  CommonHours:      0.0000
+  Total Cost:       16666.6667 USD
+--------------------------------------------------
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'SpecializedHours': 166.66666666666666, 'CommonHours': 0.0}, 'objective': 16666.666666666664}
+
+================================================================================
+
+Problem 230: 230_nlp4lp_230
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model Version 1 (Original Constraint Formulation):
+{'NumGolfCarts': 17.0, 'NumPullCarts': 12.0, 'objective': 29.0}
+
+Results for Model Version 2 (Alternative Rearranged Constraint):
+{'NumGolfCarts': 17.0, 'NumPullCarts': 12.0, 'objective': 29.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumGolfCarts': 17.0, 'NumPullCarts': 12.0}, 'objective': 29.0}
+
+================================================================================
+
+Problem 231: 231_nlp4lp_231
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Integer Model Result:
+{'AcaiSmoothies': 2.0, 'BananaSmoothies': 3.0, 'objective': 18.0}
+
+Continuous Model Result:
+{'AcaiSmoothies': 1.1666666666666663, 'BananaSmoothies': 2.166666666666666, 'objective': 12.166666666666664}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'AcaiSmoothies': 0.0, 'BananaSmoothies': 0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 232: 232_nlp4lp_232
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Integer Model (MIP) Solution:
+{'variables': {'ProductionQuantity': {'0': 250.0, '1': 83.0}, 'ProductionQuantityBasketballs': 250.0, 'ProductionQuantityFootballs': 83.0}, 'objective': 333.0}
+
+Continuous Model (LP) Solution:
+{'variables': {'ProductionQuantity': {'0': 250.0, '1': 83.33333333333333}, 'ProductionQuantityBasketballs': 250.0, 'ProductionQuantityFootballs': 83.33333333333333}, 'objective': 333.3333333333333}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'ProductionQuantity': {'0': 107.14285714285714, '1': 321.42857142857144}, 'ProductionQuantityBasketballs': 150.0, 'ProductionQuantityFootballs': 50.0}, 'objective': 428.57142857142856}
+
+================================================================================
+
+Problem 233: 233_nlp4lp_233
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{'LP_Model': {'variables': {'NumberOfInVivoExperiments': 0.0, 'NumberOfExVivoExperiments': 0.0}, 'objective': 0.0}, 'CP_SAT_Model': {'variables': {'NumberOfInVivoExperiments': 0, 'NumberOfExVivoExperiments': 0}, 'objective': 0}}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfInVivoExperiments': 0.0, 'NumberOfExVivoExperiments': -0.0}, 'objective': 0.0}
+
+================================================================================
+
+Problem 234: 234_nlp4lp_234
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: Single Trip per Runner
+Objective Value: 310.0
+Variables:
+  NumRunnerTrips = 40.0
+  NumCanoeTrips = 19.0
+  NumberOfRunners = 40.0
+
+Model: Multiple Trips per Runner
+Objective Value: 310.0
+Variables:
+  NumRunnerTrips = 40.0
+  NumCanoeTrips = 19.0
+  NumberOfRunners = 4.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumRunnerTrips': 47.0, 'NumCanoeTrips': 6.0, 'NumberOfRunners': 4.0}, 'objective': 201.0}
+
+================================================================================
+
+Problem 235: 235_nlp4lp_235
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results using Google OR-Tools Linear Solver:
+{'variables': {'NumberSmoothies': 2.500000000000001, 'NumberProteinBars': 4.999999999999999}, 'objective': 39.99999999999999}
+
+Results using Google OR-Tools CP-SAT Model:
+{'variables': {'NumberSmoothies': 2, 'NumberProteinBars': 4}, 'objective': 32.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberSmoothies': 2.0, 'NumberProteinBars': 4.0}, 'objective': 32.0}
+
+================================================================================
+
+Problem 236: 236_nlp4lp_236
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+  "Continuous Formulation": {
+    "variables": {
+      "NumBatchesMedicationPatch": 30.76923076923077,
+      "NumBatchesAntiBioticCream": 61.538461538461526
+    },
+    "objective": 215.38461538461536
+  },
+  "Integer Formulation": {
+    "variables": {
+      "NumBatchesMedicationPatch": 30.0,
+      "NumBatchesAntiBioticCream": 62.0
+    },
+    "objective": 213.99999999999997
+  }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumBatchesAntiBioticCream': 62.0, 'NumBatchesMedicationPatch': 30.0}, 'objective': 214.0}
+
+================================================================================
+
+Problem 237: 237_nlp4lp_237
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Continuous Model (Variables can be fractional):
+{'variables': {'NumberCamelCaravans': 7.5, 'NumberDesertTrucks': 7.5}, 'objective': 127.5}
+
+Integer Model (Variables are integers):
+{'variables': {'NumberCamelCaravans': 8.0, 'NumberDesertTrucks': 8.0}, 'objective': 136.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberCamelCaravans': -0.0, 'NumberDesertTrucks': 10.0}, 'objective': 50.0}
+
+================================================================================
+
+Problem 238: 238_nlp4lp_238
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Results for Model 1:
+FirstDoseVaccines = 41.0
+SecondDoseVaccines = 40.0
+Objective (Total gelatine used in mg) = 3220.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'FirstDoseVaccines': 40.0, 'SecondDoseVaccines': 40.0}, 'objective': 3200.0}
+
+================================================================================
+
+Problem 239: 239_nlp4lp_239
+- Proposed solution:
+Execution Results:
+SUCCESS:
+----- Linear Solver (LP formulation) Solution -----
+{'variables': {'QuantityChemicalA': 375.0, 'QuantityChemicalB': 1125.0}, 'objective': 61875.0}
+
+----- CP-SAT Model (Integer formulation) Solution -----
+{'variables': {'QuantityChemicalA': 375, 'QuantityChemicalB': 1125}, 'objective': 61875.0}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityChemicalA': 375.0, 'QuantityChemicalB': 1125.0}, 'objective': 61875.0}
+
+================================================================================
+
+Problem 240: 240_nlp4lp_240
+- Proposed solution:
+Execution Results:
+SUCCESS:
+Model 1 Results:
+Optimal number of sedans: 0.0
+Optimal number of buses: 19.0
+Objective (Total Vehicles): 19.0
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfSedans': 0.0, 'NumberOfBuses': 19.0}, 'objective': 19.0}
+
+================================================================================
+
+Problem 241: 241_nlp4lp_241
+- Proposed solution:
+Execution Results:
+SUCCESS:
+{
+    "Model1": {
+        "description": "Dessert Preference Constraint: x_Orange >= x_Matcha + 1",
+        "result": {
+            "MatchaIceCream": 0.21428571428571433,
+            "OrangeSorbet": 1.2142857142857144,
+            "objective": 5.2857142857142865
+        }
+    },
+    "Model2": {
+        "description": "Dessert Preference Constraint: x_Orange >= x_Matcha",
+        "result": {
+            "MatchaIceCream": 0.0,
+            "OrangeSorbet": 0.0,
+            "objective": 0.0
+        }
+    }
+}
+- Expected solution:
+Expected Output:
+Expected solution
+
+: {'variables': {'MatchaIceCream': 0.0, 'OrangeSorbet': 0.0}, 'objective': 0.0}
+
+================================================================================

@@ -1,0 +1,67 @@
+Problem Name: 185_nlp4lp_185
+
+# Problem Description:
+'''Problem description: A fashion company sells regular handbags and premium handbags made of higher quality material. They can sell regular handbags at a profit of $30 each and premium handbags at a profit of $180 each. The total monthly cost of manufacturing is $200 per regular handbag and $447 per premium handbag. The company has a total budget of $250000 and can sell at most 475 handbags of either type per month. How many of each handbag should they sell to maximize its monthly profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberRegularHandbags": "float",
+    "NumberPremiumHandbags": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+• HandbagTypes = {Regular, Premium}
+
+Parameters:
+• profit_regular = 30 (USD profit per regular handbag sold)
+• profit_premium = 180 (USD profit per premium handbag sold)
+• cost_regular = 200 (USD manufacturing cost per regular handbag)
+• cost_premium = 447 (USD manufacturing cost per premium handbag)
+• budget_total = 250000 (USD available monthly manufacturing budget)
+• max_handbags = 475 (maximum total handbags that can be sold per month)
+
+Variables:
+• NumberRegularHandbags ∈ ℝ, with NumberRegularHandbags ≥ 0  
+  (Decision variable representing the number of regular handbags to sell. Although handbags are discrete items, we denote them as floats per the expected schema.)
+• NumberPremiumHandbags ∈ ℝ, with NumberPremiumHandbags ≥ 0  
+  (Decision variable representing the number of premium handbags to sell.)
+
+Objective:
+Maximize TotalProfit = (profit_regular × NumberRegularHandbags) + (profit_premium × NumberPremiumHandbags)
+  (Units: USD; this is the monthly net profit from sales. The stated profits per unit are assumed to be net figures, while manufacturing costs are used solely to enforce the budget constraint.)
+
+Constraints:
+1. Manufacturing Budget Constraint:
+  (cost_regular × NumberRegularHandbags) + (cost_premium × NumberPremiumHandbags) ≤ budget_total  
+  (The total manufacturing cost for producing the handbags must not exceed the available monthly budget, with costs in USD per handbag.)
+
+2. Sales Capacity Constraint:
+  NumberRegularHandbags + NumberPremiumHandbags ≤ max_handbags  
+  (The total number of handbags sold per month, regardless of type, cannot exceed the maximum sales capacity.)
+
+-------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "NumberRegularHandbags": "float",
+    "NumberPremiumHandbags": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Solution for Linear Model:
+NumberRegularHandbags: 0.0
+NumberPremiumHandbags: 475.0
+Optimal objective value (Total Profit): 85500.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberRegularHandbags': -0.0, 'NumberPremiumHandbags': 475.0}, 'objective': 85500.0}

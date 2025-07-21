@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving using Linear Solver (CBC):\n{'variables': {'FerryTrips': 6.0, 'LightRailTrips': 26.0}, 'objective': 32.0}\n\nSolving using CP-SAT Model:\n{'variables': {'FerryTrips': 4, 'LightRailTrips': 28}, 'objective': 32}\n"
+}

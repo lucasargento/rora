@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Formulation 1 (Strict Synchronization):\n{'WashingMachinesInspected': 0.0, 'WashingMachinesRepaired': 0.0, 'FreezersInspected': 160.0, 'FreezersRepaired': 160.0, 'objective': 60000.0}\n\nResults for Formulation 2 (Decoupled Inspection & Repair):\n{'WashingMachinesInspected': 60.0, 'WashingMachinesRepaired': 0.0, 'FreezersInspected': 160.0, 'FreezersRepaired': 160.0, 'objective': 60000.0}\n"
+}

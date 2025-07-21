@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{\n  \"Continuous Formulation\": {\n    \"variables\": {\n      \"NumBatchesMedicationPatch\": 30.76923076923077,\n      \"NumBatchesAntiBioticCream\": 61.538461538461526\n    },\n    \"objective\": 215.38461538461536\n  },\n  \"Integer Formulation\": {\n    \"variables\": {\n      \"NumBatchesMedicationPatch\": 30.0,\n      \"NumBatchesAntiBioticCream\": 62.0\n    },\n    \"objective\": 213.99999999999997\n  }\n}\n"
+}

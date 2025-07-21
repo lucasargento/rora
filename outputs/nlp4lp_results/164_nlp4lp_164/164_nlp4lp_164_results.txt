@@ -1,0 +1,81 @@
+Problem Name: 164_nlp4lp_164
+
+# Problem Description:
+'''Problem description: A grape farmer transports his grapes in either small crates or large crates. A small crate can take 200 grapes while a large crate can take 500.  Because his customers prefer smaller crates, at least 3 times as many small crates must be used than large crates. The farmer has available at most 100 small crates and at most 50 large crates. In addition, his truck can take at most 60 crates total and he must use at least 10 large crates. How many of each crate should he use to maximize the total number of grapes he can transport?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumSmallCrates": "float",
+    "NumLargeCrates": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is a complete structured reformulation of the problem following the five-element framework.
+
+-------------------------------------------------------------
+Sets:
+- C: set of crate types = {Small, Large}
+
+-------------------------------------------------------------
+Parameters:
+- capacity_small: number of grapes a small crate can hold = 200 (grapes per crate)
+- capacity_large: number of grapes a large crate can hold = 500 (grapes per crate)
+- max_small: maximum number of small crates available = 100 (crates)
+- max_large: maximum number of large crates available = 50 (crates)
+- truck_capacity: maximum total number of crates the truck can carry = 60 (crates)
+- min_large: minimum number of large crates required = 10 (crates)
+- ratio: required ratio such that the number of small crates is at least 3 times the number of large crates = 3 (dimensionless)
+
+-------------------------------------------------------------
+Variables:
+- NumSmallCrates: number of small crates used [integer ≥ 0] (crates)
+- NumLargeCrates: number of large crates used [integer ≥ 0] (crates)
+
+-------------------------------------------------------------
+Objective:
+- Maximize TotalGrapes: total number of grapes transported
+  Expression: TotalGrapes = capacity_small * NumSmallCrates + capacity_large * NumLargeCrates
+
+-------------------------------------------------------------
+Constraints:
+1. Small crate availability:
+   NumSmallCrates ≤ max_small
+
+2. Large crate availability:
+   NumLargeCrates ≤ max_large
+
+3. Truck capacity constraint:
+   NumSmallCrates + NumLargeCrates ≤ truck_capacity
+
+4. Customer preference ratio constraint:
+   NumSmallCrates ≥ ratio * NumLargeCrates
+
+5. Minimum large crates requirement:
+   NumLargeCrates ≥ min_large
+
+-------------------------------------------------------------
+
+Comments:
+- All parameters use consistent units: crate counts for availability and truck capacity, and grapes per crate for capacities.
+- Although the model treats the decision variables as integers (since crates are discrete items), the variables are declared as integer in an implementation to ensure feasibility.
+- This model directly maximizes the total grapes transported while respecting both physical constraints (crate availability, truck load) and market preferences (more small crates than large).
+
+This five-element formulation is complete, self-contained, and directly mappable to Python or OR-Tools.
+
+Execution Results:
+SUCCESS:
+===== Linear/MIP Model Optimal Solution =====
+Variables:
+  NumSmallCrates = 45.0
+  NumLargeCrates = 15.0
+Objective:
+  Total Grapes Transported = 16500.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumSmallCrates': 45.0, 'NumLargeCrates': 15.0}, 'objective': 16500.0}

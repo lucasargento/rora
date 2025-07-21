@@ -1,0 +1,31 @@
+Problem Name: 32_Bounds_on_Fourth_Moment
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Decision Variables:}\quad & p_k \quad \text{for } k = 0,1,2,\dots,K, \quad \text{with } p_k \ge 0. \\[1mm]
+\textbf{Objective Function:}\quad & \text{maximize} \quad \sum_{k=0}^{K} k^4\, p_k \\[1mm]
+\textbf{Constraints:}\quad 
+& \text{Normalization:}          && \sum_{k=0}^{K} p_k = 1, \\[1mm]
+& \text{First moment (mean):}    && \sum_{k=0}^{K} k\, p_k = \text{ExpectedZ}, \\[1mm]
+& \text{Second moment:}          && \sum_{k=0}^{K} k^2\, p_k = \text{ExpectedZSquared}.
+\end{align*}
+
+In this model, the decision variables p_k represent the probability that the random variable Z takes the value k (for k = 0,1,2,…,K) and are subject to non-negativity and total probability equal to 1. The objective is to maximize the fourth moment of Z, given the constraints on the first two moments. This formulation is both feasible and bounded under the specified conditions.
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+p[0] = 0.0
+p[1] = 0.0
+p[2] = 0.25000000000000056
+p[3] = 0.666666666666666
+p[4] = 0.0
+p[5] = 0.0
+p[6] = 0.08333333333333347
+Optimal objective value (upper bound on E[Z^4]): 166.0000000000001
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 150.0}

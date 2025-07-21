@@ -1,0 +1,68 @@
+Problem Name: 61_nlp4lp_61
+
+# Problem Description:
+'''Problem description: A post office is buying stamping machines and they can buy a dual or single model stamping machine. A dual model stamping machine can stamp 50 letters per minute while a single model stamping machine can stamp 30 letters per minute. The dual model stamping machine requires 20 units of glue per minute while the single model stamping machine requires 15 units of glue per minute. Since the single model stamping machine is quieter, the number of single model stamping machines must be more than the number of dual model stamping machines. Further, the post office wants to make sure they can stamp at least 300 letters per minute and use at most 135 units of glue per minute. How many of each stamping machine should they purchase to minimize the total number of stamping machines?
+
+Expected Output Schema:
+{
+  "variables": {
+    "SingleStampMachines": "float",
+    "DualStampMachines": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- M: set of machine types = {Dual, Single}
+
+Parameters:
+- letters_per_minute[Dual] = 50 (letters stamped per minute per Dual machine)
+- letters_per_minute[Single] = 30 (letters stamped per minute per Single machine)
+- glue_usage[Dual] = 20 (units of glue used per minute per Dual machine)
+- glue_usage[Single] = 15 (units of glue used per minute per Single machine)
+- min_letters = 300 (minimum letters to be stamped per minute)
+- max_glue = 135 (maximum glue units available per minute)
+- quiet_gap = 1 (at least one more Single machine than Dual machines; i.e., Single - Dual >= 1)
+
+Variables:
+- DualStampMachines: integer, number of Dual stamping machines purchased (>= 0)
+- SingleStampMachines: integer, number of Single stamping machines purchased (>= 0)
+
+Objective:
+- Minimize TotalMachines = SingleStampMachines + DualStampMachines
+
+Constraints:
+1. Letters production constraint:
+   (letters_per_minute[Dual] * DualStampMachines) + (letters_per_minute[Single] * SingleStampMachines) >= min_letters
+   i.e., 50 * DualStampMachines + 30 * SingleStampMachines >= 300
+
+2. Glue usage constraint:
+   (glue_usage[Dual] * DualStampMachines) + (glue_usage[Single] * SingleStampMachines) <= max_glue
+   i.e., 20 * DualStampMachines + 15 * SingleStampMachines <= 135
+
+3. Quiet operation constraint (Single machines must outnumber Dual machines):
+   SingleStampMachines - DualStampMachines >= quiet_gap
+   i.e., SingleStampMachines - DualStampMachines >= 1
+
+4. Non-negativity and integrality constraints:
+   DualStampMachines ∈ {0, 1, 2, ...}
+   SingleStampMachines ∈ {0, 1, 2, ...}
+
+Notes:
+- All units are expressed per minute.
+- The model minimizes the total number of machines while satisfying the performance and resource usage constraints.
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+Model: Linear Model
+Optimal Number of SingleStampMachines: 5.0
+Optimal Number of DualStampMachines: 3.0
+Objective (Total Machines): 8.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'SingleStampMachines': 5.0, 'DualStampMachines': 3.0}, 'objective': 8.0}

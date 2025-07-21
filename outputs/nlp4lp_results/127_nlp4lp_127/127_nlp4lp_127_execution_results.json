@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nInteger Model Solution:\nShipTrips: 12.0\nPlaneTrips: 1.0\nObjective (Total Fuel): 6300.0 liters\n\nContinuous Model Solution:\nShipTrips: 12.50\nPlaneTrips: 0.00\nObjective (Total Fuel): 6250.00 liters\n"
+}

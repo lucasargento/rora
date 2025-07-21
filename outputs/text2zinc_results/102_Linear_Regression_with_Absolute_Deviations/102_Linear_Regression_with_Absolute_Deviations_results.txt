@@ -1,0 +1,48 @@
+Problem Name: 102_Linear_Regression_with_Absolute_Deviations
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:} \quad & K \in \mathbb{Z}_{++}, \quad \{(x_i, y_i)\}_{i=1}^K \text{ given data, with } K=19, \\[1mm]
+& x_i \in \mathbb{R} \quad \text{for } i=1,\ldots,K, \quad y_i \in \mathbb{R} \quad \text{for } i=1,\ldots,K. \\[3mm]
+
+\textbf{Decision Variables:} \quad & a \in \mathbb{R}, \quad \text{(intercept of the line)}; \\[1mm]
+& b \in \mathbb{R}, \quad \text{(slope of the line)}; \\[1mm]
+& d_i \in \mathbb{R}_+ \quad \text{for } i=1,\ldots,K, \quad \text{(absolute deviation of the } i\text{-th data point)}. \\[3mm]
+
+\textbf{Objective Function:} \quad & \min_{a,\,b,\{d_i\}} \quad \sum_{i=1}^K d_i \quad \text{(minimize total absolute deviation)}. \\[3mm]
+
+\textbf{Constraints:} \quad & d_i \ge y_i - \bigl( b\,x_i + a \bigr), \quad \forall\, i=1,\ldots,K, \\[1mm]
+& d_i \ge \bigl( b\,x_i + a \bigr) - y_i, \quad \forall\, i=1,\ldots,K.
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Objective value (sum of absolute deviations) = 11.466250000000002
+Intercept (a) = 0.5812499999999999
+Slope (b) = 0.6375000000000001
+d_0 = 0.41875
+d_1 = 0.0
+d_2 = 0.51875
+d_3 = 0.03750000000000009
+d_4 = 0.20750000000000005
+d_5 = 0.22499999999999987
+d_6 = 0.70625
+d_7 = 0.8125000000000004
+d_8 = 0.4312499999999999
+d_9 = 0.05000000000000058
+d_10 = 2.768750000000001
+d_11 = 0.08750000000000008
+d_12 = 0.80625
+d_13 = 2.088749999999999
+d_14 = 0.6562500000000003
+d_15 = 0.8262499999999999
+d_16 = 0.0
+d_17 = 0.4812500000000003
+d_18 = 0.34375000000000017
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 19.95}

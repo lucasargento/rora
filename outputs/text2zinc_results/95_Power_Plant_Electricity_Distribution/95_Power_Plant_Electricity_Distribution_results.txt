@@ -1,0 +1,38 @@
+Problem Name: 95_Power_Plant_Electricity_Distribution
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices:} \quad & p = 1,2,\ldots,P \quad\text{(power plants)}, \quad c = 1,2,\ldots,C \quad\text{(cities)}. \\[1mm]
+
+\textbf{Decision Variables:} \quad & x_{p,c} \geq 0 \quad \forall\, p = 1,\ldots,P,\; c = 1,\ldots,C, \\
+& \text{where } x_{p,c} \text{ is the amount of electricity (in appropriate units)}\\
+& \quad \text{transmitted from power plant } p \text{ to city } c. \\[2mm]
+
+\textbf{Parameters:} \quad & \text{Supply}_p: \text{Electricity capacity available at power plant } p,\\[0.5mm]
+& \text{Demand}_c: \text{Peak electricity demand of city } c,\\[0.5mm]
+& \text{TC}_{p,c}: \text{Transmission cost per unit of electricity from power plant } p \text{ to city } c.\\[2mm]
+
+\textbf{Objective Function:} \quad & \min \; Z = \sum_{p=1}^{P} \sum_{c=1}^{C} \text{TC}_{p,c} \, x_{p,c}. \\[2mm]
+
+\textbf{Constraints:} \\[0.5mm]
+\text{(1) Power Plant Capacity Constraints:} \quad & \sum_{c=1}^{C} x_{p,c} \leq \text{Supply}_p, \quad \forall\, p=1,\ldots,P. \\[1mm]
+\text{(2) City Demand Satisfaction Constraints:} \quad & \sum_{p=1}^{P} x_{p,c} = \text{Demand}_c, \quad \forall\, c=1,\ldots,C. \\[1mm]
+\text{(3) Non-negativity Constraints:} \quad & x_{p,c} \geq 0, \quad \forall\, p=1,\ldots,P,\; c=1,\ldots,C.
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Optimal objective value = 1380.0
+Power plant 1 -> City 1: 30.0
+Power plant 1 -> City 2: 0.0
+Power plant 2 -> City 1: 0.0
+Power plant 2 -> City 2: 25.0
+Power plant 3 -> City 1: 10.0
+Power plant 3 -> City 2: 35.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 1380.0}

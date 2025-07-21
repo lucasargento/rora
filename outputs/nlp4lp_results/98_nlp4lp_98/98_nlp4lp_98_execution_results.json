@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n----- Integer Model (Patients counted as integers) -----\nElectronicReadings: 3750.0\nRegularReadings: 1875.0\nTotal Patients (Objective): 5625.0\n\n----- Continuous Model (Relaxation) -----\nElectronicReadings: 3750.0\nRegularReadings: 1875.0\nTotal Patients (Objective): 5625.0\n"
+}

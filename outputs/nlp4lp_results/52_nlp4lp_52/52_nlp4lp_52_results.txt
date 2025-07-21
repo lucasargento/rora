@@ -1,0 +1,73 @@
+Problem Name: 52_nlp4lp_52
+
+# Problem Description:
+'''Problem description: A bakery makes almond and pistachio croissants. An almond croissant requires 5 units of butter and 8 units of flour. A pistachio croissant requires 3 units of butter and 6 units of flour. The bakery has available 600 units of butter and 800 units of flour. Since the almond croissant is more popular, at least 3 times as many almond croissants should be made as pistachio croissants. If making an almond croissant takes 12 minutes and making a pistachio croissant takes 10 minutes, how many of each should be made to minimize the total production time?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityAlmondCroissant": "float",
+    "QuantityPistachioCroissant": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Product: {Almond, Pistachio}
+
+Parameters:
+- butter_per_almond = 5 (butter units needed per almond croissant)
+- butter_per_pistachio = 3 (butter units needed per pistachio croissant)
+- flour_per_almond = 8 (flour units needed per almond croissant)
+- flour_per_pistachio = 6 (flour units needed per pistachio croissant)
+- total_butter = 600 (available butter units)
+- total_flour = 800 (available flour units)
+- time_almond = 12 (production time per almond croissant in minutes)
+- time_pistachio = 10 (production time per pistachio croissant in minutes)
+- popularity_ratio = 3 (almond croissants must be at least 3 times the pistachio croissants)
+
+Variables:
+- QuantityAlmondCroissant (x_almond): number of almond croissants to produce, assumed integer and nonnegative.
+- QuantityPistachioCroissant (x_pistachio): number of pistachio croissants to produce, assumed integer and nonnegative.
+
+Objective:
+- Minimize total production time = time_almond * x_almond + time_pistachio * x_pistachio
+  In other words, minimize (12 * QuantityAlmondCroissant + 10 * QuantityPistachioCroissant).
+
+Constraints:
+1. Butter constraint: butter_per_almond * x_almond + butter_per_pistachio * x_pistachio ≤ total_butter  
+   That is, 5 * QuantityAlmondCroissant + 3 * QuantityPistachioCroissant ≤ 600.
+2. Flour constraint: flour_per_almond * x_almond + flour_per_pistachio * x_pistachio ≤ total_flour  
+   That is, 8 * QuantityAlmondCroissant + 6 * QuantityPistachioCroissant ≤ 800.
+3. Popularity constraint: x_almond ≥ popularity_ratio * x_pistachio  
+   That is, QuantityAlmondCroissant ≥ 3 * QuantityPistachioCroissant.
+4. Nonnegativity: x_almond, x_pistachio ≥ 0 and integer.
+
+--------------------------------------------------
+
+For clarity (expected output schema for a coding agent):
+
+{
+  "variables": {
+    "QuantityAlmondCroissant": "integer (>=0)",
+    "QuantityPistachioCroissant": "integer (>=0)"
+  },
+  "objective": "Minimize 12 * QuantityAlmondCroissant + 10 * QuantityPistachioCroissant"
+}
+
+This completes the structured mathematical model using the five-element framework.
+
+Execution Results:
+SUCCESS:
+Results for Croissant Production Problem (Implementation 1):
+Status: OPTIMAL
+Quantity Almond Croissant: 0
+Quantity Pistachio Croissant: 0
+Total Production Time: 0.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityAlmondCroissant': -0.0, 'QuantityPistachioCroissant': -0.0}, 'objective': 0.0}

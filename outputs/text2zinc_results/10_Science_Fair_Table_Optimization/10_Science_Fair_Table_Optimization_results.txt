@@ -1,0 +1,66 @@
+Problem Name: 10_Science_Fair_Table_Optimization
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Decision Variables:} & & & \\
+x & = & \text{Number of circular tables to set up} & x \in \mathbb{Z}_{\ge 1}, \\
+y & = & \text{Number of rectangular tables to set up} & y \in \mathbb{Z}_{\ge 1}. \\[1em]
+
+\textbf{Parameters:} & & & \\
+\text{ParticipantsPerCircular} &=& 5, & \quad \text{Participants at a circular table,} \\
+\text{ParticipantsPerRectangular} &=& 4, & \quad \text{Participants at a rectangular table,} \\
+\\
+\text{BoardsPerCircular} &=& 4, & \quad \text{Poster boards at a circular table,} \\
+\text{BoardsPerRectangular} &=& 4, & \quad \text{Poster boards at a rectangular table,} \\
+\\
+\text{GuestsPerCircular} &=& 8, & \quad \text{Guests accommodated by a circular table,} \\
+\text{GuestsPerRectangular} &=& 12, & \quad \text{Guests accommodated by a rectangular table,} \\
+\\
+\text{SpacePerCircular} &=& 15, & \quad \text{Space (in square units) required per circular table,} \\
+\text{SpacePerRectangular} &=& 20, & \quad \text{Space (in square units) required per rectangular table,} \\
+\\
+\text{TotalSpace} &=& 1900, & \quad \text{Total available space,} \\
+\text{MinParticipants} &=& 500, & \quad \text{Minimum number of participants required,} \\
+\text{MinBoards} &=& 300, & \quad \text{Minimum number of poster boards required.} \\[1em]
+
+\textbf{Objective Function:} & & & \\
+\text{Maximize} \quad Z &=& 8x + 12y, & \quad \text{(Total number of guests)} \\[1em]
+
+\textbf{Constraints:} & & & \\
+\text{(1) Space Constraint:} & 15x + 20y & \leq & 1900, \\[0.5em]
+\text{(2) Participant Constraint:} & 5x + 4y & \geq & 500, \\[0.5em]
+\text{(3) Poster Board Constraint:} & 4x + 4y & \geq & 300. \\[1em]
+
+\textbf{Complete Mathematical Formulation:} & & & \\[0.5em]
+\boxed{
+\begin{aligned}
+&\text{Maximize} \quad && Z = 8x + 12y, \\
+&\text{subject to} \quad && 15x + 20y \le 1900, \\
+& && 5x + 4y \ge 500, \\
+& && 4x + 4y \ge 300, \\
+& && x \ge 1,\quad y \ge 1, \\
+& && x,y \in \mathbb{Z}.
+\end{aligned}
+}
+\end{array}
+\]
+
+This formulation fully represents the problem with:
+1. Decision variables defined as nonnegative integers (with a minimum of 1 each to avoid trivial scenarios),
+2. An objective function that maximizes the total number of guests,
+3. Constraints on total space available, minimum participants, and minimum poster boards needed.
+
+
+Execution Results:
+SUCCESS:
+Solution:
+Number of circular tables (x): 60.0
+Number of rectangular tables (y): 50.0
+Total guests (objective): 1080.0
+
+
+Expected Output:
+Expected solution
+
+: {'CircularTables': 60, 'RectangularTables': 50, 'TotalGuests': 1080, '_objective': 1080}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n---- Linear Solver (CBC Mixed Integer Programming) Result ----\nPainkillerPills: 50.0\nSleepingPills: 117.0\nObjective (Total Digestive Medicine): 735.0\n\n---- CP-SAT Solver Result ----\nPainkillerPills: 50\nSleepingPills: 117\nObjective (Total Digestive Medicine): 735.0\n"
+}

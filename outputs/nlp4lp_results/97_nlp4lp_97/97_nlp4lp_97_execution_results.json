@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nModel: LinearSolver\n  BatchesShots: 10.0\n  BatchesPills: 18.0\n  Objective Value (Total People Supplied): 226.0\n\nModel: CPSAT\n  BatchesShots: 10\n  BatchesPills: 18\n  Objective Value (Total People Supplied): 226.0\n"
+}

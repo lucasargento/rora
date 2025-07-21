@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving both model versions...\n\nModel: Version 1 (Separate Inventory and Sales Decisions)\nOptimal Variables:\n   NumberPlushToys = 190.0\n   NumberDolls = 65.0\n   NumberPlushToysSold = 190.0\n   NumberDollsSold = 65.0\nOptimal Objective Value: 890.0\n--------------------------------------------------\nModel: Version 2 (Purchase equals Sales)\nOptimal Variables:\n   NumberPlushToys = 190.0\n   NumberDolls = 65.0\n   NumberPlushToysSold = 190.0\n   NumberDollsSold = 65.0\nOptimal Objective Value: 890.0\n--------------------------------------------------\n"
+}

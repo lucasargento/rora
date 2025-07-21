@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nMethod: LinearSolver\nNumberOfVans: 10\nNumberOfMinibuses: 9\nTotal Pollution: 160.0\n\nMethod: CPSAT\nNumberOfVans: 10\nNumberOfMinibuses: 9\nTotal Pollution: 160.0\n"
+}

@@ -1,0 +1,84 @@
+Problem Name: 78_Capacitated_Facility_Location
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Indices:} & i = 1,\dots,10 & \quad & \text{(potential facilities)} \\
+                 & j = 1,\dots,20 & \quad & \text{(customer zones)}
+\end{array}
+\]
+
+\[
+\begin{array}{rcll}
+\textbf{Parameters:} & f_i \quad & \text{facility fixed cost for facility } i, & \quad i = 1,\dots,10, \\
+                    & t_{ij} \quad & \text{transportation cost per unit from facility } i \text{ to customer } j, & \quad i=1,\dots,10,\; j=1,\dots,20, \\
+                    & c_i \quad & \text{capacity of facility } i, & \quad i=1,\dots,10, \\
+                    & d_j \quad & \text{demand of customer zone } j, & \quad j=1,\dots,20.
+\end{array}
+\]
+
+\[
+\begin{array}{rcll}
+\textbf{Decision Variables:} & y_i \in \{0,1\} \quad & \text{= 1 if facility } i \text{ is established, } 0 \text{ otherwise,} & \quad i=1,\dots,10, \\
+                             & x_{ij} \ge 0 \quad & \text{amount of goods shipped from facility } i \text{ to customer } j, & \quad i=1,\dots,10,\; j=1,\dots,20.
+\end{array}
+\]
+
+\[
+\begin{align*}
+\textbf{Minimize} \quad & Z = \sum_{i=1}^{10} f_i\, y_i + \sum_{i=1}^{10}\sum_{j=1}^{20} t_{ij}\, x_{ij} \\
+\\
+\textbf{subject to:}& \\
+\text{(1) Facility Capacity Constraints:} \quad & \sum_{j=1}^{20} x_{ij} \le c_i\, y_i, && \forall\, i=1,\dots,10, \\
+\\
+\text{(2) Customer Demand Satisfaction:} \quad & \sum_{i=1}^{10} x_{ij} \ge d_j, && \forall\, j=1,\dots,20, \\
+\\
+\text{(3) Nonnegativity and Binary:} \quad & x_{ij} \ge 0, && \forall\, i=1,\dots,10,\; j=1,\dots,20, \\
+& y_i \in \{0,1\}, && \forall\, i=1,\dots,10.
+\end{align*}
+\]
+
+\textbf{Explanation:}  
+1. The binary variable \( y_i \) determines whether facility \( i \) is established.  
+2. The continuous variable \( x_{ij} \) represents the quantity shipped from facility \( i \) to customer \( j \).  
+3. The objective function minimizes the total cost, which is the sum of the fixed costs for opening facilities and the variable transportation costs incurred by shipping goods from facilities to customers.  
+4. Constraint (1) ensures that if facility \( i \) is not open (\( y_i = 0 \)), no shipments can be made from it, and if it is open (\( y_i = 1 \)), the total shipment does not exceed its capacity \( c_i \).  
+5. Constraint (2) guarantees that each customer's demand is met by the combined shipments from all facilities.  
+
+This complete formulation accurately represents the capacitated facility location problem in transportation and logistics, ensuring feasibility and boundedness as required.
+
+Execution Results:
+SUCCESS:
+Optimal objective value = 95090.0
+Facility 2 is open with capacity usage 342.00
+  Ship 86.00 units to Customer 1
+  Ship 69.00 units to Customer 2
+  Ship 114.00 units to Customer 12
+  Ship 73.00 units to Customer 15
+Facility 3 is open with capacity usage 355.00
+  Ship 117.00 units to Customer 0
+  Ship 110.00 units to Customer 4
+  Ship 74.00 units to Customer 5
+  Ship 54.00 units to Customer 10
+Facility 4 is open with capacity usage 406.00
+  Ship 136.00 units to Customer 6
+  Ship 126.00 units to Customer 8
+  Ship 144.00 units to Customer 16
+Facility 6 is open with capacity usage 463.00
+  Ship 79.00 units to Customer 9
+  Ship 86.00 units to Customer 11
+  Ship 76.00 units to Customer 13
+  Ship 49.00 units to Customer 17
+  Ship 53.00 units to Customer 18
+  Ship 120.00 units to Customer 19
+Facility 8 is open with capacity usage 331.00
+  Ship 53.00 units to Customer 3
+  Ship 140.00 units to Customer 7
+  Ship 136.00 units to Customer 14
+  Ship 2.00 units to Customer 17
+
+
+Expected Output:
+Expected solution
+
+: {'FacilityOpen': [0, 0, 1, 1, 1, 0, 1, 0, 1, 0], 'CustomerAssignment': [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 86, 69, 0, 0, 0, 0, 0, 0, 0, 0, 0, 114, 0, 0, 73, 0, 0, 0, 0], [117, 0, 0, 0, 110, 74, 0, 0, 0, 0, 54, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 136, 0, 126, 0, 0, 0, 0, 0, 0, 0, 144, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 79, 0, 86, 0, 76, 0, 0, 0, 49, 53, 120], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 53, 0, 0, 0, 140, 0, 0, 0, 0, 0, 0, 136, 0, 0, 2, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], 'TotalCost': 95090, '_objective': 95090}

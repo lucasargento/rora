@@ -1,0 +1,69 @@
+Problem Name: 55_nlp4lp_55
+
+# Problem Description:
+'''Problem description: A laundromat can buy two types of washing machines, a top-loading model and a front-loading model. The top-loading model can wash 50 items per day while the front-loading model can wash 75 items per day. The top-loading model consumes 85 kWh per day while the front-loading model consumes 100 kWh per day. The laundromat must be able to wash at least 5000 items per day and has available 7000 kWh per day. Since the top-loading machine are harder to use, at most 40% of the machines can be top-loading. Further, at least 10 machines should be front-loading. How many of each machine should the laundromat buy to minimize the total number of washing machines?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumTopLoading": "float",
+    "NumFrontLoading": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- M: set of washing machine types = {TopLoading, FrontLoading}
+
+Parameters:
+- WashItems_T: number of items washed per day by a top-loading machine = 50 [items/day]
+- WashItems_F: number of items washed per day by a front-loading machine = 75 [items/day]
+- Power_T: power consumption per day of a top-loading machine = 85 [kWh/day]
+- Power_F: power consumption per day of a front-loading machine = 100 [kWh/day]
+- MinItems: minimum items to wash per day = 5000 [items]
+- AvailablePower: available power per day = 7000 [kWh]
+- MaxTopFraction: maximum fraction of machines that may be top-loading = 0.40 [fraction]
+- MinFront: minimum number of front-loading machines required = 10 [machines]
+
+Variables:
+- NumTopLoading: number of top-loading machines to buy [integer ≥ 0]
+- NumFrontLoading: number of front-loading machines to buy [integer ≥ 0]
+
+Objective:
+- Minimize TotalMachines = NumTopLoading + NumFrontLoading
+
+Constraints:
+1. Washing capacity constraint:
+   (WashItems_T * NumTopLoading) + (WashItems_F * NumFrontLoading) ≥ MinItems
+
+2. Power consumption constraint:
+   (Power_T * NumTopLoading) + (Power_F * NumFrontLoading) ≤ AvailablePower
+
+3. Top-loading machine fraction constraint:
+   NumTopLoading ≤ MaxTopFraction * (NumTopLoading + NumFrontLoading)
+
+4. Minimum front-loading machines constraint:
+   NumFrontLoading ≥ MinFront
+
+Comments:
+- All machines are counted as whole units.
+- The model assumes that daily performance attributes (items washed, kWh used per day) are additive across machines.
+- The top-loading fraction constraint ensures that no more than 40% of the total machines are top-loading, which addresses usability concerns.
+- The objective is to minimize the total number of machines purchased while satisfying operational constraints.
+
+This structured model provides a clear formulation that can be directly translated into Python or an optimization solver using OR-Tools.
+
+Execution Results:
+SUCCESS:
+Results from ortools.linear_solver:
+{'variables': {'NumTopLoading': 0.0, 'NumFrontLoading': 67.0}, 'objective': 67.0}
+
+Results from ortools.sat.python.cp_model:
+{'variables': {'NumTopLoading': 0, 'NumFrontLoading': 67}, 'objective': 67}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumTopLoading': -0.0, 'NumFrontLoading': 67.0}, 'objective': 67.0}

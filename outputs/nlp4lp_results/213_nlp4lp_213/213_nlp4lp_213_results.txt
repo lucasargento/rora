@@ -1,0 +1,58 @@
+Problem Name: 213_nlp4lp_213
+
+# Problem Description:
+'''Problem description: A restaurant has two combos available to their customers, an original and an experimental meal. The original meal typically generates 20 units of food waste and 45 units of wrapping waste and takes 10 minutes to cook. In comparison, the experimental meal generates 25 units of food waste and 35 units of wrapping waste and takes 15 minutes to cook. The restaurant can have at most 900 units of wrapping waste and can have at most 800 units of food waste as regulated by the government. How many of each combo should be pushed for by the waiting staff to minimize the cooking time?
+
+Expected Output Schema:
+{
+  "variables": {
+    "OriginalMeals": "float",
+    "ExperimentalMeals": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Combos = {Original, Experimental}
+
+Parameters:
+- foodWaste_Original = 20  // food waste units per original meal [units/meal]
+- foodWaste_Experimental = 25  // food waste units per experimental meal [units/meal]
+- wrappingWaste_Original = 45  // wrapping waste units per original meal [units/meal]
+- wrappingWaste_Experimental = 35  // wrapping waste units per experimental meal [units/meal]
+- cookTime_Original = 10  // cooking time per original meal [minutes/meal]
+- cookTime_Experimental = 15  // cooking time per experimental meal [minutes/meal]
+- maxFoodWaste = 800  // maximum allowed food waste [units]
+- maxWrappingWaste = 900  // maximum allowed wrapping waste [units]
+
+Variables:
+- OriginalMeals: number of original meals to be offered (continuous, nonnegative) [meals]
+- ExperimentalMeals: number of experimental meals to be offered (continuous, nonnegative) [meals]
+
+Objective:
+- Minimize total cooking time, represented as 
+  cookTime_Original * OriginalMeals + cookTime_Experimental * ExperimentalMeals
+  [minutes]
+
+Constraints:
+1. Food waste constraint:
+   foodWaste_Original * OriginalMeals + foodWaste_Experimental * ExperimentalMeals ≤ maxFoodWaste
+2. Wrapping waste constraint:
+   wrappingWaste_Original * OriginalMeals + wrappingWaste_Experimental * ExperimentalMeals ≤ maxWrappingWaste
+
+Notes:
+- All parameters are given in consistent units (waste in units, cooking time in minutes, meals in count).
+- The decision variables are continuous as specified, though in a practical scenario they may be integer values.
+
+Execution Results:
+SUCCESS:
+Model 1: Linear Programming Formulation using GLOP
+Optimal solution:
+{'variables': {'OriginalMeals': 0.0, 'ExperimentalMeals': 0.0}, 'objective': 0.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'OriginalMeals': -0.0, 'ExperimentalMeals': -0.0}, 'objective': 0.0}

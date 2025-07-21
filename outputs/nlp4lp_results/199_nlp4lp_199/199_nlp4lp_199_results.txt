@@ -1,0 +1,67 @@
+Problem Name: 199_nlp4lp_199
+
+# Problem Description:
+'''Problem description: Both subsoil and topsoil need to be added to a garden bed. One bag of subsoil requires 10 units of water to hydrate while one bag of topsoil requires 6 units of water to hydrate every day. The truck used to transport the dirt has limited capacity and therefore, the farmer has available 150 bags of topsoil and subsoil combined. In addition, at least 10 bags of topsoil must be used. Since the topsoil is more expensive, at most 30% of all bags of soil can be topsoil. How many bags of each should be bought to minimize the total amount of water required to hydrate the garden bed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "SubsoilBags": "float",
+    "TopsoilBags": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- SoilType: the set of soil types = {subsoil, topsoil}
+
+Parameters:
+- waterSubsoil = 10 (water units required per bag of subsoil per day)
+- waterTopsoil = 6 (water units required per bag of topsoil per day)
+- maxTotalBags = 150 (maximum total number of bags available)
+- minTopsoilBags = 10 (minimum number of topsoil bags required)
+- topsoilFractionLimit = 0.30 (at most 30% of all bags can be topsoil)
+  • Note: The constraint topsoilBags ≤ topsoilFractionLimit × (subsoilBags + topsoilBags) can be equivalently linearized as:
+    0.7 × topsoilBags ≤ 0.3 × subsoilBags, or equivalently, 7 × topsoilBags ≤ 3 × subsoilBags.
+
+Variables:
+- subsoilBags: number of subsoil bags used [integer, ≥ 0]
+- topsoilBags: number of topsoil bags used [integer, ≥ 0]
+
+Objective:
+- Minimize totalWater = waterSubsoil × subsoilBags + waterTopsoil × topsoilBags
+  • That is, minimize totalWater = 10 × subsoilBags + 6 × topsoilBags
+
+Constraints:
+1. Total bags constraint: subsoilBags + topsoilBags ≤ maxTotalBags
+2. Minimum topsoil constraint: topsoilBags ≥ minTopsoilBags
+3. Topsoil proportion constraint: 7 × topsoilBags ≤ 3 × subsoilBags  
+   • This linear formulation enforces that topsoilBags ≤ 0.30 × (subsoilBags + topsoilBags).
+
+Notes:
+- All units are consistent: water is measured in water units per day per bag, and bag counts are whole units.
+- Both decision variables are defined as integers to reflect the discrete number of bags. 
+
+Expected Output Schema:
+{
+  "variables": {
+    "SubsoilBags": "float",  // here representing an integer number (≥ 0)
+    "TopsoilBags": "float"   // here representing an integer number (≥ 0)
+  },
+  "objective": "float"        // total water required: 10 × SubsoilBags + 6 × TopsoilBags
+}
+
+Execution Results:
+SUCCESS:
+Results for Formulation 1 (Using constraint: 7 * TopsoilBags <= 3 * SubsoilBags):
+{'SubsoilBags': 24.0, 'TopsoilBags': 10.0, 'objective': 300.0}
+
+Results for Formulation 2 (Using constraint: TopsoilBags <= 0.3*(SubsoilBags + TopsoilBags)):
+{'SubsoilBags': 24.0, 'TopsoilBags': 10.0, 'objective': 300.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'SubsoilBags': 24.0, 'TopsoilBags': 10.0}, 'objective': 300.0}

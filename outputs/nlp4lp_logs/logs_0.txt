@@ -1,0 +1,3440 @@
+============================================================
+Problema 88
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_88
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'RegularBatches': 'float', 'PremiumBatches': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A pharmaceutical company makes skin cream in batches, a regular batch and premium batch, to sell to hospitals. The regular batch requires 50 units of medicinal ingredients and 40 units of rehydration product. A premium batch requires 40 units of medicinal ingredients and 60 units of rehydration product. The company has available 3000 units of medicinal ingredients and 3500 units of rehydration product. Since the premium batch sells better, the number of regular batches must be less than the number of premium batches. In addition, the company must make at least 10 regular batches. If a regular batch can treat 50 people and a premium batch can treat 30 people, how many of each batch should be made to maximize the number of people that can be treated?
+
+Expected Output Schema:
+{
+  "variables": {
+    "RegularBatches": "float",
+    "PremiumBatches": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A pharmaceutical company makes skin cream in batches, a regular batch and premium batch, to sell to hospitals. The regular batch requires 50 units of medicinal ingredients and 40 units of rehydration product. A premium batch requires 40 units of medicinal ingredients and 60 units of rehydration product. The company has available 3000 units of medicinal ingredients and 3500 units of rehydration product. Since the premium batch sells better, the number of regular batches must be less than the number of premium batches. In addition, the company must make at least 10 regular batches. If a regular batch can treat 50 people and a premium batch can treat 30 people, how many of each batch should be made to maximize the number of people that can be treated?
+
+Expected Output Schema:
+{
+  "variables": {
+    "RegularBatches": "float",
+    "PremiumBatches": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- Batches: a set with two elements {Regular, Premium} representing the two types of skin cream batches.
+
+Parameters:
+- medicinal_req_regular: 50 (units of medicinal ingredients needed per regular batch)
+- medicinal_req_premium: 40 (units of medicinal ingredients needed per premium batch)
+- rehydration_req_regular: 40 (units of rehydration product needed per regular batch)
+- rehydration_req_premium: 60 (units of rehydration product needed per premium batch)
+- medicinal_avail: 3000 (total available units of medicinal ingredients)
+- rehydration_avail: 3500 (total available units of rehydration product)
+- treats_regular: 50 (number of people treated by one regular batch)
+- treats_premium: 30 (number of people treated by one premium batch)
+- min_regular_batches: 10 (minimum number of regular batches that must be produced)
+- note: All units are assumed consistent (ingredients and treated people per batch).
+
+Variables:
+- x_regular: number of regular batches produced [integer ≥ 0]
+- x_premium: number of premium batches produced [integer ≥ 0]
+
+Objective:
+Maximize total people treated:
+   maximize_total_people = treats_regular * x_regular + treats_premium * x_premium
+   i.e., maximize 50 * x_regular + 30 * x_premium
+
+Constraints:
+1. Medicinal ingredient constraint:
+   medicinal_req_regular * x_regular + medicinal_req_premium * x_premium ≤ medicinal_avail
+   i.e., 50 * x_regular + 40 * x_premium ≤ 3000
+
+2. Rehydration product constraint:
+   rehydration_req_regular * x_regular + rehydration_req_premium * x_premium ≤ rehydration_avail
+   i.e., 40 * x_regular + 60 * x_premium ≤ 3500
+
+3. Batch comparison constraint (regular batches must be less than premium batches):
+   x_regular < x_premium
+
+4. Minimum production requirement for regular batches:
+   x_regular ≥ min_regular_batches
+   i.e., x_regular ≥ 10
+
+5. Domain of decision variables:
+   x_regular and x_premium are non-negative integers.
+
+This complete model provides a clear mapping from the problem description into the five-element mathematical optimization formulation.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3680 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results:
+-----------
+Model 1: Linear Solver
+{'variables': {'RegularBatches': 32.0, 'Premium...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 105
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_105
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'OperatingTime': {'0': 'float', '1': 'float'}}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A pharmacy makes eye cream and foot cream using two different machines, machine 1 and machine 2. Machine 1 can  make 30 ml of eye cream and 60 ml of foot cream per hour. Machine 2 can make 45 ml of eye cream and 30 ml of foot cream per hour. Furthermore, machine 1 requires 20 ml of distilled water per hour while machine 2 requires 15 ml of distilled water per hour. The pharmacy has available 1200 ml of distilled water. If the pharmacy needs to make at least 1300 ml of eye cream and 1500 ml of foot cream, how many hours should each machine be used to minimize the total time needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "OperatingTime": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A pharmacy makes eye cream and foot cream using two different machines, machine 1 and machine 2. Machine 1 can  make 30 ml of eye cream and 60 ml of foot cream per hour. Machine 2 can make 45 ml of eye cream and 30 ml of foot cream per hour. Furthermore, machine 1 requires 20 ml of distilled water per hour while machine 2 requires 15 ml of distilled water per hour. The pharmacy has available 1200 ml of distilled water. If the pharmacy needs to make at least 1300 ml of eye cream and 1500 ml of foot cream, how many hours should each machine be used to minimize the total time needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "OperatingTime": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is one valid formulation using the five-element structured model.
+
+----------------------------------------------------------------
+Sets:
+- M: set of machines = {1, 2}
+
+Parameters:
+- eyeProd[1] = 30      (ml of eye cream produced per hour by machine 1)
+- eyeProd[2] = 45      (ml of eye cream produced per hour by machine 2)
+- footProd[1] = 60     (ml of foot cream produced per hour by machine 1)
+- footProd[2] = 30     (ml of foot cream produced per hour by machine 2)
+- waterUse[1] = 20     (ml of water consumed per hour by machine 1)
+- waterUse[2] = 15     (ml of water consumed per hour by machine 2)
+
+- minEyeCream = 1300   (minimum required ml of eye cream)
+- minFootCream = 1500  (minimum required ml of foot cream)
+- availWater = 1200    (total available ml of distilled water)
+
+Comments:
+- All production numbers are in milliliters (ml) per hour.
+- Operating times are measured in hours.
+- The water constraint uses the same unit (ml).
+
+Variables:
+- OperatingTime[i] for each machine i in M, where OperatingTime[i] is a continuous variable representing the number of hours machine i is used.
+  • OperatingTime[1] ≥ 0
+  • OperatingTime[2] ≥ 0
+
+Objective:
+- Minimize TotalTime = OperatingTime[1] + OperatingTime[2]
+  (This minimizes the total machine operating time in hours.)
+
+Constraints:
+1. Eye Cream Production Constraint:
+   - eyeProd[1] * OperatingTime[1] + eyeProd[2] * OperatingTime[2] ≥ minEyeCream
+   - (30 * OperatingTime[1] + 45 * OperatingTime[2] ≥ 1300)
+
+2. Foot Cream Production Constraint:
+   - footProd[1] * OperatingTime[1] + footProd[2] * OperatingTime[2] ≥ minFootCream
+   - (60 * OperatingTime[1] + 30 * OperatingTime[2] ≥ 1500)
+
+3. Water Availability Constraint:
+   - waterUse[1] * OperatingTime[1] + waterUse[2] * OperatingTime[2] ≤ availWater
+   - (20 * OperatingTime[1] + 15 * OperatingTime[2] ≤ 1200)
+
+----------------------------------------------------------------
+This complete model clearly defines the decision variables, objective, and constraints using the five-element framework.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3934 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results using ortools.linear_solver (GLOP):
+{'OperatingTime': {'0': 15.833333333333332, '1'...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 169
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_169
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'NumberOfCanoes': 'float', 'NumberOfDieselBoats': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A large fishing boat sends fish back to shore either by small canoes or smaller diesel boats. A canoe can carry back 10 fish while a small diesel boat can carry back 15 fish. In order to follow environmental rules, the number of small canoes used has to be at least 3 times as many as the number of diesel boats uses. If  at least 1000 fish need to be transported to shore, minimize the total number of canoes and diesel boats needed.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfCanoes": "float",
+    "NumberOfDieselBoats": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A large fishing boat sends fish back to shore either by small canoes or smaller diesel boats. A canoe can carry back 10 fish while a small diesel boat can carry back 15 fish. In order to follow environmental rules, the number of small canoes used has to be at least 3 times as many as the number of diesel boats uses. If  at least 1000 fish need to be transported to shore, minimize the total number of canoes and diesel boats needed.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfCanoes": "float",
+    "NumberOfDieselBoats": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- V: set of vessel types = {Canoe, DieselBoat}
+
+Parameters:
+- capacity_Canoe: 10 fish per canoe
+- capacity_DieselBoat: 15 fish per diesel boat
+- fishRequirement: 1000 fish (minimum fish to be transported)
+
+Variables:
+- NumberOfCanoes: number of canoes to be used (nonnegative, decision variable; assumed to be an integer)
+- NumberOfDieselBoats: number of diesel boats to be used (nonnegative, decision variable; assumed to be an integer)
+
+Objective:
+- Minimize totalVehicles = NumberOfCanoes + NumberOfDieselBoats
+
+Constraints:
+1. Fish Transportation Constraint:
+   (capacity_Canoe * NumberOfCanoes) + (capacity_DieselBoat * NumberOfDieselBoats) ≥ fishRequirement
+   (This means that the total number of fish carried by all vessels must be at least 1000 fish)
+
+2. Environmental Regulation Constraint:
+   NumberOfCanoes ≥ 3 * NumberOfDieselBoats
+   (The number of canoes must be at least three times the number of diesel boats)
+
+Output Schema Example:
+{
+  "variables": {
+    "NumberOfCanoes": "float",
+    "NumberOfDieselBoats": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3211 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results from Linear Solver (MIP):
+{'variables': {'NumberOfCanoes': 67.0, 'NumberOfDieselBoa...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 174
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_174
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'NumberOfDesks': 'float', 'NumberOfDrawers': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: An office company makes desks and drawers. Each desk requires 40 minutes of assembly and 20 minutes of sanding. Each drawer requires 30 minutes of assembly and 10 minutes of sanding. The company has available 4000 minutes for assembly and 3500 minutes for sanding. If the profit per desk is $100 and the profit per drawer is $90, how many of each should the company make to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfDesks": "float",
+    "NumberOfDrawers": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: An office company makes desks and drawers. Each desk requires 40 minutes of assembly and 20 minutes of sanding. Each drawer requires 30 minutes of assembly and 10 minutes of sanding. The company has available 4000 minutes for assembly and 3500 minutes for sanding. If the profit per desk is $100 and the profit per drawer is $90, how many of each should the company make to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfDesks": "float",
+    "NumberOfDrawers": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- Product: set of office products = {Desk, Drawer}
+
+Parameters:
+- profit_desk: profit per desk (USD/unit) = 100
+- profit_drawer: profit per drawer (USD/unit) = 90
+- assembly_time_desk: assembly time required per desk (minutes/unit) = 40
+- assembly_time_drawer: assembly time required per drawer (minutes/unit) = 30
+- sanding_time_desk: sanding time required per desk (minutes/unit) = 20
+- sanding_time_drawer: sanding time required per drawer (minutes/unit) = 10
+- max_assembly_time: total available assembly time (minutes) = 4000
+- max_sanding_time: total available sanding time (minutes) = 3500
+
+Variables:
+- x_desk: number of desks to produce (float ≥ 0) [units]
+- x_drawer: number of drawers to produce (float ≥ 0) [units]
+
+Objective:
+- Maximize total profit = (profit_desk * x_desk) + (profit_drawer * x_drawer)
+  (This equals 100 * x_desk + 90 * x_drawer)
+
+Constraints:
+1. Assembly time constraint: (assembly_time_desk * x_desk) + (assembly_time_drawer * x_drawer) ≤ max_assembly_time  
+   (i.e., 40 * x_desk + 30 * x_drawer ≤ 4000)
+2. Sanding time constraint: (sanding_time_desk * x_desk) + (sanding_time_drawer * x_drawer) ≤ max_sanding_time  
+   (i.e., 20 * x_desk + 10 * x_drawer ≤ 3500)
+3. Non-negativity constraints: x_desk ≥ 0 and x_drawer ≥ 0
+
+Additional Comments:
+- All time parameters are expressed in minutes, and capacity constraints are given in minutes.
+- Profits are in USD per unit produced.
+- Although production counts are typically integer, the expected output schema declares the decision variables as float.
+  
+This completes the structured mathematical model using the five-element framework.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3491 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Continuous Model Solution:
+NumberOfDesks: 0.0
+NumberOfDrawers: 133.33333333333331
+objective...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 42
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_42
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'AcresAllocated': ['float']}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A farmer has 200 acres of land on which he must process hay using either a windrower or hay harvester. For each acre of land, the windrower can process 10 kg of hay while the hay harvester can process 8 kg of hay. Per acre, the windrower produces 5 kg of methane gas and requires 2 kg of fuel. On the other hand, the hay harvester produces 3 kg of methane gas per acre and requires 1 kg of fuel. There are 300 kg of fuel available and the farmer can produce at most 800 kg of methane gas. For how many acres should each machine be used to maximize the amount of hay processed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AcresAllocated": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A farmer has 200 acres of land on which he must process hay using either a windrower or hay harvester. For each acre of land, the windrower can process 10 kg of hay while the hay harvester can process 8 kg of hay. Per acre, the windrower produces 5 kg of methane gas and requires 2 kg of fuel. On the other hand, the hay harvester produces 3 kg of methane gas per acre and requires 1 kg of fuel. There are 300 kg of fuel available and the farmer can produce at most 800 kg of methane gas. For how many acres should each machine be used to maximize the amount of hay processed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AcresAllocated": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- Machines: set of machine types = {Windrower, HayHarvester}
+
+Parameters:
+- available_acres: total acres available = 200 acres
+- fuel_available: total fuel available = 300 kg
+- methane_limit: maximum allowable methane gas produced = 800 kg
+- hay_per_acre:
+  - Windrower: 10 kg hay processed per acre
+  - HayHarvester: 8 kg hay processed per acre
+- fuel_req:
+  - Windrower: 2 kg fuel required per acre
+  - HayHarvester: 1 kg fuel required per acre
+- methane_prod:
+  - Windrower: 5 kg methane produced per acre
+  - HayHarvester: 3 kg methane produced per acre
+
+Variables:
+- acres_allocated[m in Machines]: number of acres on which machine m is used [continuous, >= 0] (unit: acres)
+
+Objective:
+- Maximize total hay processed = (10 * acres_allocated[Windrower]) + (8 * acres_allocated[HayHarvester])
+  (unit: kg hay)
+
+Constraints:
+1. Land constraint: acres_allocated[Windrower] + acres_allocated[HayHarvester] ≤ available_acres (200 acres)
+2. Fuel constraint: (2 * acres_allocated[Windrower]) + (1 * acres_allocated[HayHarvester]) ≤ fuel_available (300 kg)
+3. Methane constraint: (5 * acres_allocated[Windrower]) + (3 * acres_allocated[HayHarvester]) ≤ methane_limit (800 kg methane)
+
+--------------------------------------------------
+Output Schema (for reference):
+{
+  "variables": {
+    "AcresAllocated": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4728 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+{'LinearSolver_Result': {'model': 'LinearSolver (Continuous)', 'variables': {'AcresAllocate...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 126
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_126
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'SmallBottlesUsed': 'float', 'LargeBottlesUsed': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A bee farmer transports his honey in small and large bottles. A small bottle can take 5 units of honey while a large bottle can take 20 units of honey. The farmer has available at most 300 small bottles and at most 100 large bottles. In addition, since small bottles are easier to sell, at least twice as many small bottles must be used than large bottles. Finally, he can transport at most 200 bottles total and at least 50 must be large bottles. How many of each bottle should be use to maximize the total amount of honey he can transport?
+
+Expected Output Schema:
+{
+  "variables": {
+    "SmallBottlesUsed": "float",
+    "LargeBottlesUsed": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A bee farmer transports his honey in small and large bottles. A small bottle can take 5 units of honey while a large bottle can take 20 units of honey. The farmer has available at most 300 small bottles and at most 100 large bottles. In addition, since small bottles are easier to sell, at least twice as many small bottles must be used than large bottles. Finally, he can transport at most 200 bottles total and at least 50 must be large bottles. How many of each bottle should be use to maximize the total amount of honey he can transport?
+
+Expected Output Schema:
+{
+  "variables": {
+    "SmallBottlesUsed": "float",
+    "LargeBottlesUsed": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- BottleTypes = {Small, Large}
+
+Parameters:
+- capacity_small: honey capacity per small bottle [units] = 5
+- capacity_large: honey capacity per large bottle [units] = 20
+- max_small: maximum available small bottles [bottles] = 300
+- max_large: maximum available large bottles [bottles] = 100
+- max_total_bottles: maximum total bottles that can be transported [bottles] = 200
+- min_large_used: minimum large bottles to use [bottles] = 50
+- small_to_large_ratio: minimum ratio of small bottles to large bottles = 2  (i.e., number of small bottles used must be at least twice the number of large bottles used)
+
+Variables:
+- x_small: number of small bottles to use [integer, units = bottles]
+- x_large: number of large bottles to use [integer, units = bottles]
+
+Objective:
+- Maximize total honey transported = (capacity_small * x_small) + (capacity_large * x_large)
+
+Constraints:
+1. Availability constraints:
+   - x_small <= max_small
+   - x_large <= max_large
+
+2. Total bottle constraint:
+   - x_small + x_large <= max_total_bottles
+
+3. Ratio constraint:
+   - x_small >= small_to_large_ratio * x_large
+
+4. Minimum large bottle usage constraint:
+   - x_large >= min_large_used
+
+Comments:
+- All decision variables are assumed to be integer since the number of bottles must be whole numbers.
+- The units for capacities are in "units of honey" (e.g., liters, kilograms) as described in the problem but no specific unit was provided.
+- This model maximizes the total transported honey subject to the available bottle counts and additional constraints.
+
+Expected Output Schema:
+{
+  "variables": {
+    "SmallBottlesUsed": "float",
+    "LargeBottlesUsed": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4218 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+=== Solving with Linear Solver (MIP) ===
+Linear Solver (MIP) Solution:
+{'variables': {'Smal...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 175
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_175
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'Produce': {'0': 'float', '1': 'float'}}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A milk tea shop owner would like to sell two different milk teas: black milk tea and matcha milk tea. Each contains both milk and honey. A bottle of black milk tea contains 600 grams of milk and 10 grams of honey, whereas a bottle of matcha milk tea contains 525 grams of milk and 5 grams of honey. The profit from each bottle of black milk tea sold is $7.5 and the profit from each bottle of matcha milk tea sold is $5. If his total production must not exceed his available stock of 30000 grams of milk and 500 grams of honey, how many bottles of each type of milk tea should be made to maximize profits?
+
+Expected Output Schema:
+{
+  "variables": {
+    "Produce": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A milk tea shop owner would like to sell two different milk teas: black milk tea and matcha milk tea. Each contains both milk and honey. A bottle of black milk tea contains 600 grams of milk and 10 grams of honey, whereas a bottle of matcha milk tea contains 525 grams of milk and 5 grams of honey. The profit from each bottle of black milk tea sold is $7.5 and the profit from each bottle of matcha milk tea sold is $5. If his total production must not exceed his available stock of 30000 grams of milk and 500 grams of honey, how many bottles of each type of milk tea should be made to maximize profits?
+
+Expected Output Schema:
+{
+  "variables": {
+    "Produce": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- TeaTypes: set of milk tea types = {black, matcha}
+
+Parameters:
+- profit_black: profit per bottle of black milk tea [USD per bottle] = 7.5
+- profit_matcha: profit per bottle of matcha milk tea [USD per bottle] = 5
+- milk_black: milk required per bottle of black milk tea [grams per bottle] = 600
+- milk_matcha: milk required per bottle of matcha milk tea [grams per bottle] = 525
+- honey_black: honey required per bottle of black milk tea [grams per bottle] = 10
+- honey_matcha: honey required per bottle of matcha milk tea [grams per bottle] = 5
+- total_milk: total available milk [grams] = 30000
+- total_honey: total available honey [grams] = 500
+
+Variables:
+- x_black: number of bottles of black milk tea to produce [nonnegative continuous variable, representing bottles]
+- x_matcha: number of bottles of matcha milk tea to produce [nonnegative continuous variable, representing bottles]
+  (Note: Even though bottles are discrete, the problem formulation uses floats. In a practical implementation, you might require integer variables.)
+
+Objective:
+- Maximize total profit:
+  Maximize Profit = (profit_black * x_black) + (profit_matcha * x_matcha)
+  which numerically is: Maximize Profit = 7.5*x_black + 5*x_matcha
+
+Constraints:
+1. Milk availability constraint:
+   milk_black*x_black + milk_matcha*x_matcha ≤ total_milk
+   That is: 600*x_black + 525*x_matcha ≤ 30000
+
+2. Honey availability constraint:
+   honey_black*x_black + honey_matcha*x_matcha ≤ total_honey
+   That is: 10*x_black + 5*x_matcha ≤ 500
+
+# Model Comments:
+- All resource units are expressed in grams for milk and honey.
+- The decision variables represent the number of bottles produced; while bottles are discrete, the variable type is indicated as float per the expected output schema.
+- The objective focuses solely on profit maximization with no additional cost elements.
+
+This structured mathematical model is complete and faithfully represents the original milk tea optimization problem using the five-element framework.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4777 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+---- Linear Solver (Continuous Variables) ----
+Optimal Production Plan:
+  black: 50.00 bott...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 198
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_198
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'NumberOfCarts': 'float', 'NumberOfTrolleys': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A concert organizer has to transport equipment using carts or trolleys. Carts can transport 5 kg/min of equipment and requires 2 workers. Trolleys can transport 7 kg/min of equipment and requires 4 workers. There must be at least 12 trolleys to be used. Additionally, only a maximum of 40% of the transportation can be using trolleys. The organizer has to deliver at a rate of 100 kg/min of equipment. How many of each transportation method should be used to minimize the total number of workers?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfCarts": "float",
+    "NumberOfTrolleys": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A concert organizer has to transport equipment using carts or trolleys. Carts can transport 5 kg/min of equipment and requires 2 workers. Trolleys can transport 7 kg/min of equipment and requires 4 workers. There must be at least 12 trolleys to be used. Additionally, only a maximum of 40% of the transportation can be using trolleys. The organizer has to deliver at a rate of 100 kg/min of equipment. How many of each transportation method should be used to minimize the total number of workers?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfCarts": "float",
+    "NumberOfTrolleys": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- M: set of transportation methods = {Cart, Trolley}
+
+Parameters:
+- capacity_cart = 5        // Equipment delivered per cart in kg per minute
+- capacity_trolley = 7     // Equipment delivered per trolley in kg per minute
+- workers_cart = 2         // Workers required per cart
+- workers_trolley = 4      // Workers required per trolley
+- required_delivery = 100  // Total required delivery rate in kg per minute
+- min_trolleys = 12        // At least 12 trolleys must be used
+- max_trolley_share = 0.4  // Maximum share (40%) of total delivery that can come from trolleys
+
+Variables:
+- NumberOfCarts, representing the number of carts used [decision variable, continuous (or integer if enforced) and ≥ 0]
+- NumberOfTrolleys, representing the number of trolleys used [decision variable, continuous (or integer if enforced) and ≥ 0]
+
+Objective:
+- Minimize total workers required = workers_cart * NumberOfCarts + workers_trolley * NumberOfTrolleys
+
+Constraints:
+1. Delivery Requirement: 
+   capacity_cart * NumberOfCarts + capacity_trolley * NumberOfTrolleys ≥ required_delivery
+   (i.e., 5 * NumberOfCarts + 7 * NumberOfTrolleys ≥ 100)
+
+2. Minimum Trolley Usage:
+   NumberOfTrolleys ≥ min_trolleys
+   (i.e., NumberOfTrolleys ≥ 12)
+
+3. Trolley Share Limitation:
+   The equipment delivered by trolleys may not exceed max_trolley_share of the total equipment delivered. That is,
+   capacity_trolley * NumberOfTrolleys ≤ max_trolley_share * (capacity_cart * NumberOfCarts + capacity_trolley * NumberOfTrolleys)
+   (i.e., 7 * NumberOfTrolleys ≤ 0.4 * (5 * NumberOfCarts + 7 * NumberOfTrolleys))
+
+Comments:
+- All rates and capacities are given in kg per minute and workers per vehicle.
+- Although the decision variables could be naturally integer, the output schema indicates their type as "float". Adjust integrality constraints as needed in implementation.
+- The third constraint ensures that at most 40% of the total transportation (by kg/min) is provided by trolleys.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfCarts": "float",
+    "NumberOfTrolleys": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4342 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Continuous Model (variables as float):
+{'variables': {'NumberOfCarts': 25.200000000000003, ...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 132
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_132
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'NumberOfVans': 'float', 'NumberOfTrucks': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A shoe company supplies shoes to stores via vans and trucks. A van can transport 50 pairs of shoes while a truck can transport 100 pairs of shoes. The company must supply a minimum of 2000 pairs of shoes around the city. Since most stores are small, the number of trucks used cannot exceed the number of vans used.  Find the minimum number of vans that can be used?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfVans": "float",
+    "NumberOfTrucks": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A shoe company supplies shoes to stores via vans and trucks. A van can transport 50 pairs of shoes while a truck can transport 100 pairs of shoes. The company must supply a minimum of 2000 pairs of shoes around the city. Since most stores are small, the number of trucks used cannot exceed the number of vans used.  Find the minimum number of vans that can be used?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfVans": "float",
+    "NumberOfTrucks": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- VehicleTypes: set of vehicle types = {Van, Truck}
+
+Parameters:
+- van_capacity: capacity of a van in pairs of shoes = 50 pairs
+- truck_capacity: capacity of a truck in pairs of shoes = 100 pairs
+- minimum_supply: minimum number of pairs of shoes that must be supplied = 2000 pairs
+
+Variables:
+- NumberOfVans: number of vans used [integer, ≥ 0]
+- NumberOfTrucks: number of trucks used [integer, ≥ 0]
+
+Objective:
+- Minimize NumberOfVans  
+  (The goal is to use as few vans as possible while meeting the supply requirement.)
+
+Constraints:
+1. Supply Constraint:  
+   van_capacity * NumberOfVans + truck_capacity * NumberOfTrucks ≥ minimum_supply  
+   (This ensures the total number of shoes transported meets or exceeds 2000 pairs.)
+2. Vehicle Balance Constraint:  
+   NumberOfTrucks ≤ NumberOfVans  
+   (This ensures that the number of trucks used does not exceed the number of vans used.)
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3820 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results using OR-Tools Linear Solver:
+  NumberOfVans:  14.0
+  NumberOfTrucks:  13.0
+  Objec...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 76
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_76
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'MilkBars': 'float', 'DarkBars': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A small chocolate shop makes milk chocolate and dark chocolate bars. Milk chocolate bars require 4 units of cocoa and 7 units of milk. Dark chocolate bars require 6 units of cocoa and 3 units of milk. The shop has 2000 units of cocoa and 1750 units of milk available. In addition since milk chocolate sells better, at least 2 times as many milk chocolate bars need to be made as dark chocolate bars.  If making a milk chocolate bar takes 15 minutes and making a dark chocolate bar takes 12 mins, how many of each should the make to minimize total production time?
+
+Expected Output Schema:
+{
+  "variables": {
+    "MilkBars": "float",
+    "DarkBars": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A small chocolate shop makes milk chocolate and dark chocolate bars. Milk chocolate bars require 4 units of cocoa and 7 units of milk. Dark chocolate bars require 6 units of cocoa and 3 units of milk. The shop has 2000 units of cocoa and 1750 units of milk available. In addition since milk chocolate sells better, at least 2 times as many milk chocolate bars need to be made as dark chocolate bars.  If making a milk chocolate bar takes 15 minutes and making a dark chocolate bar takes 12 mins, how many of each should the make to minimize total production time?
+
+Expected Output Schema:
+{
+  "variables": {
+    "MilkBars": "float",
+    "DarkBars": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is a complete and unambiguous mathematical model using the five-element structure.
+
+--------------------------------------------------
+Sets:
+- P: set of chocolate bar types = {Milk, Dark}
+
+--------------------------------------------------
+Parameters:
+- Cocoa_per_Milk: cocoa units required per milk chocolate bar = 4 [units/bar]
+- Cocoa_per_Dark: cocoa units required per dark chocolate bar = 6 [units/bar]
+- Milk_per_Milk: milk units required per milk chocolate bar = 7 [units/bar]
+- Milk_per_Dark: milk units required per dark chocolate bar = 3 [units/bar]
+- Total_Cocoa: total available cocoa = 2000 [units]
+- Total_Milk: total available milk = 1750 [units]
+- Time_Milk: production time per milk chocolate bar = 15 [minutes/bar]
+- Time_Dark: production time per dark chocolate bar = 12 [minutes/bar]
+- Ratio_Min: minimum ratio of milk chocolate bars to dark chocolate bars = 2 [milk bars per dark bar]
+
+--------------------------------------------------
+Variables:
+- MilkBars: number of milk chocolate bars produced [nonnegative integer; units: bars]
+- DarkBars: number of dark chocolate bars produced [nonnegative integer; units: bars]
+
+--------------------------------------------------
+Objective:
+- Minimize total production time = (Time_Milk * MilkBars) + (Time_Dark * DarkBars)
+  which translates to: Minimize 15 * MilkBars + 12 * DarkBars [minutes]
+
+--------------------------------------------------
+Constraints:
+1. Cocoa availability constraint:
+   4 * MilkBars + 6 * DarkBars ≤ 2000
+   (Total cocoa used by both types cannot exceed available cocoa.)
+
+2. Milk availability constraint:
+   7 * MilkBars + 3 * DarkBars ≤ 1750
+   (Total milk used by both types cannot exceed available milk.)
+
+3. Production ratio constraint:
+   MilkBars ≥ 2 * DarkBars
+   (At least two milk chocolate bars must be produced for every dark chocolate bar.)
+
+--------------------------------------------------
+
+Additional Comments:
+- All units are clearly stated in the parameter definitions.
+- Decision variables are assumed to be integers since they represent countable bars. However, if divisibility is acceptable (or for relaxation purposes), they may be treated as continuous nonnegative variables.
+- The model is self-contained and avoids duplications by directly referencing parameters in constraints and the objective.
+- This complete formulation can be directly mapped to code using Python or OR-Tools.
+
+--------------------------------------------------
+
+Expected Output Schema:
+{
+  "variables": {
+    "MilkBars": "float",
+    "DarkBars": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3984 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Integer Formulation Solution:
+{'MilkBars': 0.0, 'DarkBars': 0.0, 'objective': 0.0}
+
+Continu...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 215
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_215
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'NumberLargeTrips': 'float', 'NumberSmallTrips': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A cruise company can either have two types of trips, a large cruise ship or a small cruise ship. A large cruise ship trip can carry 2000 customers and produces 20 units of pollution. A small cruise ship trip can carry 800 customers and produces 15 units of pollution. There can be at most 7 large cruise ship trips and at least 40% of the total trips must be made by small cruise ships. If the cruise company aims to transport at least 20000 customers, how many of each size of cruise ships should the company use to minimize the total amount of pollution produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberLargeTrips": "float",
+    "NumberSmallTrips": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A cruise company can either have two types of trips, a large cruise ship or a small cruise ship. A large cruise ship trip can carry 2000 customers and produces 20 units of pollution. A small cruise ship trip can carry 800 customers and produces 15 units of pollution. There can be at most 7 large cruise ship trips and at least 40% of the total trips must be made by small cruise ships. If the cruise company aims to transport at least 20000 customers, how many of each size of cruise ships should the company use to minimize the total amount of pollution produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberLargeTrips": "float",
+    "NumberSmallTrips": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is the structured mathematical model following the five-element format.
+
+--------------------------------------------------
+
+Sets:
+- ShipType = {Large, Small}
+
+Parameters:
+- LargeCapacity = 2000 (number of customers per large cruise trip)
+- SmallCapacity = 800 (number of customers per small cruise trip)
+- LargePollution = 20 (pollution units produced per large cruise trip)
+- SmallPollution = 15 (pollution units produced per small cruise trip)
+- MaxLargeTrips = 7 (maximum allowable number of large cruise trips)
+- MinTotalCustomers = 20000 (minimum total number of customers to be transported)
+- MinSmallFraction = 0.4 (minimum fraction of total trips that must be small cruise trips)
+  (Note: The small-ship requirement implies that the number of small trips must be at least 0.4 times the total trips.)
+
+Variables:
+- NumberLargeTrips [integer, ≥ 0]: Number of large cruise ship trips to schedule (units: trips)
+- NumberSmallTrips [integer, ≥ 0]: Number of small cruise ship trips to schedule (units: trips)
+
+Objective:
+- Minimize total pollution produced:
+  TotalPollution = LargePollution * NumberLargeTrips + SmallPollution * NumberSmallTrips
+
+Constraints:
+1. Customer Requirement Constraint:
+   LargeCapacity * NumberLargeTrips + SmallCapacity * NumberSmallTrips ≥ MinTotalCustomers
+
+2. Maximum Large Trips Constraint:
+   NumberLargeTrips ≤ MaxLargeTrips
+
+3. Minimum Small Trip Fraction Constraint:
+   To ensure at least 40% of all trips are small trips, we enforce:
+   NumberSmallTrips ≥ MinSmallFraction * (NumberLargeTrips + NumberSmallTrips)
+   (Note: This inequality is equivalent to NumberSmallTrips ≥ (2/3) * NumberLargeTrips.)
+
+4. Non-negativity Constraints:
+   NumberLargeTrips ≥ 0  
+   NumberSmallTrips ≥ 0
+
+--------------------------------------------------
+
+This complete model can now be implemented in a mathematical optimization framework where the decision variables and parameters are as described.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberLargeTrips": "float",
+    "NumberSmallTrips": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3924 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results for Model Version 1 (using the constraint NumberSmallTrips ≥ 0.4*(NumberLargeTrips+...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 239
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_239
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'QuantityChemicalA': 'float', 'QuantityChemicalB': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: Both chemical A and chemical B need to be added to a mixer for making bread. One unit of chemical A takes 30 seconds to be effective while one unit of chemical B takes 45 seconds to be effective. Because chemical A can be dangerous, there has to be at most a third as much chemical A as chemical B in the mixer. If there has to be at least 300 units of chemical A in the mixer and at least 1500 units of total chemicals in the mixer, how many units of each should be added to minimize the total time it takes for the mixed bread to be ready?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityChemicalA": "float",
+    "QuantityChemicalB": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: Both chemical A and chemical B need to be added to a mixer for making bread. One unit of chemical A takes 30 seconds to be effective while one unit of chemical B takes 45 seconds to be effective. Because chemical A can be dangerous, there has to be at most a third as much chemical A as chemical B in the mixer. If there has to be at least 300 units of chemical A in the mixer and at least 1500 units of total chemicals in the mixer, how many units of each should be added to minimize the total time it takes for the mixed bread to be ready?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityChemicalA": "float",
+    "QuantityChemicalB": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- Chem: set of chemicals = {A, B}
+
+Parameters:
+- time_per_unit_A: Time required for one unit of chemical A to be effective [seconds per unit] = 30
+- time_per_unit_B: Time required for one unit of chemical B to be effective [seconds per unit] = 45
+- safe_ratio: Maximum allowed ratio of chemical A to chemical B [unitless] = 1/3  
+  (Interpretation: The quantity of chemical A must be at most one third of the quantity of chemical B.)
+- min_A: Minimum required units of chemical A [units] = 300
+- min_total: Minimum required total units of chemicals A and B [units] = 1500
+
+Variables:
+- QuantityChemicalA: Number of units of chemical A to add [continuous, ≥ 0, units]
+- QuantityChemicalB: Number of units of chemical B to add [continuous, ≥ 0, units]
+
+Objective:
+- Minimize total_mixing_time = (time_per_unit_A * QuantityChemicalA) + (time_per_unit_B * QuantityChemicalB)
+  [Total mixing time in seconds]
+
+Constraints:
+1. Safety constraint: QuantityChemicalA ≤ safe_ratio * QuantityChemicalB
+   (Ensures that chemical A does not exceed one third the amount of chemical B.)
+2. Minimum chemical A requirement: QuantityChemicalA ≥ min_A
+3. Total chemical requirement: QuantityChemicalA + QuantityChemicalB ≥ min_total
+
+Comments:
+- All units are assumed to be consistent (units for chemicals, seconds for time).  
+- The objective is to reduce the overall mixing time while respecting safety and minimum quantity constraints.  
+- Both decision variables are modeled as continuous, but if the application requires discrete units, they could be redefined as integers.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4973 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+----- Linear Solver (LP formulation) Solution -----
+{'variables': {'QuantityChemicalA': 375...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 25
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_25
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'QuantityMango': 'float', 'QuantityGuava': 'float', 'MangosSold': 'float', 'GuavasSold': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A food truck owner can spend at most $20000 on mangos and guavas. A mango costs the food truck owner $5 and a guava costs him $3. Spices are added and each mango is sold for a profit of $3 while each guava is sold for a profit of $4. The owner estimates that at least 100 mangos but at the most 150 are sold each month. He also estimates that the number of guavas sold is at most a third of the mangos sold. How many mangos and guavas should be sold in order to maximize the profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityMango": "float",
+    "QuantityGuava": "float",
+    "MangosSold": "float",
+    "GuavasSold": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A food truck owner can spend at most $20000 on mangos and guavas. A mango costs the food truck owner $5 and a guava costs him $3. Spices are added and each mango is sold for a profit of $3 while each guava is sold for a profit of $4. The owner estimates that at least 100 mangos but at the most 150 are sold each month. He also estimates that the number of guavas sold is at most a third of the mangos sold. How many mangos and guavas should be sold in order to maximize the profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityMango": "float",
+    "QuantityGuava": "float",
+    "MangosSold": "float",
+    "GuavasSold": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is a complete five‐element formulation that stays true to the problem details. Note that in this model we assume that the number of fruits purchased equals the number sold so that QuantityMango equals MangosSold and QuantityGuava equals GuavasSold. You can later choose to treat them as separate decisions if the problem’s business logic requires it.
+
+-----------------------------------------------------------
+Sets:
+• Fruits = {Mango, Guava}
+
+-----------------------------------------------------------
+Parameters:
+• max_budget = 20000  
+  – The maximum dollars available to spend on fruits.
+• cost_Mango = 5  
+  – The cost in dollars per mango.
+• cost_Guava = 3  
+  – The cost in dollars per guava.
+• profit_Mango = 3  
+  – The profit in dollars earned from selling one mango.
+• profit_Guava = 4  
+  – The profit in dollars earned from selling one guava.
+• min_mangos_sold = 100  
+  – The minimum number of mangos that must be sold each month.
+• max_mangos_sold = 150  
+  – The maximum number of mangos that can be sold each month.
+• guava_ratio = 1/3  
+  – Guavas sold cannot exceed one third of the number of mangos sold.
+   (Interpretation: GuavasSold ≤ (1/3) × MangosSold)
+
+-----------------------------------------------------------
+Variables:
+• MangosSold  
+  – Number of mangos sold [integer, units]  
+• GuavasSold  
+  – Number of guavas sold [integer, units]  
+• QuantityMango  
+  – Total number of mangos purchased [float]; in this model we set QuantityMango = MangosSold.
+• QuantityGuava  
+  – Total number of guavas purchased [float]; here QuantityGuava = GuavasSold.
+
+-----------------------------------------------------------
+Objective:
+Maximize profit, defined as:
+  Total Profit = profit_Mango × MangosSold + profit_Guava × GuavasSold  
+  or equivalently, maximize 3 × MangosSold + 4 × GuavasSold.
+  (This formulation assumes profit is calculated after accounting for the cost of spices; only the per-unit profits of fruits are used here as per the problem description.)
+
+-----------------------------------------------------------
+Constraints:
+1. Budget Constraint:  
+  cost_Mango × MangosSold + cost_Guava × GuavasSold ≤ max_budget  
+  In expression form: 5 × MangosSold + 3 × GuavasSold ≤ 20000  
+  (Unit: dollars)
+
+2. Mango Sales Range:  
+  min_mangos_sold ≤ MangosSold ≤ max_mangos_sold  
+  That is, 100 ≤ MangosSold ≤ 150
+
+3. Guava Sales Ratio Constraint:  
+  GuavasSold ≤ guava_ratio × MangosSold  
+  That is, GuavasSold ≤ (1/3) × MangosSold
+
+-----------------------------------------------------------
+Comments:
+• All cost and profit parameters are in U.S. dollars per unit, and all sales numbers are expressed in units.  
+• The assumption that QuantityMango equals MangosSold (and similarly for guavas) is made since the problem does not distinguish between purchase quantity and sold quantity.  
+• Decision variables are assumed to be nonnegative integers, although they are marked as floats in the expected output schema. This choice can be adapted if fractional sales are acceptable in a relaxed model.
+
+This structured model conforms to the five-element framework and is ready for implementation in OR-Tools or similar optimization libraries.
+
+-----------------------------------------------------------
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityMango": "float",
+    "QuantityGuava": "float",
+    "MangosSold": "float",
+    "GuavasSold": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4912 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+{
+    "Model_1": {
+        "variables": {
+            "QuantityMango": 150.0,
+            "...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 82
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_82
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'FlourUsedPerBeaker': {'0': 'float', '1': 'float'}}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A summer camps does science experiments in two pre filled beakers, beaker 1 and beaker 2. Beaker 1 uses 4 units of flour and 6 units of special liquid to make 5 units of slime. Beaker 2 uses 6 units of flour and 3 units of special liquid to make 3 units of slime.  However, beaker 1 creates 4 units of waste while beaker 2 creates 2 units of waste. The summer camp has available 150 units of flour and 100 units of special liquid. If at most 30 units of waste can be produced, how many of each beaker should be used to maximize the amount of slime produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "FlourUsedPerBeaker": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A summer camps does science experiments in two pre filled beakers, beaker 1 and beaker 2. Beaker 1 uses 4 units of flour and 6 units of special liquid to make 5 units of slime. Beaker 2 uses 6 units of flour and 3 units of special liquid to make 3 units of slime.  However, beaker 1 creates 4 units of waste while beaker 2 creates 2 units of waste. The summer camp has available 150 units of flour and 100 units of special liquid. If at most 30 units of waste can be produced, how many of each beaker should be used to maximize the amount of slime produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "FlourUsedPerBeaker": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is the structured mathematical model for the problem using the five‐element framework.
+
+------------------------------------------------
+Sets:
+• B = {1, 2}  
+  (Beaker types: 1 for beaker 1 and 2 for beaker 2)
+
+------------------------------------------------
+Parameters:
+• flour_b: units of flour used per experiment with beaker b  
+  – flour_1 = 4 units per use (beaker 1)  
+  – flour_2 = 6 units per use (beaker 2)
+
+• liquid_b: units of special liquid used per experiment with beaker b  
+  – liquid_1 = 6 units per use (beaker 1)  
+  – liquid_2 = 3 units per use (beaker 2)
+
+• slime_b: units of slime produced per experiment with beaker b  
+  – slime_1 = 5 units per use (beaker 1)  
+  – slime_2 = 3 units per use (beaker 2)
+
+• waste_b: units of waste produced per experiment with beaker b  
+  – waste_1 = 4 units per use (beaker 1)  
+  – waste_2 = 2 units per use (beaker 2)
+
+• resource limits (all units are consistent with the given descriptions):  
+  – total_flour = 150 units  
+  – total_liquid = 100 units  
+  – max_waste = 30 units
+
+------------------------------------------------
+Variables:
+• x_b for b in B, where:
+  – x_1 = number of times beaker 1 is used  
+  – x_2 = number of times beaker 2 is used  
+ Domain: x_b ∈ {0, 1, 2, …} (nonnegative integers)  
+  (Note: we assume each usage represents one complete experiment with the beaker)
+
+------------------------------------------------
+Objective:
+Maximize total slime production (in units) given by:
+ TotalSlime = slime_1 * x_1 + slime_2 * x_2  
+In other words, maximize 5 * x_1 + 3 * x_2
+
+------------------------------------------------
+Constraints:
+1. Flour Constraint:  
+  flour_1 * x_1 + flour_2 * x_2 ≤ total_flour  
+  i.e., 4 * x_1 + 6 * x_2 ≤ 150
+
+2. Special Liquid Constraint:  
+  liquid_1 * x_1 + liquid_2 * x_2 ≤ total_liquid  
+  i.e., 6 * x_1 + 3 * x_2 ≤ 100
+
+3. Waste Constraint:  
+  waste_1 * x_1 + waste_2 * x_2 ≤ max_waste  
+  i.e., 4 * x_1 + 2 * x_2 ≤ 30
+
+------------------------------------------------
+Notes and Assumptions:
+• All resource usage and production values are in “units” as stated in the problem.  
+• The decision variables (x_1 and x_2) are assumed to be integer because you cannot use a beaker a fractional number of times.  
+• The formulation is directly based on the real-world description with no data simplification or transformation.  
+
+This model is now complete and ready for implementation in a tool such as OR-Tools.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3607 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results:
+----------
+Linear Solver Implementation:
+variables: {'FlourUsedPerBeaker': {'0': -...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 57
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_57
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'RegularVans': 'float', 'HybridVans': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A shipping company can purchase regular and hybrid vans to make deliveries. A regular van can deliver 500 packages per day and produces 200 units of pollutants. A hybrid van can deliver 300 packages per day and produces 100 units of pollutants. Due to a new environmental law, they can produce at most 7000 units of pollutants per day. However, the company needs to be able to deliver at least 20000 packages per day. How many of each type of van should they buy to minimize the total number of vans needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "RegularVans": "float",
+    "HybridVans": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A shipping company can purchase regular and hybrid vans to make deliveries. A regular van can deliver 500 packages per day and produces 200 units of pollutants. A hybrid van can deliver 300 packages per day and produces 100 units of pollutants. Due to a new environmental law, they can produce at most 7000 units of pollutants per day. However, the company needs to be able to deliver at least 20000 packages per day. How many of each type of van should they buy to minimize the total number of vans needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "RegularVans": "float",
+    "HybridVans": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- V: set of van types = {Regular, Hybrid}
+
+Parameters:
+- delivery_capacity[v] (packages per day): delivery_capacity[Regular] = 500, delivery_capacity[Hybrid] = 300
+- pollutant_emission[v] (pollutant units per day): pollutant_emission[Regular] = 200, pollutant_emission[Hybrid] = 100
+- max_pollutants (pollutant units per day) = 7000
+- min_packages (packages per day) = 20000
+
+Variables:
+- x[v]: number of vans to purchase of type v (integer, nonnegative)
+  - x[Regular]: number of regular vans
+  - x[Hybrid]: number of hybrid vans
+
+Objective:
+- Minimize total vans = x[Regular] + x[Hybrid]
+
+Constraints:
+- Package delivery constraint: delivery_capacity[Regular] * x[Regular] + delivery_capacity[Hybrid] * x[Hybrid] >= min_packages
+- Pollutant constraint: pollutant_emission[Regular] * x[Regular] + pollutant_emission[Hybrid] * x[Hybrid] <= max_pollutants
+
+--------------------------------------------------------------------------------
+
+Comments:
+- All units are per day.
+- Both decision variables are assumed integer though they are represented as float in the expected output schema.
+- The model assumes each van works at full capacity every day.
+- Alternative interpretation:
+   If the van numbers are allowed to be fractional (due to leasing or averaging over days), then the variables can be continuous. Otherwise, they should be integer.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3514 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Integer Model (Mixed-Integer Programming) Solution:
+RegularVans: 10.0
+HybridVans: 50.0
+Tota...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 22
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_22
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'FertilizerQuantity': ['float']}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: Ayse produces a plant growth compound by mixing two types of fertilizer: C and Y. This growth compound must contain at least 5 units of nitrous oxide and 8 units of vitamin mix. Fertilizer C and Y cost $2 and $3 per kg respectively. Fertilizer C contains 1.5 units of nitrous oxide per kg and 3 units of vitamin mix per kg. Fertilizer Y contains 5 units of nitrous oxide per kg and 1 unit of vitamin mix per kg. Determine the minimum cost of Ayse's compound.
+
+Expected Output Schema:
+{
+  "variables": {
+    "FertilizerQuantity": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: Ayse produces a plant growth compound by mixing two types of fertilizer: C and Y. This growth compound must contain at least 5 units of nitrous oxide and 8 units of vitamin mix. Fertilizer C and Y cost $2 and $3 per kg respectively. Fertilizer C contains 1.5 units of nitrous oxide per kg and 3 units of vitamin mix per kg. Fertilizer Y contains 5 units of nitrous oxide per kg and 1 unit of vitamin mix per kg. Determine the minimum cost of Ayse's compound.
+
+Expected Output Schema:
+{
+  "variables": {
+    "FertilizerQuantity": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- F: set of fertilizers = {C, Y}
+
+Parameters:
+- cost_f: cost per kg for fertilizer f [USD/kg], where cost_C = 2 and cost_Y = 3.
+- nitrous_f: units of nitrous oxide per kg for fertilizer f, where nitrous_C = 1.5 and nitrous_Y = 5.
+- vitamin_f: units of vitamin mix per kg for fertilizer f, where vitamin_C = 3 and vitamin_Y = 1.
+- min_nitrous: minimum required units of nitrous oxide = 5 [units].
+- min_vitamin: minimum required units of vitamin mix = 8 [units].
+
+Variables:
+- x_f: quantity (kg) of fertilizer f used in the compound [continuous, x_f ≥ 0].
+
+Objective:
+- Minimize total cost = cost_C * x_C + cost_Y * x_Y [USD].
+
+Constraints:
+- Nitrous oxide requirement: nitrous_C * x_C + nitrous_Y * x_Y ≥ min_nitrous.
+- Vitamin mix requirement: vitamin_C * x_C + vitamin_Y * x_Y ≥ min_vitamin.
+
+Notes:
+- All costs are in USD per kg.
+- The nutrient content for each fertilizer is given per kg. Ensure that the total nutrients from the mix meet or exceed the minimum requirements.
+- x_f are continuous variables representing the weight in kilograms of each fertilizer used.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3682 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+
+The implementation correctly defines the two continuous (or discretized) decision variables, applies the proper variable types and bounds, sets up the objective (minimizing cost), and translates the two constraints exactly as defined in the formulation. Both the linear solver and the CP-SAT versions are implemented using appropriate OR‑Tools modules and follow best practices.
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results using OR-Tools Linear Solver (GLOP):
+{'variables': {'FertilizerQuantity': [2.592592...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 179
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_179
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'ProductionQuantity': {'0': 'float', '1': 'float'}}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: Forest Paper makes two types of products: graph paper and music paper. Each type of paper requires the use of two machines, a printing machine and a scanning machine. It takes 3 minutes on the printing machine and 5.5 minutes on the scanning machine to make a ream of graph paper. On the other hand, it takes 1.5 minutes on the printing machine and 3 minutes on the scanning machine to make a ream of music paper. Each machine is available for a maximum of 350 minutes per day. The company sells a package of graph paper at a profit of $4 and a package of music paper at a profit of $2.5. The company can sell all the paper it makes. How many reams of each type should the company produce in a day in order to maximize profit? What is that profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "ProductionQuantity": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: Forest Paper makes two types of products: graph paper and music paper. Each type of paper requires the use of two machines, a printing machine and a scanning machine. It takes 3 minutes on the printing machine and 5.5 minutes on the scanning machine to make a ream of graph paper. On the other hand, it takes 1.5 minutes on the printing machine and 3 minutes on the scanning machine to make a ream of music paper. Each machine is available for a maximum of 350 minutes per day. The company sells a package of graph paper at a profit of $4 and a package of music paper at a profit of $2.5. The company can sell all the paper it makes. How many reams of each type should the company produce in a day in order to maximize profit? What is that profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "ProductionQuantity": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is a complete and unambiguous formulation using the five‐element framework.
+
+------------------------------------------------------------
+Sets:
+• P = {Graph, Music}  
+  (P is the set of paper types produced by Forest Paper)
+
+Parameters:
+• profit_p: profit per ream for paper type p [USD per ream]  
+  profit_Graph = 4  
+  profit_Music = 2.5
+
+• printing_time_p: printing machine time required per ream for paper type p [minutes per ream]  
+  printing_time_Graph = 3  
+  printing_time_Music = 1.5
+
+• scanning_time_p: scanning machine time required per ream for paper type p [minutes per ream]  
+  scanning_time_Graph = 5.5  
+  scanning_time_Music = 3
+
+• max_printing_time: total available printing machine time per day = 350 [minutes]  
+• max_scanning_time: total available scanning machine time per day = 350 [minutes]
+
+(Comments: All time parameters are in minutes per ream and machine availabilities are in minutes per day. We assume that the production decision can be taken as a continuous amount.)
+
+Variables:
+• x_p: number of reams of paper type p to produce per day [continuous, nonnegative]  
+  x_Graph: reams of graph paper  
+  x_Music: reams of music paper
+
+Objective:
+• Maximize total_profit = profit_Graph * x_Graph + profit_Music * x_Music  
+  (i.e., maximize 4 * x_Graph + 2.5 * x_Music)
+
+Constraints:
+1. Printing machine time constraint:  
+  printing_time_Graph * x_Graph + printing_time_Music * x_Music ≤ max_printing_time  
+  => 3 * x_Graph + 1.5 * x_Music ≤ 350
+
+2. Scanning machine time constraint:  
+  scanning_time_Graph * x_Graph + scanning_time_Music * x_Music ≤ max_scanning_time  
+  => 5.5 * x_Graph + 3 * x_Music ≤ 350
+
+------------------------------------------------------------
+
+This structured model clearly defines the sets, parameters, decision variables, objective function, and constraints. It can be used directly to generate a working implementation in Python or OR-Tools.
+
+Below is a JSON schema snippet that corresponds to the decision variables and objective for reference:
+
+{
+  "variables": {
+    "ProductionQuantity": {
+      "Graph": "float",
+      "Music": "float"
+    }
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 5502 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results from Linear Solver (Continuous LP):
+{'variables': {'ProductionQuantity': {'Graph': ...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 146
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_146
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'SmallSuitcasesUsed': 'float', 'LargeSuitcasesUsed': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A snack exporter sends snacks to his customer in small and large suitcases. A small suitcase can hold 50 snacks while a large suitcase can hold 80 snacks. Most customer prefer small suitcases, and so at least twice as many small suitcases must be used as large suitcases. The exporter has available at most 70 small suitcases and 50 large suitcases. If he must send at least 15 large suitcases and can send  at most 70 suitcases in total, how many of each should he send to maximize the total number of snacks that can be delivered?
+
+Expected Output Schema:
+{
+  "variables": {
+    "SmallSuitcasesUsed": "float",
+    "LargeSuitcasesUsed": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A snack exporter sends snacks to his customer in small and large suitcases. A small suitcase can hold 50 snacks while a large suitcase can hold 80 snacks. Most customer prefer small suitcases, and so at least twice as many small suitcases must be used as large suitcases. The exporter has available at most 70 small suitcases and 50 large suitcases. If he must send at least 15 large suitcases and can send  at most 70 suitcases in total, how many of each should he send to maximize the total number of snacks that can be delivered?
+
+Expected Output Schema:
+{
+  "variables": {
+    "SmallSuitcasesUsed": "float",
+    "LargeSuitcasesUsed": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- SuitcaseTypes: {Small, Large}
+
+Parameters:
+- snackCapacitySmall: number of snacks a small suitcase holds = 50 snacks per suitcase
+- snackCapacityLarge: number of snacks a large suitcase holds = 80 snacks per suitcase
+- minSmallToLargeRatio: minimum ratio of small to large suitcases = 2 (i.e., number of small suitcases must be at least twice the number of large suitcases)
+- maxSmallAvailable: maximum available small suitcases = 70 suitcases
+- maxLargeAvailable: maximum available large suitcases = 50 suitcases
+- minLargeRequired: minimum number of large suitcases required = 15 suitcases
+- maxTotalSuitcases: maximum total suitcases that can be sent = 70 suitcases
+
+Variables:
+- SmallSuitcasesUsed: integer variable representing the number of small suitcases used (units: suitcases), where 0 ≤ SmallSuitcasesUsed ≤ maxSmallAvailable
+- LargeSuitcasesUsed: integer variable representing the number of large suitcases used (units: suitcases), where minLargeRequired ≤ LargeSuitcasesUsed ≤ maxLargeAvailable
+
+Objective:
+- Maximize TotalSnacksDelivered = snackCapacitySmall * SmallSuitcasesUsed + snackCapacityLarge * LargeSuitcasesUsed
+  (Units: snacks delivered)
+
+Constraints:
+1. Suitcase Ratio Constraint: SmallSuitcasesUsed ≥ minSmallToLargeRatio * LargeSuitcasesUsed
+2. Small Suitcase Availability: SmallSuitcasesUsed ≤ maxSmallAvailable
+3. Large Suitcase Availability: LargeSuitcasesUsed ≤ maxLargeAvailable
+4. Total Suitcase Limit: SmallSuitcasesUsed + LargeSuitcasesUsed ≤ maxTotalSuitcases
+5. Minimum Large Suitcases: LargeSuitcasesUsed ≥ minLargeRequired
+
+--------------------------------------------------
+Following the Expected Output Schema, here is the digest:
+
+{
+  "variables": {
+    "SmallSuitcasesUsed": "integer ≥ 0 and ≤ 70",
+    "LargeSuitcasesUsed": "integer between 15 and 50, with additional ratio and total constraints"
+  },
+  "objective": "Maximize total snacks: 50 * SmallSuitcasesUsed + 80 * LargeSuitcasesUsed"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4406 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Optimization Results:
+
+Method: LinearSolver
+  Solution: {'SmallSuitcasesUsed': 47.0, 'Large...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 5
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_5
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'NumberOfChairs': 'float', 'NumberOfDressers': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A chair produced by Elm Furniture yields a profit of $43, while every dresser yields a $52 profit. Each week, 17 gallons of stain and 11 lengths of oak wood are available. Each chair requires 1.4 gallons of stain and 2 lengths of oak wood, while each dresser requires 1.1 gallons of stain and 3 lengths of oak wood. Determine the maximum profit.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfChairs": "float",
+    "NumberOfDressers": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A chair produced by Elm Furniture yields a profit of $43, while every dresser yields a $52 profit. Each week, 17 gallons of stain and 11 lengths of oak wood are available. Each chair requires 1.4 gallons of stain and 2 lengths of oak wood, while each dresser requires 1.1 gallons of stain and 3 lengths of oak wood. Determine the maximum profit.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfChairs": "float",
+    "NumberOfDressers": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is the complete five‐element model for the Elm Furniture production problem.
+
+------------------------------------------------------------
+Sets:
+- P: set of products = {Chair, Dresser}
+
+------------------------------------------------------------
+Parameters:
+- profit_Chair: profit per chair produced [$ per chair] = 43
+- profit_Dresser: profit per dresser produced [$ per dresser] = 52
+- stain_available: total gallons of stain available per week [gallons] = 17
+- oak_available: total lengths of oak wood available per week [lengths] = 11
+- stain_required_Chair: gallons of stain required per chair [gallons/chair] = 1.4
+- stain_required_Dresser: gallons of stain required per dresser [gallons/dresser] = 1.1
+- oak_required_Chair: lengths of oak wood required per chair [lengths/chair] = 2
+- oak_required_Dresser: lengths of oak wood required per dresser [lengths/dresser] = 3
+
+------------------------------------------------------------
+Variables:
+- NumberOfChairs: number of chairs to produce [nonnegative continuous, measured in units]
+- NumberOfDressers: number of dressers to produce [nonnegative continuous, measured in units]
+
+------------------------------------------------------------
+Objective:
+- Maximize Total Profit = (profit_Chair * NumberOfChairs) + (profit_Dresser * NumberOfDressers)
+
+------------------------------------------------------------
+Constraints:
+1. Stain Constraint: (stain_required_Chair * NumberOfChairs) + (stain_required_Dresser * NumberOfDressers) ≤ stain_available  
+   (This ensures the weekly consumption of stain does not exceed 17 gallons.)
+
+2. Oak Wood Constraint: (oak_required_Chair * NumberOfChairs) + (oak_required_Dresser * NumberOfDressers) ≤ oak_available  
+   (This ensures the weekly consumption of oak wood does not exceed 11 lengths.)
+
+------------------------------------------------------------
+Note:
+- We assume that the production quantities can be fractional (as indicated by “float” in the expected output). If only whole units are feasible, then NumberOfChairs and NumberOfDressers should be declared as integers.
+- All units have been consistently assigned based on the problem description.
+
+------------------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfChairs": "float",
+    "NumberOfDressers": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4288 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Solving Elm Furniture Production Problem
+
+Continuous Model (Fractional Production Allowed):...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 35
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_35
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'RunningTime': {'0': 'float', '1': 'float'}}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A teddy bear company produces three different colored bears: black, white, and brown. These bears are made in two different factories. Running factory 1 for 1 hour costs $300 and produces 5 black teddy bears, 6 white teddy bears, and 3 brown ones. Running factory 2 for 1 hour costs $600 and produces 10 black teddy bears and 10 white teddy bears. (but no brown ones). To meet children's demand, at least 20 black teddy bears, 5 white teddy bears, and 15 brown teddy bears must be made daily. Given this information, develop a linear programming problem assuming the teddy bear company wants to minimize the cost of production.
+
+Expected Output Schema:
+{
+  "variables": {
+    "RunningTime": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A teddy bear company produces three different colored bears: black, white, and brown. These bears are made in two different factories. Running factory 1 for 1 hour costs $300 and produces 5 black teddy bears, 6 white teddy bears, and 3 brown ones. Running factory 2 for 1 hour costs $600 and produces 10 black teddy bears and 10 white teddy bears. (but no brown ones). To meet children's demand, at least 20 black teddy bears, 5 white teddy bears, and 15 brown teddy bears must be made daily. Given this information, develop a linear programming problem assuming the teddy bear company wants to minimize the cost of production.
+
+Expected Output Schema:
+{
+  "variables": {
+    "RunningTime": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is a precise formulation of the problem using the five-element structure:
+
+------------------------------------------------------------
+Sets:
+- F: set of factories = {1, 2}
+- B: set of bear colors = {black, white, brown}
+
+------------------------------------------------------------
+Parameters:
+- cost[f]: production cost per hour for factory f (in USD/hour). Namely, cost[1] = 300, cost[2] = 600.
+- prod[f, b]: number of bears of color b produced per hour in factory f.
+  - For factory 1: prod[1, black] = 5, prod[1, white] = 6, prod[1, brown] = 3.
+  - For factory 2: prod[2, black] = 10, prod[2, white] = 10, prod[2, brown] = 0.
+- demand[b]: minimum number of bears that must be produced daily for each color.
+  - demand[black] = 20, demand[white] = 5, demand[brown] = 15.
+
+------------------------------------------------------------
+Variables:
+- x[f]: running time of factory f (in hours). Here x[1] and x[2] are continuous variables with x[f] >= 0.
+  (The variable x[f] represents the number of hours factory f is operated.)
+
+------------------------------------------------------------
+Objective:
+- Minimize total production cost.
+  That is, minimize Z = sum over f in F of (cost[f] * x[f]).
+  In this problem: Z = 300*x[1] + 600*x[2].
+
+------------------------------------------------------------
+Constraints:
+For each bear color b in B, the total production from both factories must meet or exceed the daily demand.
+- For black bears: prod[1, black]*x[1] + prod[2, black]*x[2] >= demand[black]
+  which becomes: 5*x[1] + 10*x[2] >= 20.
+- For white bears: prod[1, white]*x[1] + prod[2, white]*x[2] >= demand[white]
+  which becomes: 6*x[1] + 10*x[2] >= 5.
+- For brown bears: prod[1, brown]*x[1] + prod[2, brown]*x[2] >= demand[brown]
+  which becomes: 3*x[1] + 0*x[2] >= 15.
+
+------------------------------------------------------------
+Additional Notes:
+- All production rates and costs are given per hour, ensuring consistency in units.
+- The decision variables (x[1] and x[2]) are continuous, assuming that fractional hours of operation are allowed.
+- The model is linear and minimizes the total operational costs while satisfying the daily production requirements.
+- In implementation, one could map the factories with indices 0 and 1 if required (e.g., RunningTime{0} corresponds to x[1] and RunningTime{1} corresponds to x[2]).
+
+This completes the structured linear programming model for the teddy bear production problem.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 5262 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Optimization Results:
+
+Version1:
+  Optimal RunningTimes:
+    Factory 1: 5.0
+    Factory 2: ...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 87
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_87
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'FishMeals': 'float', 'ChickenMeals': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A doctor recommends her patient eat more fish and chicken to increase her protein and iron intake. Each fish meal contains 10 units of protein and 12 units of iron. Each chicken meal contains 15 units of protein and 8 units of iron. The patient needs to consume at least 130 units of protein and 120 units of iron. Since the chicken meal is less expensive, the patient prefers to consume at least twice as many chicken meals as fish meals. If each fish meal contains 7 units of fat and each chicken meal contains 10 units of fat, how many meals of each should she eat to minimize her fat intake?
+
+Expected Output Schema:
+{
+  "variables": {
+    "FishMeals": "float",
+    "ChickenMeals": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A doctor recommends her patient eat more fish and chicken to increase her protein and iron intake. Each fish meal contains 10 units of protein and 12 units of iron. Each chicken meal contains 15 units of protein and 8 units of iron. The patient needs to consume at least 130 units of protein and 120 units of iron. Since the chicken meal is less expensive, the patient prefers to consume at least twice as many chicken meals as fish meals. If each fish meal contains 7 units of fat and each chicken meal contains 10 units of fat, how many meals of each should she eat to minimize her fat intake?
+
+Expected Output Schema:
+{
+  "variables": {
+    "FishMeals": "float",
+    "ChickenMeals": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is the complete and structured mathematical optimization model using the five-element framework. This model is fully self-contained based on the provided problem data and requirements.
+
+------------------------------------------------------------
+Sets:
+- Meals: the set of meal types = {Fish, Chicken}
+
+------------------------------------------------------------
+Parameters:
+- protein_fish: protein per fish meal = 10 units [units of protein/meal]
+- protein_chicken: protein per chicken meal = 15 units [units of protein/meal]
+- iron_fish: iron per fish meal = 12 units [units of iron/meal]
+- iron_chicken: iron per chicken meal = 8 units [units of iron/meal]
+- fat_fish: fat per fish meal = 7 units [units of fat/meal]
+- fat_chicken: fat per chicken meal = 10 units [units of fat/meal]
+- protein_requirement: minimum required protein = 130 units [units of protein]
+- iron_requirement: minimum required iron = 120 units [units of iron]
+- chicken_to_fish_ratio: minimum ratio of chicken to fish meals = 2  
+  (i.e., the number of chicken meals must be at least twice the number of fish meals)
+
+------------------------------------------------------------
+Variables:
+- FishMeals: number of fish meals consumed [float, continuous, nonnegative]
+- ChickenMeals: number of chicken meals consumed [float, continuous, nonnegative]
+
+------------------------------------------------------------
+Objective:
+Minimize total fat intake:
+  TotalFat = fat_fish * FishMeals + fat_chicken * ChickenMeals
+In terms of the given parameters:
+  Minimize: 7 * FishMeals + 10 * ChickenMeals
+
+------------------------------------------------------------
+Constraints:
+1. Protein intake constraint:
+   protein_fish * FishMeals + protein_chicken * ChickenMeals >= protein_requirement
+   i.e., 10 * FishMeals + 15 * ChickenMeals >= 130
+
+2. Iron intake constraint:
+   iron_fish * FishMeals + iron_chicken * ChickenMeals >= iron_requirement
+   i.e., 12 * FishMeals + 8 * ChickenMeals >= 120
+
+3. Chicken-to-fish meal ratio constraint:
+   ChickenMeals >= chicken_to_fish_ratio * FishMeals
+   i.e., ChickenMeals >= 2 * FishMeals
+
+------------------------------------------------------------
+Model Comments:
+- All units are assumed to be consistent per meal as described.
+- Although meals are discrete in practice, the variables are modeled as continuous (float) as defined in the expected output schema.
+- The objective focuses solely on minimizing fat intake, while nutritional constraints ensure the patient meets her protein and iron needs, and the preference for a higher count of chicken meals is also respected.
+
+------------------------------------------------------------
+Expected Output Schema (for reference in implementation):
+{
+  "variables": {
+    "FishMeals": "float",
+    "ChickenMeals": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4249 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results using Linear Solver (Continuous LP formulation):
+{'variables': {'FishMeals': 4.2857...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 47
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_47
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'NumberSeasonal': 'float', 'NumberPermanent': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A city employs seasonal and permanent snow removers. A seasonal snow remover works 6 hours per shift and gets paid $120. A permanent snow remover works 10 hours per shift and gets paid $250. Currently the city needs 300 hours of snow remover labor after a heavy snowfall. If the city has a budget of $6500, how many of each type of worker should be hired to minimize the total number of snow removers?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberSeasonal": "float",
+    "NumberPermanent": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A city employs seasonal and permanent snow removers. A seasonal snow remover works 6 hours per shift and gets paid $120. A permanent snow remover works 10 hours per shift and gets paid $250. Currently the city needs 300 hours of snow remover labor after a heavy snowfall. If the city has a budget of $6500, how many of each type of worker should be hired to minimize the total number of snow removers?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberSeasonal": "float",
+    "NumberPermanent": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- W: set of worker types = {Seasonal, Permanent}
+
+Parameters:
+- HoursPerShift_Seasonal = 6 (hours per shift for a seasonal snow remover)
+- HoursPerShift_Permanent = 10 (hours per shift for a permanent snow remover)
+- CostPerShift_Seasonal = 120 (USD per seasonal snow remover shift)
+- CostPerShift_Permanent = 250 (USD per permanent snow remover shift)
+- RequiredLaborHours = 300 (total snow removal labor hours needed)
+- TotalBudget = 6500 (USD available for payment)
+
+Variables:
+- NumberSeasonal: number of seasonal snow removers hired (float ≥ 0; in practice, an integer count)
+- NumberPermanent: number of permanent snow removers hired (float ≥ 0; in practice, an integer count)
+
+Objective:
+- Minimize TotalWorkers = NumberSeasonal + NumberPermanent
+
+Constraints:
+1. Labor Hours Constraint: 
+   HoursPerShift_Seasonal * NumberSeasonal + HoursPerShift_Permanent * NumberPermanent ≥ RequiredLaborHours
+   (i.e., 6 * NumberSeasonal + 10 * NumberPermanent ≥ 300)
+
+2. Budget Constraint:
+   CostPerShift_Seasonal * NumberSeasonal + CostPerShift_Permanent * NumberPermanent ≤ TotalBudget
+   (i.e., 120 * NumberSeasonal + 250 * NumberPermanent ≤ 6500)
+
+----------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "NumberSeasonal": "float",
+    "NumberPermanent": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4617 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Continuous (Linear Solver) Model Result:
+{'variables': {'NumberSeasonal': 33.33333333333333...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 18
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_18
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'AllocatedSpace': {'0': 'float', '1': 'float'}}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A suspicious factory has 100 sq. feet of space. It makes bootleg phones and laptops. Phones require 2 hours of labor and cost $12 for each sq. foot of space allocated for phone production (cost of electricity and equipment). Laptops require 3 hours of labor and cost $15 for each sq. foot of space allocated for laptop production. Phones produce a net revenue of $50 per sq. foot while laptops produce a net revenue of $70 per sq. foot. The factory wants to spend at most $5000 and 2000 hours of labor. What is the optimal factory layout to maximize revenue?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AllocatedSpace": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A suspicious factory has 100 sq. feet of space. It makes bootleg phones and laptops. Phones require 2 hours of labor and cost $12 for each sq. foot of space allocated for phone production (cost of electricity and equipment). Laptops require 3 hours of labor and cost $15 for each sq. foot of space allocated for laptop production. Phones produce a net revenue of $50 per sq. foot while laptops produce a net revenue of $70 per sq. foot. The factory wants to spend at most $5000 and 2000 hours of labor. What is the optimal factory layout to maximize revenue?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AllocatedSpace": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is one complete formulation of the factory layout problem using the five-element framework.
+
+--------------------------------------------------
+
+Sets:
+- P: set of products = {Phone, Laptop}
+
+Parameters:
+- total_space: total available factory floor space [sq. feet] = 100
+- cost_per_sqft:
+  • phone: cost per square foot for phone production [USD/sq.ft] = 12
+  • laptop: cost per square foot for laptop production [USD/sq.ft] = 15
+- net_revenue_per_sqft:
+  • phone: net revenue per square foot for phone production [USD/sq.ft] = 50
+  • laptop: net revenue per square foot for laptop production [USD/sq.ft] = 70
+- labor_required:
+  • phone: labor hours required per square foot for phone production [hours/sq.ft] = 2
+  • laptop: labor hours required per square foot for laptop production [hours/sq.ft] = 3
+- cost_limit: maximum spending for production inputs [USD] = 5000
+- labor_limit: maximum labor hours available [hours] = 2000
+
+Variables:
+- x_p: allocated space for product p ∈ P in square feet (continuous variable, ≥ 0)
+  • x_phone corresponds to space for phone production
+  • x_laptop corresponds to space for laptop production
+
+Objective:
+- Maximize total net revenue = (net_revenue_per_sqft[phone] * x_phone) + (net_revenue_per_sqft[laptop] * x_laptop)
+  (Note: The term “net revenue” already represents revenue in excess of other variable production costs. The production costs appear only as constraints through the spending limit.)
+
+Constraints:
+1. Space constraint:
+   - x_phone + x_laptop ≤ total_space
+2. Cost constraint:
+   - (cost_per_sqft[phone] * x_phone) + (cost_per_sqft[laptop] * x_laptop) ≤ cost_limit
+3. Labor constraint:
+   - (labor_required[phone] * x_phone) + (labor_required[laptop] * x_laptop) ≤ labor_limit
+4. Non-negativity:
+   - For each p in P, x_p ≥ 0
+
+--------------------------------------------------
+
+Comments:
+- All parameters are expressed with consistent units: space in square feet, cost and revenue in US dollars per square foot, and labor in hours per square foot.
+- The decision variables (x_phone and x_laptop) represent how many square feet of the available 100 sq. feet are allocated to each product.
+- The objective maximizes total net revenue subject to physical (space) and operational (labor and expenditure) constraints.
+
+--------------------------------------------------
+
+Alternative modeling note:
+If one instead prefers to separately account for revenue and the cost of space allocation (i.e., treating revenue and cost as separate expressions), an alternative formulation would be:
+  • Total revenue = (50 * x_phone) + (70 * x_laptop)
+  • Total cost = (12 * x_phone) + (15 * x_laptop)
+  • Then the net objective would be: maximize (Total revenue – Total cost)
+In that case, the cost constraint (Total cost ≤ 5000) would still be enforced, and the objective would explicitly subtract total cost from total revenue. However, based on the phrase “net revenue” in the problem statement, the first formulation is the direct translation.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4009 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Optimization Results for Factory Layout Problem
+-------------------------------------------...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 50
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_50
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'NumUsedContainers': ['float']}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: There are two specialized containers, a small and large one, that are used to make a pharmaceutical paste. The small container requires 10 units of water and 15 units of the powdered pill to make 20 units of the paste. The large container requires 20 units of water and 20 units of the powdered pill to make 30 units of the paste. The pharmacy has available 500 units of water and 700 units of the powdered pill. How many of each container should be used to maximize the amount of paste that can be made?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumUsedContainers": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: There are two specialized containers, a small and large one, that are used to make a pharmaceutical paste. The small container requires 10 units of water and 15 units of the powdered pill to make 20 units of the paste. The large container requires 20 units of water and 20 units of the powdered pill to make 30 units of the paste. The pharmacy has available 500 units of water and 700 units of the powdered pill. How many of each container should be used to maximize the amount of paste that can be made?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumUsedContainers": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is the structured mathematical model following the five-element format.
+
+------------------------------------------------------------
+Sets:
+- C: set of container types = {small, large}
+
+------------------------------------------------------------
+Parameters (all units are in “units”; note that water and powdered pill input quantities are provided per container, and the output is measured in paste “units”):
+- water_req[c]: water required per container c
+    • water_req[small] = 10 (units of water per small container)
+    • water_req[large] = 20 (units of water per large container)
+- pill_req[c]: powdered pill required per container c
+    • pill_req[small] = 15 (units of powdered pill per small container)
+    • pill_req[large] = 20 (units of powdered pill per large container)
+- paste_out[c]: paste output per container c
+    • paste_out[small] = 20 (units of paste per small container)
+    • paste_out[large] = 30 (units of paste per large container)
+- total_water: total available water = 500 (units)
+- total_pill: total available powdered pill = 700 (units)
+
+------------------------------------------------------------
+Variables:
+- x[c]: number of containers of type c to use
+  • For each c in C, x[c] is a decision variable (assumed continuous for modeling, but naturally expected to be integer and nonnegative)
+  • Domain: x[c] ≥ 0 (units may be “container uses”)
+
+------------------------------------------------------------
+Objective:
+Maximize total paste output produced by the containers.
+- Total_Paste = sum over c in C of (paste_out[c] * x[c])
+In other words, maximize: 20*x[small] + 30*x[large]
+
+------------------------------------------------------------
+Constraints:
+1. Water availability constraint:
+   - For water: sum over c in C of (water_req[c] * x[c]) ≤ total_water
+   - That is: 10*x[small] + 20*x[large] ≤ 500
+
+2. Powdered pill availability constraint:
+   - For pills: sum over c in C of (pill_req[c] * x[c]) ≤ total_pill
+   - That is: 15*x[small] + 20*x[large] ≤ 700
+
+------------------------------------------------------------
+Notes:
+- The units for water and pills are assumed to be consistent throughout the model.
+- Although the decision variables x[small] and x[large] are defined here as continuous (floats) per the expected output schema, the context implies that they should be nonnegative integers for a practical implementation.
+- If needed, one could include integrality constraints in an implementation.
+- This formulation directly maps to typical Python or OR-Tools code using the variables, constraints, and objective defined above.
+
+------------------------------------------------------------
+Alternative Version (if fractional container use is not allowed):
+- One might explicitly enforce that:
+   • x[c] ∈ Z (nonnegative integers)
+This additional condition would be added to the “Variables” section if an integer program is required.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4252 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+=== Continuous Model (Fractional Container Use Allowed) ===
+Optimal number of small contain...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 59
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_59
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'AcresUsed': ['float']}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A tea estate has available 500 acres of land and they need to pick the tea leaves either using a traditional machine or modern machine. For each acre of land, the traditional machine can pick 30 kg of tea leaves, creates 10 kg of waste, and requires 20 liters of fuel. For each acre of land, the modern machine can pick 40 kg of tea leaves, creates 15 kg of waste, and requires 15 liters of fuel. The estate has available 9000 liters of fuel can handle at most 6000 kg of waste. For how many acres should each machine be used to maximize the amount of tea leaves that can be picked?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AcresUsed": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A tea estate has available 500 acres of land and they need to pick the tea leaves either using a traditional machine or modern machine. For each acre of land, the traditional machine can pick 30 kg of tea leaves, creates 10 kg of waste, and requires 20 liters of fuel. For each acre of land, the modern machine can pick 40 kg of tea leaves, creates 15 kg of waste, and requires 15 liters of fuel. The estate has available 9000 liters of fuel can handle at most 6000 kg of waste. For how many acres should each machine be used to maximize the amount of tea leaves that can be picked?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AcresUsed": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- M: set of machine types = {Traditional, Modern}
+
+Parameters:
+- acres_total: total available land in acres = 500 acres
+- fuel_available: total available fuel = 9000 liters
+- waste_capacity: maximum allowable waste = 6000 kg
+- tea_yield[m]: tea leaves picked per acre for machine m (kg)
+   - tea_yield[Traditional] = 30 kg/acre
+   - tea_yield[Modern] = 40 kg/acre
+- waste[m]: waste produced per acre for machine m (kg)
+   - waste[Traditional] = 10 kg/acre
+   - waste[Modern] = 15 kg/acre
+- fuel[m]: fuel required per acre for machine m (liters)
+   - fuel[Traditional] = 20 liters/acre
+   - fuel[Modern] = 15 liters/acre
+
+Variables:
+- x[m] for m in M: acres of land allocated to machine m (continuous, in acres, >= 0)
+
+Objective:
+- Maximize total tea leaves picked = tea_yield[Traditional] * x[Traditional] + tea_yield[Modern] * x[Modern]
+
+Constraints:
+1. Land constraint: x[Traditional] + x[Modern] <= acres_total 
+2. Fuel constraint: fuel[Traditional] * x[Traditional] + fuel[Modern] * x[Modern] <= fuel_available
+3. Waste constraint: waste[Traditional] * x[Traditional] + waste[Modern] * x[Modern] <= waste_capacity
+
+-----------------------------------------------------
+This model assumes that acres can be fractionally allocated. If integer allocations (i.e., whole acres) are required, the variable x[m] should be defined as integer.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4427 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Optimization Results:
+
+Continuous LP Model:
+Acres Used: {'Traditional': 300.0000000000001, ...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 125
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_125
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'VanTrips': 'float', 'TruckTrips': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A chocolate company can transport their boxes of chocolate either using their own vans or by renting trucks. Their vans can transport 50 boxes per trip while a truck can transport 80 boxes per trip. Since they own their vans, the cost per van trip is $30 while the cost per truck trip is $50. The company needs to transport at least 1500 boxes of chocolate and they have a budget of $1000. Since the vans also provide advertising, the number of trips by van must be larger than the number of trips by trucks. How many of trip by each should be done to minimize the total number of trips?
+
+Expected Output Schema:
+{
+  "variables": {
+    "VanTrips": "float",
+    "TruckTrips": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A chocolate company can transport their boxes of chocolate either using their own vans or by renting trucks. Their vans can transport 50 boxes per trip while a truck can transport 80 boxes per trip. Since they own their vans, the cost per van trip is $30 while the cost per truck trip is $50. The company needs to transport at least 1500 boxes of chocolate and they have a budget of $1000. Since the vans also provide advertising, the number of trips by van must be larger than the number of trips by trucks. How many of trip by each should be done to minimize the total number of trips?
+
+Expected Output Schema:
+{
+  "variables": {
+    "VanTrips": "float",
+    "TruckTrips": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Sets:
+- TransportModes: {Van, Truck}
+
+Parameters:
+- VanCapacity: number of boxes that can be transported per van trip (value = 50 boxes/trip)
+- TruckCapacity: number of boxes that can be transported per truck trip (value = 80 boxes/trip)
+- VanCost: cost per van trip (value = 30 dollars/trip)
+- TruckCost: cost per truck trip (value = 50 dollars/trip)
+- RequiredBoxes: minimum number of boxes to transport (value = 1500 boxes)
+- Budget: maximum allowed transportation cost (value = 1000 dollars)
+
+Variables:
+- VanTrips: number of trips made with vans (decision variable, nonnegative integer; note that while the expected output schema indicates "float", conceptually this represents an integer number of trips)
+- TruckTrips: number of trips made with trucks (decision variable, nonnegative integer)
+
+Objective:
+- Minimize total trips = VanTrips + TruckTrips
+
+Constraints:
+1. Capacity Constraint: (VanCapacity * VanTrips) + (TruckCapacity * TruckTrips) ≥ RequiredBoxes
+   - That is: 50 * VanTrips + 80 * TruckTrips ≥ 1500
+
+2. Budget Constraint: (VanCost * VanTrips) + (TruckCost * TruckTrips) ≤ Budget
+   - That is: 30 * VanTrips + 50 * TruckTrips ≤ 1000
+
+3. Advertising Constraint: VanTrips must be strictly greater than TruckTrips.
+   - Since trips are integer quantities, enforce VanTrips ≥ TruckTrips + 1
+
+// Note: All units are consistent with the problem statement (boxes, dollars, trips). The decision variables are defined as nonnegative; if fractional trips are allowed the variables could be continuous (float), but typically trips are integer values. The model above follows the five-element format as required.
+
+Expected Output Schema:
+{
+  "variables": {
+    "VanTrips": "float",
+    "TruckTrips": "float"
+  },
+  "objective": "float"
+}
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4218 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Optimal Solutions:
+{'LinearSolver': {'variables': {'VanTrips': 14.0, 'TruckTrips': 10.0}, '...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 154
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_154
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'NumberOfBikes': 'float', 'NumberOfCars': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: A village hosts a banquet and provides bike and car transportation for everyone. A bike can take 3 people while a car can take 5 people. Since cars are more expensive, at most 40% of the vehicles can be cars. If the village needs to transport at least 500 people, how many of each vehicle should be used to minimize the total number of bikes needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfBikes": "float",
+    "NumberOfCars": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: A village hosts a banquet and provides bike and car transportation for everyone. A bike can take 3 people while a car can take 5 people. Since cars are more expensive, at most 40% of the vehicles can be cars. If the village needs to transport at least 500 people, how many of each vehicle should be used to minimize the total number of bikes needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfBikes": "float",
+    "NumberOfCars": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is the complete five‐element structured model that represents the problem exactly as described.
+
+--------------------------------------------------
+
+Sets:
+- Vehicles = {Bike, Car}  
+  (Note: Although only two types exist, we keep them separate for clarity.)
+
+Parameters:
+- capacity_Bike = 3   (number of people a bike can transport)
+- capacity_Car = 5    (number of people a car can transport)
+- min_people = 500    (minimum number of people to be transported)
+- max_car_fraction = 0.4   (maximum allowed fraction of vehicles that can be cars)
+
+Variables:
+- NumberOfBikes: number of bikes used [nonnegative real number, assume integer in practical implementation]
+- NumberOfCars: number of cars used [nonnegative real number, assume integer in practical implementation]
+
+Objective:
+- Minimize the total number of bikes, i.e., minimize NumberOfBikes  
+  (Here, the assumption is that bikes are cheaper relative to limiting total vehicles but the goal is to reduce the deployed bike count.)
+
+Constraints:
+1. Transportation capacity constraint:  
+   3 * NumberOfBikes + 5 * NumberOfCars >= 500  
+   (This ensures that the combined capacity of bikes and cars covers at least 500 people.)
+
+2. Car fraction constraint:  
+   NumberOfCars <= 0.4 * (NumberOfBikes + NumberOfCars)  
+   (This ensures that cars do not exceed 40% of the total vehicles used.)  
+
+--------------------------------------------------
+
+Additional Comments:
+- Both NumberOfBikes and NumberOfCars are decision variables and although the expected output schema lists them as float, in practice they should be integers since you cannot use a fraction of a vehicle.
+- All capacities and the minimum requirement are expressed in "people".
+- The car fraction is expressed as a percentage (40%) in its decimal form (0.4) ensuring unit consistency with the overall count of vehicles.
+
+This model is complete, self-contained, and logically consistent for implementing in any optimization solver such as OR-Tools or Python-based frameworks.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 3236 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Results for Model 1 (Original constraint formulation):
+{'NumberOfBikes': 80.0, 'NumberOfCar...
+💻 [DEBUG] reflection_agent: Starting reflection step
+💻 [DEBUG] reflection_agent: Generated solution reflection:
+ OK
+Succesfully reached a feasible solution, saving results.
+
+------------------------------------------------------------
+
+============================================================
+Problema 121
+============================================================
+Checking if already solved
+
+📋 DESCRIPCIÓN DEL INPUT:
+Nombre: nlp4lp_121
+Dominio: N/A
+Generating prompt and starting agent..
+solution schema:  {'variables': {'ChlorineAmount': 'float', 'WaterSoftenerAmount': 'float', 'ChlorineUnits': 'float', 'WaterSoftenerUnits': 'float', 'TotalTime': 'float'}, 'objective': 'float'}
+
+🤖 PROMPT GENERADO:
+==================================================
+Problem description: Both chorine and water softener need to be added to a pool. One unit of chlorine takes 1 minute to be effective while one unit of water softener takes 2 minutes to be effective. Because too much chlorine can burn your eyes, there has to at most half as much chlorine as water softener in the pool. If there has to be at least 200 units of chlorine in the water and a total of 500 units of chemicals in the water, how many units of each should be added to minimize the total time it takes for the pool to be ready? (Note: chlorine must be added before water softener or vice versa).
+
+Expected Output Schema:
+{
+  "variables": {
+    "ChlorineAmount": "float",
+    "WaterSoftenerAmount": "float",
+    "ChlorineUnits": "float",
+    "WaterSoftenerUnits": "float",
+    "TotalTime": "float"
+  },
+  "objective": "float"
+}
+==================================================
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: Both chorine and water softener need to be added to a pool. One unit of chlorine takes 1 minute to be effective while one unit of water softener takes 2 minutes to be effective. Because too much chlorine can burn your eyes, there has to at most half as much chlorine as water softener in the pool. If there has to be at least 200 units of chlorine in the water and a total of 500 units of chemicals in the water, how many units of each should be added to minimize the total time it takes for the pool to be ready? (Note: chlorine must be added before water softener or vice versa).
+
+Expected Output Schema:
+{
+  "variables": {
+    "ChlorineAmount": "float",
+    "WaterSoftenerAmount": "float",
+    "ChlorineUnits": "float",
+    "WaterSoftenerUnits": "float",
+    "TotalTime": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is one complete formulation using the five‐element structure. Note that if you interpret “at most half as much chlorine as water softener” literally (chlorine ≤ ½ · water softener), then with the additional requirements (at least 200 units of chlorine and a fixed total of 500 units of chemicals) the set of constraints is actually inconsistent. (To see this, note that if chlorine ≤ ½ · water softener and total = chlorine + water softener, then even when chlorine is as high as allowed the maximum chlorine is 500/3 ≈ 166.67, which conflicts with the ≥200 requirement.) 
+
+Because of this, an alternative formulation is provided at the end where the safety constraint is reversed (water softener ≤ 2 · chlorine) so that all numerical requirements can be met. In either case the objective is to minimize the total time for chemical effectiveness (with each unit of chlorine needing 1 minute and each unit of water softener 2 minutes) and the chemicals are applied sequentially (in one order or the other, so the total time is simply the sum of the two times).
+
+──────────────────────────────
+Main Model (using chlorine ≤ 0.5 · water softener)
+
+Sets:
+• ChemicalTypes = {Chlorine, WaterSoftener}
+
+Parameters (all units in “units” for chemicals and “minutes per unit effectiveness” for time):
+• min_chlorine = 200    // Minimum required chlorine units
+• total_chemicals = 500   // Total units of chemicals to be added
+• time_per_unit[Chlorine] = 1  // Minutes needed per unit of chlorine
+• time_per_unit[WaterSoftener] = 2 // Minutes needed per unit of water softener
+• max_chlorine_ratio = 0.5  // Safety constraint: chlorine must be at most half as much as water softener
+
+Variables (continuous and assumed > 0 since both chemicals must be added):
+• ChlorineUnits      : number of chlorine units to add
+• WaterSoftenerUnits : number of water softener units to add
+
+– We also define an auxiliary variable:
+• TotalTime = time_per_unit[Chlorine] · ChlorineUnits + time_per_unit[WaterSoftener] · WaterSoftenerUnits
+  (in minutes)
+
+Objective:
+Minimize TotalTime
+
+Constraints:
+1. Total chemical requirement: 
+  ChlorineUnits + WaterSoftenerUnits = total_chemicals
+2. Chlorine minimum requirement: 
+  ChlorineUnits ≥ min_chlorine
+3. Safety (ratio) constraint:
+  ChlorineUnits ≤ max_chlorine_ratio * WaterSoftenerUnits
+
+• Note: With min_chlorine = 200, total_chemicals = 500, and the safety constraint interpreted as chlorine ≤ 0.5 · water softener, a quick substitution (WaterSoftenerUnits = 500 − ChlorineUnits) shows 
+  ChlorineUnits ≤ 0.5 · (500 − ChlorineUnits) ⟹ 1.5 · ChlorineUnits ≤ 500 ⟹ ChlorineUnits ≤ 333.33.
+  However, since the safety inequality actually forces (if taken to its limit) ChlorineUnits ≤ (500 – ChlorineUnits)/2, then the maximum feasible chlorine would be only 500/3 ≈ 166.67. This contradicts the requirement ChlorineUnits ≥ 200. In other words, no feasible solution exists under these three constraints simultaneously.
+
+──────────────────────────────
+Alternative Model (swapping the safety constraint interpretation)
+
+Suppose instead the safety requirement is intended so that “too much chlorine” is avoided by insisting that water softener is not more than double the chlorine, that is:
+  WaterSoftenerUnits ≤ 2 · ChlorineUnits.
+This guarantees that chlorine is at least half of the total chemicals (keeping its level in check) while allowing at least 200 chlorine units within a 500‐unit total.
+
+Sets:
+• ChemicalTypes = {Chlorine, WaterSoftener}
+
+Parameters:
+• min_chlorine = 200    // Minimum chlorine required (units)
+• total_chemicals = 500   // Total chemicals required (units)
+• time_per_unit[Chlorine] = 1  // Minutes per unit of chlorine
+• time_per_unit[WaterSoftener] = 2 // Minutes per unit of water softener
+• safety_ratio_alternative = 2 // Safety constraint: water softener must not exceed 2 × chlorine
+
+Variables (continuous and > 0):
+• ChlorineUnits
+• WaterSoftenerUnits
+
+Auxiliary Expression:
+• TotalTime = ChlorineUnits * time_per_unit[Chlorine] + WaterSoftenerUnits * time_per_unit[WaterSoftener]
+
+Objective:
+Minimize TotalTime
+
+Constraints:
+1. Total chemicals: 
+  ChlorineUnits + WaterSoftenerUnits = total_chemicals
+2. Chlorine minimum: 
+  ChlorineUnits ≥ min_chlorine
+3. Safety (alternative ratio) constraint:
+  WaterSoftenerUnits ≤ safety_ratio_alternative * ChlorineUnits
+
+──────────────────────────────
+Expected Output Schema
+
+Below is a JSON object listing the decision variables and the objective (the remaining parts of the model would be used by a solver implementation):
+
+{
+  "variables": {
+    "ChlorineAmount": "This represents the required minimum chlorine units (parameter value, e.g., 200)",
+    "WaterSoftenerAmount": "This represents the water softener parameter information, if needed",
+    "ChlorineUnits": "Continuous variable representing the number of chlorine units to add",
+    "WaterSoftenerUnits": "Continuous variable representing the number of water softener units to add",
+    "TotalTime": "Continuous variable representing the total time in minutes, calculated as (1 × ChlorineUnits + 2 × WaterSoftenerUnits)"
+  },
+  "objective": "Minimize TotalTime = ChlorineUnits + 2 · WaterSoftenerUnits"
+}
+
+──────────────────────────────
+Summary
+
+• The Main Model uses:
+  Constraint 1: ChlorineUnits + WaterSoftenerUnits = 500,
+  Constraint 2: ChlorineUnits ≥ 200,
+  Constraint 3: ChlorineUnits ≤ 0.5 · WaterSoftenerUnits.
+This model is mathematically precise but is infeasible given the provided numerical requirements.
+
+• The Alternative Model (with safety constraint WaterSoftenerUnits ≤ 2 · ChlorineUnits) is feasible and may be compared if a reinterpretation of “at most half as much chlorine” is acceptable.
+
+A coding agent can implement either version and compare their feasibility and performance based on the intended practical meaning.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 5469 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+==========================================
+Model: Main Model (chlorine <= 0.5 * water_softe...
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: Both chorine and water softener need to be added to a pool. One unit of chlorine takes 1 minute to be effective while one unit of water softener takes 2 minutes to be effective. Because too much chlorine can burn your eyes, there has to at most half as much chlorine as water softener in the pool. If there has to be at least 200 units of chlorine in the water and a total of 500 units of chemicals in the water, how many units of each should be added to minimize the total time it takes for the pool to be ready? (Note: chlorine must be added before water softener or vice versa).
+
+Expected Output Schema:
+{
+  "variables": {
+    "ChlorineAmount": "float",
+    "WaterSoftenerAmount": "float",
+    "ChlorineUnits": "float",
+    "WaterSoftenerUnits": "float",
+    "TotalTime": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is one complete mathematical model expressed using the five‐element framework. Note that when we translate the text as written we get a set of constraints that, when combined, lead to an infeasible model. In particular, requiring at least 200 units of chlorine while forcing “at most half as much chlorine as water softener” (i.e. chlorine ≤ ½ × water softener) together with a total of exactly 500 units implies that chlorine must be both at least 200 and no more than about 166.67 (since if chlorine = C then water softener = 500 – C and the ratio constraint becomes C ≤ ½ (500 – C), or C ≤ 166.67). 
+
+Because that combination cannot be satisfied, two alternative versions of the model are provided below. The first (Main Model) follows the text verbatim. The second (Alternative Model) presents one natural fix (flipping the ratio inequality) so that ratio means “at least half as much chlorine as water softener” (i.e. chlorine ≥ ½ × water softener) while keeping the other requirements unchanged. A modeling or coding agent can compare both versions.
+
+──────────────────────────────
+Main Model (Verbatim Interpretation)
+
+Sets:
+  • CHEMICALS = {Chlorine, WaterSoftener}
+
+Parameters:
+  • chlorine_effectiveness_time = 1 minute per unit (time for each unit of chlorine to be effective)
+  • water_softener_effectiveness_time = 2 minutes per unit
+  • min_chlorine_units = 200 units (minimum required chlorine)
+  • total_chemical_units = 500 units (total amount of chemicals to be added)
+  • ratio_factor = 0.5  (the constraint “at most half as much chlorine as water softener” means: Chlorine_units ≤ 0.5 × WaterSoftener_units)
+
+Variables:
+  • ChlorineUnits (continuous, ≥ 0) – units of chlorine added
+  • WaterSoftenerUnits (continuous, ≥ 0) – units of water softener added
+  • TotalTime (continuous, ≥ 0) – total time (in minutes) required for both chemicals to be effective
+
+Objective:
+  • Minimize TotalTime defined as:
+      TotalTime = chlorine_effectiveness_time × ChlorineUnits + water_softener_effectiveness_time × WaterSoftenerUnits
+
+Constraints:
+  1. Total Chemical Requirement:
+         ChlorineUnits + WaterSoftenerUnits = total_chemical_units
+  2. Minimum Chlorine Requirement:
+         ChlorineUnits ≥ min_chlorine_units
+  3. Ratio Constraint (to avoid too much chlorine):
+         ChlorineUnits ≤ ratio_factor × WaterSoftenerUnits
+  4. (Ordering note) Chlorine must be added before water softener or vice versa.
+         (This note is acknowledged; here we assume that the chemicals are added in sequence and that their individual effectiveness times simply add up.)
+
+Comments:
+  • With total_chemical_units fixed at 500, constraint (1) implies WaterSoftenerUnits = 500 − ChlorineUnits.
+  • Substituting into (3) we require ChlorineUnits ≤ 0.5 × (500 − ChlorineUnits), which simplifies to ChlorineUnits ≤ 166.67. This directly conflicts with (2) which requires ChlorineUnits ≥ 200.
+  • Therefore, as written, the Main Model is infeasible. 
+
+──────────────────────────────
+Alternative Model (Adjusted Ratio Constraint)
+
+(One common adjustment is to assume that “too much chlorine” is avoided by requiring that chlorine be at least half as much as water softener rather than at most. In this version, we replace constraint (3) by its flipped version.)
+
+Sets:
+  • CHEMICALS = {Chlorine, WaterSoftener}
+
+Parameters:
+  • chlorine_effectiveness_time = 1 minute per unit
+  • water_softener_effectiveness_time = 2 minutes per unit
+  • min_chlorine_units = 200 units
+  • total_chemical_units = 500 units
+  • ratio_factor = 0.5  
+       (Now the ratio constraint is interpreted as: ChlorineUnits ≥ ratio_factor × WaterSoftenerUnits,
+       i.e. there must be at least half as much chlorine as water softener.)
+
+Variables:
+  • ChlorineUnits (continuous, ≥ 0) – units of chlorine added
+  • WaterSoftenerUnits (continuous, ≥ 0) – units of water softener added
+  • TotalTime (continuous, ≥ 0) – total time (in minutes) for the pool to be ready
+
+Objective:
+  • Minimize TotalTime defined by:
+         TotalTime = chlorine_effectiveness_time × ChlorineUnits + water_softener_effectiveness_time × WaterSoftenerUnits
+
+Constraints:
+  1. Total Chemical Requirement:
+         ChlorineUnits + WaterSoftenerUnits = total_chemical_units
+  2. Minimum Chlorine Requirement:
+         ChlorineUnits ≥ min_chlorine_units
+  3. Adjusted Ratio Constraint:
+         ChlorineUnits ≥ ratio_factor × WaterSoftenerUnits
+         (Equivalently, WaterSoftenerUnits ≤ 2 × ChlorineUnits)
+  4. Chemical Addition Ordering:
+         (The problem note “chlorine must be added before water softener or vice versa” is acknowledged.
+         We assume here that because the chemicals are added sequentially, the overall effective time is the sum of the individual times.)
+
+Comments:
+  • With constraint (1), WaterSoftenerUnits = 500 − ChlorineUnits.
+  • Constraint (3) becomes ChlorineUnits ≥ 0.5 × (500 − ChlorineUnits), i.e. ChlorineUnits ≥ 250/1.5 approximately, which is feasible with ChlorineUnits ≥ 200.
+  • In this alternative formulation, a candidate optimal solution will balance the lower (faster) time for chlorine with the higher (slower) time for water softener while meeting the ratio and total chemical requirements.
+  
+──────────────────────────────
+Expected Output Schema (variables and objective):
+
+{
+  "variables": {
+    "ChlorineAmount": "This is equivalent to ChlorineUnits, measured in chemical units (float, continuous)",
+    "WaterSoftenerAmount": "This is equivalent to WaterSoftenerUnits, measured in chemical units (float, continuous)",
+    "ChlorineUnits": "Alias for ChlorineAmount (float, continuous)",
+    "WaterSoftenerUnits": "Alias for WaterSoftenerAmount (float, continuous)",
+    "TotalTime": "Total time in minutes (float, continuous)"
+  },
+  "objective": "TotalTime = 1 × ChlorineUnits + 2 × WaterSoftenerUnits (minimize this expression)"
+}
+
+──────────────────────────────
+Summary
+
+• The Main Model follows the given text exactly, but its three constraints (chlorine ≥ 200, total = 500, and chlorine ≤ 0.5 × water softener) are mutually contradictory.
+• The Alternative Model modifies the ratio so that chlorine is at least half of water softener, which may be a more reasonable interpretation and leads to a feasible optimization model.
+• A coder can choose which version to implement or compare both to check the impact on the solution.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 5344 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Main Model (Verbatim Interpretation) Results:
+No optimal solution found (Main Model might b...
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: Both chorine and water softener need to be added to a pool. One unit of chlorine takes 1 minute to be effective while one unit of water softener takes 2 minutes to be effective. Because too much chlorine can burn your eyes, there has to at most half as much chlorine as water softener in the pool. If there has to be at least 200 units of chlorine in the water and a total of 500 units of chemicals in the water, how many units of each should be added to minimize the total time it takes for the pool to be ready? (Note: chlorine must be added before water softener or vice versa).
+
+Expected Output Schema:
+{
+  "variables": {
+    "ChlorineAmount": "float",
+    "WaterSoftenerAmount": "float",
+    "ChlorineUnits": "float",
+    "WaterSoftenerUnits": "float",
+    "TotalTime": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is a complete, self-contained formulation using the five-element framework. In this formulation the decision is about how many units of each chemical to add. We assume that “ChlorineAmount” is the effective quantity of chlorine (in units) added (and equivalently for water softener) and that the total time is the sum of the individual times (1 minute per chlorine unit and 2 minutes per water softener unit). Note that because the chemicals must be added sequentially (one before the other), the total time is the sum of the individual addition times.
+
+────────────────────────────
+Sets:
+- CHEMICALS: the set of chemicals = {Chlorine, WaterSoftener}
+
+────────────────────────────
+Parameters:
+- min_chlorine_units = 200           (minimum required chlorine units)
+- total_chemical_units = 500         (total units of chemicals required)
+- time_per_unit_Chlorine = 1         (minutes required for one unit of chlorine)
+- time_per_unit_WaterSoftener = 2    (minutes required for one unit of water softener)
+- chlorine_ratio_limit = 0.5         (chlorine units must be at most half the water softener units)
+
+────────────────────────────
+Variables:
+- ChlorineUnits (continuous, ≥ 0): the number of chlorine units added [units]
+- WaterSoftenerUnits (continuous, ≥ 0): the number of water softener units added [units]
+- ChlorineAmount (continuous): defined as the effective amount of chlorine in the pool (equal to ChlorineUnits) [units]
+- WaterSoftenerAmount (continuous): defined as the effective amount of water softener in the pool (equal to WaterSoftenerUnits) [units]
+- TotalTime (continuous): the total time for the pool to be ready, computed as (1 minute * ChlorineUnits) + (2 minutes * WaterSoftenerUnits) [minutes]
+
+────────────────────────────
+Objective:
+Minimize TotalTime = ChlorineUnits * time_per_unit_Chlorine + WaterSoftenerUnits * time_per_unit_WaterSoftener  
+(which in numerical terms is: minimize TotalTime = ChlorineUnits + 2 * WaterSoftenerUnits)
+
+────────────────────────────
+Constraints:
+1. Chlorine minimum requirement:  
+   ChlorineUnits ≥ min_chlorine_units  
+   (i.e., ChlorineUnits ≥ 200)
+
+2. Total chemicals requirement:  
+   ChlorineUnits + WaterSoftenerUnits = total_chemical_units  
+   (i.e., ChlorineUnits + WaterSoftenerUnits = 500)
+
+3. Chlorine to water softener ratio limit:  
+   ChlorineUnits ≤ chlorine_ratio_limit * WaterSoftenerUnits  
+   (i.e., ChlorineUnits ≤ 0.5 * WaterSoftenerUnits)
+
+4. Non-negativity:  
+   ChlorineUnits ≥ 0 and WaterSoftenerUnits ≥ 0
+
+────────────────────────────
+Additional Comments:
+- The sequential requirement (that chlorine must be added before water softener, or vice versa) is captured by the fact that total time is computed as the sum of the individual effective times.
+- All units are assumed to be consistent (units in quantity and minutes in time).  
+- This model is directly mappable to code (for example, in Python using an optimization package) and remains faithful to the original problem description.
+
+The expected output schema variables (ChlorineAmount, WaterSoftenerAmount, ChlorineUnits, WaterSoftenerUnits, TotalTime) appear in the decision or derived variables as defined above, with the objective being the minimized TotalTime.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 6856 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Optimization Results:
+
+ Version1_SequentialAddition :
+The sequential addition model is infe...
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: Both chorine and water softener need to be added to a pool. One unit of chlorine takes 1 minute to be effective while one unit of water softener takes 2 minutes to be effective. Because too much chlorine can burn your eyes, there has to at most half as much chlorine as water softener in the pool. If there has to be at least 200 units of chlorine in the water and a total of 500 units of chemicals in the water, how many units of each should be added to minimize the total time it takes for the pool to be ready? (Note: chlorine must be added before water softener or vice versa).
+
+Expected Output Schema:
+{
+  "variables": {
+    "ChlorineAmount": "float",
+    "WaterSoftenerAmount": "float",
+    "ChlorineUnits": "float",
+    "WaterSoftenerUnits": "float",
+    "TotalTime": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is one complete formulation using the five‐element framework. Note that when we translate the verbal conditions directly we obtain an infeasible set of constraints. In particular, if we define
+
+  • Chlorine + WaterSoftener = 500 (total chemical units)  
+  • Chlorine >= 200 (at least 200 units chlorine) and  
+  • Chlorine <= 0.5 × WaterSoftener (chlorine is “at most half as much as” water softener)
+
+then substituting WaterSoftener = 500 – Chlorine leads to  
+  Chlorine <= 0.5 × (500 – Chlorine)  
+  1.5 × Chlorine <= 500  
+  Chlorine <= 333.33 …  
+but a further inspection shows that in any feasible allocation (where WaterSoftener is positive) the chlorine maximum would in fact be below 200. (For example, rearranging the ratio constraint gives Chlorine <= (500 – Chlorine)/2, which implies Chlorine <= 166.67.) 
+
+Because of this inconsistency the decision maker might need to review the figures (for example, the required minimum chlorine or the ratio requirement). Below you will find the direct formulation (Model Version 1) and then an alternative (Model Version 2) in which one might “flip” the ratio meaning to assume instead that chlorine must be at least half as much as water softener (i.e. Chlorine >= 0.5 × WaterSoftener). Both versions are provided for completeness.
+
+────────────────────────────
+Main Model (Version 1 – Direct Interpretation):
+
+Sets:
+  • ChemicalTypes = {Chlorine, WaterSoftener}
+
+Parameters:
+  • min_chlorine = 200      [units; minimum required chlorine]
+  • total_chemicals = 500     [units; total chemicals in the pool]
+  • time_per_unit_chlorine = 1  [minute per unit of chlorine]
+  • time_per_unit_ws = 2      [minute per unit of water softener]
+  • chlorine_ratio_bound = 0.5  [ratio; chlorine must be at most 0.5 times water softener]
+
+Variables (decision variables – assumed continuous):
+  • ChlorineAmount (or ChlorineUnits): amount of chlorine added [units; ≥ 0]
+  • WaterSoftenerAmount (or WaterSoftenerUnits): amount of water softener added [units; ≥ 0]
+  • TotalTime: total time required to achieve effectiveness [minutes; ≥ 0]
+
+Objective:
+  Minimize TotalTime =
+   (time_per_unit_chlorine × ChlorineAmount) + (time_per_unit_ws × WaterSoftenerAmount)
+
+Constraints:
+  1. Total Chemical Constraint:
+   ChlorineAmount + WaterSoftenerAmount = total_chemicals
+                   (i.e. 500 units)
+
+  2. Minimum Chlorine Requirement:
+   ChlorineAmount >= min_chlorine
+             (i.e. at least 200 units chlorine)
+
+  3. Chlorine-to-WaterSoftener Ratio Constraint:
+   ChlorineAmount <= chlorine_ratio_bound × WaterSoftenerAmount
+          (i.e. chlorine is at most half as much as water softener)
+
+  4. Sequential Addition Note (model comment):
+   Because chemicals must be added one after the other (order does not change the overall sum of times), the total effective time is given by the sum in the objective.
+
+Model Comments:
+  – Units: Chemical amounts are in “units” and time is in minutes.
+  – In this direct formulation, the constraints lead to an infeasible model because the requirement of at least 200 chlorine units conflicts with the ratio constraint when total chemicals equal 500.
+  – The coding agent should verify the model parameters with the decision maker.
+
+────────────────────────────
+Alternative Model (Version 2 – Adjusted Ratio Interpretation):
+
+Here we assume that the intended ratio constraint was meant to be interpreted in the opposite direction. That is, to alleviate eye irritation the pool needs a minimum relative amount of chlorine such that
+   ChlorineAmount >= 0.5 × WaterSoftenerAmount.
+Note that with this alternative the ratio constraint is reversed. The remaining requirements and total chemicals remain the same.
+
+Sets:
+  • ChemicalTypes = {Chlorine, WaterSoftener}
+
+Parameters:
+  • min_chlorine = 200      [units]
+  • total_chemicals = 500     [units]
+  • time_per_unit_chlorine = 1  [minute per unit of chlorine]
+  • time_per_unit_ws = 2      [minute per unit of water softener]
+  • chlorine_ratio_lower_bound = 0.5  [ratio; chlorine must be at least 0.5 times water softener]
+
+Variables:
+  • ChlorineAmount (or ChlorineUnits): amount of chlorine added [units; ≥ 0]
+  • WaterSoftenerAmount (or WaterSoftenerUnits): amount of water softener added [units; ≥ 0]
+  • TotalTime: total time required [minutes; ≥ 0]
+
+Objective:
+  Minimize TotalTime =
+   (time_per_unit_chlorine × ChlorineAmount) + (time_per_unit_ws × WaterSoftenerAmount)
+
+Constraints:
+  1. Total Chemical Constraint:
+   ChlorineAmount + WaterSoftenerAmount = total_chemicals
+
+  2. Minimum Chlorine Requirement:
+   ChlorineAmount >= min_chlorine
+
+  3. Adjusted Ratio Constraint:
+   ChlorineAmount >= chlorine_ratio_lower_bound × WaterSoftenerAmount
+     (i.e. chlorine is at least half as much as water softener)
+
+  4. Sequential Addition Note:
+   As before, the total time is the sum of the individual chemical’s effective times because the chemicals are added sequentially.
+
+Model Comments:
+  – With the alternative interpretation the feasible region becomes:
+   WaterSoftenerAmount = total_chemicals – ChlorineAmount,
+   and ChlorineAmount must lie in a range where both the minimum chlorine requirement and the ratio constraint are satisfied.
+  – Units and variables are defined as in Model Version 1.
+  – The decision maker should compare both models to decide which best reflects the physical process.
+
+────────────────────────────
+Expected Output Format (Summary):
+
+{
+  "variables": {
+    "ChlorineAmount": "float",
+    "WaterSoftenerAmount": "float",
+    "ChlorineUnits": "float",
+    "WaterSoftenerUnits": "float",
+    "TotalTime": "float"
+  },
+  "objective": "float"
+}
+
+In this summary, note that ChlorineAmount and ChlorineUnits represent the same decision variable (and similarly for WaterSoftener). The objective, in both versions, is the minimization of the weighted sum of times associated with each chemical.
+
+This completes the structured formulation of the problem using the five‐element framework.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 5345 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: SUCCESS:
+Solving Version 1 – Direct Interpretation (expected to be infeasible):
+{'error': 'Model Ver...
+📐 [DEBUG] expert_math_agent: Starting mathematical formulation
+------------------------------------------------------------------------------------------------------------------------
+--> Problem Description
+Problem description: Both chorine and water softener need to be added to a pool. One unit of chlorine takes 1 minute to be effective while one unit of water softener takes 2 minutes to be effective. Because too much chlorine can burn your eyes, there has to at most half as much chlorine as water softener in the pool. If there has to be at least 200 units of chlorine in the water and a total of 500 units of chemicals in the water, how many units of each should be added to minimize the total time it takes for the pool to be ready? (Note: chlorine must be added before water softener or vice versa).
+
+Expected Output Schema:
+{
+  "variables": {
+    "ChlorineAmount": "float",
+    "WaterSoftenerAmount": "float",
+    "ChlorineUnits": "float",
+    "WaterSoftenerUnits": "float",
+    "TotalTime": "float"
+  },
+  "objective": "float"
+}
+........................................................................................................................
+--> Mathematical Problem Formulation:
+Below is one complete formulation following the five‐element structure. Note that when the ratio constraint is interpreted in the most natural way (“there has to be at most half as much chlorine as water softener” is modeled as chlorine ≤ 0.5 × water softener), the numerical requirements (at least 200 chlorine units and a 500‑unit total) are mutually inconsistent. In the comments an alternative interpretation is provided.
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Sets:
+- CHEM: set of chemicals = {Chlorine, WaterSoftener}
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Parameters:
+- time_effect[C] for C in CHEM:
+  • time_effect[Chlorine] = 1            (minutes per unit)
+  • time_effect[WaterSoftener] = 2        (minutes per unit)
+- min_chlorine = 200               (minimum units required for Chlorine)
+- total_units = 500               (total chemical units to be added)
+- ratio_limit = 0.5                (upper bound on Chlorine relative to WaterSoftener)
+  • Note: Interpreted as “Chlorine units ≤ 0.5 × WaterSoftener units”. 
+  • Alternative interpretation (if intended to avoid infeasibility): “WaterSoftener units ≤ 0.5 × Chlorine units.”
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Variables:
+- Chlorine_units: [continuous ≥ 0]  (units of Chlorine added)
+- WaterSoftener_units: [continuous ≥ 0]  (units of Water Softener added)
+- TotalTime: [continuous ≥ 0]  (total time in minutes for the process)
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Objective:
+Minimize TotalTime, where
+ TotalTime = (time_effect[Chlorine] × Chlorine_units) + (time_effect[WaterSoftener] × WaterSoftener_units)
+  i.e., TotalTime = 1 × Chlorine_units + 2 × WaterSoftener_units
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Constraints:
+1. Total chemical units requirement:
+  Chlorine_units + WaterSoftener_units = total_units
+
+2. Minimum chlorine requirement:
+  Chlorine_units ≥ min_chlorine
+
+3. Eye safety (chlorine ratio) constraint:
+  Chlorine_units ≤ ratio_limit × WaterSoftener_units
+    (Interpretation A – natural reading: There should be at most half as much Chlorine as WaterSoftener.)
+    • Note: With min_chlorine = 200 and total_units = 500, this constraint implies: Chlorine_units ≤ 0.5 × (500 − Chlorine_units) → Chlorine_units ≤ 166.67, which conflicts with Constraint 2.
+     An alternative (Interpretation B) is to reverse the ratio:
+      WaterSoftener_units ≤ ratio_limit × Chlorine_units
+     which would read “water softener is at most half as much as chlorine” (a less natural reading given the fear of burning eyes but might be considered if a feasible solution is desired).
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Model Comments:
+• Under Interpretation A, the constraints are infeasible because the requirement of at least 200 Chlorine units cannot be met together with the safety ratio constraint when total_units = 500.
+• The coding agent can either report the infeasibility or consider using the alternative ratio (Interpretation B) by replacing Constraint 3 with:
+  WaterSoftener_units ≤ ratio_limit × Chlorine_units.
+• All time units are in minutes and the amount parameters for chemicals are in “units” (assumed consistent across the model).
+
+–––––––––––––––––––––––––––––––––––––––––––––––––––––––––––
+Expected Output Schema Example:
+{
+  "variables": {
+    "ChlorineAmount": "not used explicitly since units are defined via Chlorine_units",
+    "WaterSoftenerAmount": "not used explicitly since units are defined via WaterSoftener_units",
+    "ChlorineUnits": "continuous variable representing the number of chlorine units [units]",
+    "WaterSoftenerUnits": "continuous variable representing the number of water softener units [units]",
+    "TotalTime": "continuous variable representing the total time [minutes]"
+  },
+  "objective": "minimize TotalTime = 1 * Chlorine_units + 2 * WaterSoftener_units"
+}
+
+This structured model fully captures and comments on the original problem details and is ready for translation into a working implementation.
+------------------------------------------------------------------------------------------------------------------------
+💻 [DEBUG] expert_code_agent: Starting code implementation
+💻 [DEBUG] expert_code_agent: Generated code implementation (length: 4406 chars)
+🔍 [DEBUG] code_validator_node: Validating code
+🔍 [DEBUG] code_validator_node: Validation result: VALID: Code passed basic validation checks
+💻 [DEBUG] code_critic_agent: Starting code critic
+💻 [DEBUG] code_critic_agent: Generated code feedback:
+ OK
+🚀 [DEBUG] code_executor_node: Executing code
+🚀 [DEBUG] code_executor_node: Execution result: ERROR:
+WARNING: All log messages before absl::InitializeLog() is called are written to STDERR
+E0000 ...

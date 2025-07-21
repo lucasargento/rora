@@ -1,0 +1,82 @@
+Problem Name: 120_nlp4lp_120
+
+# Problem Description:
+'''Problem description: A lab has 1000 units of medicinal ingredients to make two pills, a large pill and a small pill. A large pill requires 3 units of medicinal ingredients and 2 units of filler. A small pill requires 2 units of medicinal ingredients and 1 unit of filler. The lab has to make at least 100 large pills. However, since small pills are more popular at least 60% of the total number of pills must be small. How many of each should be made to minimize the total number of filler material needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "PillsProduced": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- PILL_TYPE: set of pill types = {Large, Small}
+
+Parameters:
+- medicinal_available: total available medicinal ingredients = 1000 (units)
+- req_med_large: medicinal ingredients required per large pill = 3 (units per pill)
+- req_med_small: medicinal ingredients required per small pill = 2 (units per pill)
+- req_fill_large: filler material required per large pill = 2 (units per pill)
+- req_fill_small: filler material required per small pill = 1 (unit per pill)
+- min_large: minimum number of large pills to produce = 100 (pills)
+- small_fraction: minimum fraction of small pills among total pills = 0.60  
+  (Note: This requirement is equivalent to enforcing small_pills ≥ 1.5 × large_pills)
+
+Variables:
+- PillsProduced[p] for p in PILL_TYPE, where:
+  • PillsProduced[Large]: number of large pills to produce [integer ≥ 0]
+  • PillsProduced[Small]: number of small pills to produce [integer ≥ 0]
+
+Objective:
+- Minimize total filler consumption = (req_fill_large × PillsProduced[Large]) + (req_fill_small × PillsProduced[Small])
+  That is, minimize (2 × PillsProduced[Large] + 1 × PillsProduced[Small])
+
+Constraints:
+1. Medicinal ingredient availability:
+   (req_med_large × PillsProduced[Large]) + (req_med_small × PillsProduced[Small]) ≤ medicinal_available
+   i.e., 3 × PillsProduced[Large] + 2 × PillsProduced[Small] ≤ 1000
+
+2. Minimum large pills production:
+   PillsProduced[Large] ≥ min_large
+   i.e., PillsProduced[Large] ≥ 100
+
+3. Popularity requirement (at least 60% of pills must be small):
+   This can be written as:
+   PillsProduced[Small] ≥ small_fraction × (PillsProduced[Large] + PillsProduced[Small])
+   Rearranging gives: PillsProduced[Small] ≥ 1.5 × PillsProduced[Large]
+
+4. Non-negativity and integrality:
+   PillsProduced[Large] and PillsProduced[Small] are integers and ≥ 0
+
+----------------------
+Mapping to the Expected Output Schema:
+
+{
+  "variables": {
+    "PillsProduced": {
+      "0": "float",   // corresponds to PillsProduced[Large]
+      "1": "float"    // corresponds to PillsProduced[Small]
+    }
+  },
+  "objective": "float"  // represents the total filler consumption: 2*PillsProduced[Large] + 1*PillsProduced[Small]"
+}
+
+Notes:
+- Even though the expected JSON schema lists the decision variables as floats, the context (number of pills) implies ideally integer decisions. This can be adapted in implementation.
+- All parameter units (ingredients per pill, overall available ingredients) are assumed to be consistent.
+
+Execution Results:
+SUCCESS:
+{'LinearSolver': {'model': 'Linear Solver (MIP)', 'variables': {'PillsProduced': {'0': 100.0, '1': 150.0}}, 'objective': 350.0}, 'CPSAT': {'model': 'CP-SAT Solver', 'variables': {'PillsProduced': {'0': 100, '1': 150}}, 'objective': 350}}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'PillsProduced': {'0': 100.0, '1': 150.0}}, 'objective': 350.0}

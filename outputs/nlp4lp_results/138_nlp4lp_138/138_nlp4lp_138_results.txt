@@ -1,0 +1,70 @@
+Problem Name: 138_nlp4lp_138
+
+# Problem Description:
+'''Problem description: A zoo needs to transport their monkeys to the vet either by bus or by car. A bus can transport 20 monkeys per trip and takes 30 minutes. A car can transport 6 monkeys per trip and takes 15 minutes. There can be at most 10 bus trips. In addition, since the monkeys get aggressive when there are too many in one place at least 60% of the trips should be by car. If the zoo needs to transport 300 monkeys, how many trips of each should be done to minimize the total time required to transport the monkeys?
+
+Expected Output Schema:
+{
+  "variables": {
+    "BusTrips": "float",
+    "CarTrips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- TransportModes: set = {Bus, Car}
+
+Parameters:
+- capacity_Bus: number of monkeys per bus trip = 20 monkeys/trip
+- capacity_Car: number of monkeys per car trip = 6 monkeys/trip
+- time_Bus: travel time per bus trip = 30 minutes/trip
+- time_Car: travel time per car trip = 15 minutes/trip
+- max_bus_trips: maximum number of bus trips = 10 trips
+- total_monkeys: total monkeys that need to be transported = 300 monkeys
+- car_share_minimum: minimum fraction of trips that must be by car = 60% (i.e., 0.60)
+
+Variables:
+- BusTrips: number of bus trips (nonnegative integer)
+- CarTrips: number of car trips (nonnegative integer)
+
+Objective:
+- Minimize the total transport time (minutes), given by:
+  TotalTime = time_Bus * BusTrips + time_Car * CarTrips
+
+Constraints:
+1. Capacity constraint (ensure enough monkeys are transported):
+   capacity_Bus * BusTrips + capacity_Car * CarTrips >= total_monkeys
+2. Maximum bus trips constraint:
+   BusTrips <= max_bus_trips
+3. Car trip share constraint (at least 60% of the trips are by car):
+   CarTrips >= car_share_minimum * (BusTrips + CarTrips)
+   (This can be rearranged to: CarTrips >= (car_share_minimum / (1 - car_share_minimum)) * BusTrips, i.e., CarTrips >= 1.5 * BusTrips)
+
+Note:
+- The units are consistent: monkeys per trip combined with trips yield the total monkeys, and time units (minutes) multiplied by number of trips yield total time.
+- Although trips are typically integer decisions, the variable type can be specified as integer if required by the implementation.
+
+Expected Output Schema:
+{
+  "variables": {
+    "BusTrips": "float",
+    "CarTrips": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Solving with Linear Solver (MIP):
+{'variables': {'BusTrips': 10.0, 'CarTrips': 17.0}, 'objective': 555.0}
+
+Solving with CP-SAT Model:
+{'variables': {'BusTrips': 10, 'CarTrips': 17}, 'objective': 555.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'BusTrips': 9.0, 'CarTrips': 20.0}, 'objective': 570.0}

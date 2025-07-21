@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n----- Continuous LP Model -----\nOptimal days operated at old farm: 4.333333333333333\nOptimal days operated at new farm: 0.33333333333333326\nTotal operating cost: $ 1366.6666666666667\n\n----- Integer LP Model -----\nOptimal days operated at old farm: 4.0\nOptimal days operated at new farm: 1.0\nTotal operating cost: $ 1400.0\n"
+}

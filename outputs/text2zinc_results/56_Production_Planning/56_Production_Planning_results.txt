@@ -1,0 +1,37 @@
+Problem Name: 56_Production_Planning
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices:} \quad & k \in \{1, 2, \dots, K\} \quad \text{(products)}, \quad s \in \{1, 2, \dots, S\} \quad \text{(production stations or machines)}. \\[1mm]
+\textbf{Parameters:} \quad & \text{ProduceTime}_{k,s} \quad \text{(time required for one unit of product } k \text{ on station } s\text{)},\\[0.5mm]
+& \text{AvailableTime}_s \quad \text{(total available processing time on station } s\text{)}, \\[0.5mm]
+& \text{Profit}_k \quad \text{(profit per unit of product } k\text{)}.\\[2mm]
+\textbf{Decision Variables:} \quad &
+x_k \in \mathbb{Z}_{+} \quad \text{for all } k=1,\dots,K, \quad \text{with the additional condition } x_k \geq 1.
+\quad \text{(Production quantity of product } k\text{)}
+\\[2mm]
+\textbf{Objective Function:} \quad &
+\text{maximize} \quad Z = \sum_{k=1}^{K} \text{Profit}_k \, x_k.
+\\[2mm]
+\textbf{Constraints:} \quad &
+\text{(1) Machine/Station time capacity constraints:} \\[0.5mm]
+& \sum_{k=1}^{K} \text{ProduceTime}_{k,s} \, x_k \leq \text{AvailableTime}_s
+\quad \forall \, s=1,\dots,S. \\[1.5mm]
+& \text{(2) Non-trivial production (each product is produced in a nonzero quantity):} \\[0.5mm]
+& x_k \geq 1 \quad \forall \, k=1,\dots,K.
+\end{align*} 
+
+\noindent This formulation exactly represents the manufacturing problem with multiple products and production stages, ensuring that production on each station does not exceed its available time and that each product is produced in a non-trivial quantity, while maximizing the total profit.
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Product 1 production quantity: 1
+Product 2 production quantity: 97
+Optimal profit: 990.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 1000.0}

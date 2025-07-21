@@ -1,0 +1,100 @@
+Problem Name: 82_nlp4lp_82
+
+# Problem Description:
+'''Problem description: A summer camps does science experiments in two pre filled beakers, beaker 1 and beaker 2. Beaker 1 uses 4 units of flour and 6 units of special liquid to make 5 units of slime. Beaker 2 uses 6 units of flour and 3 units of special liquid to make 3 units of slime.  However, beaker 1 creates 4 units of waste while beaker 2 creates 2 units of waste. The summer camp has available 150 units of flour and 100 units of special liquid. If at most 30 units of waste can be produced, how many of each beaker should be used to maximize the amount of slime produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "FlourUsedPerBeaker": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the structured mathematical model for the problem using the five‐element framework.
+
+------------------------------------------------
+Sets:
+• B = {1, 2}  
+  (Beaker types: 1 for beaker 1 and 2 for beaker 2)
+
+------------------------------------------------
+Parameters:
+• flour_b: units of flour used per experiment with beaker b  
+  – flour_1 = 4 units per use (beaker 1)  
+  – flour_2 = 6 units per use (beaker 2)
+
+• liquid_b: units of special liquid used per experiment with beaker b  
+  – liquid_1 = 6 units per use (beaker 1)  
+  – liquid_2 = 3 units per use (beaker 2)
+
+• slime_b: units of slime produced per experiment with beaker b  
+  – slime_1 = 5 units per use (beaker 1)  
+  – slime_2 = 3 units per use (beaker 2)
+
+• waste_b: units of waste produced per experiment with beaker b  
+  – waste_1 = 4 units per use (beaker 1)  
+  – waste_2 = 2 units per use (beaker 2)
+
+• resource limits (all units are consistent with the given descriptions):  
+  – total_flour = 150 units  
+  – total_liquid = 100 units  
+  – max_waste = 30 units
+
+------------------------------------------------
+Variables:
+• x_b for b in B, where:
+  – x_1 = number of times beaker 1 is used  
+  – x_2 = number of times beaker 2 is used  
+ Domain: x_b ∈ {0, 1, 2, …} (nonnegative integers)  
+  (Note: we assume each usage represents one complete experiment with the beaker)
+
+------------------------------------------------
+Objective:
+Maximize total slime production (in units) given by:
+ TotalSlime = slime_1 * x_1 + slime_2 * x_2  
+In other words, maximize 5 * x_1 + 3 * x_2
+
+------------------------------------------------
+Constraints:
+1. Flour Constraint:  
+  flour_1 * x_1 + flour_2 * x_2 ≤ total_flour  
+  i.e., 4 * x_1 + 6 * x_2 ≤ 150
+
+2. Special Liquid Constraint:  
+  liquid_1 * x_1 + liquid_2 * x_2 ≤ total_liquid  
+  i.e., 6 * x_1 + 3 * x_2 ≤ 100
+
+3. Waste Constraint:  
+  waste_1 * x_1 + waste_2 * x_2 ≤ max_waste  
+  i.e., 4 * x_1 + 2 * x_2 ≤ 30
+
+------------------------------------------------
+Notes and Assumptions:
+• All resource usage and production values are in “units” as stated in the problem.  
+• The decision variables (x_1 and x_2) are assumed to be integer because you cannot use a beaker a fractional number of times.  
+• The formulation is directly based on the real-world description with no data simplification or transformation.  
+
+This model is now complete and ready for implementation in a tool such as OR-Tools.
+
+Execution Results:
+SUCCESS:
+Results:
+----------
+Linear Solver Implementation:
+variables: {'FlourUsedPerBeaker': {'0': -0.0, '1': 15.0}}
+objective: 45.0
+
+CP-SAT Model Implementation:
+variables: {'FlourUsedPerBeaker': {'0': 0, '1': 15}}
+objective: 45
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'FlourUsedPerBeaker': {'0': 0.0, '1': 15.0}}, 'objective': 45.0}

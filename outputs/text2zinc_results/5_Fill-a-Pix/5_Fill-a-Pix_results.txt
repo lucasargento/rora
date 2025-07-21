@@ -1,0 +1,42 @@
+Problem Name: 5_Fill-a-Pix
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices:}\quad & i,j \in \{1,2,\ldots,n\} \\[1mm]
+\textbf{Parameters:}\quad & n \text{ is the size of the grid.} \\[1mm]
+& \text{For each cell } (i,j),\; c_{ij} \in \{0,1,2,\dots,9\} \cup \{\mathtt{X}\} \text{ is given by the input puzzle.} \\[1mm]
+& \text{Here, } c_{ij} = \mathtt{X} \text{ indicates an unknown (i.e., no clue) cell, while if } c_{ij} \text{ is numeric it is a clue.} \\[1mm]
+\textbf{Decision Variables:}\quad & x_{ij} \in \{0,1\} \quad \forall i,j = 1,\ldots,n, \\[1mm]
+& \quad \text{where } x_{ij} = 1 \text{ if cell } (i,j) \text{ is painted, and } 0 \text{ otherwise.} \\[1mm]
+\textbf{Auxiliary Sets:}\quad & \text{For each cell } (i,j), \text{ define the set of adjacent cells that are within the grid} \\
+& \quad \mathcal{N}(i,j) = \{ (p,q) \,:\, p \in \{i-1,i,i+1\}, \; q \in \{j-1,j,j+1\}, \; 1\le p \le n,\; 1\le q \le n\}. \\[1mm]
+\textbf{Objective Function:}\quad & \text{Since the problem is a feasibility puzzle we choose a dummy objective.} \\
+& \text{Minimize } z = 0. \\[1mm]
+\textbf{Constraints:} \\[1mm]
+& \text{For every cell } (i,j) \text{ such that } c_{ij} \neq \mathtt{X}, \text{ enforce:} \\[1mm]
+& \quad \sum_{(p,q) \in \mathcal{N}(i,j)} x_{pq} = c_{ij} \quad \forall\, (i,j) \text{ with } c_{ij} \in \{0,1,2,\dots,9\}. \\[1mm]
+& \text{(There are no restrictions on cells with } c_{ij}=\mathtt{X} \text{ apart from } x_{ij} \in \{0,1\}.) 
+\end{align*} 
+
+\noindent This model completely represents the Fill-a-Pix puzzle as a feasibility problem where the painted cells (variables $x_{ij}$) must be chosen so that for every cell with a clue the sum of painted cells in its 3$\times$3 neighborhood (including itself) matches exactly the provided clue value. The problem is both feasible (if a solution exists) and bounded, and the dummy objective ensures that a solution satisfying all constraints is found.
+
+Execution Results:
+SUCCESS:
+Objective value: 0.0
+Grid solution (1 represents painted, 0 not painted):
+0 0 0 0 0 0 1 1 1 1
+0 0 1 1 0 0 1 0 0 1
+1 0 1 1 0 0 1 1 1 1
+1 0 1 0 0 0 0 0 0 0
+1 1 1 1 1 0 0 0 0 0
+1 1 1 0 0 1 1 1 1 1
+1 1 1 1 1 0 0 1 0 0
+1 1 1 1 1 0 0 1 0 0
+1 1 0 0 1 0 0 1 0 0
+1 1 0 0 1 0 1 1 1 0
+
+
+Expected Output:
+Expected solution
+
+: {'grid': [[0, 0, 0, 0, 0, 0, 1, 1, 1, 1], [0, 0, 1, 1, 0, 0, 1, 0, 0, 1], [1, 0, 1, 1, 0, 0, 1, 1, 1, 1], [1, 0, 1, 0, 0, 0, 0, 0, 0, 0], [1, 1, 1, 1, 1, 0, 0, 0, 0, 0], [1, 1, 1, 0, 0, 1, 1, 1, 1, 1], [1, 1, 1, 1, 1, 0, 0, 1, 0, 0], [1, 1, 1, 1, 1, 0, 0, 1, 0, 0], [1, 1, 0, 0, 1, 0, 0, 1, 0, 0], [1, 1, 0, 0, 1, 0, 1, 1, 1, 0]]}

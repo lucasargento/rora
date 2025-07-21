@@ -1,0 +1,58 @@
+Problem Name: 112_nlp4lp_112
+
+# Problem Description:
+'''Problem description: A competitive eater challenges himself to eat slices of cheesecake and caramel cake. Each slice of cheesecake contains 200 calories and 40 grams of sugar. Each slice of caramel cake contains 250 calories and 50 grams of sugar. He prefers cheesecake and decides to eat at least 3 times as many slices of cheesecake as caramel cake. However, he must also eat at least 3 slices of caramel cake. If he can consume at most 10000 calories in one day, how many slices of each cake should he eat to maximize the total amount of sugar he consumes?
+
+Expected Output Schema:
+{
+  "variables": {
+    "CheesecakeSlices": "float",
+    "CaramelCakeSlices": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- C: set of cake types = {Cheesecake, CaramelCake}
+
+Parameters:
+- calories_Cheesecake = 200 (calories per slice of cheesecake)
+- calories_Caramel = 250 (calories per slice of caramel cake)
+- sugar_Cheesecake = 40 (grams of sugar per slice of cheesecake)
+- sugar_Caramel = 50 (grams of sugar per slice of caramel cake)
+- min_CaramelSlices = 3 (minimum number of caramel cake slices required)
+- calorie_limit = 10000 (maximum calories that can be consumed in a day)
+
+Variables:
+- CheesecakeSlices: float, number of cheesecake slices eaten (expected to be integer but defined as float per output schema)
+- CaramelCakeSlices: float, number of caramel cake slices eaten (expected to be integer but defined as float per output schema)
+
+Objective:
+- Maximize total sugar consumption = (sugar_Cheesecake * CheesecakeSlices) + (sugar_Caramel * CaramelCakeSlices)
+  (Objective unit: grams of sugar)
+
+Constraints:
+1. Calorie constraint: (calories_Cheesecake * CheesecakeSlices) + (calories_Caramel * CaramelCakeSlices) ≤ calorie_limit
+2. Preference constraint: CheesecakeSlices ≥ 3 * CaramelCakeSlices (at least three times as many cheesecake slices as caramel cake slices)
+3. Minimum caramel cake slices: CaramelCakeSlices ≥ min_CaramelSlices
+
+Output Schema:
+{
+  "variables": {
+    "CheesecakeSlices": "float",
+    "CaramelCakeSlices": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Linear Programming Model Result:
+{'variables': {'CheesecakeSlices': 46.25, 'CaramelCakeSlices': 3.0}, 'objective': 2000.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'CheesecakeSlices': 45.0, 'CaramelCakeSlices': 4.0}, 'objective': 2000.0}

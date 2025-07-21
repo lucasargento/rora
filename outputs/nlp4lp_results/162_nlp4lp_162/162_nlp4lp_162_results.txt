@@ -1,0 +1,57 @@
+Problem Name: 162_nlp4lp_162
+
+# Problem Description:
+'''Problem description: A farmer on an island sends corn to the main land either by ferry or light rail. Each ferry trip can take 20 boxes of corn while each light rail trip can take 15 boxes of corn. Since ferry trips are slow, the number of light rail trip has to be at least 4 times the number of ferry trips. If the farmer wants to send at least 500 boxes of corn, minimize the total number of trips of either type needed.
+
+Expected Output Schema:
+{
+  "variables": {
+    "FerryTrips": "float",
+    "LightRailTrips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Mode: set of transportation modes = {Ferry, LightRail}
+
+Parameters:
+- ferry_capacity = 20 (boxes per ferry trip)
+- lightrail_capacity = 15 (boxes per light rail trip)
+- min_boxes = 500 (minimum number of corn boxes to be sent)
+- ratio_multiplier = 4 (light rail trips must be at least 4 times ferry trips)
+
+Variables:
+- FerryTrips: number of ferry trips to use (integer, ≥ 0)
+- LightRailTrips: number of light rail trips to use (integer, ≥ 0)
+
+Objective:
+- Minimize total trips = FerryTrips + LightRailTrips
+
+Constraints:
+1. Shipment capacity constraint:
+   - (ferry_capacity * FerryTrips) + (lightrail_capacity * LightRailTrips) ≥ min_boxes
+   - That is, 20 * FerryTrips + 15 * LightRailTrips ≥ 500
+
+2. Mode ratio constraint:
+   - LightRailTrips ≥ ratio_multiplier * FerryTrips
+   - That is, LightRailTrips ≥ 4 * FerryTrips
+
+Notes:
+- All units are consistent: box counts for corn and trips.  
+- It is assumed that the trips must be integer numbers since fractional trips are not meaningful in this context.
+
+Execution Results:
+SUCCESS:
+Solving using Linear Solver (CBC):
+{'variables': {'FerryTrips': 6.0, 'LightRailTrips': 26.0}, 'objective': 32.0}
+
+Solving using CP-SAT Model:
+{'variables': {'FerryTrips': 4, 'LightRailTrips': 28}, 'objective': 32}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'FerryTrips': 6.0, 'LightRailTrips': 26.0}, 'objective': 32.0}

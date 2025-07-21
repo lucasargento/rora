@@ -1,0 +1,64 @@
+Problem Name: 158_nlp4lp_158
+
+# Problem Description:
+'''Problem description: A tourist spot in the mountains allows visitors to travel to the top either by hot-air balloon or gondola lift. A hot air balloon can carry 4 visitors while a gondola lift can carry 6 visitors. Each hot air balloon produces 10 units of pollution while each gondola lift produces 15 units of pollution. There can be at most 10 hot-air balloon rides and at least 70 visitors need to be transported. How many of each type of transport method should be taken to minimize the total pollution produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "BalloonRides": "float",
+    "GondolaLifts": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Method: set of transportation methods = {HotAirBalloon, GondolaLift}
+
+Parameters:
+- Capacity_Balloon: number of visitors per hot-air balloon ride = 4 (visitors/ride)
+- Capacity_Gondola: number of visitors per gondola lift = 6 (visitors/ride)
+- Pollution_Balloon: pollution produced per hot-air balloon ride = 10 (pollution units/ride)
+- Pollution_Gondola: pollution produced per gondola lift = 15 (pollution units/ride)
+- Max_Balloon_Rides: maximum allowable hot-air balloon rides = 10 (rides)
+- Min_Visitors: minimum visitors to transport = 70 (visitors)
+
+Variables:
+- BalloonRides: number of hot-air balloon rides taken [integer, ≥ 0] (rides)
+- GondolaLifts: number of gondola lifts taken [integer, ≥ 0] (rides)
+
+Objective:
+- Minimize total pollution produced = (Pollution_Balloon * BalloonRides) + (Pollution_Gondola * GondolaLifts)
+
+Constraints:
+1. Visitor Transportation Constraint:
+   - (Capacity_Balloon * BalloonRides) + (Capacity_Gondola * GondolaLifts) ≥ Min_Visitors
+   - This ensures that at least 70 visitors are transported.
+2. Hot-Air Balloon Ride Limit:
+   - BalloonRides ≤ Max_Balloon_Rides
+   - This restricts the number of hot-air balloon rides to at most 10.
+
+------------------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "BalloonRides": "integer, ≥ 0",
+    "GondolaLifts": "integer, ≥ 0"
+  },
+  "objective": "Minimize (10 * BalloonRides) + (15 * GondolaLifts)"
+}
+
+Execution Results:
+SUCCESS:
+Linear Solver Implementation Result:
+Optimal solution:
+  BalloonRides = 10.0
+  GondolaLifts = 5.0
+  Objective (Total Pollution) = 175.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'BalloonRides': 1.0, 'GondolaLifts': 11.0}, 'objective': 175.0}

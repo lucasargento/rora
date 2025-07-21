@@ -1,0 +1,69 @@
+Problem Name: 69_nlp4lp_69
+
+# Problem Description:
+'''Problem description: A coffee shop sells mochas and regular coffees. Each mocha requires 3 units of coffee powder and 6 units of milk. Each regular coffee requires 6 units of coffee powder and 2 units of milk. The shop has available 400 units of coffee powder and 500 units of milk. Making a mocha takes 5 minutes and making a regular coffee takes 3 minutes. Since mochas are more popular among people, the shop must make at least 3 times as many mochas as regular coffees. How many of each should they make to minimize the total production time?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumMocha": "float",
+    "NumRegularCoffee": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Drinks: a set of coffee drink types = {Mocha, RegularCoffee}
+
+Parameters:
+- coffeePowderPerMocha = 3 (units of coffee powder required per mocha)
+- coffeePowderPerRegular = 6 (units of coffee powder required per regular coffee)
+- milkPerMocha = 6 (units of milk required per mocha)
+- milkPerRegular = 2 (units of milk required per regular coffee)
+- availableCoffeePowder = 400 (total available units of coffee powder)
+- availableMilk = 500 (total available units of milk)
+- productionTimeMocha = 5 (minutes required to make one mocha)
+- productionTimeRegular = 3 (minutes required to make one regular coffee)
+- minMochaToRegularRatio = 3 (mochas must be at least 3 times the number of regular coffees)
+
+Variables:
+- NumMocha: number of mochas to produce (float, ≥ 0) [units]
+- NumRegularCoffee: number of regular coffees to produce (float, ≥ 0) [units]
+
+Objective:
+- Minimize total production time in minutes = productionTimeMocha * NumMocha + productionTimeRegular * NumRegularCoffee
+  That is, minimize (5 * NumMocha + 3 * NumRegularCoffee)
+
+Constraints:
+1. Coffee powder constraint:
+   3 * NumMocha + 6 * NumRegularCoffee ≤ 400
+2. Milk constraint:
+   6 * NumMocha + 2 * NumRegularCoffee ≤ 500
+3. Demand ratio constraint:
+   NumMocha ≥ 3 * NumRegularCoffee
+
+Comments:
+- All unit quantities are assumed to be consistent (e.g., production time in minutes, material usage in units).
+- Although production quantities are typically integers, the expected output schema specifies float variables for NumMocha and NumRegularCoffee.
+- This model minimizes the total production time subject to resource and ratio constraints, and is ready to be implemented using Python or OR-Tools code.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumMocha": "float",
+    "NumRegularCoffee": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Solution using ortools.linear_solver:
+{'variables': {'NumMocha': 0.0, 'NumRegularCoffee': 0.0}, 'objective': 0.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumMocha': -0.0, 'NumRegularCoffee': -0.0}, 'objective': 0.0}

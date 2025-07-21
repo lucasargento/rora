@@ -1,0 +1,81 @@
+Problem Name: 37_Rocket_Fuel_Optimization
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{Decision Variables:} \\
+&& x_t \in \mathbb{R}, \quad \forall t = 0,1,\dots, T, \quad \text{(Position of the rocket at time }t\text{)}; \\
+&& v_t \in \mathbb{R}, \quad \forall t = 0,1,\dots, T, \quad \text{(Velocity of the rocket at time }t\text{)}; \\
+&& a_t \in \mathbb{R}, \quad \forall t = 0,1,\dots, T-1, \quad \text{(Acceleration (control) applied at time }t\text{)}. \\[1em]
+
+\textbf{Parameters:} \\
+&& x_0 = 0, \quad v_0 = 0, \quad \text{(Initial position and velocity)}; \\
+&& x_T = 1, \quad v_T = 0, \quad \text{(Target final position and velocity)}; \\
+&& T = 20. \\[1em]
+
+\textbf{Objective Function:} \\
+&& \text{Minimize} \quad J = \sum_{t=0}^{T-1} \lvert a_t \rvert. \\[1em]
+
+\textbf{Constraints:} \\
+&& \text{Dynamics (Position update):} \quad x_{t+1} = x_t + v_t, \quad \forall \, t = 0,1,\dots, T-1; \\
+&& \text{Dynamics (Velocity update):} \quad v_{t+1} = v_t + a_t, \quad \forall \, t = 0,1,\dots, T-1; \\
+&& \text{Initial conditions:} \quad x_0 = 0, \quad v_0 = 0; \\
+&& \text{Terminal conditions:} \quad x_T = 1, \quad v_T = 0.
+\end{array}
+\]
+
+Alternatively, presented in a single aligned block:
+
+\[
+\begin{aligned}
+\textbf{Decision Variables:} \quad
+& x_t \in \mathbb{R}, \quad t = 0,1,\dots, T, \quad \text{(Position)}; \\
+& v_t \in \mathbb{R}, \quad t = 0,1,\dots, T, \quad \text{(Velocity)}; \\
+& a_t \in \mathbb{R}, \quad t = 0,1,\dots, T-1, \quad \text{(Acceleration/control)}; \\[1em]
+\textbf{Parameters:} \quad
+& x_0 = 0, \quad v_0 = 0, \quad x_T = 1, \quad v_T = 0, \quad T = 20; \\[1em]
+\textbf{Objective:} \quad
+& \min_{\,\{a_t\}_{t=0}^{T-1}} \; \sum_{t=0}^{T-1} \lvert a_t \rvert; \\[1em]
+\textbf{Subject to:} \quad
+& x_{t+1} = x_t + v_t, \quad t = 0,1,\dots, T-1; \\
+& v_{t+1} = v_t + a_t, \quad t = 0,1,\dots, T-1; \\
+& x_0 = 0, \quad v_0 = 0; \\
+& x_T = 1, \quad v_T = 0.
+\end{aligned}
+\]
+
+This formulation fully captures the real-world energy and natural resources problem for the rocket's trajectory, ensuring that the dynamics, boundary conditions, and fuel consumption (modeled as the sum of the absolute accelerations) are all properly represented.
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Objective value (total fuel consumption): 0.10526315788823232
+
+Time	Position	Velocity	Acceleration	|Acceleration|
+ 0	    0.0000	    0.0000	         0.0526	         0.0526
+ 1	    0.0000	    0.0526	         0.0000	         0.0000
+ 2	    0.0526	    0.0526	         0.0000	         0.0000
+ 3	    0.1053	    0.0526	         0.0000	         0.0000
+ 4	    0.1579	    0.0526	         0.0000	         0.0000
+ 5	    0.2105	    0.0526	         0.0000	         0.0000
+ 6	    0.2632	    0.0526	         0.0000	         0.0000
+ 7	    0.3158	    0.0526	         0.0000	         0.0000
+ 8	    0.3684	    0.0526	         0.0000	         0.0000
+ 9	    0.4211	    0.0526	         0.0000	         0.0000
+10	    0.4737	    0.0526	        -0.0000	         0.0000
+11	    0.5263	    0.0526	         0.0000	         0.0000
+12	    0.5789	    0.0526	        -0.0000	         0.0000
+13	    0.6316	    0.0526	        -0.0000	         0.0000
+14	    0.6842	    0.0526	        -0.0000	         0.0000
+15	    0.7368	    0.0526	        -0.0000	         0.0000
+16	    0.7895	    0.0526	        -0.0000	         0.0000
+17	    0.8421	    0.0526	        -0.0000	         0.0000
+18	    0.8947	    0.0526	         0.0000	         0.0000
+19	    0.9474	    0.0526	        -0.0526	         0.0526
+20	    1.0000	    0.0000
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 0.111}

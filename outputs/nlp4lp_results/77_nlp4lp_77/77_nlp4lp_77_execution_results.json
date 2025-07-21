@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n-----------------------------------------------------\nOptimization Model Using OR-Tools Linear Solver\n-----------------------------------------------------\nOptimal Number of Printers:\n  Premium: 7\n  Regular: 0\nMinimum Total Printers (Objective Value): 7.0\n-----------------------------------------------------\n"
+}

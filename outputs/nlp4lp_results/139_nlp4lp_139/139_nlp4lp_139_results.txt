@@ -1,0 +1,65 @@
+Problem Name: 139_nlp4lp_139
+
+# Problem Description:
+'''Problem description: A farmer decides to move his cows to a nearby farm using helicopters and trucks. A helicopter can take 3 cows per trip and creates 5 units of pollution. A truck can take 7 cows per trip and creates 10 units of pollution. The farmer needs to transport 80 cows and he only has enough money for at most 8 truck trips. How many of each type of trip should be taken to minimize the total amount of pollution produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumHelicopterTrips": "float",
+    "NumTruckTrips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- M: set of transportation modes = {Helicopter, Truck}
+
+Parameters:
+- TotalCows: total number of cows to transport [cows] = 80
+- Capacity_H: number of cows per helicopter trip [cows/trip] = 3
+- Capacity_T: number of cows per truck trip [cows/trip] = 7
+- Pollution_H: pollution generated per helicopter trip [pollution units/trip] = 5
+- Pollution_T: pollution generated per truck trip [pollution units/trip] = 10
+- MaxTruckTrips: maximum allowed truck trips [trips] = 8
+  // Assumption: All units are consistent (cows, trips, pollution units). Trips must be integer,
+  // however, we allow continuous variables for a relaxed version per expected output schema.
+
+Variables:
+- NumHelicopterTrips: number of helicopter trips to use [continuous, ≥ 0] (in implementation, may be integer)
+- NumTruckTrips: number of truck trips to use [continuous, ≥ 0] (in implementation, may be integer)
+
+Objective:
+- Minimize TotalPollution = Pollution_H * NumHelicopterTrips + Pollution_T * NumTruckTrips
+  // This represents the total pollution produced by all trips.
+
+Constraints:
+1. Cows Transported Constraint:
+   Capacity_H * NumHelicopterTrips + Capacity_T * NumTruckTrips ≥ TotalCows
+   // The total number of cows transported must be at least 80.
+2. Truck Trips Limit:
+   NumTruckTrips ≤ MaxTruckTrips
+   // The number of truck trips cannot exceed 8.
+
+Final Structured Model Output Schema:
+{
+  "variables": {
+    "NumHelicopterTrips": "float (≥ 0)",
+    "NumTruckTrips": "float (≥ 0)"
+  },
+  "objective": "Minimize 5 * NumHelicopterTrips + 10 * NumTruckTrips"
+}
+
+Execution Results:
+SUCCESS:
+Continuous Model Solution:
+Optimal number of Helicopter Trips: 8.0
+Optimal number of Truck Trips: 8.0
+Minimum Total Pollution: 120.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumHelicopterTrips': 8.0, 'NumTruckTrips': 8.0}, 'objective': 120.0}

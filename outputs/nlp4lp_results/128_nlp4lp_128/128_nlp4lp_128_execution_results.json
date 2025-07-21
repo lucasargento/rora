@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving Integer Model (Trips as integers):\n{'variables': {'BoatTrips': 12.0, 'CanoeTrips': 23.0}, 'objective': 1160.0}\n\nSolving Continuous Model (Trips as floats):\n{'variables': {'BoatTrips': 12.0, 'CanoeTrips': 22.5}, 'objective': 1140.0}\n"
+}

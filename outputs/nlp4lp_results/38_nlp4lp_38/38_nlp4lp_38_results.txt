@@ -1,0 +1,101 @@
+Problem Name: 38_nlp4lp_38
+
+# Problem Description:
+'''Problem description: A gem factory has two drills, a high intensity one and a low intensity one. Each day, the high intensity drill can process 50 gems and requires 50 units of water to dissipate heat. Each day, the low intensity drill can process 30 gems and requires 20 units of water to dissipate heat. Each day the factory must process 800 gems and they have available 700 units of water. Since the high intensity drill produces a lot of noise pollution, at most 40% of the drills can be high intensity ones. Further, at least 10 should be low intensity drills. How many of each drill should be used to minimize the total number of drills needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "HighDrills": "float",
+    "LowDrills": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is a complete formulation of the problem using the five-element framework.
+
+--------------------------------------------------
+Sets:
+- DrillType: {High, Low}
+  (We distinguish between high intensity drills and low intensity drills.)
+
+--------------------------------------------------
+Parameters:
+- gems_per_drill:
+  • High = 50 gems per drill per day
+  • Low = 30 gems per drill per day
+- water_per_drill:
+  • High = 50 water units per drill per day
+  • Low = 20 water units per drill per day
+- gem_target = 800 gems per day (total gems to be processed)
+- water_available = 700 water units per day
+- max_high_percentage = 0.4
+  (At most 40% of the drills used can be high intensity.)
+- min_low_drills = 10
+  (At least 10 low intensity drills must be used.)
+  
+  // Note: All water and gem units are assumed to be measured per day.
+
+--------------------------------------------------
+Variables:
+- HighDrills: integer ≥ 0
+  (Number of high intensity drills to use)
+- LowDrills: integer ≥ 0
+  (Number of low intensity drills to use)
+
+--------------------------------------------------
+Objective:
+- Minimize total_drills = HighDrills + LowDrills
+  (We want to minimize the total number of drills deployed.)
+
+--------------------------------------------------
+Constraints:
+1. Gem Processing Constraint:
+   50 * HighDrills + 30 * LowDrills ≥ gem_target
+   (Combined processing capacity must cover at least 800 gems.)
+
+2. Water Usage Constraint:
+   50 * HighDrills + 20 * LowDrills ≤ water_available
+   (Combined water usage of all drills cannot exceed 700 units.)
+
+3. High Drill Percentage Constraint:
+   HighDrills ≤ max_high_percentage * (HighDrills + LowDrills)
+   (No more than 40% of the total drills can be high intensity.)
+
+4. Minimum Low Drills Constraint:
+   LowDrills ≥ min_low_drills
+   (There must be at least 10 low intensity drills.)
+
+--------------------------------------------------
+Model Comments:
+- The decision variables are defined as integers because they represent counts of drills.
+- The gem production and water usage parameters are given per day; therefore, the constraints ensure daily processing meets the gem target without exceeding the available water.
+- The constraint on the percentage of high intensity drills is formulated relative to the total number of drills.
+- The objective is simply to minimize the total number of drills needed while satisfying all production and resource requirements.
+  
+--------------------------------------------------
+Expected Output Schema (for reference):
+{
+  "variables": {
+    "HighDrills": "integer >= 0",
+    "LowDrills": "integer >= 0"
+  },
+  "objective": "minimize (HighDrills + LowDrills)"
+}
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: LinearSolver
+Solution:
+  HighDrills = 7.0
+  LowDrills  = 15.0
+Objective (Total drills) = 22.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'HighDrills': 7.0, 'LowDrills': 15.0}, 'objective': 22.0}

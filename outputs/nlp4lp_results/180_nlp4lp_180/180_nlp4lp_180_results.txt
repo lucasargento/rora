@@ -1,0 +1,68 @@
+Problem Name: 180_nlp4lp_180
+
+# Problem Description:
+'''Problem description: Calcium and Magnesium are found in two health supplements, health supplement A and health supplement B. One serving of health supplement A contains 30 grams of Calcium and 50 grams of Magnesium. One serving of health supplement B contains 60 grams of Calcium and 10 grams of Magnesium. The cost per health supplement for health supplement A is $14 and the cost per health supplement for health supplement B is $25. A patient must consume these two health supplements every day to get at least 400 grams of Calcium and 50 grams of Magnesium. Determine how much servings of each supplement the patient needs to minimize her daily cost.
+
+Expected Output Schema:
+{
+  "variables": {
+    "Servings": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Supplements = {A, B}
+
+Parameters:
+- cost_A = 14 (USD per serving for supplement A)
+- cost_B = 25 (USD per serving for supplement B)
+- calcium_A = 30 (grams of Calcium per serving of supplement A)
+- calcium_B = 60 (grams of Calcium per serving of supplement B)
+- magnesium_A = 50 (grams of Magnesium per serving of supplement A)
+- magnesium_B = 10 (grams of Magnesium per serving of supplement B)
+- min_Calcium = 400 (grams required daily)
+- min_Magnesium = 50 (grams required daily)
+
+Variables:
+- x_A: number of servings of supplement A consumed per day [continuous, non-negative]
+- x_B: number of servings of supplement B consumed per day [continuous, non-negative]
+
+Objective:
+- Minimize Total Cost = cost_A * x_A + cost_B * x_B
+
+Constraints:
+1. Calcium constraint: calcium_A * x_A + calcium_B * x_B >= min_Calcium  
+   (i.e., 30 * x_A + 60 * x_B >= 400)
+2. Magnesium constraint: magnesium_A * x_A + magnesium_B * x_B >= min_Magnesium  
+   (i.e., 50 * x_A + 10 * x_B >= 50)
+3. Non-negativity: x_A >= 0, x_B >= 0
+
+-------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "Servings": {
+      "0": "float",   // servings of supplement A
+      "1": "float"    // servings of supplement B
+    }
+  },
+  "objective": "float"  // minimized total cost in USD
+}
+
+Execution Results:
+SUCCESS:
+Results for the Linear Programming formulation:
+Optimal Servings of Supplement A (index '0'): 0.0000
+Optimal Servings of Supplement B (index '1'): 6.6667
+Minimized Total Cost (objective): 166.6667
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'Servings': {'0': 0.0, '1': 6.666666666666667}}, 'objective': 166.66666666666669}

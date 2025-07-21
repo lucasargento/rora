@@ -1,0 +1,91 @@
+Problem Name: 128_nlp4lp_128
+
+# Problem Description:
+'''Problem description: There has been an oil spill in the ocean and ducks need to be taken to shore to be cleaned either by boat or by canoe. A boat can take 10 ducks per trip while a canoe can take 8 ducks per trip. Since the boats are motor powered, they take 20 minutes per trip while the canoes take 40 minutes per trip. In order to avoid further environmental damage, there can be at most 12 boat trips and at least 60% of the trips should be by canoe. If at least 300 ducks need to be taken to shore, how many of each transportation method should be used to minimize the total amount of time needed to transport the ducks?
+
+Expected Output Schema:
+{
+  "variables": {
+    "BoatTrips": "float",
+    "CanoeTrips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is a complete translation of the problem using the five-element framework.
+
+------------------------------------------------------------
+Sets:
+- TripModes: the set of transportation methods used = {Boat, Canoe}
+
+------------------------------------------------------------
+Parameters:
+- boat_capacity = 10 ducks per boat trip
+- canoe_capacity = 8 ducks per canoe trip
+- boat_time = 20 minutes per boat trip
+- canoe_time = 40 minutes per canoe trip
+- max_boat_trips = 12 trips (boats cannot be used more than 12 times)
+- ducks_required = 300 ducks (at least 300 ducks must be transported)
+- min_canoe_proportion = 0.6 (at least 60% of all trips must be by canoe)
+
+------------------------------------------------------------
+Variables:
+- BoatTrips: number of trips made by boat; nonnegative integer (or float if integrality is relaxed) [units: trips]
+- CanoeTrips: number of trips made by canoe; nonnegative integer (or float if integrality is relaxed) [units: trips]
+
+------------------------------------------------------------
+Objective:
+Minimize TotalTime where
+  TotalTime = (boat_time * BoatTrips) + (canoe_time * CanoeTrips)
+In other words, minimize 20 * BoatTrips + 40 * CanoeTrips [units: minutes]
+
+------------------------------------------------------------
+Constraints:
+1. Boat trips limit:
+   BoatTrips <= max_boat_trips 
+   (i.e., BoatTrips <= 12)
+
+2. Duck transport capacity requirement:
+   (boat_capacity * BoatTrips) + (canoe_capacity * CanoeTrips) >= ducks_required 
+   (i.e., 10*BoatTrips + 8*CanoeTrips >= 300)
+
+3. Minimum canoe trips proportion:
+   CanoeTrips >= min_canoe_proportion * (BoatTrips + CanoeTrips)
+   This can be rearranged for clarity:
+     CanoeTrips >= 0.6 * (BoatTrips + CanoeTrips)
+   Equivalently, subtracting 0.6 * CanoeTrips from both sides:
+     0.4 * CanoeTrips >= 0.6 * BoatTrips 
+   Which can be simplified to:
+     CanoeTrips >= 1.5 * BoatTrips
+
+------------------------------------------------------------
+Model Comments:
+- All time parameters are in minutes, capacities are in ducks per trip, and trips are counts.
+- The decision variables may be modelled as integers if an exactly countable number of trips is required.
+- The minimum canoe trips constraint ensures that at least 60% of the total trips are by canoe.
+- This formulation minimizes the total time required to transport a minimum of 300 ducks under the given operational limits.
+
+------------------------------------------------------------
+Expected Output Schema (example):
+{
+  "variables": {
+    "BoatTrips": "float",
+    "CanoeTrips": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Solving Integer Model (Trips as integers):
+{'variables': {'BoatTrips': 12.0, 'CanoeTrips': 23.0}, 'objective': 1160.0}
+
+Solving Continuous Model (Trips as floats):
+{'variables': {'BoatTrips': 12.0, 'CanoeTrips': 22.5}, 'objective': 1140.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'BoatTrips': 12.0, 'CanoeTrips': 23.0}, 'objective': 1160.0}

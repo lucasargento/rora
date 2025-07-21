@@ -1,0 +1,70 @@
+Problem Name: 10_nlp4lp_10
+
+# Problem Description:
+'''Problem description: A glass factory makes two types of glass panes: a regular glass pane and a tempered glass pane. Both require time on a heating and cooling machine. Both machines are available for a maximum of 300 minutes per day. It takes 3 minutes in the heating machine and 5 minutes in the cooling machine to make one regular glass pane. It takes 5 minutes in the heating machine and 8 minutes in the cooling machine to make one tempered glass pane. The profit per pane of regular glass is $8 and the profit per pane of tempered glass is $10. How many panes of each glass type should the factory make to maximize profit? What is the maximum profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityRegular": "float",
+    "QuantityTempered": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- GlassType: set of glass pane types = {Regular, Tempered}
+
+Parameters:
+- heating_time: minutes required on the heating machine per pane
+  • heating_time for Regular = 3 minutes per pane
+  • heating_time for Tempered = 5 minutes per pane
+- cooling_time: minutes required on the cooling machine per pane
+  • cooling_time for Regular = 5 minutes per pane
+  • cooling_time for Tempered = 8 minutes per pane
+- max_heating_time: maximum available time on the heating machine = 300 minutes per day
+- max_cooling_time: maximum available time on the cooling machine = 300 minutes per day
+- profit: profit per pane [USD]
+  • profit for Regular = 8 USD per pane
+  • profit for Tempered = 10 USD per pane
+
+Variables:
+- QuantityRegular: number of regular glass panes produced [float, ≥ 0]
+- QuantityTempered: number of tempered glass panes produced [float, ≥ 0]
+
+Objective:
+- Maximize total profit = (8 * QuantityRegular) + (10 * QuantityTempered)
+
+Constraints:
+1. Heating machine time constraint:
+  (3 * QuantityRegular) + (5 * QuantityTempered) ≤ 300
+2. Cooling machine time constraint:
+  (5 * QuantityRegular) + (8 * QuantityTempered) ≤ 300
+
+Note: All times are in minutes and profits are in US dollars per pane. This model is fully consistent with the problem description and can be directly translated into Python or OR-Tools code.
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityRegular": "float",
+    "QuantityTempered": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: LinearSolver
+Variables:
+  QuantityRegular: 59.99999999999999
+  QuantityTempered: 0.0
+Objective Value: 479.99999999999994
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityRegular': 60.0, 'QuantityTempered': 0.0}, 'objective': 480.0}

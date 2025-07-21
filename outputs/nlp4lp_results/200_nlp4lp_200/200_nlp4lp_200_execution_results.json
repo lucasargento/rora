@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution for the Ski Lift Problem (Minimize Total Lifts):\n{'variables': {'LooselySeatedLift': 5, 'DenselySeatedLift': 20}, 'objective': 25.0}\n"
+}

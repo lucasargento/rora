@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nInteger Model (Mixed-Integer Programming) Solution:\nRegularVans: 10.0\nHybridVans: 50.0\nTotal Vans (objective): 60.0\n\nContinuous Model (Fractional Variables) Solution:\nRegularVans: 9.999999999999973\nHybridVans: 50.00000000000005\nTotal Vans (objective): 60.00000000000002\n"
+}

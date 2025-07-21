@@ -1,0 +1,60 @@
+Problem Name: 80_Car_Selection_Problem
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Parameters:} \quad & & &  \\
+  & P & = & \text{Total number of participants (here } P=25\text{)}, \\
+  & C & = & \text{Total number of cars (here } C=25\text{)}, \\
+  & a_{ij} & \in & \{0,1\} \quad \forall\, i=1,\ldots,P,\; j=1,\ldots,C,\ \text{with } a_{ij}=1 \text{ if participant } i \text{ is interested in car } j, \\
+  & & & \text{and } a_{ij}=0 \text{ otherwise.} \\[1em]
+\textbf{Decision Variables:} \quad & & & \\
+  & x_{ij} & \in & \{0,1\} \quad \forall\, i=1,\ldots,P,\; j=1,\ldots,C, \\
+  & & & \text{where } x_{ij}=1 \text{ indicates that participant } i \text{ is assigned car } j, \\
+  & & & \text{and } x_{ij}=0 \text{ otherwise.} \\[1em]
+\textbf{Objective Function:} \quad & & & \\
+\text{maximize} \quad & z & = & \sum_{i=1}^{P} \sum_{j=1}^{C} x_{ij}. \\[1em]
+\textbf{Subject to:} \quad & & & \\
+\text{(1) Participant Assignment Constraint:} \quad & \sum_{j=1}^{C} x_{ij} & \leq & 1, \quad \forall\, i=1,\ldots,P, \\
+\text{(2) Car Availability Constraint:} \quad & \sum_{i=1}^{P} x_{ij} & \leq & 1, \quad \forall\, j=1,\ldots,C, \\
+\text{(3) Interest Feasibility Constraint:} \quad & x_{ij} & \leq & a_{ij}, \quad \forall\, i=1,\ldots,P,\; j=1,\ldots,C.
+\end{array}
+\]
+
+This formulation is a complete and self-contained integer programming model for the Car Selection Problem, ensuring that each participant is assigned at most one car, each car is assigned at most to one participant, and assignments can only be made where there is expressed interest.
+
+Execution Results:
+SUCCESS:
+Optimal objective value = 25.0
+Assignments (participant, car):
+Participant 0 assigned to Car 2
+Participant 1 assigned to Car 1
+Participant 2 assigned to Car 3
+Participant 3 assigned to Car 0
+Participant 4 assigned to Car 5
+Participant 5 assigned to Car 11
+Participant 6 assigned to Car 4
+Participant 7 assigned to Car 7
+Participant 8 assigned to Car 6
+Participant 9 assigned to Car 8
+Participant 10 assigned to Car 9
+Participant 11 assigned to Car 10
+Participant 12 assigned to Car 14
+Participant 13 assigned to Car 12
+Participant 14 assigned to Car 19
+Participant 15 assigned to Car 13
+Participant 16 assigned to Car 16
+Participant 17 assigned to Car 15
+Participant 18 assigned to Car 17
+Participant 19 assigned to Car 22
+Participant 20 assigned to Car 18
+Participant 21 assigned to Car 20
+Participant 22 assigned to Car 21
+Participant 23 assigned to Car 23
+Participant 24 assigned to Car 24
+
+
+Expected Output:
+Expected solution
+
+: {'Assignment': [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1], [0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], '_objective': 25}

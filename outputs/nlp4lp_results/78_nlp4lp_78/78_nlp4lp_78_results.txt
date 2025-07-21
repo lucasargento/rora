@@ -1,0 +1,67 @@
+Problem Name: 78_nlp4lp_78
+
+# Problem Description:
+'''Problem description: A vine company sells vine in vintage and regular bottles. A vintage bottle can hold 500 ml of vine while a regular bottle can hold 750 ml of vine. The company has available 100000 ml of vine. Because vintage bottles are mostly bought by collectors, the number of regular bottles must be at least 4 times as much as the number of vintage bottles. However, at least 10 vintage bottles must be made. How many of each should be made to maximize the total number of bottles produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberVintageBottles": "float",
+    "NumberRegularBottles": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- BottleTypes: set of bottle types = {Vintage, Regular}
+
+Parameters:
+- capacity_Vintage: vine capacity per vintage bottle (ml) = 500
+- capacity_Regular: vine capacity per regular bottle (ml) = 750
+- vineAvailable: total available vine (ml) = 100000
+- minVintage: minimum number of vintage bottles = 10
+- regularMultiplier: minimum ratio of regular to vintage bottles = 4
+  (This means the number of Regular bottles must be at least 4 times the number of Vintage bottles.)
+
+Variables:
+- NumberVintageBottles: number of vintage bottles produced [float, ≥ 0]
+- NumberRegularBottles: number of regular bottles produced [float, ≥ 0]
+
+Objective:
+- Maximize total bottles produced = NumberVintageBottles + NumberRegularBottles
+
+Constraints:
+1. Vine capacity constraint:
+   500 * NumberVintageBottles + 750 * NumberRegularBottles ≤ vineAvailable
+   (Ensure the total vine used does not exceed 100000 ml.)
+2. Market ratio constraint:
+   NumberRegularBottles ≥ regularMultiplier * NumberVintageBottles
+   (At least 4 regular bottles are made for every vintage bottle.)
+3. Minimum vintage production:
+   NumberVintageBottles ≥ minVintage
+   (At least 10 vintage bottles must be produced.)
+
+-----------------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "NumberVintageBottles": "float",
+    "NumberRegularBottles": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Results using OR-Tools Linear Solver:
+{'variables': {'NumberVintageBottles': 28.571428571428573, 'NumberRegularBottles': 114.28571428571429}, 'objective': 142.85714285714286}
+
+Results using OR-Tools CP-SAT Model:
+{'variables': {'NumberVintageBottles': 28, 'NumberRegularBottles': 114}, 'objective': 142}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberVintageBottles': 28.0, 'NumberRegularBottles': 114.0}, 'objective': 142.0}

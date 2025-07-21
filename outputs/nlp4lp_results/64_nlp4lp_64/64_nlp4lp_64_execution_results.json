@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nVersion A: Using reformulated hygiene ratio constraint (6*M <= 4*MotionActivatedMachines)\nOptimal solution found:\n  ManualMachines         = 6.0\n  MotionActivatedMachines= 11.0\n  TotalMachines          = 17.0\n  Objective (Total)      = 17.0\n\nVersion B: Using explicit TotalMachines variable and original hygiene ratio constraint (ManualMachines <= 0.4 * TotalMachines)\nOptimal solution found:\n  ManualMachines         = 6.0\n  MotionActivatedMachines= 11.0\n  TotalMachines          = 17.0\n  Objective (Total)      = 17.0\n"
+}

@@ -1,0 +1,51 @@
+Problem Name: 31_nlp4lp_31
+
+# Problem Description:
+'''Problem description: A company sells custom scooters and bikes for customers. The profit per scooter is $200 and the profit per bike is $300. Each product requires time with the design team and engineering team. Each scooter needs 2 hours with the design team and 3 hours with the engineering team. Each bike needs 4 hours with the design team and 5 hours with the engineering team. Per month, there are 5000 hours available on the design team and 6000 hours available on the engineering team. How many of each should the company make per month to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfScooters": "float",
+    "NumberOfBikes": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Products: {Scooter, Bike}
+
+Parameters:
+- profit: profit per unit, with profit[Scooter] = 200 (USD per scooter) and profit[Bike] = 300 (USD per bike)
+- design_hours: design team hours required per unit, with design_hours[Scooter] = 2 (hours per scooter) and design_hours[Bike] = 4 (hours per bike)
+- engineering_hours: engineering team hours required per unit, with engineering_hours[Scooter] = 3 (hours per scooter) and engineering_hours[Bike] = 5 (hours per bike)
+- available_design_time: total available design team hours per month = 5000 (hours)
+- available_engineering_time: total available engineering team hours per month = 6000 (hours)
+
+Variables:
+- x[product]: number of units produced of product (Scooter and Bike). These are non-negative decision variables. (They can be modeled as continuous or integer as required by implementation. Typically, production quantities are integer.)
+
+Objective:
+- Maximize total profit = profit[Scooter] * x[Scooter] + profit[Bike] * x[Bike]
+
+Constraints:
+1. Design time constraint: design_hours[Scooter] * x[Scooter] + design_hours[Bike] * x[Bike] ≤ available_design_time  
+   (i.e., 2 * x[Scooter] + 4 * x[Bike] ≤ 5000)
+2. Engineering time constraint: engineering_hours[Scooter] * x[Scooter] + engineering_hours[Bike] * x[Bike] ≤ available_engineering_time  
+   (i.e., 3 * x[Scooter] + 5 * x[Bike] ≤ 6000)
+
+Notes:
+- All units are in hours for time-related parameters and in USD for profit.
+- The decision variables represent monthly production quantities.
+
+Execution Results:
+SUCCESS:
+Results for the Linear Programming model:
+{'variables': {'NumberOfScooters': 2000.0, 'NumberOfBikes': 0.0}, 'objective': 400000.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfScooters': 2000.0, 'NumberOfBikes': 0.0}, 'objective': 400000.0}

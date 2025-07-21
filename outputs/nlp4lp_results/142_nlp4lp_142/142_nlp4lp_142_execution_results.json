@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults:\n{\n  \"variables\": {\n    \"NumLargePlanes\": 7.0,\n    \"NumSmallPlanes\": 9.0\n  },\n  \"objective\": 16.0\n}\n"
+}

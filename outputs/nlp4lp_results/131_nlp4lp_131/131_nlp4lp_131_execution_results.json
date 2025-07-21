@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving Continuous Model:\n{'NumberOfOtters': 13.636363636363638, 'NumberOfDolphins': 31.81818181818182, 'objective': 72.72727272727273}\n\nSolving Integer Model:\n{'NumberOfOtters': 13.0, 'NumberOfDolphins': 32.0, 'objective': 71.0}\n"
+}

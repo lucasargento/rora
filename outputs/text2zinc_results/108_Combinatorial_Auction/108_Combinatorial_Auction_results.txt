@@ -1,0 +1,45 @@
+Problem Name: 108_Combinatorial_Auction
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Indices} &:& j \in J = \{1,2,\ldots, \mathtt{num\_bids}\} & \text{(set of bids)}\\[1mm]
+                &:& i \in I = \{1,2,\ldots, \mathtt{num\_items}\} & \text{(set of items)}\\[2mm]
+\textbf{Parameters} &:& 
+\begin{array}{l}
+\mathtt{bids}_j \quad \text{is the bid amount offered in bid } j, \\
+\mathtt{packages}_{j,i} \quad \text{is a binary parameter equal to } 1 \text{ if bid } j \text{ includes item } i \text{ and } 0 \text{ otherwise.}
+\end{array}
+\end{array}
+\]
+
+\[
+\begin{array}{rcll}
+\textbf{Decision Variables} &:& 
+\begin{array}{l}
+x_j \in \{0,1\} \quad \text{for } j \in J, \\
+\text{where } x_j = 1 \text{ if bid } j \text{ is accepted, and } 0 \text{ otherwise.}
+\end{array} & \\
+\\[2mm]
+\textbf{Objective Function} &:& \displaystyle \max \; Z = \sum_{j=1}^{\mathtt{num\_bids}} \mathtt{bids}_j \, x_j & \text{(Maximize total revenue)}\\[2mm]
+\textbf{Constraints} &:& \displaystyle \sum_{j=1}^{\mathtt{num\_bids}} \mathtt{packages}_{j,i} \, x_j \le 1, \quad \forall i \in I & \text{(Each item is allocated at most once)}\\[2mm]
+&& x_j \in \{0,1\}, \quad \forall j \in J. &
+\end{array}
+\]
+
+\vspace{2mm}
+
+\textbf{Discussion:}  
+This model represents the combinatorial auction problem. The decision variable \(x_j\) denotes whether bid \(j\) is accepted. The objective is to maximize the total revenue from accepted bids, while the constraint for each item \(i\) ensures that the item is included in at most one accepted bid (i.e., bids selected do not overlap in their allocated items). No further simplifications have been made, and the model accurately reflects the entire problem as described.
+
+Execution Results:
+SUCCESS:
+Optimal objective value: 11.0
+Bid 2 accepted with bid value: 6
+Bid 3 accepted with bid value: 5
+
+
+Expected Output:
+Expected solution
+
+: {'supplier': [5, 2, 5, 1, 5, 2, 2, 3, 2, 3], 'open': [True, True, True, False, True], 'cost': [30, 27, 70, 2, 4, 22, 5, 13, 35, 55], 'tot': 383, '_objective': 383}

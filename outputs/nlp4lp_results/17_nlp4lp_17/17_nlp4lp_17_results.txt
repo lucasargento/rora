@@ -1,0 +1,71 @@
+Problem Name: 17_nlp4lp_17
+
+# Problem Description:
+'''Problem description: A candy store mixes regular candy and sour candy to prepare two products, regular mix and sour surprise mix. Each kilogram of the regular mix contains 0.8 kg of regular candy and 0.2 kg of sour candy. The profit per kilogram of the regular mix is $3. Each kilogram of the sour surprise mix contains 0.1 kg of regular candy and 0.9 kg of sour candy. The profit per kilogram of the sour surprise mix is $5. The candy store has 80 kg of regular candy and 60 kg of sour candy available. How many kilograms of each type of candy mix should be created to maximize profits?
+
+Expected Output Schema:
+{
+  "variables": {
+    "ProductionMix": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Mixes: set of candy mixes = {RegularMix, SourSurpriseMix}
+
+Parameters:
+- profit[m]: profit per kilogram of mix m [USD per kg] where
+  - profit[RegularMix] = 3
+  - profit[SourSurpriseMix] = 5
+- reg_requirement[m]: kilograms of regular candy required per kilogram of mix m [kg per kg] where
+  - reg_requirement[RegularMix] = 0.8
+  - reg_requirement[SourSurpriseMix] = 0.1
+- sour_requirement[m]: kilograms of sour candy required per kilogram of mix m [kg per kg] where
+  - sour_requirement[RegularMix] = 0.2
+  - sour_requirement[SourSurpriseMix] = 0.9
+- avail_reg: total available regular candy [kg] = 80
+- avail_sour: total available sour candy [kg] = 60
+
+Variables:
+- x[m]: kilograms of mix m to produce [continuous, kg] for each m in Mixes, with x[m] ≥ 0
+
+Objective:
+- Maximize total profit = profit[RegularMix] * x[RegularMix] + profit[SourSurpriseMix] * x[SourSurpriseMix]
+
+Constraints:
+1. Regular candy availability: 
+   reg_requirement[RegularMix] * x[RegularMix] + reg_requirement[SourSurpriseMix] * x[SourSurpriseMix] ≤ avail_reg
+   (i.e., 0.8 * x[RegularMix] + 0.1 * x[SourSurpriseMix] ≤ 80)
+2. Sour candy availability:
+   sour_requirement[RegularMix] * x[RegularMix] + sour_requirement[SourSurpriseMix] * x[SourSurpriseMix] ≤ avail_sour
+   (i.e., 0.2 * x[RegularMix] + 0.9 * x[SourSurpriseMix] ≤ 60)
+
+Notes:
+- All quantities are in kilograms.
+- The decision variables x[m] are continuous, assuming fractional kilograms can be produced.
+- This model assumes that all available candy is produced in the current period (i.e., no carryover stock effects).
+
+Execution Results:
+SUCCESS:
+{
+  "LinearProgram": {
+    "variables": {
+      "ProductionMix": {
+        "0": 94.28571428571428,
+        "1": 45.71428571428571
+      }
+    },
+    "objective": 511.4285714285714
+  }
+}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'ProductionMix': {'0': 94.28571428571428, '1': 45.71428571428571}}, 'objective': 511.4285714285714}

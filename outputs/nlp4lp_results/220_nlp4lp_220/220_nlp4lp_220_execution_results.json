@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nVersion 1 (Linear Programming Model) Optimal Solution:\n{'variables': {'NumberSmallBoxes': 21.0, 'NumberLargeBoxes': 5.0}, 'objective': 26.0}\n"
+}

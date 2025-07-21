@@ -1,0 +1,63 @@
+Problem Name: 80_nlp4lp_80
+
+# Problem Description:
+'''Problem description: A patient in the hospital can take two pills, Pill 1 and Pill 2. Per pill, pill 1 provides 0.2 units of pain medication and 0.3 units of anxiety medication. Per pill, pill 2 provides 0.6 units of pain medication and 0.2 units of anxiety medication. In addition, pill 1 causes 0.3 units of discharge while pill 2 causes 0.1 units of discharge. At most 6 units of pain medication can be provided and at least 3 units of anxiety medication must be provided. How many pills of each should the patient be given to minimize the total amount of discharge?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfPills": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Pills: set of pill types = {1, 2}
+
+Parameters:
+- pain_per_pill: amount of pain medication provided per pill, with
+  - For Pill 1: 0.2 [units/pill]
+  - For Pill 2: 0.6 [units/pill]
+- anxiety_per_pill: amount of anxiety medication provided per pill, with
+  - For Pill 1: 0.3 [units/pill]
+  - For Pill 2: 0.2 [units/pill]
+- discharge_per_pill: amount of discharge caused per pill, with
+  - For Pill 1: 0.3 [units/pill]
+  - For Pill 2: 0.1 [units/pill]
+- max_total_pain: maximum allowed total pain medication = 6 [units]
+- min_total_anxiety: minimum required total anxiety medication = 3 [units]
+
+Variables:
+- x[i] for each pill i in Pills:
+  - x[1]: number of Pill 1 to administer [continuous, x[1] ≥ 0]
+  - x[2]: number of Pill 2 to administer [continuous, x[2] ≥ 0]
+
+Objective:
+- Minimize total discharge = (0.3 * x[1]) + (0.1 * x[2])
+
+Constraints:
+1. Pain Medication Constraint:
+   - (0.2 * x[1]) + (0.6 * x[2]) ≤ 6
+2. Anxiety Medication Constraint:
+   - (0.3 * x[1]) + (0.2 * x[2]) ≥ 3
+3. Non-negativity:
+   - x[1] ≥ 0, x[2] ≥ 0
+
+Comments:
+- All units are consistent with the problem description (units of medication or discharge per pill).
+- Although pills are naturally discrete, the decision variables are modeled as continuous (float) as specified in the expected output schema.
+
+Execution Results:
+SUCCESS:
+Solution for Model Version 1:
+{'variables': {'NumberOfPills': {'0': 4.2857142857142865, '1': 8.57142857142857}}, 'objective': 2.142857142857143}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfPills': {'0': 5.0, '1': 8.0}}, 'objective': 2.3}

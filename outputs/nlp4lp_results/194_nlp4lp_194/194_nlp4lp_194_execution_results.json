@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nContinuous Model Solution:\n{'variables': {'NumStrawberryCookies': 20.0, 'NumSugarCookies': 80.0}, 'objective': 1070.0}\n\nInteger Model Solution:\n{'variables': {'NumStrawberryCookies': 20.0, 'NumSugarCookies': 80.0}, 'objective': 1070.0}\n"
+}

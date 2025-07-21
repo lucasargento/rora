@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Model with Strict Inequality (DosesB >= DosesA + epsilon with epsilon=1):\n{'variables': {'DosesA': 3.0, 'DosesB': 5.0}, 'objective': 76.0}\n\nResults for Model with Non-Strict Inequality (DosesB >= DosesA):\n{'variables': {'DosesA': 4.0, 'DosesB': 4.0}, 'objective': 80.0}\n"
+}

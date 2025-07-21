@@ -1,0 +1,40 @@
+Problem Name: 79_Bakery_Production_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Decision Variables:} \quad
+& A \in \mathbb{Z}_{>0} \quad \text{(number of almond croissants to produce)}\\[1mm]
+& P \in \mathbb{Z}_{>0} \quad \text{(number of pistachio croissants to produce)}\\[2mm]
+\textbf{Parameters:} \quad
+& b_A = 5 \quad \text{(butter per almond croissant)}\\[1mm]
+& b_P = 3 \quad \text{(butter per pistachio croissant)}\\[1mm]
+& f_A = 8 \quad \text{(flour per almond croissant)}\\[1mm]
+& f_P = 6 \quad \text{(flour per pistachio croissant)}\\[1mm]
+& T_B = 600 \quad \text{(total available butter)}\\[1mm]
+& T_F = 800 \quad \text{(total available flour)}\\[1mm]
+& t_A = 12 \quad \text{(baking time per almond croissant)}\\[1mm]
+& t_P = 10 \quad \text{(baking time per pistachio croissant)}\\[1mm]
+& m = 3 \quad \text{(minimum almond-to-pistachio production ratio)}
+\\[2mm]
+\textbf{Objective Function:} \quad
+& \min \; Z = t_A A + t_P P = 12\,A + 10\,P\\[2mm]
+\textbf{Constraints:}\\[1mm]
+& \text{(1) Butter Constraint:} \quad b_A A + b_P P \le T_B, \quad \Longrightarrow \quad 5\,A + 3\,P \le 600,\\[2mm]
+& \text{(2) Flour Constraint:} \quad f_A A + f_P P \le T_F, \quad \Longrightarrow \quad 8\,A + 6\,P \le 800,\\[2mm]
+& \text{(3) Production Ratio:} \quad A \ge m\,P, \quad \Longrightarrow \quad A \ge 3\,P,\\[2mm]
+& \text{(4) Non-trivial Production:} \quad A \ge 1,\quad P \ge 1,\\[2mm]
+& \text{(5) Integrality and Non-negativity:} \quad A,P \in \mathbb{Z}^{+}.
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Almond Croissants : 3
+Pistachio Croissants : 1
+Total Baking Time : 46
+
+
+Expected Output:
+Expected solution
+
+: {'AlmondCroissants': 0, 'PistachioCroissants': 0, 'TotalTime': 0, '_objective': 0}

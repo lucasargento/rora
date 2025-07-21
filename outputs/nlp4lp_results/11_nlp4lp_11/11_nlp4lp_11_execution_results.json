@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\nModel: LinearSolver\nVariables:\n  Production:\n    0: Number of elephants produced (x_Animal[Elephant], integer, units) = 0.0\n    1: Number of tigers produced (x_Animal[Tiger], integer, units) = 125.0\nObjective Value: 500.0\n----------------------------------------\n"
+}

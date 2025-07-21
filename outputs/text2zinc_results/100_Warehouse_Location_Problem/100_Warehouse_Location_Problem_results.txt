@@ -1,0 +1,63 @@
+Problem Name: 100_Warehouse_Location_Problem
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices:}\\
+& i \in \{1, 2, \ldots, n_{stores}\} \quad \text{(stores)}\\
+& j \in \{1, 2, \ldots, n_{suppliers}\} \quad \text{(candidate warehouse locations)}\\[1em]
+
+\textbf{Decision Variables:}\\
+& y_j = \begin{cases}
+1, & \text{if warehouse } j \text{ is opened},\\[0.5em]
+0, & \text{otherwise},
+\end{cases} \quad \forall j=1,\dots,n_{suppliers}\\[0.5em]
+& x_{ij} = \begin{cases}
+1, & \text{if store } i \text{ is supplied by warehouse } j,\\[0.5em]
+0, & \text{otherwise},
+\end{cases} \quad \forall i=1,\dots,n_{stores}, \; \forall j=1,\dots,n_{suppliers}\\[1em]
+
+\textbf{Parameters:}\\
+& n_{suppliers} \quad \text{(number of candidate warehouses)},\\[0.5em]
+& n_{stores} \quad \text{(number of stores)},\\[0.5em]
+& \text{building\_cost} \quad \text{(fixed cost to open any warehouse)},\\[0.5em]
+& \text{capacity}_j, \quad j=1,\ldots,n_{suppliers} \quad \text{(capacity of warehouse } j\text{)},\\[0.5em]
+& c_{ij}, \quad \forall i=1,\dots, n_{stores}, \ \forall j=1,\dots, n_{suppliers} \quad \text{(supply cost for store } i \text{ from warehouse } j\text{)}.\\[1em]
+
+\textbf{Objective Function:}\\[0.5em]
+\text{Minimize} \quad & Z = \underbrace{\sum_{j=1}^{n_{suppliers}} \text{building\_cost} \cdot y_j}_{\text{Warehouse opening costs}} + \underbrace{\sum_{i=1}^{n_{stores}} \sum_{j=1}^{n_{suppliers}} c_{ij} \cdot x_{ij}}_{\text{Supply costs}}.\\[1em]
+
+\textbf{Constraints:}\\[0.5em]
+\text{(1) Each store must be assigned to exactly one warehouse:} \quad & \sum_{j=1}^{n_{suppliers}} x_{ij} = 1, \quad \forall i=1,\ldots, n_{stores}.\\[0.5em]
+\text{(2) Warehouse capacity constraints:} \quad & \sum_{i=1}^{n_{stores}} x_{ij} \leq \text{capacity}_j \, y_j, \quad \forall j=1,\ldots, n_{suppliers}.\\[0.5em]
+\text{(3) Binary constraints:} \quad & x_{ij} \in \{0,1\}, \quad \forall i=1,\dots,n_{stores}, \ \forall j=1,\dots, n_{suppliers},\\[0.5em]
+& y_j \in \{0,1\}, \quad \forall j=1,\dots,n_{suppliers}.
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Solution:
+Optimal objective value = 383.0
+Warehouse decisions (y[j]):
+ Warehouse 0: Open = 1
+ Warehouse 1: Open = 1
+ Warehouse 2: Open = 1
+ Warehouse 3: Open = 0
+ Warehouse 4: Open = 1
+
+Store assignments (x[i][j]):
+ Store 0 is assigned to Warehouse 4 (Cost = 30)
+ Store 1 is assigned to Warehouse 1 (Cost = 27)
+ Store 2 is assigned to Warehouse 4 (Cost = 70)
+ Store 3 is assigned to Warehouse 0 (Cost = 2)
+ Store 4 is assigned to Warehouse 4 (Cost = 4)
+ Store 5 is assigned to Warehouse 1 (Cost = 22)
+ Store 6 is assigned to Warehouse 1 (Cost = 5)
+ Store 7 is assigned to Warehouse 2 (Cost = 13)
+ Store 8 is assigned to Warehouse 1 (Cost = 35)
+ Store 9 is assigned to Warehouse 2 (Cost = 55)
+
+
+Expected Output:
+Expected solution
+
+: {'supplier': [5, 2, 5, 1, 5, 2, 2, 3, 2, 3], 'open': [True, True, True, False, True], 'cost': [30, 27, 70, 2, 4, 22, 5, 13, 35, 55], 'tot': 383, '_objective': 383}

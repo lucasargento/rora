@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n----- Solution using ortools.linear_solver (CBC) -----\nOptimal decision variables: {'QuantityOfProduct': {'0': 333.0, '1': 0.0}}\nOptimal objective value: 133200.0\n\n----- Solution using ortools.sat.python.cp_model -----\nOptimal decision variables: {'QuantityOfProduct': {'0': 333, '1': 0}}\nOptimal objective value: 133200.0\n"
+}

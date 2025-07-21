@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution using OR-Tools Linear Solver (GLOP):\n{'variables': {'AutomaticPatients': 500.0, 'ManualPatients': 999.9999999999999}, 'objective': 1500.0}\n"
+}

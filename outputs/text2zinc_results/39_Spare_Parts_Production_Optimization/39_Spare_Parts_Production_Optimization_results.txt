@@ -1,0 +1,60 @@
+Problem Name: 39_Spare_Parts_Production_Optimization
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Indices:} & k & \in \{1,2,\dots, K\} & \quad \text{(spare part types)} \\
+                 & s & \in \{1,2,\dots, S\} & \quad \text{(shops or machines)} \\[1em]
+\textbf{Parameters:} & & & \\
+\text{NumParts}   & = & K, & \text{number of spare parts (here } K=5 \text{)}\\[0.5em]
+\text{NumMachines} & = & S, & \text{number of shops/machines (here } S=2 \text{)}\\[0.5em]
+T_{k,s}         & : & \mathbb{Z}_{>0}, & \text{worker-hours required for one unit of part } k \text{ at machine } s\\[0.5em]
+P_{k}           & : & \mathbb{R},     & \text{profit from one unit of spare part } k\\[0.5em]
+C_s             & : & \mathbb{R}_{>0}, & \text{total available working hours at machine } s\\[1em]
+\textbf{Decision Variables:} & & & \\
+x_{k} & \in & \mathbb{Z}_{\ge0}, & \quad \text{number of units of spare part } k \text{ to produce, for } k=1,\dots, K.\\[1em]
+\textbf{Mathematical Model:} & & & \\
+\max \quad & z = & \displaystyle \sum_{k=1}^{K} P_{k}\, x_{k}, & \quad \text{(maximize total profit)}\\[1em]
+\text{s.t.} \quad & \displaystyle \sum_{k=1}^{K} T_{k,s}\, x_{k} & \leq C_{s}, & \quad s=1,2,\dots,S \quad \text{(machine capacity constraints)}\\[1em]
+& x_{k} & \ge 0, & \quad k=1,2,\dots,K\,.\\[1em]
+\end{array}
+\]
+
+\[
+\begin{aligned}
+\textbf{Where:} \quad & K = 5, \quad S = 2,\\[0.5em]
+& \text{Time data: } T_{k,s} = \begin{array}{c|cc}
+k \backslash s & 1 & 2\\ \hline
+1 & 2 & 3\\[0.2em]
+2 & 1 & 2\\[0.2em]
+3 & 3 & 1\\[0.2em]
+4 & 2 & 1\\[0.2em]
+5 & 3 & 1\\[0.array}
+\quad & (\text{worker-hours per unit})\\[1em]
+& \text{Profit data: } P = \begin{bmatrix}30, & 20, & 40, & 25, & 10\end{bmatrix},\\[0.5em]
+& \text{Capacity data: } C = \begin{bmatrix}700, & 1000\end{bmatrix}\,.\\[0.5em]
+\end{aligned}
+\]
+
+\textbf{Remarks:}  
+1. The decision variables xₖ are assumed to be integers, reflecting the fact that production quantities are discrete.  
+2. The capacity constraints ensure that the allocation of production respects the available worker-hours at each shop.  
+3. The model is feasible and bounded, with non‐negative production and limited machine hours.  
+4. Non-trivial production mixes (i.e., not producing exclusively one product unless optimal) will naturally result from solving this maximization model.
+
+
+Execution Results:
+SUCCESS:
+Optimal solution found!
+Objective value = 12400.0
+x[1] = 0
+x[2] = 460
+x[3] = 80
+x[4] = 0
+x[5] = 0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 12000.0}

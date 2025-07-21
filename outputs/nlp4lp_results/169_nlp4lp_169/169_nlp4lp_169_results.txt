@@ -1,0 +1,61 @@
+Problem Name: 169_nlp4lp_169
+
+# Problem Description:
+'''Problem description: A large fishing boat sends fish back to shore either by small canoes or smaller diesel boats. A canoe can carry back 10 fish while a small diesel boat can carry back 15 fish. In order to follow environmental rules, the number of small canoes used has to be at least 3 times as many as the number of diesel boats uses. If  at least 1000 fish need to be transported to shore, minimize the total number of canoes and diesel boats needed.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfCanoes": "float",
+    "NumberOfDieselBoats": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- V: set of vessel types = {Canoe, DieselBoat}
+
+Parameters:
+- capacity_Canoe: 10 fish per canoe
+- capacity_DieselBoat: 15 fish per diesel boat
+- fishRequirement: 1000 fish (minimum fish to be transported)
+
+Variables:
+- NumberOfCanoes: number of canoes to be used (nonnegative, decision variable; assumed to be an integer)
+- NumberOfDieselBoats: number of diesel boats to be used (nonnegative, decision variable; assumed to be an integer)
+
+Objective:
+- Minimize totalVehicles = NumberOfCanoes + NumberOfDieselBoats
+
+Constraints:
+1. Fish Transportation Constraint:
+   (capacity_Canoe * NumberOfCanoes) + (capacity_DieselBoat * NumberOfDieselBoats) ≥ fishRequirement
+   (This means that the total number of fish carried by all vessels must be at least 1000 fish)
+
+2. Environmental Regulation Constraint:
+   NumberOfCanoes ≥ 3 * NumberOfDieselBoats
+   (The number of canoes must be at least three times the number of diesel boats)
+
+Output Schema Example:
+{
+  "variables": {
+    "NumberOfCanoes": "float",
+    "NumberOfDieselBoats": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Results from Linear Solver (MIP):
+{'variables': {'NumberOfCanoes': 67.0, 'NumberOfDieselBoats': 22.0}, 'objective': 89.0}
+
+Results from CP-SAT Model:
+{'variables': {'NumberOfCanoes': 67, 'NumberOfDieselBoats': 22}, 'objective': 89}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfCanoes': 67.0, 'NumberOfDieselBoats': 22.0}, 'objective': 89.0}

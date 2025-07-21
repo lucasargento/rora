@@ -1,0 +1,44 @@
+Problem Name: 18_Bus_Driver_Scheduling
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{Parameters:} & & \\
+& n_w &= \text{Number of works} = 24, \\
+& n_s &= \text{Number of shifts} = 77, \\
+& \underline{n}_s &= \text{Minimum number of shifts required} = 7, \\
+& S_j \subseteq \{1,2,\ldots,n_w\} & \text{for } j = 1,\ldots, n_s, \quad \text{(set of works covered by shift } j\text{)}. \\[1ex]
+\text{For convenience, define } & a_{ij} = \begin{cases}
+1, & \text{if } i \in S_j,\\[1mm]
+0, & \text{otherwise},
+\end{cases} & \text{for } i=1,\ldots,n_w, \; j=1,\ldots,n_s. \\[1ex]
+\\
+\textbf{Decision Variables:} & & \\
+x_j \in \{0,1\}, & & j = 1,\ldots,n_s, \quad \text{where } \\
+& & x_j = \begin{cases}
+1, & \text{if shift } j \text{ is selected},\\[1mm]
+0, & \text{otherwise}.
+\end{cases} \\[1ex]
+\\
+\textbf{Objective Function:} & & \\
+\min & \displaystyle \sum_{j=1}^{n_s} x_j. & \quad \text{(Minimize the total number of selected shifts)} \\[2ex]
+\\
+\textbf{Constraints:} & & \\
+\text{Coverage Constraints: } & \displaystyle \sum_{j=1}^{n_s} a_{ij} \, x_j = 1, & \quad \forall \; i = 1, \ldots, n_w, \quad \text{(each work is covered exactly once)}. \\[1ex]
+\text{Minimum Shifts Requirement: } & \displaystyle \sum_{j=1}^{n_s} x_j \ge \underline{n}_s, & \quad \text{(ensure at least } \underline{n}_s \text{ shifts are selected)}. \\[1ex]
+\end{array}
+\]
+
+This completes the full mathematical formulation of the bus driver scheduling problem as a set partitioning model.
+
+Execution Results:
+SUCCESS:
+Solution Found:
+Objective (total number of shifts selected) = 7.0
+Selected shift indices: [1, 9, 17, 24, 35, 72, 76]
+
+
+Expected Output:
+Expected solution
+
+: {'x': [0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1], 'tot_shifts': 7, '_objective': 7}

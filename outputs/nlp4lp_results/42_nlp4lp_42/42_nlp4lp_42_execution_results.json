@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{'LinearSolver_Result': {'model': 'LinearSolver (Continuous)', 'variables': {'AcresAllocated': [{'machine': 'Windrower', 'value': 100.00000000000001}, {'machine': 'HayHarvester', 'value': 99.99999999999997}]}, 'objective': 1800.0}, 'CP_SAT_Result': {'model': 'CP-SAT (Integer)', 'variables': {'AcresAllocated': [{'machine': 'Windrower', 'value': 100}, {'machine': 'HayHarvester', 'value': 100}]}, 'objective': 1800.0}}\n"
+}

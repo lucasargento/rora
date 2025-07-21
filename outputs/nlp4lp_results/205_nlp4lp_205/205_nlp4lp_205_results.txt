@@ -1,0 +1,82 @@
+Problem Name: 205_nlp4lp_205
+
+# Problem Description:
+'''Problem description: A dentist has 3000 units of resin to fill cavities in both molars and canines. Molars require 20 units of resin and 3 units of pain killer. Canines require 15 units of resin and 2.3 units of pain killer. Since this dentist sees more cavities in canines, at least 60% of cavities filled must be in canines. In addition, the dentist must reserve materials to fill at least 45 molars. How many of each type of teeth should the dentist schedule to fill to minimize the amount of pain killer needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberMolars": "float",
+    "NumberCanines": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the complete mathematical optimization model using the five-element structure.
+
+--------------------------------------------------
+
+Sets:
+- T: set of tooth types = {Molars, Canines}
+
+Parameters:
+- resin_total = 3000 (total resin available, in resin units)
+- resin_per_molar = 20 (resin required per molar, in resin units)
+- resin_per_canine = 15 (resin required per canine, in resin units)
+- painkiller_per_molar = 3 (pain killer required per molar, in pain killer units)
+- painkiller_per_canine = 2.3 (pain killer required per canine, in pain killer units)
+- min_molars = 45 (minimum number of molar fillings to schedule)
+- min_canine_ratio = 0.6 (at least 60% of all cavities must be canines)
+
+Variables:
+- NumberMolars: number of molars to fill [float ≥ 0]
+- NumberCanines: number of canines to fill [float ≥ 0]
+
+Objective:
+- Minimize total pain killer usage = (painkiller_per_molar * NumberMolars) + (painkiller_per_canine * NumberCanines)
+
+Constraints:
+1. Resin constraint:
+   - resin_per_molar * NumberMolars + resin_per_canine * NumberCanines ≤ resin_total
+   - (20 * NumberMolars) + (15 * NumberCanines) ≤ 3000
+
+2. Canine ratio constraint (at least 60% of all filled teeth must be canines):
+   - NumberCanines ≥ min_canine_ratio * (NumberMolars + NumberCanines)
+   - This can be rearranged to: NumberCanines ≥ 1.5 * NumberMolars
+
+3. Minimum molars constraint:
+   - NumberMolars ≥ min_molars
+   - NumberMolars ≥ 45
+
+--------------------------------------------------
+
+The expected output in the prescribed schema is:
+
+{
+  "variables": {
+    "NumberMolars": "float",
+    "NumberCanines": "float"
+  },
+  "objective": "minimize (3 * NumberMolars) + (2.3 * NumberCanines)"
+}
+
+Notes:
+- The decision variables are defined as floats for ease of modeling. In practical scheduling, these may need to be integers.
+- The unit of resin is assumed consistent across the parameters. Similarly, the pain killer units are assumed to be uniform.
+- The canine ratio constraint has been reformulated from the statement “at least 60% of cavities filled must be in canines” to: NumberCanines ≥ 1.5 * NumberMolars.
+- The structure above is self-contained and clear for straightforward translation into Python or OR-Tools code.
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+Linear Programming Model:
+  NumberMolars   = 45.0
+  NumberCanines  = 67.5
+  Objective (minimized pain killer usage) = 290.25
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberMolars': 45.0, 'NumberCanines': 68.0}, 'objective': 291.4}

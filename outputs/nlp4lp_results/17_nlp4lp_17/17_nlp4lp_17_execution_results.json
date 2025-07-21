@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{\n  \"LinearProgram\": {\n    \"variables\": {\n      \"ProductionMix\": {\n        \"0\": 94.28571428571428,\n        \"1\": 45.71428571428571\n      }\n    },\n    \"objective\": 511.4285714285714\n  }\n}\n"
+}

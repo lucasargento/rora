@@ -1,0 +1,81 @@
+Problem Name: 9_nlp4lp_9
+
+# Problem Description:
+'''Problem description: A bakery uses a stand-mixer and a slow bake oven to make bread and cookies. Each machine can run for at most 3000 hours per year. To bake a loaf of bread takes 1 hour in the stand mixer and 3 hours in the oven. A batch of cookies requires 0.5 hours in the mixer and 1 hour in the oven. The profit per loaf of bread is $5 and the profit per batch of cookies is $3. How should the bakery operate to maximize total profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "BreadQuantity": "float",
+    "CookiesQuantity": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the structured model using the five-element framework.
+
+--------------------------------------------------
+Sets:
+- Product: set of products = {Bread, Cookies}
+
+--------------------------------------------------
+Parameters:
+- profit:
+  - profit[Bread] = 5 dollars per loaf of bread
+  - profit[Cookies] = 3 dollars per batch of cookies
+- mixer_time:
+  - mixer_time[Bread] = 1 hour per loaf of bread
+  - mixer_time[Cookies] = 0.5 hours per batch of cookies
+- oven_time:
+  - oven_time[Bread] = 3 hours per loaf of bread
+  - oven_time[Cookies] = 1 hour per batch of cookies
+- capacity:
+  - max_mixer_hours = 3000 hours per year (stand mixer)
+  - max_oven_hours = 3000 hours per year (slow bake oven)
+
+--------------------------------------------------
+Variables:
+- BreadQuantity: number of loaves of bread to produce (nonnegative continuous; note: if production must be an integer count then declare as integer)
+- CookiesQuantity: number of batches of cookies to produce (nonnegative continuous; note: if production must be an integer count then declare as integer)
+
+--------------------------------------------------
+Objective:
+- Maximize total profit defined as:
+  Total_Profit = profit[Bread] * BreadQuantity + profit[Cookies] * CookiesQuantity
+  That is, maximize (5 * BreadQuantity + 3 * CookiesQuantity)
+
+--------------------------------------------------
+Constraints:
+1. Mixer capacity constraint:
+   mixer_time[Bread] * BreadQuantity + mixer_time[Cookies] * CookiesQuantity ≤ max_mixer_hours
+   i.e., (1 * BreadQuantity + 0.5 * CookiesQuantity) ≤ 3000
+
+2. Oven capacity constraint:
+   oven_time[Bread] * BreadQuantity + oven_time[Cookies] * CookiesQuantity ≤ max_oven_hours
+   i.e., (3 * BreadQuantity + 1 * CookiesQuantity) ≤ 3000
+
+--------------------------------------------------
+Below is the expected JSON output schema for variables and the objective:
+
+{
+  "variables": {
+    "BreadQuantity": "float",
+    "CookiesQuantity": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Continuous Model Result:
+{'variables': {'BreadQuantity': 0.0, 'CookiesQuantity': 3000.0}, 'objective': 9000.0}
+
+Integer Model Result:
+{'variables': {'BreadQuantity': 0.0, 'CookiesQuantity': 3000.0}, 'objective': 9000.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'BreadQuantity': 0.0, 'CookiesQuantity': 3000.0}, 'objective': 9000.0}

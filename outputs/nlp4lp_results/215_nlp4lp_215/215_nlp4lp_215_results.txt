@@ -1,0 +1,82 @@
+Problem Name: 215_nlp4lp_215
+
+# Problem Description:
+'''Problem description: A cruise company can either have two types of trips, a large cruise ship or a small cruise ship. A large cruise ship trip can carry 2000 customers and produces 20 units of pollution. A small cruise ship trip can carry 800 customers and produces 15 units of pollution. There can be at most 7 large cruise ship trips and at least 40% of the total trips must be made by small cruise ships. If the cruise company aims to transport at least 20000 customers, how many of each size of cruise ships should the company use to minimize the total amount of pollution produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberLargeTrips": "float",
+    "NumberSmallTrips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the structured mathematical model following the five-element format.
+
+--------------------------------------------------
+
+Sets:
+- ShipType = {Large, Small}
+
+Parameters:
+- LargeCapacity = 2000 (number of customers per large cruise trip)
+- SmallCapacity = 800 (number of customers per small cruise trip)
+- LargePollution = 20 (pollution units produced per large cruise trip)
+- SmallPollution = 15 (pollution units produced per small cruise trip)
+- MaxLargeTrips = 7 (maximum allowable number of large cruise trips)
+- MinTotalCustomers = 20000 (minimum total number of customers to be transported)
+- MinSmallFraction = 0.4 (minimum fraction of total trips that must be small cruise trips)
+  (Note: The small-ship requirement implies that the number of small trips must be at least 0.4 times the total trips.)
+
+Variables:
+- NumberLargeTrips [integer, ≥ 0]: Number of large cruise ship trips to schedule (units: trips)
+- NumberSmallTrips [integer, ≥ 0]: Number of small cruise ship trips to schedule (units: trips)
+
+Objective:
+- Minimize total pollution produced:
+  TotalPollution = LargePollution * NumberLargeTrips + SmallPollution * NumberSmallTrips
+
+Constraints:
+1. Customer Requirement Constraint:
+   LargeCapacity * NumberLargeTrips + SmallCapacity * NumberSmallTrips ≥ MinTotalCustomers
+
+2. Maximum Large Trips Constraint:
+   NumberLargeTrips ≤ MaxLargeTrips
+
+3. Minimum Small Trip Fraction Constraint:
+   To ensure at least 40% of all trips are small trips, we enforce:
+   NumberSmallTrips ≥ MinSmallFraction * (NumberLargeTrips + NumberSmallTrips)
+   (Note: This inequality is equivalent to NumberSmallTrips ≥ (2/3) * NumberLargeTrips.)
+
+4. Non-negativity Constraints:
+   NumberLargeTrips ≥ 0  
+   NumberSmallTrips ≥ 0
+
+--------------------------------------------------
+
+This complete model can now be implemented in a mathematical optimization framework where the decision variables and parameters are as described.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberLargeTrips": "float",
+    "NumberSmallTrips": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Results for Model Version 1 (using the constraint NumberSmallTrips ≥ 0.4*(NumberLargeTrips+NumberSmallTrips)):
+{'NumberLargeTrips': 7.0, 'NumberSmallTrips': 8.0, 'objective': 260.0}
+
+Results for Model Version 2 (using the equivalent constraint NumberSmallTrips ≥ (2/3)*NumberLargeTrips):
+{'NumberLargeTrips': 7.0, 'NumberSmallTrips': 8.0, 'objective': 260.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberLargeTrips': 7.0, 'NumberSmallTrips': 8.0}, 'objective': 260.0}

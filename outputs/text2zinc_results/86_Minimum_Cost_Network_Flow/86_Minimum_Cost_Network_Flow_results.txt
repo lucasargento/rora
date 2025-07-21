@@ -1,0 +1,71 @@
+Problem Name: 86_Minimum_Cost_Network_Flow
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{Indices:} & & \\
+l & = & 1,\ldots, L \quad \text{with } L \text{ = NumLinks}, \\
+f & = & 1,\ldots, F \quad \text{with } F \text{ = NumFlowReqs}, \\
+n & \in & N \quad \text{(set of all nodes in the network)}. \\[1ex]
+
+\textbf{Parameters:} & & \\
+\text{StartNode}_l & = & \text{Starting node of link } l, \quad l=1,\ldots,L, \\
+\text{EndNode}_l & = & \text{Ending node of link } l, \quad l=1,\ldots,L, \\
+\text{Capacity}_l & = & \text{Maximum data capacity of link } l, \quad l=1,\ldots,L, \\
+\text{Cost}_l & = & \text{Cost per unit data transmitted on link } l, \quad l=1,\ldots,L, \\
+s_f & = & \text{Source node for data flow } f, \quad f=1,\ldots,F, \\
+t_f & = & \text{Destination node for data flow } f, \quad f=1,\ldots,F, \\
+d_f & = & \text{Required data rate for flow } f, \quad f=1,\ldots,F. \\[1ex]
+
+\textbf{Decision Variables:} & & \\
+x_{l}^{(f)} & \ge & 0, \quad \forall \, l=1,\ldots,L, \, \forall \, f=1,\ldots,F, \\
+& & \text{where } x_{l}^{(f)} \text{ is the amount of data from flow } f \\
+& & \text{transmitted along link } l. \\[1ex]
+
+\textbf{Objective Function:} & & \\
+\min \quad Z & = & \sum_{l=1}^{L} \sum_{f=1}^{F} \text{Cost}_l \; x_{l}^{(f)}.
+\end{array}
+\]
+
+\[
+\begin{array}{rcl}
+\textbf{Subject to:} & & \\[1ex]
+\text{(1) \quad Capacity constraints for each link:} && \\
+\quad \sum_{f=1}^{F} x_{l}^{(f)} & \le & \text{Capacity}_l, \quad \forall \, l=1,\ldots, L. \\[1ex]
+\text{(2) \quad Flow conservation constraints for each flow at each node:} && \\
+\quad \sum_{\substack{l: \ \text{StartNode}_l = n}} x_{l}^{(f)} - \sum_{\substack{l:\ \text{EndNode}_l = n}} x_{l}^{(f)} 
+& = & 
+\begin{cases}
+d_f, & \text{if } n = s_f, \\
+-\,d_f, & \text{if } n = t_f, \\
+0, & \text{if } n \in N \setminus \{s_f,t_f\},
+\end{cases} \\
+&& \forall \, n\in N, \quad \forall \, f=1,\ldots,F.
+\end{array}
+\]
+
+\[
+\begin{array}{rcl}
+\textbf{Domain:} && \\
+x_{l}^{(f)} & \in & \mathbb{R}_{+} \quad \forall\, l=1,\ldots,L,\; \forall\, f=1,\ldots,F.
+\end{array}
+\]
+
+This model completely describes the problem of routing multiple data flows over a network. The flow for each commodity f is split arbitrarily over the given links in such a way that the total data on each link does not exceed its capacity, and the overall cost 
+\[
+\sum_{l=1}^{L} \sum_{f=1}^{F} \text{Cost}_l \; x_{l}^{(f)}
+\]
+is minimized.
+
+Execution Results:
+SUCCESS:
+Optimal solution found with objective value = 210.0
+Link 1 (from 1 to 2), Flow 1 = 40.0
+Link 2 (from 2 to 3), Flow 2 = 30.0
+Link 3 (from 2 to 4), Flow 1 = 40.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 190.0}

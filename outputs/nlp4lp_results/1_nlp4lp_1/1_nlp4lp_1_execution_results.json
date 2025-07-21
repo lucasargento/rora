@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOR-Tools Linear Solver Solution:\nOptimal number of regular sandwiches (0): 20.0\nOptimal number of special sandwiches (1): 0.0\nMaximum profit: 60.0\n\nStructured Output:\n{'variables': {'NumSandwiches': {'0': 20.0, '1': 0.0}}, 'objective': 60.0}\n"
+}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResult from the Linear Programming Model:\nOptimal Variables (ShiftsPerType):\n  Regular (index '0'): 15.0\n  Emergency (index '1'): 25.0\nObjective Value (Total number of fire fighters): 40.0\n"
+}

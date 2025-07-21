@@ -1,0 +1,65 @@
+Problem Name: 49_nlp4lp_49
+
+# Problem Description:
+'''Problem description: An ice cream store can buy two machines, a counter-top sized one and a fridge sized one, to make ice cream. The counter-top sized one can produce 80 cones worth of ice cream every day while the fridge sizes one can produce 150 cones worth of ice cream every day. The counter-top sized machine outputs 50 units of heat while the fridge sized one outputs 70 units of heat. The ice cream store can output at most 500 units of heat per day and must produce at least 1000 cones worth of ice cream. How many of each machine should they buy to minimize the total number of machines needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "MachinesCounterTop": "float",
+    "MachinesFridge": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- M: set of machine types = {CounterTop, Fridge}
+
+Parameters:
+- cones_per_machine:
+   - For CounterTop machine: 80 cones/day produced.
+   - For Fridge machine: 150 cones/day produced.
+- heat_per_machine:
+   - For CounterTop machine: 50 heat units/day generated.
+   - For Fridge machine: 70 heat units/day generated.
+- required_cones: 1000 cones (minimum ice cream production per day).
+- max_heat: 500 heat units (maximum allowable daily heat output).
+
+Variables:
+- MachinesCounterTop: number of counter-top machines to buy (float; expected to be a whole number, units: machines).
+- MachinesFridge: number of fridge machines to buy (float; expected to be a whole number, units: machines).
+
+Objective:
+- Minimize total number of machines purchased = MachinesCounterTop + MachinesFridge.
+
+Constraints:
+1. Production Constraint (Cones Requirement):
+   80 * MachinesCounterTop + 150 * MachinesFridge >= required_cones
+   (ensures that at least 1000 cones are produced per day).
+
+2. Heat Constraint:
+   50 * MachinesCounterTop + 70 * MachinesFridge <= max_heat
+   (ensures that the total heat generated does not exceed 500 heat units per day).
+
+Notes:
+- Although the decision variables are defined as floats in the expected schema, in practical implementation they should represent integer values since machines cannot be divided.
+- All units are consistent: cones per day for production and heat units per day for heat output.
+
+Execution Results:
+SUCCESS:
+Solution using OR-Tools Linear Solver (MIP formulation):
+MachinesCounterTop:  0.0
+MachinesFridge:  7.0
+Objective (Total Machines):  7.0
+
+Solution using OR-Tools CP-SAT model:
+MachinesCounterTop:  0
+MachinesFridge:  7
+Objective (Total Machines):  7.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'MachinesCounterTop': 0.0, 'MachinesFridge': 7.0}, 'objective': 7.0}

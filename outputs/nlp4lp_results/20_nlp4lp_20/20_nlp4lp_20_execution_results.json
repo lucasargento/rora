@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{\n    \"LinearProgrammingSolution\": {\n        \"variables\": {\n            \"RegularModelsProduced\": 6.0,\n            \"PremiumModelsProduced\": 6.0\n        },\n        \"objective\": 81000.0\n    }\n}\n"
+}

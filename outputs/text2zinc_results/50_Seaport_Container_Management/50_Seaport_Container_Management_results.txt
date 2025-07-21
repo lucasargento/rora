@@ -1,0 +1,69 @@
+Problem Name: 50_Seaport_Container_Management
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices:} \quad & t = 1,\dots,T \\[1mm]
+\textbf{Parameters:} \quad & T \quad \text{(number of months)}\\[0.5mm]
+& D_t \quad \text{demand (number of containers) in month } t,\quad t=1,\dots,T\\[0.5mm]
+& c^{\text{unload}}_t \quad \text{cost to unload one container in month } t,\quad t=1,\dots,T\\[0.5mm]
+& U_t \quad \text{maximum containers that can be unloaded in month } t,\quad t=1,\dots,T\\[0.5mm]
+& h \quad \text{holding cost per container carried to the next month}\\[0.5mm]
+& M \quad \text{maximum number of containers that can be held in the yard}\\[0.5mm]
+& I_0 \quad \text{initial number of containers available at the beginning of month 1}\\[0.5mm]
+& N \quad \text{maximum number of cranes available (and therefore can be rented)}\\[0.5mm]
+& Q \quad \text{capacity (in containers) of each crane}\\[0.5mm]
+& c^{\text{crane}} \quad \text{rental cost per crane per month}
+\\[3mm]
+\textbf{Decision Variables:} \quad & \\
+x_t &\ge 0,\quad \text{integer, number of containers unloaded in month } t,\quad t=1,\dots,T,\\[0.5mm]
+y_t &\ge 0,\quad \text{integer, number of containers in inventory (yard) at end of month } t,\quad t=1,\dots,T,\\[0.5mm]
+w_t &\ge 0,\quad \text{integer, number of cranes rented in month } t,\quad t=1,\dots,T.
+\\[3mm]
+\textbf{Objective Function:} \quad & \text{Minimize total cost over the planning horizon} \\
+\min \quad & \sum_{t=1}^{T} \left( c^{\text{unload}}_t x_t + c^{\text{crane}} w_t \right) + \sum_{t=1}^{T-1} h\, y_t 
+\\[3mm]
+\textbf{Constraints:} \\[1mm]
+\textbf{(a) Inventory Balance:} \quad & \\
+\text{For } t = 1: \quad & I_0 + x_1 = D_1 + y_1, \\
+\text{For } t = 2,\dots,T: \quad & y_{t-1} + x_t = D_t + y_t, \\
+\text{Terminal condition:} \quad & y_T = 0. \\[1mm]
+\textbf{(b) Unloading Capacity:} \quad & \\
+& x_t \le U_t, \quad \forall\, t=1,\dots,T. \\[1mm]
+\textbf{(c) Yard Storage Capacity:} \quad & \\
+& y_t \le M, \quad \forall\, t=1,\dots,T. \\[1mm]
+\textbf{(d) Crane Loading Capacity:} \quad & \\
+& w_t \, Q \ge D_t, \quad \forall\, t=1,\dots,T. \\[1mm]
+\textbf{(e) Crane Availability:} \quad & \\
+& w_t \le N, \quad \forall\, t=1,\dots,T. \\[1mm]
+\textbf{(f) Integrality and Nonnegativity:} \quad & \\
+& x_t \in \mathbb{Z}_{+},\quad y_t \in \mathbb{Z}_{+},\quad w_t \in \mathbb{Z}_{+}, \quad \forall\, t=1,\dots,T.
+\end{align*}
+
+\vspace{2mm}
+This complete mathematical model faithfully represents the transportation and logistics problem described. The objective is to minimize total costs from unloading, inventory holding, and crane rentals while meeting the monthly shipping container demands subject to operational capacity constraints.
+
+Execution Results:
+SUCCESS:
+Optimal objective value = 251500.0
+Month 1:
+  Containers unloaded (x_1) = 750.0
+  Containers stored at end (y_1) = 500.0
+  Cranes rented (w_1) = 3.0
+Month 2:
+  Containers unloaded (x_2) = 300.0
+  Containers stored at end (y_2) = 100.0
+  Cranes rented (w_2) = 4.0
+Month 3:
+  Containers unloaded (x_3) = 450.0
+  Containers stored at end (y_3) = 50.0
+  Cranes rented (w_3) = 3.0
+Month 4:
+  Containers unloaded (x_4) = 700.0
+  Containers stored at end (y_4) = 0.0
+  Cranes rented (w_4) = 4.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 251500.0}

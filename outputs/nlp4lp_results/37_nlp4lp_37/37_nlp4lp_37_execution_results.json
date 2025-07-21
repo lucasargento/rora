@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimal Solutions for the Teacher Hiring Problem:\n\nImplementation_1:\nVariables:\n  NumStaffShifts: 66.0\n  NumSubstituteShifts: 202.0\n  NumStaffTeachers: 66.0\n  NumSubstituteTeachers: 202.0\nObjective (Total teachers): 268.0\n"
+}

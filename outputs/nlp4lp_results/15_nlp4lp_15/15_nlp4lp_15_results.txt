@@ -1,0 +1,68 @@
+Problem Name: 15_nlp4lp_15
+
+# Problem Description:
+'''Problem description: A hobbyist makes model trains and planes using wood and paint. A model train requires 3 units of wood and 3 units of paint. A model plane requires 4 units of wood and 2 units of paint. The hobbyist has available 120 units of wood and 90 units of paint. If the profit per model train is $8 and the profit per model plane is $10, how many of each should be made to maximize his profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfTrains": "float",
+    "NumberOfPlanes": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Products: {Train, Plane}
+
+Parameters:
+- profit_Product: profit per unit produced [USD per unit] where
+  - profit_Train = 8
+  - profit_Plane = 10
+- woodRequired_Product: units of wood required per unit produced [wood units per unit] where
+  - woodRequired_Train = 3
+  - woodRequired_Plane = 4
+- paintRequired_Product: units of paint required per unit produced [paint units per unit] where
+  - paintRequired_Train = 3
+  - paintRequired_Plane = 2
+- availableWood: total available wood [wood units] = 120
+- availablePaint: total available paint [paint units] = 90
+
+Variables:
+- NumberOfTrains: number of model trains to produce (decision variable, continuous nonnegative value; in practical implementation, you may require integer values)
+- NumberOfPlanes: number of model planes to produce (decision variable, continuous nonnegative value; in practical implementation, you may require integer values)
+
+Objective:
+- Maximize total profit = (profit_Train * NumberOfTrains) + (profit_Plane * NumberOfPlanes)
+  - This represents the total revenue from selling the produced models.
+
+Constraints:
+1. Wood constraint: (woodRequired_Train * NumberOfTrains) + (woodRequired_Plane * NumberOfPlanes) ≤ availableWood  
+   i.e., 3*NumberOfTrains + 4*NumberOfPlanes ≤ 120
+2. Paint constraint: (paintRequired_Train * NumberOfTrains) + (paintRequired_Plane * NumberOfPlanes) ≤ availablePaint  
+   i.e., 3*NumberOfTrains + 2*NumberOfPlanes ≤ 90
+3. Nonnegativity constraints:
+   - NumberOfTrains ≥ 0
+   - NumberOfPlanes ≥ 0
+
+----------------------------------
+Expected Output Schema (as required):
+{
+  "variables": {
+    "NumberOfTrains": "float",
+    "NumberOfPlanes": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Linear model solution:
+{'variables': {'NumberOfTrains': 20.000000000000004, 'NumberOfPlanes': 14.999999999999993}, 'objective': 310.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfTrains': 20.0, 'NumberOfPlanes': 15.0}, 'objective': 310.0}

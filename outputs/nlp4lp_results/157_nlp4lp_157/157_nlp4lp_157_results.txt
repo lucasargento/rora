@@ -1,0 +1,70 @@
+Problem Name: 157_nlp4lp_157
+
+# Problem Description:
+'''Problem description: The weather is freezing and the fish in the pond need to be transported either by helicopter or car. A helicopter can take 30 fish per trip and takes 40 minutes. A car can take 20 fish per trip and takes 30 minutes. Since helicopter trips are expensive, there can be at most 5 helicopter trips. In addition, at least 60% of the trips should be by car. If at least 300 fish need to transported, how many of each trip should be taken to minimize the total time needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "HelicopterTrips": "float",
+    "CarTrips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Trips: the set of trip modes = {Helicopter, Car} (Note: each mode has its own characteristics)
+
+Parameters:
+- Helicopter_Capacity = 30 (fish per helicopter trip)
+- Car_Capacity = 20 (fish per car trip)
+- Helicopter_Time = 40 (minutes per helicopter trip)
+- Car_Time = 30 (minutes per car trip)
+- Max_Helicopter_Trips = 5 (maximum number of helicopter trips allowed)
+- Min_Fish_Transport = 300 (minimum number of fish to transport)
+- Min_Car_Trip_Fraction = 0.60 (at least 60% of total trips must be by car)
+
+Variables:
+- HelicopterTrips: number of helicopter trips (integer, ≥ 0)
+- CarTrips: number of car trips (integer, ≥ 0)
+
+Objective:
+- Minimize Total_Time = Helicopter_Time * HelicopterTrips + Car_Time * CarTrips  
+  (minutes; this represents the total transportation time)
+
+Constraints:
+1. Fish Transport Requirement:  
+   Helicopter_Capacity * HelicopterTrips + Car_Capacity * CarTrips ≥ Min_Fish_Transport
+
+2. Helicopter Trip Limit:  
+   HelicopterTrips ≤ Max_Helicopter_Trips
+
+3. Minimum Car Trip Proportion:  
+   Since at least 60% of all trips must be by car, we require:  
+   CarTrips ≥ Min_Car_Trip_Fraction * (HelicopterTrips + CarTrips)  
+   This can be rearranged to: CarTrips ≥ 1.5 * HelicopterTrips
+
+Notes:
+- Units are consistent: fish counts for capacities and total fish, minutes for trip times.
+- Although trips are typically integer quantities, they are defined here as integer decision variables.
+- The reformulated constraint for car trips (CarTrips ≥ 1.5 * HelicopterTrips) ensures that the proportion of car trips is at least 60% of all trips.
+
+Expected Output Schema:
+{
+  "variables": {
+    "HelicopterTrips": "float",
+    "CarTrips": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+{'LinearSolver': {'variables': {'HelicopterTrips': 4.0, 'CarTrips': 9.0}, 'objective': 430.0}, 'CPSAT': {'variables': {'HelicopterTrips': 4, 'CarTrips': 9}, 'objective': 430}}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'HelicopterTrips': 4.0, 'CarTrips': 9.0}, 'objective': 430.0}

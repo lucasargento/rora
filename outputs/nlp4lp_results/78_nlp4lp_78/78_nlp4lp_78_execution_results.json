@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults using OR-Tools Linear Solver:\n{'variables': {'NumberVintageBottles': 28.571428571428573, 'NumberRegularBottles': 114.28571428571429}, 'objective': 142.85714285714286}\n\nResults using OR-Tools CP-SAT Model:\n{'variables': {'NumberVintageBottles': 28, 'NumberRegularBottles': 114}, 'objective': 142}\n"
+}

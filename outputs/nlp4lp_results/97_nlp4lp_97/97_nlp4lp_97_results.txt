@@ -1,0 +1,70 @@
+Problem Name: 97_nlp4lp_97
+
+# Problem Description:
+'''Problem description: A clinic makes batches of vitamin shots and pills. Each batch of vitamin shots requires 30 units of vitamin C and 40 units of vitamin D. Each batch of vitamin pills requires 50 units of vitamin C and 30 units of vitamin D. Since pills are more popular, the number of batches of vitamin pills must be larger than the number of batches of vitamin shots. Further, the clinic can make at most 10 batches of vitamin shots. The clinic has available 1200 units of vitamin C and 1500 units of vitamin D. If each batch of vitamin shots can supply 10 people and each batch of vitamin pills can supply 7 people, how many batches of each should be made to maximize the number of people that can be supplied?
+
+Expected Output Schema:
+{
+  "variables": {
+    "BatchesShots": "float",
+    "BatchesPills": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+  - ProductTypes = {Shots, Pills}
+
+Parameters:
+  - vitaminC_shots = 30 units per batch (Vitamin C required for one batch of vitamin shots)
+  - vitaminD_shots = 40 units per batch (Vitamin D required for one batch of vitamin shots)
+  - vitaminC_pills = 50 units per batch (Vitamin C required for one batch of vitamin pills)
+  - vitaminD_pills = 30 units per batch (Vitamin D required for one batch of vitamin pills)
+  - supply_per_shot = 10 people per batch (Number of people supplied per batch of vitamin shots)
+  - supply_per_pill = 7 people per batch (Number of people supplied per batch of vitamin pills)
+  - available_vitaminC = 1200 units (Total Vitamin C available)
+  - available_vitaminD = 1500 units (Total Vitamin D available)
+  - max_batches_shots = 10 (Maximum allowed batches of vitamin shots)
+
+Variables:
+  - BatchesShots: integer, number of batches of vitamin shots to produce (>= 0)
+  - BatchesPills: integer, number of batches of vitamin pills to produce (>= 0)
+
+Objective:
+  - Maximize TotalPeopleSupplied = (supply_per_shot * BatchesShots) + (supply_per_pill * BatchesPills)
+    (Maximize the number of people supplied with vitamin shots and pills)
+
+Constraints:
+  - Vitamin C constraint: 
+      (vitaminC_shots * BatchesShots) + (vitaminC_pills * BatchesPills) <= available_vitaminC
+      i.e., 30 * BatchesShots + 50 * BatchesPills <= 1200
+  - Vitamin D constraint:
+      (vitaminD_shots * BatchesShots) + (vitaminD_pills * BatchesPills) <= available_vitaminD
+      i.e., 40 * BatchesShots + 30 * BatchesPills <= 1500
+  - Production limit for shots:
+      BatchesShots <= max_batches_shots
+      i.e., BatchesShots <= 10
+  - Popularity constraint (batches of pills must be larger than batches of shots): 
+      BatchesPills >= BatchesShots + 1
+      (This enforces that the number of vitamin pill batches is strictly greater than the number of vitamin shot batches)
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: LinearSolver
+  BatchesShots: 10.0
+  BatchesPills: 18.0
+  Objective Value (Total People Supplied): 226.0
+
+Model: CPSAT
+  BatchesShots: 10
+  BatchesPills: 18
+  Objective Value (Total People Supplied): 226.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'BatchesShots': 10.0, 'BatchesPills': 18.0}, 'objective': 226.0}

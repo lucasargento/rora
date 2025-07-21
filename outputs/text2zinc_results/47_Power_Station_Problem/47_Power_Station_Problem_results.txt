@@ -1,0 +1,108 @@
+Problem Name: 47_Power_Station_Problem
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{\underline{Indices and Parameters:}}\\[1mm]
+& t \in \{1,\dots,T\} & \text{(time periods)}\\[0.5mm]
+& k \in \{1,\dots,K\} & \text{(generator types)}\\[0.5mm]
+& Demand_t \in \mathbb{R}_+ & \text{Electricity demand in period } t\\[0.5mm]
+& NumGenerator_k \in \mathbb{Z}_+ & \text{Number of available generators of type } k\\[0.5mm]
+& MinLevel_k \in \mathbb{R}_+ & \text{Minimum production (MW) of type } k\text{ when on}\\[0.5mm]
+& MaxLevel_k \in \mathbb{R}_+ & \text{Maximum production (MW) of type } k\\[0.5mm]
+& RunCost_k \in \mathbb{R}_+ & \text{Hourly cost of running a generator of type } k \text{ at its minimum level}\\[0.5mm]
+& ExtraCost_k \in \mathbb{R}_+ & \text{Extra hourly cost per MW above the minimum level for type } k\\[0.5mm]
+& StartCost_k \in \mathbb{R}_+ & \text{Cost of starting up a generator of type } k\\[2mm]
+\textbf{\underline{Decision Variables:}}\\[1mm]
+& n_{k,t} \in \{0,1,2,\dots,NumGenerator_k\} & \text{Number of generators of type } k \text{ turned on in period } t,\\[0.5mm]
+& p_{k,t} \ge 0 & \text{Additional production (MW) above the minimum from generators of type } k \text{ in period } t,\\[0.5mm]
+& s_{k,t} \in \mathbb{Z}_+ & \text{Number of generators of type } k started up in period } t.
+\end{array}
+\]
+
+\[
+\begin{array}{rcl}
+\textbf{\underline{Objective Function:}}\\[1mm]
+\text{Minimize } Z &=& \sum_{t=1}^{T} \sum_{k=1}^{K} \Bigl[
+    n_{k,t}\, \text{RunCost}_k  + \, p_{k,t}\, \text{ExtraCost}_k  + \, s_{k,t}\, \text{StartCost}_k
+\Bigr].
+\end{array}
+\]
+
+\[
+\begin{array}{rcl}
+\textbf{\underline{Constraints:}}\\[2mm]
+\text{(1) Demand Satisfaction:} & & \forall\, t=1,\dots,T: \\[0.5mm]
+\quad \sum_{k=1}^{K} \Bigl( n_{k,t}\,\text{MinLevel}_k + p_{k,t} \Bigr) &\ge& Demand_t. \\[3mm]
+\text{(2) Production Limits per Generator Type:} & & \forall\, k=1,\dots,K,\; t=1,\dots,T: \\[0.5mm]
+\quad n_{k,t}\,\text{MinLevel}_k + p_{k,t} &\le& n_{k,t}\,\text{MaxLevel}_k, \\[0.5mm]
+\quad \Rightarrow\quad p_{k,t} &\le& n_{k,t}\,\Bigl( \text{MaxLevel}_k - \text{MinLevel}_k \Bigr). \\[3mm]
+\text{(3) Availability of Generators:} & & \forall\, k=1,\dots,K,\; t=1,\dots,T: \\[0.5mm]
+\quad n_{k,t} &\le& NumGenerator_k. \\[3mm]
+\text{(4) Startup Constraints:} & & \forall\, k=1,\dots,K: \\[0.5mm]
+\quad \text{For } t=1:\quad s_{k,1} &=& n_{k,1}, \\[0.5mm]
+\quad \text{For } t=2,\dots,T:\quad s_{k,t} &\ge& n_{k,t} - n_{k,t-1}. \\[3mm]
+\text{(5) Nonnegativity and Integrality:} & & \forall\, k=1,\dots,K,\; t=1,\dots,T: \\[0.5mm]
+\quad n_{k,t} &\in& \{0,1,2,\dots,NumGenerator_k\}, \\[0.5mm]
+\quad p_{k,t} &\ge& 0, \\[0.5mm]
+\quad s_{k,t} &\in& \mathbb{Z}_+.
+\end{array}
+\]
+
+\[
+\begin{array}{rcl}
+\textbf{\underline{Full Formulation:}}
+\end{array}
+\]
+
+\[
+\begin{aligned}
+\textbf{Minimize } Z =\; & \sum_{t=1}^{T} \sum_{k=1}^{K} \Bigl[ n_{k,t}\, \text{RunCost}_k + p_{k,t}\, \text{ExtraCost}_k + s_{k,t}\, \text{StartCost}_k \Bigr] \\[1mm]
+\textbf{subject to:}\quad
+& \sum_{k=1}^{K} \Bigl( n_{k,t}\,\text{MinLevel}_k + p_{k,t} \Bigr) \ge Demand_t, \quad \forall\, t=1,\dots,T, \\[1mm]
+& p_{k,t} \le n_{k,t}\,\Bigl( \text{MaxLevel}_k - \text{MinLevel}_k \Bigr), \quad \forall\, k=1,\dots,K,\; t=1,\dots,T, \\[1mm]
+& n_{k,t} \le NumGenerator_k, \quad \forall\, k=1,\dots,K,\; t=1,\dots,T, \\[1mm]
+& s_{k,1} = n_{k,1}, \quad \forall\, k=1,\dots,K, \\[1mm]
+& s_{k,t} \ge n_{k,t} - n_{k,t-1}, \quad \forall\, k=1,\dots,K,\; t=2,\dots,T, \\[1mm]
+& n_{k,t} \in \{0, 1, 2, \ldots, NumGenerator_k\}, \quad \forall\, k=1,\dots,K,\; t=1,\dots,T, \\[1mm]
+& p_{k,t} \ge 0, \quad \forall\, k=1,\dots,K,\; t=1,\dots,T, \\[1mm]
+& s_{k,t} \in \mathbb{Z}_+, \quad \forall\, k=1,\dots,K,\; t=1,\dots,T.
+\end{aligned}
+\]
+
+This complete formulation accurately represents the real‐world problem from the energy and natural resources context. It determines for each generator type k and each period t the number of generators activated (nₖ,ₜ), the extra production above the minimum level (pₖ,ₜ), and the number of start-ups (sₖ,ₜ), ensuring the demand is met in every period while minimizing the total cost of running and starting up generators.
+
+Execution Results:
+SUCCESS:
+Optimal objective value: 256500.0
+Period 1: Demand = 15000
+  Generator type 1: on = 12.0, extra production = 1300.0, startups = 12.0
+  Generator type 2: on = 2.0, extra production = 1000.0, startups = 2.0
+  Generator type 3: on = 0.0, extra production = 0.0, startups = 0.0
+
+Period 2: Demand = 30000
+  Generator type 1: on = 12.0, extra production = 5800.000000000004, startups = 0.0
+  Generator type 2: on = 8.0, extra production = 4000.0, startups = 6.0
+  Generator type 3: on = 0.0, extra production = 0.0, startups = 0.0
+
+Period 3: Demand = 25000
+  Generator type 1: on = 12.0, extra production = 800.0000000000044, startups = 0.0
+  Generator type 2: on = 8.0, extra production = 4000.0, startups = 0.0
+  Generator type 3: on = 0.0, extra production = 0.0, startups = 0.0
+
+Period 4: Demand = 40000
+  Generator type 1: on = 12.0, extra production = 12549.999999999998, startups = 0.0
+  Generator type 2: on = 9.0, extra production = 4500.0, startups = 1.0
+  Generator type 3: on = 1.0, extra production = 0.0, startups = 1.0
+
+Period 5: Demand = 27000
+  Generator type 1: on = 12.0, extra production = 1050.000000000002, startups = 0.0
+  Generator type 2: on = 9.0, extra production = 4500.0, startups = 0.0
+  Generator type 3: on = 0.0, extra production = 0.0, startups = 0.0
+
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 986630.0}

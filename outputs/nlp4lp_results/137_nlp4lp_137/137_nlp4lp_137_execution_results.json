@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nModel_Version1:\nTripsNewCompany: 2\nTripsOldCompany: 13\nTotal Diesel Consumption (Objective): 580.0\n\nModel_Version2:\nTripsNewCompany: 2\nTripsOldCompany: 13\nTotal Diesel Consumption (Objective): 580.0\n"
+}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n----- Results from OR-Tools Linear Solver -----\nOptimal solution:\nNumberMediumCarts = 18.0\nNumberLargeCarts = 6.0\nTotal Rice Transported = 960.0\n"
+}

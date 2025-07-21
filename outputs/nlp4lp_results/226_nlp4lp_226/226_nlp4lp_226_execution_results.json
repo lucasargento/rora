@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n----- Linear Solver (OR-Tools Linear) Results -----\nOptimal Variables:\n  OperationTime:\n    Method A: 0.0\n    Method B: 40.0\n  Total Time: 40.0\nOptimal Objective (TotalTime): 40.0\n"
+}

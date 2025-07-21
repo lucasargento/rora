@@ -1,0 +1,75 @@
+Problem Name: 175_nlp4lp_175
+
+# Problem Description:
+'''Problem description: A milk tea shop owner would like to sell two different milk teas: black milk tea and matcha milk tea. Each contains both milk and honey. A bottle of black milk tea contains 600 grams of milk and 10 grams of honey, whereas a bottle of matcha milk tea contains 525 grams of milk and 5 grams of honey. The profit from each bottle of black milk tea sold is $7.5 and the profit from each bottle of matcha milk tea sold is $5. If his total production must not exceed his available stock of 30000 grams of milk and 500 grams of honey, how many bottles of each type of milk tea should be made to maximize profits?
+
+Expected Output Schema:
+{
+  "variables": {
+    "Produce": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- TeaTypes: set of milk tea types = {black, matcha}
+
+Parameters:
+- profit_black: profit per bottle of black milk tea [USD per bottle] = 7.5
+- profit_matcha: profit per bottle of matcha milk tea [USD per bottle] = 5
+- milk_black: milk required per bottle of black milk tea [grams per bottle] = 600
+- milk_matcha: milk required per bottle of matcha milk tea [grams per bottle] = 525
+- honey_black: honey required per bottle of black milk tea [grams per bottle] = 10
+- honey_matcha: honey required per bottle of matcha milk tea [grams per bottle] = 5
+- total_milk: total available milk [grams] = 30000
+- total_honey: total available honey [grams] = 500
+
+Variables:
+- x_black: number of bottles of black milk tea to produce [nonnegative continuous variable, representing bottles]
+- x_matcha: number of bottles of matcha milk tea to produce [nonnegative continuous variable, representing bottles]
+  (Note: Even though bottles are discrete, the problem formulation uses floats. In a practical implementation, you might require integer variables.)
+
+Objective:
+- Maximize total profit:
+  Maximize Profit = (profit_black * x_black) + (profit_matcha * x_matcha)
+  which numerically is: Maximize Profit = 7.5*x_black + 5*x_matcha
+
+Constraints:
+1. Milk availability constraint:
+   milk_black*x_black + milk_matcha*x_matcha ≤ total_milk
+   That is: 600*x_black + 525*x_matcha ≤ 30000
+
+2. Honey availability constraint:
+   honey_black*x_black + honey_matcha*x_matcha ≤ total_honey
+   That is: 10*x_black + 5*x_matcha ≤ 500
+
+# Model Comments:
+- All resource units are expressed in grams for milk and honey.
+- The decision variables represent the number of bottles produced; while bottles are discrete, the variable type is indicated as float per the expected output schema.
+- The objective focuses solely on profit maximization with no additional cost elements.
+
+This structured mathematical model is complete and faithfully represents the original milk tea optimization problem using the five-element framework.
+
+Execution Results:
+SUCCESS:
+---- Linear Solver (Continuous Variables) ----
+Optimal Production Plan:
+  black: 50.00 bottles
+  matcha: 0.00 bottles
+Maximum Profit: $375.00
+
+---- CP-SAT Solver (Integer Variables) ----
+Optimal Production Plan:
+  black: 50 bottles
+  matcha: 0 bottles
+Maximum Profit: $375.00
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'Produce': {'0': 50.0, '1': 0.0}}, 'objective': 375.0}

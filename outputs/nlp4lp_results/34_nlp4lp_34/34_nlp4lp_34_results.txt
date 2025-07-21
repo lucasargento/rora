@@ -1,0 +1,62 @@
+Problem Name: 34_nlp4lp_34
+
+# Problem Description:
+'''Problem description: A bakery bakes bagels and croissants. A batch of bagels can be made using 2 hours of oven time and 0.25 hours of pastry chef time. A batch of croissants is more complicated, so while they take 1 hour of oven time, they take 2 hours of pastry chef time. In a day, the bakery has at most 70 hours available for the oven and 32 pastry chef hours available. Using all the available capacity, what is the maximum profit the bakery can generate assuming the profit per batch is $20 and $40 respectively for a batch of bagels and a batch of croissants.
+
+Expected Output Schema:
+{
+  "variables": {
+    "Batch": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Products: {Bagels, Croissants}
+
+Parameters:
+- profit_per_batch: Dictionary with values {Bagels: 20 (USD per batch), Croissants: 40 (USD per batch)}
+- oven_time_per_batch: Dictionary with values {Bagels: 2 (hours per batch), Croissants: 1 (hour per batch)}
+- chef_time_per_batch: Dictionary with values {Bagels: 0.25 (hours per batch), Croissants: 2 (hours per batch)}
+- oven_capacity: 70 (hours available per day)
+- chef_capacity: 32 (hours available per day)
+  (Note: All time units are in hours. It is assumed that batches are produced in whole numbers, so decision variables may be modeled as integer.)
+
+Variables:
+- x_Product: Number of batches produced for each product.
+  Specifically,
+  - x_Bagels: number of bagel batches produced (non-negative integer)
+  - x_Croissants: number of croissant batches produced (non-negative integer)
+
+Objective:
+- Maximize total profit = profit_per_batch[Bagels] * x_Bagels + profit_per_batch[Croissants] * x_Croissants
+  That is, Maximize 20 * x_Bagels + 40 * x_Croissants
+
+Constraints:
+1. Oven Time Constraint:
+   oven_time_per_batch[Bagels] * x_Bagels + oven_time_per_batch[Croissants] * x_Croissants ≤ oven_capacity
+   → 2 * x_Bagels + 1 * x_Croissants ≤ 70
+
+2. Pastry Chef Time Constraint:
+   chef_time_per_batch[Bagels] * x_Bagels + chef_time_per_batch[Croissants] * x_Croissants ≤ chef_capacity
+   → 0.25 * x_Bagels + 2 * x_Croissants ≤ 32
+
+This structured model provides a complete and unambiguous formulation for the bakery problem using the five-element framework.
+
+Execution Results:
+SUCCESS:
+Results from Linear Solver (CBC_MIP):
+{'status': 'OPTIMAL', 'objective': 1060.0, 'variables': {'Batch': {'0': 29.0, '1': 12.0}}}
+
+Results from CP-SAT Solver:
+{'status': 'OPTIMAL', 'objective': 1060.0, 'variables': {'Batch': {'0': 29, '1': 12}}}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'Batch': {'0': 28.8, '1': 12.4}}, 'objective': 1072.0}

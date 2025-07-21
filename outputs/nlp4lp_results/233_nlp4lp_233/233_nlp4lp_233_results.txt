@@ -1,0 +1,73 @@
+Problem Name: 233_nlp4lp_233
+
+# Problem Description:
+'''Problem description: A researcher must perform two types of experiments, in-vivo and ex-vivo. In-vivo experiments requires 30 minutes to prepare and 60 minutes to execute. Ex-vivo experiments require 45 minutes to prepare and 30 minutes to execute. In addition, in-vivo experiments gives the researcher 2 units of radiation while ex-vivo experiments give the researcher 3 unites of radiation. At most 400 minutes can be used for preparation and 500 minutes for execution of the experiment. How many of each experiment should be scheduled by the researcher to minimize the total radiation received by the researcher?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfInVivoExperiments": "float",
+    "NumberOfExVivoExperiments": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- E: set of experiment types = {in_vivo, ex_vivo}
+
+Parameters:
+- prep_time_e: preparation time required per experiment of type e [minutes]
+  • in_vivo: 30
+  • ex_vivo: 45
+- exec_time_e: execution time required per experiment of type e [minutes]
+  • in_vivo: 60
+  • ex_vivo: 30
+- radiation_e: radiation unit produced per experiment of type e [units]
+  • in_vivo: 2
+  • ex_vivo: 3
+- max_prep_time: maximum available preparation time [minutes] = 400
+- max_exec_time: maximum available execution time [minutes] = 500
+
+Variables:
+- x_e: number of experiments of type e to schedule [nonnegative real, ideally integer]
+  • x_in_vivo corresponds to in_vivo experiments
+  • x_ex_vivo corresponds to ex_vivo experiments
+
+Objective:
+- Minimize total radiation received, calculated as:
+  Total Radiation = (radiation_in_vivo * x_in_vivo) + (radiation_ex_vivo * x_ex_vivo)
+  Which numerically is: 2 * x_in_vivo + 3 * x_ex_vivo
+
+Constraints:
+1. Preparation time constraint:
+   (prep_time_in_vivo * x_in_vivo) + (prep_time_ex_vivo * x_ex_vivo) ≤ max_prep_time
+   That is: 30 * x_in_vivo + 45 * x_ex_vivo ≤ 400
+
+2. Execution time constraint:
+   (exec_time_in_vivo * x_in_vivo) + (exec_time_ex_vivo * x_ex_vivo) ≤ max_exec_time
+   That is: 60 * x_in_vivo + 30 * x_ex_vivo ≤ 500
+
+Comments:
+- All time-related parameters are given in minutes.
+- Decision variables represent the count of experiments and ideally should be integer values, though they are defined as nonnegative real numbers in this basic formulation.
+- The objective is to minimize radiation exposure for the researcher while not exceeding the given preparation and execution time limits.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfInVivoExperiments": "float",
+    "NumberOfExVivoExperiments": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+{'LP_Model': {'variables': {'NumberOfInVivoExperiments': 0.0, 'NumberOfExVivoExperiments': 0.0}, 'objective': 0.0}, 'CP_SAT_Model': {'variables': {'NumberOfInVivoExperiments': 0, 'NumberOfExVivoExperiments': 0}, 'objective': 0}}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfInVivoExperiments': 0.0, 'NumberOfExVivoExperiments': -0.0}, 'objective': 0.0}

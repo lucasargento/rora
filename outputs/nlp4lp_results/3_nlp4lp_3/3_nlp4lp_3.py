@@ -1,0 +1,138 @@
+# Problem Description:
+'''Problem description: A store employs senior citizens who earn $500 per week and young adults who earn $750 per week. The store must keep the weekly wage bill below $30000. On any day, the store requires at least 50 workers, of whom at least 10 must be young adults. To ensure the store runs smoothly, the number of young adults should be at least a third the number of senior citizens. Formulate a LP to minimize the wage bill.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfSeniorCitizens": "float",
+    "NumberOfYoungAdults": "float"
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Sets:
+- Workers: the set of worker types = {SeniorCitizens, YoungAdults}
+
+Parameters:
+- wage_senior: weekly wage per senior citizen worker = 500 (USD/week)
+- wage_young: weekly wage per young adult worker = 750 (USD/week)
+- max_weekly_wage: maximum allowed weekly wage bill = 30000 (USD/week)
+- min_total_workers: minimum required workers on any day = 50 (workers)
+- min_young_workers: minimum required young adult workers on any day = 10 (workers)
+- young_to_senior_ratio: minimum ratio of young adults to senior citizens = 1/3
+
+Variables:
+- NumberOfSeniorCitizens: number of senior citizens employed (continuous or integer, >= 0)
+- NumberOfYoungAdults: number of young adults employed (continuous or integer, >= 0)
+
+Objective:
+- Minimize total weekly wage cost = wage_senior * NumberOfSeniorCitizens + wage_young * NumberOfYoungAdults
+
+Constraints:
+1. Wage Bill Constraint:
+   wage_senior * NumberOfSeniorCitizens + wage_young * NumberOfYoungAdults <= max_weekly_wage
+
+2. Total Workers Constraint:
+   NumberOfSeniorCitizens + NumberOfYoungAdults >= min_total_workers
+
+3. Young Adult Minimum Constraint:
+   NumberOfYoungAdults >= min_young_workers
+
+4. Ratio Constraint:
+   NumberOfYoungAdults >= young_to_senior_ratio * NumberOfSeniorCitizens
+
+Comments:
+- It is assumed that every employee works every day; hence the daily minimum staffing requirement applies to the total employed workers, and the weekly wage bill is computed across all workers.
+- All monetary units are in USD and time units are in weeks unless noted otherwise.
+- The decision variables may be set as integer variables if a strictly integral number of workers is required.'''
+
+# Generated Code:
+#!/usr/bin/env python3
+from ortools.linear_solver import pywraplp
+
+def solve_model():
+    # Create the solver using CBC mixed integer programming.
+    solver = pywraplp.Solver.CreateSolver('CBC')
+    if not solver:
+        print("Solver not available.")
+        return None
+
+    # Parameters
+    wage_senior = 500
+    wage_young = 750
+    max_weekly_wage = 30000
+    min_total_workers = 50
+    min_young_workers = 10
+    young_to_senior_ratio = 1/3
+
+    # Decision Variables: using integer variables since you cannot hire a fraction of a worker.
+    NumberOfSeniorCitizens = solver.IntVar(0, solver.infinity(), 'NumberOfSeniorCitizens')
+    NumberOfYoungAdults = solver.IntVar(0, solver.infinity(), 'NumberOfYoungAdults')
+
+    # Constraints
+
+    # 1. Wage Bill Constraint: 500*senior + 750*young <= 30000
+    solver.Add(wage_senior * NumberOfSeniorCitizens + wage_young * NumberOfYoungAdults <= max_weekly_wage)
+
+    # 2. Total Workers Constraint: senior + young >= 50
+    solver.Add(NumberOfSeniorCitizens + NumberOfYoungAdults >= min_total_workers)
+
+    # 3. Young Adult Minimum Constraint: young >= 10
+    solver.Add(NumberOfYoungAdults >= min_young_workers)
+
+    # 4. Ratio Constraint: NumberOfYoungAdults >= (1/3) * NumberOfSeniorCitizens
+    # Multiply by 3 to avoid fractional coefficients: 3 * NumberOfYoungAdults >= NumberOfSeniorCitizens
+    solver.Add(3 * NumberOfYoungAdults >= NumberOfSeniorCitizens)
+
+    # Objective: Minimize total wage cost: 500*senior + 750*young
+    objective = solver.Objective()
+    objective.SetCoefficient(NumberOfSeniorCitizens, wage_senior)
+    objective.SetCoefficient(NumberOfYoungAdults, wage_young)
+    objective.SetMinimization()
+
+    # Solve the model
+    status = solver.Solve()
+
+    result = {}
+    if status == pywraplp.Solver.OPTIMAL:
+        result['variables'] = {
+            "NumberOfSeniorCitizens": NumberOfSeniorCitizens.solution_value(),
+            "NumberOfYoungAdults": NumberOfYoungAdults.solution_value()
+        }
+        result['objective'] = objective.Value()
+    else:
+        result['status'] = 'No optimal solution found.'
+
+    return result
+
+def main():
+    # Since the problem formulation is unique, we only implement one model.
+    result_model1 = solve_model()
+
+    print("=== Model 1 ===")
+    if 'status' in result_model1:
+        print(result_model1['status'])
+    else:
+        print("Optimal solution found:")
+        print("NumberOfSeniorCitizens =", result_model1['variables']["NumberOfSeniorCitizens"])
+        print("NumberOfYoungAdults =", result_model1['variables']["NumberOfYoungAdults"])
+        print("Total Weekly Wage Cost = $", result_model1['objective'])
+
+if __name__ == '__main__':
+    main()
+
+'''Execution Results:
+SUCCESS:
+=== Model 1 ===
+Optimal solution found:
+NumberOfSeniorCitizens = 37.0
+NumberOfYoungAdults = 13.0
+Total Weekly Wage Cost = $ 28250.0
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfSeniorCitizens': 37.0, 'NumberOfYoungAdults': 13.0}, 'objective': 28250.0}'''
+

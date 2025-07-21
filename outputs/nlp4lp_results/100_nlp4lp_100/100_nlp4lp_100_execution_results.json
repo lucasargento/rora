@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nRunning optimization model:\nLinear Programming Model (Google OR-Tools - Linear Solver) Results:\n{'variables': {'NumRamenPacks': 2.7272727272727275, 'NumFriesPacks': 6.363636363636364}, 'objective': 750.0}\n"
+}

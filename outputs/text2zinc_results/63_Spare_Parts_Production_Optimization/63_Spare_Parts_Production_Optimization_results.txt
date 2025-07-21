@@ -1,0 +1,54 @@
+Problem Name: 63_Spare_Parts_Production_Optimization
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Sets and Parameters:} \\
+\mathcal{K} & = & \{1,2,3,4,5\} & \text{(spare parts)} \\
+\mathcal{S} & = & \{1,2\} & \text{(shops or machines)} \\[1mm]
+\text{For each } k \in \mathcal{K} \text{ and } s \in \mathcal{S}:\\[1mm]
+T_{k,s} &=& \text{Time in worker‐hours required to process spare part } k \text{ on machine } s, & \text{with} \\[0.5mm]
+&& \begin{array}{l}
+T_{1,1}=2,\quad T_{1,2}=3,\\[0.2mm]
+T_{2,1}=1,\quad T_{2,2}=2,\\[0.2mm]
+T_{3,1}=3,\quad T_{3,2}=2,\\[0.2mm]
+T_{4,1}=3,\quad T_{4,2}=1,\\[0.2mm]
+T_{5,1}=1,\quad T_{5,2}=1,
+\end{array} \\[2mm]
+p_{k} &=& \text{Profit obtained per unit of spare part } k, & \text{with} \\
+&& (p_1,p_2,p_3,p_4,p_5) = (30,20,40,25,10), \\[2mm]
+C_{s} &=& \text{Capacity (available worker-hours) on machine } s, & \text{with} \\
+&& (C_1,C_2) = (700,1000). \\[4mm]
+
+\textbf{Decision Variables:} & & & \\
+x_{k} & \in & \mathbb{Z}^{+}, \quad \forall k \in \mathcal{K}, & \text{(Number of units of spare part } k \text{ produced)} \\
+& \text{with} & x_k \ge 1, & \quad \forall k \in \mathcal{K} \quad \text{(enforcing a non‐trivial mix)} \\[4mm]
+
+\textbf{Mathematical Model:} & & & \\[2mm]
+\textbf{Objective:} \quad \max \quad & Z &=& \sum_{k \in \mathcal{K}} p_{k} \, x_{k} \\[4mm]
+
+\textbf{Subject to:} \\[2mm]
+\text{Machine capacity constraints:} \quad 
+& \sum_{k \in \mathcal{K}} T_{k,s} \, x_{k} & \le & \; C_{s}, \quad \forall s \in \mathcal{S}, \\[2mm]
+\text{Non-negativity and integrality:} \quad
+& x_{k} & \in & \; \mathbb{Z}^{+} \quad \forall k \in \mathcal{K}.
+\end{array}
+\]
+
+This model fully specifies the manufacturing planning problem: each product requires specific processing times at each machine, profit is accrued per unit produced, and the total processing time on each machine is limited by its capacity. The additional lower bound constraint (i.e., \(x_k \ge 1\) for all \(k\)) prevents a trivial solution in which only one product is produced while all others are zero, ensuring a diversified product mix.
+
+Execution Results:
+SUCCESS:
+Solution:
+Objective value = 11975.0
+Spare part 1: Production quantity = 1.0
+Spare part 2: Production quantity = 399.0
+Spare part 3: Production quantity = 98.0
+Spare part 4: Production quantity = 1.0
+Spare part 5: Production quantity = 2.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 12000.0}

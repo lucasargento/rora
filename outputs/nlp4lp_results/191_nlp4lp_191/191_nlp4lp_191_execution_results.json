@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving using Linear Solver (ortools.linear_solver):\n{'variables': {'QuantityMathWorkbooks': 140.0, 'QuantityEnglishWorkbooks': 170.0}, 'objective': 4990.0}\n\nSolving using CP-SAT Solver (ortools.sat.python.cp_model):\n{'variables': {'QuantityMathWorkbooks': 140, 'QuantityEnglishWorkbooks': 170}, 'objective': 4990.0}\n"
+}

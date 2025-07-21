@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nInteger Model Result:\n{'AcaiSmoothies': 2.0, 'BananaSmoothies': 3.0, 'objective': 18.0}\n\nContinuous Model Result:\n{'AcaiSmoothies': 1.1666666666666663, 'BananaSmoothies': 2.166666666666666, 'objective': 12.166666666666664}\n"
+}

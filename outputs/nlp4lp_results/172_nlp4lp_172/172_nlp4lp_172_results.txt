@@ -1,0 +1,70 @@
+Problem Name: 172_nlp4lp_172
+
+# Problem Description:
+'''Problem description: A meat processing plant uses two machines, a meat slicer and a meat packer, to make their hams and pork ribs. To produce one batch of hams requires 4 hours on the meat slicer and 2.5 hours on the meat packer. To produce one batch of pork ribs requires 2 hours on the meat slicer and 3.5 hours on the meat packer. Each machine runs for at most 4000 hours per year. If the profit per batch of hams is $150 and the profit per batch of pork ribs is $300, how many batches of each should be made to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "BatchesProduced": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Products = {Hams, PorkRibs}
+
+Parameters:
+- profit: profit per batch in USD.
+  • profit[Hams] = 150  (USD per batch of hams)
+  • profit[PorkRibs] = 300  (USD per batch of pork ribs)
+- slicerTime: meat slicer usage per batch in hours.
+  • slicerTime[Hams] = 4  (hours per batch of hams)
+  • slicerTime[PorkRibs] = 2  (hours per batch of pork ribs)
+- packerTime: meat packer usage per batch in hours.
+  • packerTime[Hams] = 2.5  (hours per batch of hams)
+  • packerTime[PorkRibs] = 3.5  (hours per batch of pork ribs)
+- maxSlicerHours = 4000  (total available hours per year for the meat slicer)
+- maxPackerHours = 4000  (total available hours per year for the meat packer)
+
+Variables:
+- BatchesProduced[p] for each product p in Products.
+  • BatchesProduced[Hams] ∈ float, with BatchesProduced[Hams] ≥ 0  (number of batches of hams produced)
+  • BatchesProduced[PorkRibs] ∈ float, with BatchesProduced[PorkRibs] ≥ 0  (number of batches of pork ribs produced)
+  (Note: Although batches are typically integer, the expected schema uses float.)
+
+Objective:
+- Maximize total profit:
+  Total profit = profit[Hams] * BatchesProduced[Hams] + profit[PorkRibs] * BatchesProduced[PorkRibs]
+
+Constraints:
+1. Meat slicer capacity:
+   slicerTime[Hams] * BatchesProduced[Hams] + slicerTime[PorkRibs] * BatchesProduced[PorkRibs] ≤ maxSlicerHours
+   That is, 4 * BatchesProduced[Hams] + 2 * BatchesProduced[PorkRibs] ≤ 4000
+
+2. Meat packer capacity:
+   packerTime[Hams] * BatchesProduced[Hams] + packerTime[PorkRibs] * BatchesProduced[PorkRibs] ≤ maxPackerHours
+   That is, 2.5 * BatchesProduced[Hams] + 3.5 * BatchesProduced[PorkRibs] ≤ 4000
+
+This structured model is complete and faithful to the problem description and can be directly translated to code in Python or an OR-Tools implementation.
+
+Execution Results:
+SUCCESS:
+=== Linear Solver Model Output ===
+Optimal solution found:
+  Batches of Hams    : 0.00
+  Batches of PorkRibs: 1142.86
+  Objective (Profit) : 342857.14
+
+Structured Output:
+{'variables': {'BatchesProduced': {'0': 0.0, '1': 1142.857142857143}}, 'objective': 342857.14285714284}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'BatchesProduced': {'0': 0.0, '1': 1142.857142857143}}, 'objective': 342857.14285714284}

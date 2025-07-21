@@ -1,0 +1,70 @@
+Problem Name: 206_nlp4lp_206
+
+# Problem Description:
+'''Problem description: A food delivery person can either have shifts on bikes or scooters. A shift on a bike can deliver 10 orders, takes 5 units of energy, and brings in $50 on tips because it is faster. A shift on a scooter can deliver 7 orders, takes 6 units of energy, and brings in $43 on tips.  The delivery person has available 40 shifts a month and has 230 units of energy and must bring at least 320 orders. He must have at least 5 shifts on a scooter because bikes are harder to get. How many shifts on each type of transportation should the delivery person schedule to maximize tips received?
+
+Expected Output Schema:
+{
+  "variables": {
+    "BikeShifts": "float",
+    "ScooterShifts": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- T: set of transportation modes = {Bike, Scooter}
+
+Parameters:
+- orders_Bike = 10 orders per Bike shift
+- orders_Scooter = 7 orders per Scooter shift
+- energy_Bike = 5 energy units per Bike shift
+- energy_Scooter = 6 energy units per Scooter shift
+- tips_Bike = 50 dollars per Bike shift (tip revenue)
+- tips_Scooter = 43 dollars per Scooter shift (tip revenue)
+- max_shifts = 40 shifts available per month
+- max_energy = 230 energy units available per month
+- min_orders = 320 orders required per month
+- min_scooter_shifts = 5 shifts minimum required for Scooter
+
+Variables:
+- BikeShifts: number of Bike shifts scheduled (integer ≥ 0)
+- ScooterShifts: number of Scooter shifts scheduled (integer ≥ 0)
+
+Objective:
+- Maximize total_tips = (tips_Bike * BikeShifts) + (tips_Scooter * ScooterShifts)
+
+Constraints:
+1. Shift availability constraint:
+   BikeShifts + ScooterShifts ≤ max_shifts
+2. Energy capacity constraint:
+   (energy_Bike * BikeShifts) + (energy_Scooter * ScooterShifts) ≤ max_energy
+3. Minimum orders constraint:
+   (orders_Bike * BikeShifts) + (orders_Scooter * ScooterShifts) ≥ min_orders
+4. Scooter shift minimum constraint:
+   ScooterShifts ≥ min_scooter_shifts
+
+--------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "BikeShifts": "float",   // non-negative integer representing number of bike shifts
+    "ScooterShifts": "float" // non-negative integer representing number of scooter shifts
+  },
+  "objective": "float"       // maximum tip revenue in dollars
+}
+
+Execution Results:
+SUCCESS:
+Solving the Food Delivery Optimization Problem using Linear Programming (OR-Tools)...
+Optimal solution found:
+BikeShifts  = 35.0
+ScooterShifts = 5.0
+Maximum Tips = $ 1965.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'BikeShifts': 35.0, 'ScooterShifts': 5.0}, 'objective': 1965.0}

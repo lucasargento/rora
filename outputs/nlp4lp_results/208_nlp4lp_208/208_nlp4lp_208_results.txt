@@ -1,0 +1,58 @@
+Problem Name: 208_nlp4lp_208
+
+# Problem Description:
+'''Problem description: A neighbourhood pizza restaurant has opened and sells pizzas in two sizes; large pizza and medium pizza. Large pizzas require 12 units of dough, and 5 units of toppings. Medium pizzas require 8 units of dough, and 4 units of toppings. While large pizzas take 12 minutes to bake, medium pizzas require 8 minutes to bake. The neighbourhood pizza restaurant must use at least 10000 units of dough and 4400 units of toppings. Medium pizzas are popular due to a promotion, therefore, at least 200 medium pizzas must be made. There are regulars that prefer large pizzas and at least two times as many large pizzas should be made than medium pizzas. How many of each size of pizzas should the neighbourhood pizza restaurant make to reduce time spent baking?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberLargePizzas": "float",
+    "NumberMediumPizzas": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- SIZES: set of pizza sizes = {Large, Medium}
+
+Parameters:
+- DoughUsage: units of dough required per pizza by size. Specifically, DoughUsage[Large] = 12 (units per large pizza), DoughUsage[Medium] = 8 (units per medium pizza)
+- ToppingUsage: units of toppings required per pizza by size. Specifically, ToppingUsage[Large] = 5 (units per large pizza), ToppingUsage[Medium] = 4 (units per medium pizza)
+- BakeTime: baking time required per pizza by size. Specifically, BakeTime[Large] = 12 (minutes per large pizza), BakeTime[Medium] = 8 (minutes per medium pizza)
+- MinTotalDough: minimum total dough required = 10000 (units)
+- MinTotalToppings: minimum total toppings required = 4400 (units)
+- MinMediumPizzas: minimum medium pizzas to produce = 200 (pizzas)
+- RatioLargeToMedium: minimum ratio of large to medium pizzas = 2
+
+Variables:
+- NumberLargePizzas: number of large pizzas to produce (integer >= 0)
+- NumberMediumPizzas: number of medium pizzas to produce (integer >= 0)
+
+Objective:
+- Minimize total baking time = (BakeTime[Large] * NumberLargePizzas) + (BakeTime[Medium] * NumberMediumPizzas)
+  Note: The objective is expressed in minutes.
+
+Constraints:
+1. Dough constraint: (DoughUsage[Large] * NumberLargePizzas) + (DoughUsage[Medium] * NumberMediumPizzas) >= MinTotalDough
+2. Toppings constraint: (ToppingUsage[Large] * NumberLargePizzas) + (ToppingUsage[Medium] * NumberMediumPizzas) >= MinTotalToppings
+3. Medium pizza minimum: NumberMediumPizzas >= MinMediumPizzas
+4. Large-to-medium ratio: NumberLargePizzas >= RatioLargeToMedium * NumberMediumPizzas
+
+This structured model completely represents the neighborhood pizza restaurant problem while ensuring all units are consistent, and it is directly translatable to a Python or OR-Tools implementation.
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Model: Linear_Solver_Model
+Variables:
+  NumberLargePizzas: 629.0
+  NumberMediumPizzas: 314.0
+Objective Value: 10060.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberLargePizzas': 629.0, 'NumberMediumPizzas': 314.0}, 'objective': 10060.0}

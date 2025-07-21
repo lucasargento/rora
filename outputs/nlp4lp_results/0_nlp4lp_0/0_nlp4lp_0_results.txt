@@ -1,0 +1,49 @@
+Problem Name: 0_nlp4lp_0
+
+# Problem Description:
+'''Problem description: Mrs. Watson wants to invest in the real-estate market and has a total budget of at most $760000. She has two choices which include condos and detached houses. Each dollar invested in condos yields a $0.50 profit and each dollar invested in detached houses yields a $1 profit. A minimum of 20% of all money invested must be in condos, and at least $20000 must be in detached houses. Formulate an LP that can be used to maximize total profit earned from Mrs. Watson's investment.
+
+Expected Output Schema:
+{
+  "variables": {
+    "InvestmentCondos": "float",
+    "InvestmentDetachedHouses": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- InvestmentOptions: set of investment types = {Condos, DetachedHouses}
+
+Parameters:
+- total_budget: total available investment budget = 760000 dollars
+- profit_per_dollar_condos: profit per dollar invested in condos = 0.50 dollars per dollar
+- profit_per_dollar_detached: profit per dollar invested in detached houses = 1.00 dollar per dollar
+- min_percent_condos: minimum percentage of total investment that must be in condos = 0.20 (20%)
+- min_detached_investment: minimum dollar amount that must be invested in detached houses = 20000 dollars
+
+Variables:
+- InvestmentCondos: amount invested in condos (continuous variable, ≥ 0) [in dollars]
+- InvestmentDetachedHouses: amount invested in detached houses (continuous variable, ≥ 0) [in dollars]
+
+Objective:
+- Maximize total profit = (profit_per_dollar_condos * InvestmentCondos) + (profit_per_dollar_detached * InvestmentDetachedHouses)
+
+Constraints:
+1. Budget Constraint: InvestmentCondos + InvestmentDetachedHouses ≤ total_budget
+2. Detached House Minimum Constraint: InvestmentDetachedHouses ≥ min_detached_investment
+3. Condos Investment Ratio Constraint: InvestmentCondos ≥ min_percent_condos * (InvestmentCondos + InvestmentDetachedHouses)
+
+Execution Results:
+SUCCESS:
+Solution for LP using ortools.linear_solver:
+Investment in Condos: $152000.00
+Investment in Detached Houses: $608000.00
+Total Profit: $684000.00
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'InvestmentCondos': 152000.0, 'InvestmentDetachedHouses': 608000.0}, 'objective': 684000.0}

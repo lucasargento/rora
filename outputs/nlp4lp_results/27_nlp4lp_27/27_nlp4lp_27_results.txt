@@ -1,0 +1,62 @@
+Problem Name: 27_nlp4lp_27
+
+# Problem Description:
+'''Problem description: Mark has 50 acres of land available to grow potatoes and cucumbers that he sells at a farmers' market. He must grow at least 12 acres of potatoes and 15 acres of cucumbers to meet his contract. Mark prefers to grow more cucumbers than potatoes, but he only has enough resources to grow at most twice the amount of cucumbers as potatoes. If the profit per acre of potatoes is $500 and the profit per acre of cucumbers is $650, how many acres of each should he grow to maximize his profit? What is that profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AcresPotatoes": "float",
+    "AcresCucumbers": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- CROP: set of crops = {Potatoes, Cucumbers}
+
+Parameters:
+- TotalAcres: total acres of land available [acres] = 50
+- MinAcresPotatoes: minimum acres required for Potatoes [acres] = 12
+- MinAcresCucumbers: minimum acres required for Cucumbers [acres] = 15
+- ProfitPotatoes: profit per acre of Potatoes [USD per acre] = 500
+- ProfitCucumbers: profit per acre of Cucumbers [USD per acre] = 650
+- MaxCucumberToPotatoRatio: maximum allowable ratio of Cucumbers to Potatoes [unitless] = 2
+
+Variables:
+- AcresPotatoes: acres allocated to growing Potatoes [float, continuous, acres, >= 0]
+- AcresCucumbers: acres allocated to growing Cucumbers [float, continuous, acres, >= 0]
+
+Objective:
+- Maximize TotalProfit = (ProfitPotatoes * AcresPotatoes) + (ProfitCucumbers * AcresCucumbers)
+
+Constraints:
+1. Total Land Constraint:
+   - AcresPotatoes + AcresCucumbers ≤ TotalAcres
+2. Minimum Acreage Constraints:
+   - AcresPotatoes ≥ MinAcresPotatoes
+   - AcresCucumbers ≥ MinAcresCucumbers
+3. Preference Constraint (Mark prefers to grow more Cucumbers than Potatoes):
+   - AcresCucumbers ≥ AcresPotatoes
+4. Resource Limitation Constraint:
+   - AcresCucumbers ≤ MaxCucumberToPotatoRatio * AcresPotatoes
+
+Additional comments:
+- All parameters and variables are expressed in consistent units (acres for land and USD per acre for profit).
+- The model uses continuous variables making it suitable for implementation in linear programming solvers.
+- The Preference Constraint ensures that the acreage for Cucumbers is at least equal to that for Potatoes, reflecting Mark’s desire to plant more Cucumbers.
+- The Resource Limitation Constraint ensures that the acreage of Cucumbers does not exceed twice the acreage of Potatoes, reflecting resource restrictions.
+
+Execution Results:
+SUCCESS:
+Results from the Linear Programming formulation:
+Optimal Acres for Potatoes: 16.666666666666668
+Optimal Acres for Cucumbers: 33.333333333333336
+Maximum Profit: 30000.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'AcresPotatoes': 16.666666666666668, 'AcresCucumbers': 33.33333333333333}, 'objective': 30000.0}

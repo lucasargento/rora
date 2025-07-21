@@ -1,0 +1,75 @@
+Problem Name: 106_Network_Intrusion_Response_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Sets:} \quad & i \in \{1,2,\ldots,N\} \quad \text{(each cluster or intervention)} \\[1mm]
+\textbf{Parameters:} \quad &
+\begin{array}{ll}
+N: & \text{Total number of interventions (clusters)};\\[1mm]
+ISc_i: & \text{Processing time for isolating at the central system for intervention } i,\\[1mm]
+SSc_i: & \text{Processing time for scanning at the central system for intervention } i,\\[1mm]
+IDist_i: & \text{Processing time for isolating at the distributed system for intervention } i,\\[1mm]
+SDist_i: & \text{Processing time for scanning at the distributed system for intervention } i,\\[1mm]
+C_{cost}: & \text{Opportunity cost for a central system intervention},\\[1mm]
+D_{cost}: & \text{Opportunity cost for a distributed system intervention},\\[1mm]
+C_{max}: & \text{Maximum total hours available for central processing},\\[1mm]
+D_{max}: & \text{Maximum total hours available for distributed processing}.
+\end{array}\\[2mm]
+\textbf{Decision Variables:} \quad & \\
+& y_{i}^{IC} = 
+\begin{cases}
+1, & \text{if intervention } i \text{ is performed as isolation using the central system},\\[1mm]
+0, & \text{otherwise},
+\end{cases} \quad i=1,\ldots,N, \\[1mm]
+& y_{i}^{SC} = 
+\begin{cases}
+1, & \text{if intervention } i \text{ is performed as a scan using the central system},\\[1mm]
+0, & \text{otherwise},
+\end{cases} \quad i=1,\ldots,N, \\[1mm]
+& y_{i}^{ID} = 
+\begin{cases}
+1, & \text{if intervention } i \text{ is performed as isolation using the distributed system},\\[1mm]
+0, & \text{otherwise},
+\end{cases} \quad i=1,\ldots,N, \\[1mm]
+& y_{i}^{SD} = 
+\begin{cases}
+1, & \text{if intervention } i \text{ is performed as a scan using the distributed system},\\[1mm]
+0, & \text{otherwise},
+\end{cases} \quad i=1,\ldots,N. \\[3mm]
+\textbf{Objective Function:} \quad &
+\text{Minimize the total cost} \\
+\text{Minimize} \quad & Z = \sum_{i=1}^{N} \Bigl[ C_{cost}\,(y_{i}^{IC} + y_{i}^{SC}) + D_{cost}\,(y_{i}^{ID} + y_{i}^{SD}) \Bigr]. \\[3mm]
+\textbf{Constraints:} \quad & \\[1mm]
+\text{(1) One intervention per cluster:} \quad & 
+y_{i}^{IC} + y_{i}^{SC} + y_{i}^{ID} + y_{i}^{SD} = 1, \quad \forall\, i=1,\ldots,N. \\[2mm]
+\text{(2) Central processing time limit:} \quad &
+\sum_{i=1}^{N} \Bigl[ ISc_i\, y_{i}^{IC} + SSc_i\, y_{i}^{SC} \Bigr] \leq C_{max}. \\[2mm]
+\text{(3) Distributed processing time limit:} \quad &
+\sum_{i=1}^{N} \Bigl[ IDist_i\, y_{i}^{ID} + SDist_i\, y_{i}^{SD} \Bigr] \leq D_{max}. \\[2mm]
+\text{(4) Binary variable conditions:} \quad &
+y_{i}^{IC},\; y_{i}^{SC},\; y_{i}^{ID},\; y_{i}^{SD} \in \{0,1\}, \quad \forall\, i=1,\ldots,N.
+\end{align*}
+
+\vspace{2mm}
+\textbf{Notes:}  
+\begin{itemize}
+    \item The model selects for each cluster one of the four intervention methods: isolating or scanning by either the central or distributed system.
+    \item The objective function minimizes the overall opportunity cost.
+    \item Constraint (1) guarantees a consistent intervention decision per cluster.
+    \item Constraints (2) and (3) ensure that processing time limitations for the central and distributed systems are not exceeded.
+    \item The data provided (for example, for N $=$ 3, the processing times, costs, and maximum hours) should be used as parameter values when instantiating this model.
+\end{itemize}
+
+Execution Results:
+SUCCESS:
+Solution:
+Total cost =  210.0
+Intervention 1: Isolate via Distributed
+Intervention 2: Isolate via Distributed
+Intervention 3: Isolate via Distributed
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 2280.0}

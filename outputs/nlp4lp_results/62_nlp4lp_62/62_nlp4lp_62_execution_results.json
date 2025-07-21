@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nContinuous Model Solution:\n{'NumberOfChocolateCrepes': 4.999999999999999e-07, 'NumberOfPeanutButterCrepes': 1.4999999999999998e-06, 'Objective': 1.35e-05}\n\nInteger Model Solution:\n{'NumberOfChocolateCrepes': 1.0, 'NumberOfPeanutButterCrepes': 2.0, 'Objective': 20.0}\n"
+}

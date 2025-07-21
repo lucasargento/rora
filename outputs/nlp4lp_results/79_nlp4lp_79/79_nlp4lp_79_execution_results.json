@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution for Model 1 (Linear Formulation):\nNumberOfPeachPacks = 2.0\nNumberOfCherryPacks = 1.0\nOptimal Total Syrup Used = 14.0\n\nStructured Output for Model 1:\n{\n  \"variables\": {\n    \"NumberOfPeachPacks\": \"float (nonnegative, ideally integer)\",\n    \"NumberOfCherryPacks\": \"float (nonnegative, ideally integer)\"\n  },\n  \"objective\": \"Minimize 5 * NumberOfPeachPacks + 4 * NumberOfCherryPacks (minimizes total syrup used)\"\n}\n"
+}

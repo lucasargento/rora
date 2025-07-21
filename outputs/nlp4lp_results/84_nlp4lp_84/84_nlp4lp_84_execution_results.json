@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution for the juice optimization problem (using ortools.linear_solver):\n{'variables': {'NumberOfAppleJuiceBoxes': 46.0, 'NumberOfOrangeJuiceBoxes': 3.0}, 'objective': 582.0}\n"
+}

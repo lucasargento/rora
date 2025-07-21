@@ -1,0 +1,46 @@
+Problem Name: 1_Road_Illumination_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices:} \quad & i = 1,\ldots, N \quad \text{(road segments)}, \quad j = 1,\ldots, M \quad \text{(lamps)}. \\[1mm]
+\textbf{Parameters:} \quad & \text{coeff}_{i,j} \quad \text{-- contribution of lamp } j \text{ to the illumination of segment } i,\\[0.5mm]
+& b_i \quad \text{-- desired illumination at segment } i, \quad \text{for } i=1,\dots,N. \\[2mm]
+\textbf{Decision Variables:} \quad & p_j \ge 0, \quad \text{for } j=1,\dots,M, \quad \text{(power of lamp } j\text{)},\\[0.5mm]
+& e_i \ge 0, \quad \text{for } i=1,\dots,N, \quad \text{(absolute error in illumination at segment } i\text{)}. \\[2mm]
+\textbf{Illumination Relationship:} \quad & I_i = \sum_{j=1}^{M} \text{coeff}_{i,j}\, p_j, \quad \text{for } i=1,\dots,N. \\[2mm]
+\textbf{Objective Function:} \quad & \text{Minimize the total absolute error:} \\
+& \min_{p,\,e} \quad \sum_{i=1}^{N} e_i. \\[2mm]
+\textbf{Constraints:} \quad & \text{For each segment } i=1,\dots,N, \text{ the absolute error is modeled by:} \\[0.5mm]
+& \sum_{j=1}^{M} \text{coeff}_{i,j}\, p_j - b_i \le e_i, \\[0.5mm]
+& -\Bigl(\sum_{j=1}^{M} \text{coeff}_{i,j}\, p_j - b_i\Bigr) \le e_i. \\[2mm]
+\textbf{Complete Mathematical Model:} \\
+\text{(P)} \quad & \min_{p,\,e} \quad \sum_{i=1}^{N} e_i \\[1mm]
+\text{s.t.} \quad & \sum_{j=1}^{M} \text{coeff}_{i,j}\, p_j - b_i \le e_i, \quad i=1,\dots,N, \\[1mm]
+& -\left(\sum_{j=1}^{M} \text{coeff}_{i,j}\, p_j - b_i\right) \le e_i, \quad i=1,\dots,N, \\[1mm]
+& p_j \ge 0, \quad j=1,\dots,M, \\[1mm]
+& e_i \ge 0, \quad i=1,\dots,N.
+\end{align*} 
+
+\textbf{Notes:}
+\begin{itemize}
+    \item The variable $p_j$ represents the power assigned to lamp $j$, and the model assumes non-negative lamp powers.
+    \item The auxiliary variables $e_i$ capture the absolute deviation between the achieved illumination $I_i = \sum_{j=1}^{M} \text{coeff}_{i,j}\, p_j$ and the desired illumination $b_i$ for each segment $i$.
+    \item The objective minimizes the total absolute error, ensuring that the realized illuminations are as close as possible to the desired levels.
+    \item The model is both feasible and bounded under the assumption that there exists at least one non-negative lamp power assignment that approximates the desired illuminations within finite error.
+\end{itemize}
+
+Execution Results:
+SUCCESS:
+Solution Found:
+Objective (total absolute error) = 7.370370370370371
+p_0 (Lamp 1 power) = 17.77777777777777
+p_1 (Lamp 2 power) = 17.03703703703704
+e_0 (Segment 1 absolute error) = -0.0
+e_1 (Segment 2 absolute error) = 7.370370370370371
+e_2 (Segment 3 absolute error) = 0.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 7.37}

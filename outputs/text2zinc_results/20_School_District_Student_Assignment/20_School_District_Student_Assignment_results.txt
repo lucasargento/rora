@@ -1,0 +1,57 @@
+Problem Name: 20_School_District_Student_Assignment
+
+Mathematical Formulation:
+\[
+\begin{aligned}
+\textbf{Indices:} \quad & s \in \{1,\dots,S\} \quad \text{(schools)}, \\
+& g \in \{1,\dots,G\} \quad \text{(student groups / grades)}, \\
+& n \in \{1,\dots,N\} \quad \text{(neighborhoods)}. \\[1em]
+
+\textbf{Parameters:} \quad
+& \text{Capacity}_{s,g} \ge 0, \quad \forall \, s \in \{1,\dots,S\},\, g \in \{1,\dots,G\}, \\
+& \text{Population}_{n,g} \ge 0, \quad \forall \, n \in \{1,\dots,N\},\, g \in \{1,\dots,G\}, \\
+& \text{Distance}_{n,s} \ge 0, \quad \forall \, n \in \{1,\dots,N\},\, s \in \{1,\dots,S\}. \\[1em]
+
+\textbf{Decision Variables:} \quad
+& x_{n,s,g} \ge 0, \quad \forall \, n \in \{1,\dots,N\},\, s \in \{1,\dots,S\},\, g \in \{1,\dots,G\}, \\
+& \quad \text{where } x_{n,s,g} \text{ represents the number of students of group } g \text{ from neighborhood } n \\
+& \quad \text{assigned to school } s. \\[1em]
+
+\textbf{Objective Function:} \quad
+& \text{Minimize } Z = \sum_{n=1}^N \sum_{s=1}^S \sum_{g=1}^G \text{Distance}_{n,s} \, x_{n,s,g}. \\[1em]
+
+\textbf{Constraints:} \\[0.5em]
+
+& \textbf{(1) Demand Fulfillment:} \quad \forall\, n \in \{1,\dots,N\},\, g \in \{1,\dots,G\}: \\
+& \quad \sum_{s=1}^S x_{n,s,g} = \text{Population}_{n,g}. \quad \text{(Every student in each group and neighborhood is assigned)} \\[1em]
+
+& \textbf{(2) School Capacity:} \quad \forall\, s \in \{1,\dots,S\},\, g \in \{1,\dots,G\}: \\
+& \quad \sum_{n=1}^N x_{n,s,g} \le \text{Capacity}_{s,g}. \quad \text{(Assignments at each school do not exceed its capacity)} \\[1em]
+
+& \textbf{(3) Non-negativity:} \quad \forall\, n,\, s,\, g: \quad x_{n,s,g} \ge 0.
+\end{aligned}
+\]
+
+This completes the full and exact mathematical formulation of the scheduling problem.
+
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Objective value = 240.89999999999998
+Assign 2.0 students from neighborhood 1, group 1 to school 2
+Assign 2.0 students from neighborhood 1, group 2 to school 2
+Assign 5.0 students from neighborhood 1, group 1 to school 3
+Assign 17.0 students from neighborhood 1, group 2 to school 3
+Assign 4.0 students from neighborhood 2, group 1 to school 1
+Assign 12.0 students from neighborhood 2, group 2 to school 1
+Assign 9.0 students from neighborhood 3, group 1 to school 2
+Assign 2.0 students from neighborhood 3, group 2 to school 2
+Assign 6.0 students from neighborhood 4, group 1 to school 2
+Assign 8.0 students from neighborhood 4, group 2 to school 2
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 240.9}

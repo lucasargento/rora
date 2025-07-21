@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n{'Version1': {'variables': {'NumberAdsZTube': 10.0, 'NumberAdsSoorchle': 0.0, 'NumberAdsWassa': 0.0}, 'objective': 4000000.0}, 'Version2': {'variables': {'xZ': 10.0, 'xS': 0.0, 'xW': 0.0}, 'objective': 4000000.0}}\n"
+}

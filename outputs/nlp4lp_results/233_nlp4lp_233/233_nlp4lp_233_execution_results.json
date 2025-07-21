@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{'LP_Model': {'variables': {'NumberOfInVivoExperiments': 0.0, 'NumberOfExVivoExperiments': 0.0}, 'objective': 0.0}, 'CP_SAT_Model': {'variables': {'NumberOfInVivoExperiments': 0, 'NumberOfExVivoExperiments': 0}, 'objective': 0}}\n"
+}

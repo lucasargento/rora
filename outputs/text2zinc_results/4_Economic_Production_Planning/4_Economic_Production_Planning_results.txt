@@ -1,0 +1,182 @@
+Problem Name: 4_Economic_Production_Planning
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Indices and Sets:} & & & \\[1mm]
+i,k &\in& \{1,\ldots, n\} & \text{(Industries)}\\[1mm]
+t &\in& \{0,1,2,\ldots,T\} & \text{(Time periods; note that } t=0 \text{ is the initial period)}\\[1mm]
+t &\in& \mathcal{P} = \{1,\ldots,T\} & \text{(Periods in which production occurs)}\\[1mm]
+t &\in& \mathcal{V} = \{1,\ldots,T-2\} & \text{(Periods in which capacity investment decisions are made)}
+\\[3mm]
+\multicolumn{4}{l}{\textbf{Parameters:}}\\[1mm]
+T &:& \text{Number of periods (planning horizon).}\\[1mm]
+\text{InputOne}_{i,k} &:& \text{Units of output from industry } i \text{ required per unit production in industry } k \text{ (production input)}.\\[1mm]
+\text{ManpowerOne}_{k} &:& \text{Manpower required per unit production in industry } k.\\[1mm]
+\text{InputTwo}_{i,k} &:& \text{Units of output from industry } i \text{ required per unit capacity built for industry } k.\\[1mm]
+\text{ManpowerTwo}_{k} &:& \text{Manpower required per unit capacity built for industry } k.\\[1mm]
+\text{Stock}_{i} &:& \text{Initial stock available of product } i \text{ (at } t=0\text{)}.\\[1mm]
+\text{Capacity}_{k} &:& \text{Initial production capacity of industry } k \text{ (at } t=0\text{)}.\\[1mm]
+\text{ManpowerLimit} &:& \text{Maximum available manpower per period.}\\[3mm]
+\multicolumn{4}{l}{\textbf{Decision Variables:}}\\[1mm]
+x_{k,t} &\ge& 0,\quad \forall k\in\{1,\ldots,n\},\; t\in \mathcal{P} &
+\begin{array}{l}
+\text{Production (in £1’s worth units) in industry } k \text{ in period } t.\\[0.5mm]
+\text{(Note: a “unit” is £1 of production value.)}
+\end{array}\\[2mm]
+v_{k,t} &\ge& 0,\quad \forall k\in\{1,\ldots,n\},\; t\in \mathcal{V} &
+\begin{array}{l}
+\text{Capacity investment in industry } k \text{ in period } t.\\[0.5mm]
+\text{One unit of } v_{k,t} \text{, when realized in period } t+2, \\[0.5mm]
+\text{increases the capacity available (permanently) by one unit.}
+\end{array}\\[2mm]
+I_{i,t} &\ge& 0,\quad \forall i\in\{1,\ldots,n\},\; t=0,1,\ldots,T & 
+\begin{array}{l}
+\text{Inventory (“stock”) level of product } i \text{ available at the beginning}\\[0.5mm]
+\text{of period } t.
+\end{array}\\[2mm]
+C_{k,t} &\ge& 0,\quad \forall k\in\{1,\ldots,n\},\; t=0,1,\ldots,T &
+\begin{array}{l}
+\text{Production capacity available to industry } k \text{ in period } t.
+\end{array}\\[3mm]
+\multicolumn{4}{l}{\textbf{Objective Function:}}\\[1mm]
+\text{Maximize}\quad Z &=& \sum_{k=1}^{n} \Bigl( x_{k,T-1} + x_{k,T} \Bigr) & 
+\begin{array}{l}
+\text{Total production in the last two periods (i.e., periods } T-1 \text{ and } T\text{).}
+\end{array}
+\\[3mm]
+\multicolumn{4}{l}{\textbf{Constraints:}}\\[1mm]
+\textbf{(1) Inventory Consumption and Flow:}&&&\\[1mm]
+\text{For } t=0: \quad & 
+\displaystyle \sum_{k=1}^{n} \text{InputOne}_{i,k}\, x_{k,1} 
+&\le& I_{i,0}, \quad \forall i=1,\ldots,n. 
+\label{inv0}\\[2mm]
+\text{For } t=1, \; \text{(using period } t=1 \text{ inventories):} \quad & 
+\displaystyle \sum_{k=1}^{n} \text{InputOne}_{i,k}\, x_{k,2} + \sum_{k=1}^{n} \text{InputTwo}_{i,k}\, v_{k,1} 
+&\le& I_{i,1}, \quad \forall i=1,\ldots,n. 
+\label{inv1}\\[2mm]
+\text{For } t \ge 2 \text{ (if defined):} \quad & 
+\displaystyle \sum_{k=1}^{n} \text{InputOne}_{i,k}\, x_{k,t+1} + \left\{\begin{array}{ll}
+\sum_{k=1}^{n} \text{InputTwo}_{i,k}\, v_{k,t} & \text{if } t\in \mathcal{V},\\[1mm]
+0 & \text{if } t\notin \mathcal{V},
+\end{array}\right.
+&\le& I_{i,t}, \quad \forall i=1,\ldots,n,\; t=2,\ldots,T-1.
+\label{invt}
+\\[3mm]
+\textbf{Inventory Update Equations:}&&&\\[1mm]
+I_{i,1} &=& I_{i,0} - \sum_{k=1}^{n} \text{InputOne}_{i,k}\, x_{k,1} + x_{i,1}, \quad
+\forall i=1,\ldots,n, 
+\label{invupdate1}\\[2mm]
+I_{i,t+1} &=& I_{i,t} - \left( \sum_{k=1}^{n} \text{InputOne}_{i,k}\, x_{k,t+1} + \chi_{\{t\in \mathcal{V}\}}\, \sum_{k=1}^{n} \text{InputTwo}_{i,k}\, v_{k,t} \right) + x_{i,t+1},\\[1mm]
+&&& \forall i=1,\ldots,n,\; t=1,\ldots,T-1,
+\label{invupdatet}
+\\[3mm]
+\textbf{(2) Manpower (Labor) Constraints:}&&&\\[1mm]
+\text{For inputs allocated in period } t=0: \quad & 
+\displaystyle \sum_{k=1}^{n} \text{ManpowerOne}_{k}\, x_{k,1} 
+&\le& \text{ManpowerLimit}.
+\label{mp0}\\[2mm]
+\text{For period } t=1: \quad & 
+\displaystyle \sum_{k=1}^{n} \text{ManpowerOne}_{k}\, x_{k,2} + \sum_{k=1}^{n} \text{ManpowerTwo}_{k}\, v_{k,1} 
+&\le& \text{ManpowerLimit}.
+\label{mp1}\\[2mm]
+\text{For period } t=2, \; (\text{and similarly for } t\ge 2 \text{ if defined}): \quad & 
+\displaystyle \sum_{k=1}^{n} \text{ManpowerOne}_{k}\, x_{k,3} + \left\{\begin{array}{ll}
+\sum_{k=1}^{n} \text{ManpowerTwo}_{k}\, v_{k,2} & \text{if } 2\in \mathcal{V},\\[1mm]
+0 & \text{otherwise},
+\end{array}\right.
+&\le& \text{ManpowerLimit}.
+\label{mp2}
+\\[3mm]
+\textbf{(3) Capacity Limits and Dynamics:}&&&\\[1mm]
+\text{Production Capacity Constraint:}\quad & 
+x_{k,t} &\le& C_{k,t}, \quad \forall k=1,\ldots,n,\; t\in \mathcal{P}.
+\label{capprod}\\[2mm]
+\text{Initial Capacity:}\quad & 
+C_{k,0} &=& \text{Capacity}_{k}, \quad \forall k=1,\ldots,n.
+\label{capinit}\\[2mm]
+\text{Capacity Update:}\quad & 
+C_{k,t} &=& C_{k,t-1} + \left\{ \begin{array}{ll}
+v_{k,t-2}, & \text{if } t\ge 3,\\[0.5mm]
+0, & \text{if } t=1,2,
+\end{array} \right. \quad \forall k=1,\ldots,n,\; t=1,\ldots,T.
+\label{capupdate}
+\\[3mm]
+\textbf{(4) Nonnegativity:}&&&\\[1mm]
+x_{k,t} &\ge& 0, &&\forall k\in\{1,\ldots,n\},\; t\in \mathcal{P},\\[2mm]
+v_{k,t} &\ge& 0, &&\forall k\in\{1,\ldots,n\},\; t\in \mathcal{V},\\[2mm]
+I_{i,t} &\ge& 0, &&\forall i\in\{1,\ldots,n\},\; t=0,1,\ldots,T,\\[2mm]
+C_{k,t} &\ge& 0, &&\forall k\in\{1,\ldots,n\},\; t=0,1,\ldots,T.
+\end{array}
+\]
+
+\vspace{2mm}
+\textbf{Explanation of the Formulation:}
+
+1. \textbf{Decision Variables:}  
+ • xₖ,ₜ represents the production (in £1’s worth) in industry k during period t.  
+ • vₖ,ₜ represents the capacity‐investment decision for industry k in period t; the new capacity becomes effective in period t+2.  
+ • Iᵢ,ₜ is the inventory level for product i available at the beginning of period t (stocks can be carried over).  
+ • Cₖ,ₜ is the production capacity available for industry k in period t.  
+
+2. \textbf{Objective Function:}  
+We maximize the total production in the last two periods (i.e. periods T–1 and T):
+  max Z = ∑ₖ ( xₖ,₍T–1₎ + xₖ,₍T₎ ).
+
+3. \textbf{Constraints:}  
+ • \emph{Inventory consumption and flow:} In every period the inventory available from the previous period must be sufficient to meet the “input demands” required both for production (according to InputOne) and for capacity investments (according to InputTwo). The update equations record that the available inventory in the next period equals what is left after input consumption plus the production output of that period.  
+ • \emph{Manpower constraints:} In each period the total manpower required—both for processing the inputs to produce goods (using ManpowerOne) and to build capacity (using ManpowerTwo)—cannot exceed ManpowerLimit.  
+ • \emph{Capacity limits and dynamics:} Production in each industry cannot exceed the available capacity. Capacity is initially given and increases (permanently) when capacity investment decisions (v) are realized two periods later.  
+ • \emph{Nonnegativity:} All decision variables are required to be nonnegative.
+
+4. \textbf{Model Features:}  
+This formulation does not “force” trivial solutions (e.g. producing only one product) since the input‐consumption and capacity buildup constraints couple all industries together. All constraints—including flow balances, capacity and manpower limits—ensure that the problem is both feasible and bounded.
+
+This complete mathematical model faithfully captures the economic and business decision problem described and is ready for translation into an OR-Tools implementation.
+
+
+Execution Results:
+SUCCESS:
+Optimal objective value = 1876.9921612541993
+x[0,1] = 42.58006718924973
+x[0,2] = 138.8174692049272
+x[0,3] = 300.0
+x[1,1] = 130.87122060470318
+x[1,2] = 350.0
+x[1,3] = 528.1746920492722
+x[2,1] = 262.6786114221724
+x[2,2] = 280.0
+x[2,3] = 279.99999999999994
+v[0,1] = 0.0
+v[1,1] = 178.17469204927212
+v[2,1] = 0.0
+I[0,0] = 150.0
+I[0,1] = 122.69921612541994
+I[0,2] = 138.81746920492725
+I[0,3] = 300.0
+I[1,0] = 80.0
+I[1,1] = 150.22620380739082
+I[1,2] = 350.00000000000006
+I[1,3] = 647.357222844345
+I[2,0] = 100.0
+I[2,1] = 262.6786114221724
+I[2,2] = 311.6349384098544
+I[2,3] = 279.9999999999999
+C[0,0] = 300.0
+C[0,1] = 300.0
+C[0,2] = 300.0
+C[0,3] = 300.0
+C[1,0] = 350.0
+C[1,1] = 350.0
+C[1,2] = 350.0
+C[1,3] = 528.1746920492722
+C[2,0] = 280.0
+C[2,1] = 280.0
+C[2,2] = 280.0
+C[2,3] = 279.99999999999994
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 2619.0}

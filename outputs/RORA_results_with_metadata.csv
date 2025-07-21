@@ -1,0 +1,111 @@
+,Problema,name,Optimal Gen,Optimal Ground Truth,domain,objective,source,constraints,identifier
+0,0,P-Median Problem,"670,00","670,00",Transportation and Logistics,minimization,hakank,"['forall', 'sum', '=', '<=', '/\\']",non_linear_problem_9
+1,1,Road Illumination Optimization,"7,37","7,37",Energy and Natural Resources,minimization,NLP4LP,"['forall', 'abs', '<=', 'sum', '*']",nlp4lp_10
+2,2,Oil Refinery Production Optimization,"245.000,00","339.000,00",Industrial Engineering and Design,maximization,NLP4LP,"['sum', '<=', '>=', 'forall']",nlp4lp_17
+3,3,Aircraft Landing Problem,"556,00","14.915,00",Scheduling,minimization,ComplexOR,"['forall', '>=', 'sum', 'if', 'then', 'elseif', 'else', 'endif']",complexor_AircraftLanding
+4,4,Economic Production Planning,"1.876,00","2.619,00",Economic and Business Decisions,maximization,NLP4LP,"['forall', 'sum', '<=', '+']",nlp4lp_28
+5,5,Fill-a-Pix,"-1,00","-1,00",Puzzles and Games,satisfaction,hakank,"['sum', 'implies', '<=', '>', 'and', 'forall']",puzzles_problem_31
+6,6,Factory Production Optimization,"1,00","2,00",Manufacturing and Production,maximization,NLP4LP,"['forall', 'sum', '<=', '=', 'if', 'else', 'endif']",nlp4lp_21
+7,7,Nonogram Solver,"-1,00","-1,00",Puzzles and Games,satisfaction,CSPLib,"['forall', 'make_automaton', 'regular']",CSPLib_12
+8,8,Food Manufacturing Optimization,"132.712,90","107.843,00",Manufacturing and Production,maximization,NLP4LP,"['forall', 'if', 'else', 'endif', '<=', '>=', '=', 'sum', '*', '-', '+']",nlp4lp_19
+9,9,Aircraft Assignment Problem,"140,00","140,00",Transportation and Logistics,minimization,ComplexOR,"['forall', 'sum', '<=', '>=', '*']",complexor_AircraftAssignment
+10,10,Science Fair Table Optimization,"1.080,00","1.080,00",Mathematical Modeling,maximization,Prob_232,"['sum', '<=', '>=', 'maximization']",LPWP_232
+11,11,Steel Manufacturing Optimization,"-18.117,50","431.433.437,50",Manufacturing and Production,maximization,NLP4LP,"['sum', '=', '>=', '<=']",nlp4lp_43
+12,12,Floppy Disk File Distribution,"3,00","3,00",Scheduling,minimization,NLP4LP,"['forall', 'sum', 'if', 'else', 'endif', '<=', 'max']",nlp4lp_44
+13,13,Economic Production and Capacity Planning,"1,00","2,00",Economic and Business Decisions,maximization,NLP4LP,"['forall', '<=', '>=', 'sum', 'max', 'if', 'then', 'else', 'endif']",nlp4lp_27
+14,14,Stock Portfolio Optimization,"15.305,00","10.305,11",Finance and Investment,maximization,NLP4LP,"['sum', '*', '-', '/', '>=', 'constraint']",nlp4lp_18
+15,15,Oil Refining and Blending,"100.278,00","3.000,00",Manufacturing and Production,maximization,NLP4LP,"['forall', 'sum', '<=', '>=', 'if', 'then', 'else', 'endif']",nlp4lp_20
+16,16,Solitaire Battleships,"-1,00","-1,00",Puzzles and Games,satisfaction,CSPLib,"['forall', 'if', 'then', 'endif', 'bool2int', 'alldifferent', 'sum', '=', '<=', '\\', '/']",CSPLib_14
+17,17,Daily Profit Maximization,"1.622,00","339.000,00",Economic and Business Decisions,maximization,NLP4LP,"['sum', '<=', '=', 'if', 'then', 'endif']",nlp4lp_16
+18,18,Bus Driver Scheduling,"7,00","7,00",Scheduling,minimization,CSPLib,"['sum', 'bool2int', '>=', '=']",CSPLib_22
+19,19,Economic Production Planning,"1,00","2,00",Economic and Business Decisions,maximization,NLP4LP,"['forall', '<=', '>=', '=', 'sum', 'max']",nlp4lp_29
+20,20,School District Student Assignment,"240,90","240,90",Scheduling,minimization,NLP4LP,"['sum', '=', '<=', '*']",nlp4lp_11
+21,21,Golomb Rulers,"55,00","55,00",Mathematical Modeling,minimization,CSPLib,"['alldifferent', '<', 'forall']",CSPLib_6
+22,22,Container Transportation Optimization,"1,00","2,00",Transportation and Logistics,minimization,NLP4LP,"['forall', 'sum', '<=', '>=', 'div', '*']",nlp4lp_45
+23,23,Cafeteria Staff Scheduling,"10,00","15,00",Scheduling,minimization,NLP4LP,"['forall', 'sum', '>=', '=', '<=', 'if', 'then', 'elseif', 'endif']",nlp4lp_42
+24,24,Currency Arbitrage Detection,"1,01","1,01",Finance and Investment,maximization,hakank,"['totalProfit >= 0.0', 'all_different', '=', 'forall', 'product']",non_linear_problem_23
+25,25,Vessel Loading,"-1,00","-1,00",Industrial Engineering and Design,satisfaction,CSPLib,"['forall', 'let', 'array', 'ElemWidth', 'ElemLength', 'Right', 'Left', 'Top', 'Bottom', 'orientation', 'separation', 'class', 'exists', 'fix']",CSPLib_8
+26,26,Dirichlet Problem for Laplace's Equation,"42,86","42,86",Mathematical Modeling,minimization,hakank,"['forall', '=', '+', '*', '4.0']",non_linear_problem_15
+27,27,Vehicle Routing Problem with Time Windows,"1,00","2,00",Transportation and Logistics,minimization,ComplexOR,"['forall', 'sum', '=', '<=', '>=', '/\\', '+', '*']",complexor_VRPTW
+28,28,Hand Sanitizer Production Optimization,"970,00","970,00",Mathematical Modeling,maximization,LPWP,"['sum', '<=', '>', 'maximization']",LPWP_128
+29,29,Coin Plating Optimization,"749,00","750,00",Mathematical Modeling,maximization,LPWP,"['sum', '<=', 'maximization']",LPWP_53
+30,30,Fishing Optimization,"150,00","150,00",Mathematical Modeling,maximization,Prob_85,"['sum', '<=', 'maximization']",LPWP_85
+31,31,Relief Effort Coordination,"178,00","18,00",Transportation and Logistics,minimization,hakank,"['forall', 'calculateDistance', 'min', 'sum', '<=']",OR_LP_IP_Scheduling_problem_4
+32,32,Bounds on Fourth Moment,"166,00","150,00",Mathematical Modeling,maximization,NLP4LP,"['sum', '*', '=', '^']",nlp4lp_9
+33,33,Carpool Fairness,"-1,00","-1,00",Transportation and Logistics,minimization,hakank,"['forall', 'sum', 'bool2int', '<=', 'abs', 'in']",combinatorial_problem_32
+34,34,Rocket Thrust Optimization,"0,01","0,01",Energy and Natural Resources,minimization,NLP4LP,"['=', '+', '<=', 'abs', 'sum', 'forall']",nlp4lp_7
+35,35,Timetable Problem,"-1,00","-1,00",Scheduling,satisfaction,hakank,"['forall', '<=', '+', '=', 'sum']",OR_LP_IP_Scheduling_problem_2
+36,36,Programmer Job Assignment,"8,00","8,00",Scheduling,minimization,hakank,"['forall', 'sum', '=', 'minimize']",OR_LP_IP_Scheduling_problem_5
+37,37,Rocket Fuel Optimization,"0,11","0,11",Energy and Natural Resources,minimization,NLP4LP,"['=', '+', 'forall', 'abs', 'sum']",nlp4lp_6
+38,38,Maximize Total Revenue,"76,00","78,64",Economic and Business Decisions,maximization,NLP4LP,"['forall', '<=', 'sum', '*']",nlp4lp_1
+39,39,Spare Parts Production Optimization,"12.400,00","12.000,00",Manufacturing and Production,maximization,NLP4LP,"['forall', 'sum', '<=', '*']",nlp4lp_8
+40,40,Seasonal Gift Basket Production,"178.900,00","178.900,00",Manufacturing and Production,maximization,NLP4LP,"['forall', '<=', '+', '>=', '-', '*']",nlp4lp_51
+41,41,Soybean Transportation Optimization,"5.230,00","33.960,00",Transportation and Logistics,minimization,NLP4LP,"['forall', 'sum', '<=', '>=', '*']",nlp4lp_56
+42,42,Optimal Delivery Path,"12,00","26,50",Transportation and Logistics,minimization,NLP4LP,"['forall', 'if', '<=', 'sum', '*']",nlp4lp_60
+43,43,N-Queens,"-1,00","-1,00",Puzzles and Games,satisfaction,CSPLib,['all_different'],CSPLib_54
+44,44,Paper Roll Cutting Optimization,"45,00","45,00",Manufacturing and Production,minimization,NLP4LP,"['sum', 'forall', '>=', '=']",nlp4lp_67
+45,45,Auto Parts Manufacturer Optimization,"116.100,00","5.600,00",Manufacturing and Production,maximization,NLP4LP,"['sum', 'if', 'then', 'else', 'endif', 'forall', '>=', '<=', '>=']",nlp4lp_58
+46,46,Quadratic Curve Fitting,"10,46","1,48",Mathematical Modeling,minimization,NLP4LP,"['forall', '>=', '-', '*', '^', '+', 'sum']",nlp4lp_33
+47,47,Power Station Problem,"256.500,00","986.630,00",Energy and Natural Resources,minimization,NLP4LP,"['forall', 'sum', '>= ', '<=', 'max', 'if', 'else', 'endif']",nlp4lp_34
+48,48,Place Numbers in Cross,"-1,00","-1,00",Puzzles and Games,satisfaction,hakank,"['==', '-', '*', '+']",puzzles_problem_12
+49,49,Traveling Salesman Problem,"1.256,00","1.256,00",Transportation and Logistics,minimization,NLP4LP,"['count', 'forall', 'sum', '!=']",nlp4lp_66
+50,50,Seaport Container Management,"251.500,00","251.500,00",Transportation and Logistics,minimization,NLP4LP,"['=', '+', '-', '>=', '<=']",nlp4lp_61
+51,51,Auto Parts Manufacturer Profit Maximization,"103.300,00","5.600,00",Manufacturing and Production,maximization,NLP4LP,"['forall', 'sum', '<=', '>=', 'if', 'then', 'else', 'endif']",nlp4lp_57
+52,52,Job-Shop Scheduling,"138,00","138,00",Scheduling,minimization,hakank,"['forall', 'cumulative', 'before', 'after', '+', '<=', '>=', '<', '>']",OR_LP_IP_Scheduling_problem_31
+53,53,Police Shift Scheduling,"16.620,00","16.620,00",Scheduling,minimization,NLP4LP,"['forall', '>=', 'sum', '*']",nlp4lp_50
+54,54,Balanced Academic Curriculum Problem,"20,00","20,00",Scheduling,minimization,CSPLib,"['forall', 'bool2int', '=', '>=', '<=', 'sum', '*', '<', 'let', 'in']",CSPLib_30
+55,55,Hidato,"-1,00","-1,00",Puzzles and Games,satisfaction,hakank,"['all_different', 'implies', 'forall', 'and', '=', '<=', '>=', '>']",puzzles_problem_13
+56,56,Production Planning,"990,00","1.000,00",Manufacturing and Production,maximization,NLP4LP,"['forall', '<=', 'sum', '*']",nlp4lp_35
+57,57,Rehearsal Scheduling Problem,"0,00","0,00",Scheduling,minimization,CSPLib,"['all_different', 'forall', 'sum', 'bool2int', '<', '>', '=']",CSPLib_39
+58,58,Linear Regression with Minimax Criterion,"1,00","2,00",Mathematical Modeling,minimization,NLP4LP,"['forall', '>=', '-', '*', '+']",nlp4lp_32
+59,59,Steel Production Optimization,"37.099,00","37.099,00",Manufacturing and Production,maximization,NLP4LP,"['forall', 'sum', '=', '>=', '<=', '/']",nlp4lp_49
+60,60,Minimize Shopping Cost,"35,01","35,01",Economic and Business Decisions,minimization,hakank,"['forall', '>', 'sum', '=', 'if', 'then', 'else', 'endif']",OR_LP_IP_Scheduling_problem_28
+61,61,Department City Assignment,"14,90","14,90",Economic and Business Decisions,maximization,hakank,"['forall', 'sum', '<=', '=', '-', '*', 'int2float']",non_linear_problem_10
+62,62,Auto Parts Manufacturer Optimization,"9.600,00","9.600,00",Manufacturing and Production,maximization,NLP4LP,"['forall', 'sum', '<=', '>=', '-']",nlp4lp_47
+63,63,Spare Parts Production Optimization,"11.975,00","12.000,00",Manufacturing and Production,maximization,NLP4LP,"['forall', 'sum', '<=', '*']",nlp4lp_40
+64,64,Chebychev Center of a Set,"2,00","2,00",Mathematical Modeling,maximization,NLP4LP,"['forall', 'sum', 'sqrt', '<=']",nlp4lp_14
+65,65,Currency Exchange Maximization,"327,50","350,45",Finance and Investment,maximization,NLP4LP,"['forall', 'sum', '<=', '=']",nlp4lp_13
+66,66,Mine Operation Optimization,"14.686.197.436.422.800,00","2.142,00",Energy and Natural Resources,maximization,NLP4LP,"['forall', 'sum', '<=', '=', '*']",nlp4lp_25
+67,67,Factory Production Planning,"96.900,00","93.715,00",Manufacturing and Production,maximization,NLP4LP,"['<=', '+', '-', '*', '/', 'if', 'else', 'endif', 'forall']",nlp4lp_22
+68,68,Project Selection Optimization,"2.310,00","149.000.000.000.001,00",Finance and Investment,maximization,hakank,"['<=', '+', '-', 'sum', 'forall']",OR_LP_IP_Scheduling_problem_18
+69,69,Template Design for Printing,"-1,00","-1,00",Mathematical Modeling,minimization,CSPLib,"['sum', 'forall', 'lex_lesseq', 'if', 'then', 'else', 'endif', 'int_search', 'minimize']",CSPLib_2
+70,70,Production Scheduling Problem,"450,00","450,00",Manufacturing and Production,minimization,NLP4LP,"['forall', 'if', '=', '+', '-', 'sum']",nlp4lp_41
+71,71,Sports Product Production Optimization,"25.498,00","62.666,60",Manufacturing and Production,maximization,NLP4LP,"['forall', 'sum', '<=', '*']",nlp4lp_46
+72,72,Custom Tees Ad Clicks Optimization,"100.500,00","100.500,00",Economic and Business Decisions,minimization,NLP4LP,"['forall', '>=', 'sum', '=']",nlp4lp_48
+73,73,Manpower Planning,"1,00","2,00",Healthcare and Human Systems,minimization,NLP4LP,"['forall', 'if', 'else', 'endif', '=', '+', '-', '*', 'sum']",nlp4lp_23
+74,74,Balanced Incomplete Block Design Generation,"1,00","1,00",Industrial Engineering and Design,satisfaction,CSPLib,"['forall', 'sum', 'bool2int', '=', '<', 'lex_lesseq', 'diff', 'max', '/\\', 'input_order', 'indomain_min', 'complete']",CSPLib_28
+75,75,Manpower Planning,"455,00","498.677,00",Healthcare and Human Systems,minimization,NLP4LP,"['forall', 'if', 'else', 'endif', '=', '+', '-', '*', '^']",nlp4lp_24
+76,76,Production and Inventory Schedule Optimization,"1,00","2,00",Manufacturing and Production,minimization,NLP4LP,"['forall', 'abs', 'sum', '-', '>=', '=']",nlp4lp_12
+77,77,Maximize Net Income,"799,00","654,20",Finance and Investment,maximization,NLP4LP,"['forall', '<=', 'sum', 'maximize']",nlp4lp_15
+78,78,Capacitated Facility Location,"95.090,00","95.090,00",Transportation and Logistics,minimization,ComplexOR,"['forall', 'sum', '=', '<=', '*']",complexor_CFLP
+79,79,Bakery Production Optimization,"1,00","2,00",Mathematical Modeling,minimization,LPWP,"['sum', '>=', '<=', 'ratio']",LPWP_66
+80,80,Car Selection Problem,"25,00","25,00",Transportation and Logistics,maximization,ComplexOR,"['forall', 'sum', '<=', '>=', 'maximize']",complexor_CarSelection
+81,81,Kidney Exchange Optimization,"6,00","6,00",Healthcare and Human Systems,maximization,hakank,"['alldifferent_except_0', 'forall', 'sum', '>', '=', 'in', 'bool2int']",combinatorial_problem_31
+82,82,Hospital Night Shift Scheduling,"15,00","15,00",Healthcare and Human Systems,minimization,NLP4LP,"['sum', 'forall', 'mod', '>=', 'max']",nlp4lp_4
+83,83,Capacitated Warehouse Location,"88.241,00","88.241,00",Transportation and Logistics,minimization,ComplexOR,"['sum', '>=', '<=', 'forall', '=', '*', '<=']",complexor_CapacitatedWarehouseLocation
+84,84,Electricity Capacity Planning,"205,00","353,00",Energy and Natural Resources,minimization,NLP4LP,"['forall', '>=', '<=', 'sum', '*', 'if', 'else', 'true', 'endif']",nlp4lp_3
+85,85,DEC System Production Optimization,"271.250.000,00","271.250.000,00",Manufacturing and Production,maximization,NLP4LP,"['forall', '>=', '<=', 'sum', '*', 'if', 'then', 'else', 'endif', '=']",nlp4lp_2
+86,86,Minimum Cost Network Flow,"210,00","190,00",Network and Security,minimization,NLP4LP,"['forall', 'sum', '>=', '<=']",nlp4lp_5
+87,87,Minimal Weekly Staffing Cost,"8.200,00","8.200,00",Scheduling,minimization,hakank,"['forall', 'let', 'array1d', 'sum', '>=', '<=']",OR_LP_IP_Scheduling_problem_8
+88,88,Maximum Flow Problem,"29,00","29,00",Network and Security,maximization,hakank,"['<=', 'sum', '=', '*']",OR_LP_IP_Scheduling_problem_6
+89,89,Ski Assignment Optimization,"7,00","7,00",Scheduling,minimization,hakank,"['all_different', 'abs', 'sum', 'minimize']",OR_LP_IP_Scheduling_problem_1
+90,90,Food Purchase Optimization,"4,00","4,00",Healthcare and Human Systems,minimization,NLP4LP,"['forall', 'sum', '>=', '*']",nlp4lp_37
+91,91,Department Relocation Optimization,"73,80","14.900,00",Economic and Business Decisions,minimization,NLP4LP,"['forall', 'sum', '=', '<=', '*']",nlp4lp_30
+92,92,Cheapest Alloy Combination,"3.800,00","3.800,00",Manufacturing and Production,minimization,NLP4LP,"['forall', '>=', 'sum', '=']",nlp4lp_39
+93,93,Seam Carving,"13,00","13,00",Puzzles and Games,maximization,hakank,"['forall', 'abs']",puzzles_problem_1
+94,94,Distribute Partially Filled Bottles,"-1,00","-1,00",Puzzles and Games,satisfaction,hakank,"['forall', '<', '=', '+', '*', 'sum']",puzzles_problem_11
+95,95,Power Plant Electricity Distribution,"1.380,00","1.380,00",Energy and Natural Resources,minimization,NLP4LP,"['forall', 'sum', '<=', '>=', '*']",nlp4lp_55
+96,96,Minimize Maximum Group Sum,"100,00","100,00",Mathematical Modeling,minimization,hakank,"['forall', 'sum', '=', 'increasing']",combinatorial_problem_1
+97,97,Auto Parts Manufacturer Optimization,"10.200,00","10.200,00",Manufacturing and Production,maximization,NLP4LP,"['forall', '<=', 'sum', '*', '+', '-']",nlp4lp_52
+98,98,Consultant Assignment Optimization,"290,00","290,00",Economic and Business Decisions,minimization,NLP4LP,"['forall', 'sum', '=', '<=', '*']",nlp4lp_64
+99,99,Minimum Cost Translator Selection,"35.000,00","35.000,00",Scheduling,minimization,NLP4LP,"['forall', 'sum', '>=', '*']",nlp4lp_63
+100,100,Warehouse Location Problem,"383,00","383,00",Transportation and Logistics,minimization,CSPLib,"['sum', 'bool2int', 'forall', 'exists', '<->', '<=', '=']",CSPLib_34
+101,101,Warehouse Stock Management,"1,00","2,00",Transportation and Logistics,maximization,NLP4LP,"['forall', '=', '<=', 'sum', '-', '*']",nlp4lp_38
+102,102,Linear Regression with Absolute Deviations,"11,40","19,95",Mathematical Modeling,minimization,NLP4LP,"['forall', '>=', '-', '*', '+', 'sum']",nlp4lp_31
+103,103,Knapsack Problem,"20,00","20,00",Mathematical Modeling,maximization,NLP4LP,"['sum', '<=', '*']",nlp4lp_36
+104,104,Goods Transportation Optimization,"315,00","315,00",Transportation and Logistics,minimization,ComplexOR,"['forall', '<=', '=', 'sum', '*']",complexor_TSP
+105,105,Auto Parts Manufacturer Optimization,"7.080,00","7.120,00",Manufacturing and Production,maximization,NLP4LP,"['forall', 'sum', '<=', '>=', '*']",nlp4lp_62
+106,106,Network Intrusion Response Optimization,"210,00","2.280,00",Network and Security,minimization,NLP4LP,"['forall', '=', 'sum', '<=']",nlp4lp_65
+107,107,Auto Parts Manufacturer Optimization,"10.050,00","9.750,00",Manufacturing and Production,maximization,NLP4LP,"['forall', '<=', '>=', 'sum', '-', '*']",nlp4lp_53
+108,108,Combinatorial Auction,"11,00","383,00",Economic and Business Decisions,maximization,hakank,"['sum', 'bool2int', '<=', 'forall']",combinatorial_problem_7
+109,109,Custom Tees Advertising Campaign,"735,00","703,00",Economic and Business Decisions,maximization,NLP4LP,"['forall', '<=', 'sum', '>=', 'maximize']",nlp4lp_54

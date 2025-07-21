@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolution using Linear Solver (continuous variables):\n{'NumberOfCartDeliveryServers': 53.5, 'NumberOfHandDeliveryServers': 3.0, 'objective': 327.5}\n\nSolution using CP-SAT Model (integer variables):\n{'NumberOfCartDeliveryServers': 45, 'NumberOfHandDeliveryServers': 10, 'objective': 425.0}\n"
+}

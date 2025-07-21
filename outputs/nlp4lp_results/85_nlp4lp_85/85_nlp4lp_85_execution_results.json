@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nModel 1 (Direct Time Interpretation) Result:\n{'variables': {'CleansingChemicalUnits': 200.0, 'OdorRemovingChemicalUnits': 100.0}, 'objective': 1400.0}\n\nModel 2 (Alternative Interpretation) Result:\n{'variables': {'CleansingChemicalUnits': 200.0, 'OdorRemovingChemicalUnits': 100.0}, 'objective': 600.0}\n"
+}

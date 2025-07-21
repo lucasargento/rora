@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimal Solutions:\n{'LinearSolver': {'variables': {'VanTrips': 14.0, 'TruckTrips': 10.0}, 'objective': 24.0}, 'CpSatSolver': {'variables': {'VanTrips': 13.0, 'TruckTrips': 11.0}, 'objective': 24.0}}\n"
+}

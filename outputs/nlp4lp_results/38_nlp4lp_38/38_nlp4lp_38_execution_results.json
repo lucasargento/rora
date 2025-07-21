@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nModel: LinearSolver\nSolution:\n  HighDrills = 7.0\n  LowDrills  = 15.0\nObjective (Total drills) = 22.0\n"
+}

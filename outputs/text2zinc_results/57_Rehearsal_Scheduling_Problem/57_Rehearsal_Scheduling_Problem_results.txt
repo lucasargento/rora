@@ -1,0 +1,89 @@
+Problem Name: 57_Rehearsal_Scheduling_Problem
+
+Mathematical Formulation:
+\[
+\begin{array}{rcl}
+\textbf{Sets and Parameters:} & & \\[1mm]
+P &=& \{1,\ldots,n\} \quad \text{(set of pieces), with } n = \texttt{num\_pieces},\\[1mm]
+J &=& \{1,\ldots,m\} \quad \text{(set of players), with } m = \texttt{num\_players},\\[1mm]
+d_i &\in& \mathbb{R}_{>0} \quad \forall\, i\in P \quad \text{(duration of piece } i\text{)},\\[1mm]
+r_{ji} &\in& \{0,1\} \quad \forall\, j\in J,\; i\in P,\quad \text{with } r_{ji}=1 \text{ if player } j \text{ is required in piece } i,\\[1mm]
+M &>& 0\quad \text{a sufficiently large constant.}\\[2mm]
+\textbf{Decision Variables:} & & \\[1mm]
+S_i &\in& \mathbb{R}_{\ge 0} \quad \forall\, i\in P,\quad \text{start time of piece } i,\\[1mm]
+z_{ik} &\in& \{0,1\} \quad \forall\, i,k \in P,\; i\neq k,\quad 
+\begin{array}{l}
+\text{with } z_{ik}=1 \text{ if piece } i \text{ is scheduled before piece } k,
+\end{array}\\[1mm]
+A_j &\in& \mathbb{R}_{\ge 0} \quad \forall\, j\in J,\quad \text{arrival time of player } j,\\[1mm]
+D_j &\in& \mathbb{R}_{\ge 0} \quad \forall\, j\in J,\quad \text{departure time of player } j.\\[2mm]
+\textbf{Auxiliary Definitions:} & & \\[1mm]
+\text{For each piece } i,\quad C_i &=& S_i + d_i \quad \text{(completion time of piece } i\text{)}.\\[2mm]
+\text{For each player } j, \quad \text{the total playing time is } T_j &=& \sum_{i\in P} r_{ji}\,d_i.\\[2mm]
+\text{The waiting time for player } j \text{ is } W_j &=& \Bigl(D_j - A_j\Bigr) - T_j.
+\end{array}
+\]
+
+We now present the complete mathematical model.
+
+\[
+\begin{array}{rcll}
+\textbf{Minimize:} & \displaystyle \min \; \sum_{j\in J} \; W_j &=& \displaystyle \min \; \sum_{j\in J} \Biggl[\, D_j - A_j - \sum_{i\in P} r_{ji}\,d_i \Biggr] & \quad \text{(Total waiting time)}\\[2mm]
+\textbf{Subject to:} & & & \\[1mm]
+\textbf{(a) \; Disjunctive Ordering Constraints:} & & & \\
+& S_i + d_i \le S_k + M\,(1 - z_{ik}) &\quad \forall\, i,k\in P,\; i\ne k, & (1)\\[1mm]
+& z_{ik} + z_{ki} = 1 &\quad \forall\, i,k\in P,\; i\ne k. & (2)\\[2mm]
+\textbf{(b) \; Player Arrival and Departure Constraints:} & & & \\
+& A_j \le S_i       &\quad \forall\, j\in J,\; \forall\, i\in P \text{ with } r_{ji}=1, & (3)\\[1mm]
+& D_j \ge S_i + d_i  &\quad \forall\, j\in J,\; \forall\, i\in P \text{ with } r_{ji}=1, & (4)\\[2mm]
+\textbf{(c) \; Reference Start Time:} & & & \\
+& S_{i_0} = 0, &\quad \text{for some } i_0\in P \quad (\text{e.g., choose } i_0=1), & (5)\\[2mm]
+\textbf{(d) \; Implicit Continuity:} & & & \\
+& \text{(No idle time is introduced since the model will naturally set } S_i \text{ to yield a continuous schedule)}. & & 
+\end{array}
+\]
+
+\vspace{2mm}
+\textbf{Remarks:}
+
+1. The variables S_i determine the start times of the pieces. The binary variables z_{ik} enforce a complete ordering (permutation) of all pieces.  
+2. For each player j, the variables A_j and D_j are “free” to be set as early as possible and as late as necessary subject to (3) and (4); hence at optimality, A_j equals the minimum start time among the pieces in which player j participates, and D_j equals the maximum completion time among those pieces.  
+3. The objective function minimizes the sum over players of (departure time minus arrival time minus the total playing duration), which is exactly the sum of waiting (idle) times.  
+4. Constraint (5) eliminates time-shift invariance by fixing the start time of one arbitrarily chosen piece.
+
+This full formulation precisely captures the scheduling problem described, is feasible (with proper data) and bounded, and can be directly transformed into an OR-Tools implementation by another modeler.
+\]
+
+Execution Results:
+SUCCESS:
+Solution:
+Piece 0: start = 0, duration = 4, finish = 4
+Piece 1: start = 9, duration = 6, finish = 15
+Piece 2: start = 22, duration = 3, finish = 25
+Piece 3: start = 4, duration = 5, finish = 9
+Piece 4: start = 15, duration = 7, finish = 22
+
+Ordering decisions:
+Piece 0 is before Piece 1
+Piece 0 is before Piece 2
+Piece 0 is before Piece 3
+Piece 0 is before Piece 4
+Piece 1 is before Piece 2
+Piece 3 is before Piece 1
+Piece 1 is before Piece 4
+Piece 3 is before Piece 2
+Piece 4 is before Piece 2
+Piece 3 is before Piece 4
+
+Players' schedules:
+Player 0: arrival = 0, departure = 15, playing_time = 15, waiting = 0
+Player 1: arrival = 9, departure = 25, playing_time = 16, waiting = 0
+Player 2: arrival = 0, departure = 22, playing_time = 22, waiting = 0
+
+Total waiting time = 0.0
+
+
+Expected Output:
+Expected solution
+
+: {'rehearsal_order': [3, 5, 2, 1, 4], 'waiting_time': [0, 0, 0], 'p_from': [3, 1, 2], 'p_to': [5, 3, 5], '_objective': 0}

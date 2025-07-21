@@ -1,0 +1,64 @@
+Problem Name: 148_nlp4lp_148
+
+# Problem Description:
+'''Problem description: A chicken farmer has sold his chicken and they need to be transported either by bus or by car. A bus can take 100 chicken and takes 2 hours per trip. A car can take 40 chicken and takes 1.5 hours per trip. There can be at most 10 bus trips and at least 60% of the trips must be by car. If the farmer needs to transport 1200 chicken, how many trips of each should be done to minimize the total time needed to transport the chicken?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfBusTrips": "float",
+    "NumberOfCarTrips": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- TransportModes = {bus, car}
+
+Parameters:
+- BusCapacity: number of chickens transported per bus trip (100 chickens per trip)
+- CarCapacity: number of chickens transported per car trip (40 chickens per trip)
+- BusDuration: time required per bus trip (2 hours per trip)
+- CarDuration: time required per car trip (1.5 hours per trip)
+- TotalChickens: total number of chickens to transport (1200 chickens)
+- MaxBusTrips: maximum number of bus trips allowed (10 trips)
+- MinCarTripRatio: minimum ratio of car trips to total trips (0.6, meaning at least 60% of trips must be by car)
+
+Variables:
+- NumberOfBusTrips: number of bus trips to schedule (integer ≥ 0)
+- NumberOfCarTrips: number of car trips to schedule (integer ≥ 0)
+
+Objective:
+- Minimize TotalTime = (BusDuration * NumberOfBusTrips) + (CarDuration * NumberOfCarTrips)
+
+Constraints:
+1. Chicken transportation constraint:
+   (BusCapacity * NumberOfBusTrips) + (CarCapacity * NumberOfCarTrips) = TotalChickens
+   (This constraint ensures that exactly 1200 chickens are transported.)
+2. Bus trips limit:
+   NumberOfBusTrips ≤ MaxBusTrips
+3. Car trips ratio constraint (at least 60% of trips must be by car):
+   NumberOfCarTrips ≥ MinCarTripRatio * (NumberOfBusTrips + NumberOfCarTrips)
+   (This can be equivalently rearranged to: NumberOfCarTrips ≥ 1.5 * NumberOfBusTrips)
+4. Non-negativity and integrality:
+   NumberOfBusTrips and NumberOfCarTrips are nonnegative integers
+
+Final Output Schema (as required):
+{
+  "variables": {
+    "NumberOfBusTrips": "integer >= 0",
+    "NumberOfCarTrips": "integer >= 0"
+  },
+  "objective": "Minimize TotalTime = 2 * NumberOfBusTrips + 1.5 * NumberOfCarTrips"
+}
+
+Execution Results:
+SUCCESS:
+{'LinearSolver_Model': {'variables': {'NumberOfBusTrips': 6, 'NumberOfCarTrips': 15}, 'objective': 34.5}}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfBusTrips': 7.0, 'NumberOfCarTrips': 13.0}, 'objective': 33.5}

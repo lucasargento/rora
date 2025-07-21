@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimal solution using formulation:\nRegularBoatTrips = 20\nSpeedBoatTrips = 20\nTotal gas consumption (liters) = 600.0\n\nStructured Output:\n{'variables': {'RegularBoatTrips': 'integer (>= 0)', 'SpeedBoatTrips': 'integer (>= 0)'}, 'objective': 'Minimize total gas consumption in liters = 10 * RegularBoatTrips + 20 * SpeedBoatTrips'}\n"
+}

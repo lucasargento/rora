@@ -1,0 +1,48 @@
+Problem Name: 2_Oil_Refinery_Production_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices:} \quad & l = 1,\dots,L \quad \text{(process index)}, \quad o = 1,\dots,O \quad \text{(crude oil type index)}, \quad p = 1,\dots,P \quad \text{(product/price index)}. \\[1mm]
+
+\textbf{Given Data:} \quad & \text{Allocated resources: } A_o,\; o=1,\dots,O, \\
+& \text{Selling prices: } r_p,\; p=1,\dots,P, \\
+& \text{Input requirements: } a_{l,o},\; l=1,\dots,L,\; o=1,\dots,O, \\
+& \text{Output amounts: } b_{l,p},\; l=1,\dots,L,\; p=1,\dots,P, \\
+& \text{Process cost per barrel (of product produced): } c_l,\; l=1,\dots,L. \\[2mm]
+
+\textbf{Decision Variables:} \quad & x_l \ge 0 \quad \text{for } l=1,\dots,L, \\
+& \quad \text{where } x_l \text{ is the (possibly fractional) number of times process } l \text{ is executed.} \\[2mm]
+
+\textbf{Production Relationships:} \quad & \text{For each process } l \text{ and product } p, \text{ the production quantity is } \, y_{l,p} = b_{l,p}\, x_l. \\[2mm]
+
+\textbf{Objective Function:} \quad & \text{Maximize net revenue, which is total sales revenue less the production cost incurred.} \\
+\text{Maximize} \quad & Z = \sum_{l=1}^{L} \sum_{p=1}^{P} \Bigl( r_p\, b_{l,p} - c_l\, b_{l,p} \Bigr) \, x_l. \\[2mm]
+
+\textbf{Constraints:} \\[2mm]
+\text{(1) Resource (Crude Oil) Availability:} \quad & \sum_{l=1}^{L} a_{l,o}\, x_l \le A_o, \quad \forall \, o=1,\dots,O. \\[2mm]
+\text{(2) Process Execution Nonnegativity:} \quad & x_l \ge 0, \quad \forall\, l=1,\dots,L.
+\end{align*}
+
+\vspace{2mm}
+\textbf{Remarks:}
+\begin{itemize}
+    \item The term \( r_p\, b_{l,p} \) represents the revenue (price per barrel times barrels produced) for product \( p \) when process \( l \) is executed once.
+    \item The cost incurred by process \( l \) is \( c_l \) per barrel produced, and since process \( l \) produces \( b_{l,p} \) barrels of product \( p \), the total cost for process \( l \) (if executed once) is \( c_l\, b_{l,p} \) for product \( p \) (and summed over all products produced in that process).
+    \item There is no separate cost for the crude oil since it has already been allocated.
+    \item The feasible region is defined by the resource (crude oil) constraints and the nonnegativity of the decision variables. This formulation is both feasible and bounded under the assumption that the allocated crude oil quantities \( A_o \) are finite and nonnegative.
+    \item Although the model naturally may choose to execute only those processes that maximize net revenue, the decision-making structure (using multiple processes with varied input/output mixes) discourages a trivial product mix. If desired, additional constraints (e.g., minimum production requirements for each product) might be added to enforce diversification.
+\end{itemize}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Process 1 executions: 0.0
+Process 2 executions: 5000.0
+Process 3 executions: 0.0
+Optimal net revenue: 245000.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 339000.0}

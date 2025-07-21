@@ -1,0 +1,58 @@
+Problem Name: 152_nlp4lp_152
+
+# Problem Description:
+'''Problem description: A jam company sends its product out in small and large jars. A small jar can hold 50 ml of jam while a large jar can hold 200 ml of jam. Most store prefer the smaller size and so the number of large jars cannot exceed the number of small jars. If the company wants to ship at least 100000 ml of jam, find the minimum number of jars that can be used.
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfSmallJars": "float",
+    "NumberOfLargeJars": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- J: set of jar types = {Small, Large}
+
+Parameters:
+- volume_small: volume contained in a small jar = 50 ml per jar
+- volume_large: volume contained in a large jar = 200 ml per jar
+- minimum_total_volume: minimum jam to be shipped = 100000 ml
+
+Variables:
+- NumberOfSmallJars: number of small jars used [nonnegative integer]
+- NumberOfLargeJars: number of large jars used [nonnegative integer]
+- TotalJars: auxiliary variable representing the total number of jars = NumberOfSmallJars + NumberOfLargeJars [nonnegative integer]
+
+Objective:
+- Minimize TotalJars
+
+Constraints:
+1. Jam volume requirement: (volume_small * NumberOfSmallJars) + (volume_large * NumberOfLargeJars) ≥ minimum_total_volume  
+   (i.e., 50 * NumberOfSmallJars + 200 * NumberOfLargeJars ≥ 100000)
+2. Jar type preference: NumberOfLargeJars ≤ NumberOfSmallJars
+
+// Expected output schema:
+{
+  "variables": {
+    "NumberOfSmallJars": "float",
+    "NumberOfLargeJars": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+=== Solution using ortools.linear_solver (MIP) ===
+{'variables': {'NumberOfSmallJars': 400.0, 'NumberOfLargeJars': 400.0}, 'objective': 800.0}
+
+=== Solution using ortools.sat.python.cp_model (CP-SAT) ===
+{'variables': {'NumberOfSmallJars': 400, 'NumberOfLargeJars': 400}, 'objective': 800}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfSmallJars': 400.0, 'NumberOfLargeJars': 400.0}, 'objective': 800.0}

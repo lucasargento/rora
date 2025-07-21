@@ -1,0 +1,71 @@
+Problem Name: 83_nlp4lp_83
+
+# Problem Description:
+'''Problem description: An dog hospital has 2000 units of tooth medication to make both small and large bones. A small bone requires 10 units of tooth medication and 12 units of meat. A large bone requires 15 units of tooth medication and 15 units of meat. Since most dogs prefer the small bones, at least 50% of the bones made must be small. In addition, the hospital must make at least 30 large bones. How many of each bone should be made to minimize the amount of meat needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "SmallBones": "float",
+    "LargeBones": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Bones: the set of bone types = {Small, Large}
+
+Parameters:
+- MedicationStock: total available tooth medication [units] = 2000
+- MedicationReq_Small: tooth medication required per small bone [units] = 10
+- MedicationReq_Large: tooth medication required per large bone [units] = 15
+- MeatReq_Small: meat required per small bone [units] = 12
+- MeatReq_Large: meat required per large bone [units] = 15
+- MinLargeBones: minimum number of large bones to produce [bones] = 30
+- MinSmallFraction: minimum fraction of small bones among all bones = 0.5  
+  (This implies that the number of small bones must be at least equal to the number of large bones.)
+
+Variables:
+- SmallBones: number of small bones produced (nonnegative integer)
+- LargeBones: number of large bones produced (nonnegative integer)
+
+Objective:
+- Minimize total meat usage = (MeatReq_Small * SmallBones) + (MeatReq_Large * LargeBones)
+
+Constraints:
+1. Tooth medication usage constraint:
+   MedicationReq_Small * SmallBones + MedicationReq_Large * LargeBones <= MedicationStock
+   → 10 * SmallBones + 15 * LargeBones <= 2000
+
+2. Proportion constraint on bone types (at least 50% of bones are small):
+   SmallBones >= (SmallBones + LargeBones) / 2
+   This simplifies to: SmallBones >= LargeBones
+
+3. Minimum large bone production:
+   LargeBones >= MinLargeBones
+   → LargeBones >= 30
+
+4. Non-negativity:
+   SmallBones >= 0  
+   LargeBones >= 0
+
+Additional Notes:
+- All ingredients are measured in consistent "units".  
+- The decision variables are assumed to be integers, since you cannot produce a fraction of a bone.
+  
+This completes the structured mathematical model for the given problem.
+
+Execution Results:
+SUCCESS:
+Results using Linear Solver (MIP):
+{'variables': {'SmallBones': 30.0, 'LargeBones': 30.0}, 'objective': 810.0}
+
+Results using CP-SAT Model:
+{'variables': {'SmallBones': 30, 'LargeBones': 30}, 'objective': 810.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'SmallBones': 30.0, 'LargeBones': 30.0}, 'objective': 810.0}

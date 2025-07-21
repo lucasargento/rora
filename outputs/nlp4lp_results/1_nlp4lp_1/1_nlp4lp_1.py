@@ -1,0 +1,145 @@
+# Problem Description:
+'''Problem description: A breakfast joint makes two different sandwiches: a regular and a special. Both need eggs and bacon. Each regular sandwich requires 2 eggs and 3 slices of bacon. Each special sandwich requires 3 eggs and 5 slices of bacon. The joint has a total of 40 eggs and 70 slices of bacon. It makes a profit of $3 per regular sandwich and a profit of $4 per special sandwich. How many of each sandwich should be made to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumSandwiches": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+# Mathematical Formulation:
+'''Sets:
+- S: set of sandwich types = {regular, special}
+
+Parameters:
+- profit_regular: profit per regular sandwich [USD per sandwich] = 3
+- profit_special: profit per special sandwich [USD per sandwich] = 4
+- eggs_regular: number of eggs required for one regular sandwich [eggs per sandwich] = 2
+- eggs_special: number of eggs required for one special sandwich [eggs per sandwich] = 3
+- bacon_regular: number of bacon slices required for one regular sandwich [slices per sandwich] = 3
+- bacon_special: number of bacon slices required for one special sandwich [slices per sandwich] = 5
+- total_eggs: available eggs [eggs] = 40
+- total_bacon: available bacon slices [slices] = 70
+
+Variables:
+- x_regular: number of regular sandwiches to make [integer ≥ 0]
+- x_special: number of special sandwiches to make [integer ≥ 0]
+
+Objective:
+- Maximize profit = (profit_regular * x_regular) + (profit_special * x_special)
+  which is maximize 3*x_regular + 4*x_special
+
+Constraints:
+1. Egg constraint: (eggs_regular * x_regular) + (eggs_special * x_special) ≤ total_eggs  
+   i.e., 2*x_regular + 3*x_special ≤ 40
+
+2. Bacon constraint: (bacon_regular * x_regular) + (bacon_special * x_special) ≤ total_bacon  
+   i.e., 3*x_regular + 5*x_special ≤ 70
+
+---
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumSandwiches": {
+      "0": "float",    // corresponds to the number of regular sandwiches, x_regular
+      "1": "float"     // corresponds to the number of special sandwiches, x_special
+    }
+  },
+  "objective": "float" // the total profit as defined by 3*x_regular + 4*x_special
+}'''
+
+# Generated Code:
+#!/usr/bin/env python3
+from ortools.linear_solver import pywraplp
+
+def solve_linear_model():
+    # Create the solver using CBC backend for mixed integer programming
+    solver = pywraplp.Solver.CreateSolver('CBC_MIXED_INTEGER_PROGRAMMING')
+    if not solver:
+        print("Solver not available.")
+        return None
+
+    # Variables: number of regular and special sandwiches (integer variables)
+    x_regular = solver.IntVar(0, solver.infinity(), 'x_regular')
+    x_special = solver.IntVar(0, solver.infinity(), 'x_special')
+
+    # Parameters (profits and resource usage)
+    profit_regular = 3
+    profit_special = 4
+    
+    eggs_regular = 2
+    eggs_special = 3
+    bacon_regular = 3
+    bacon_special = 5
+
+    total_eggs = 40
+    total_bacon = 70
+
+    # Objective: Maximize profit = 3 * x_regular + 4 * x_special
+    solver.Maximize(profit_regular * x_regular + profit_special * x_special)
+
+    # Constraint 1: Egg constraint: 2*x_regular + 3*x_special <= 40
+    solver.Add(eggs_regular * x_regular + eggs_special * x_special <= total_eggs)
+
+    # Constraint 2: Bacon constraint: 3*x_regular + 5*x_special <= 70
+    solver.Add(bacon_regular * x_regular + bacon_special * x_special <= total_bacon)
+
+    # Solve the model
+    status = solver.Solve()
+
+    if status == pywraplp.Solver.OPTIMAL:
+        solution = {
+            "variables": {
+                "NumSandwiches": {
+                    "0": x_regular.solution_value(),
+                    "1": x_special.solution_value()
+                }
+            },
+            "objective": solver.Objective().Value()
+        }
+        print("OR-Tools Linear Solver Solution:")
+        print("Optimal number of regular sandwiches (0):", x_regular.solution_value())
+        print("Optimal number of special sandwiches (1):", x_special.solution_value())
+        print("Maximum profit:", solver.Objective().Value())
+        return solution
+    elif status == pywraplp.Solver.INFEASIBLE:
+        print("The problem is infeasible.")
+        return None
+    else:
+        print("Solver ended with status:", status)
+        return None
+
+def main():
+    # Only one formulation is provided, so we solve using the linear solver model.
+    solution_linear = solve_linear_model()
+
+    # Print the structured result if available.
+    if solution_linear:
+        print("\nStructured Output:")
+        print(solution_linear)
+
+if __name__ == '__main__':
+    main()
+
+'''Execution Results:
+SUCCESS:
+OR-Tools Linear Solver Solution:
+Optimal number of regular sandwiches (0): 20.0
+Optimal number of special sandwiches (1): 0.0
+Maximum profit: 60.0
+
+Structured Output:
+{'variables': {'NumSandwiches': {'0': 20.0, '1': 0.0}}, 'objective': 60.0}
+'''
+
+'''Expected Output:
+Expected solution
+
+: {'variables': {'NumSandwiches': {'0': 20.0, '1': 0.0}}, 'objective': 60.0}'''
+

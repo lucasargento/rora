@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nContinuous LP (using ortools.linear_solver) solution:\n{'variables': {'LightSandwiches': 0.0, 'HeavySandwiches': 0.0}, 'objective': 0.0}\n\nInteger CP-SAT (using ortools.sat.python.cp_model) solution:\n{'variables': {'LightSandwiches': 0, 'HeavySandwiches': 0}, 'objective': 0.0}\n"
+}

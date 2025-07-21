@@ -1,0 +1,64 @@
+Problem Name: 59_nlp4lp_59
+
+# Problem Description:
+'''Problem description: A tea estate has available 500 acres of land and they need to pick the tea leaves either using a traditional machine or modern machine. For each acre of land, the traditional machine can pick 30 kg of tea leaves, creates 10 kg of waste, and requires 20 liters of fuel. For each acre of land, the modern machine can pick 40 kg of tea leaves, creates 15 kg of waste, and requires 15 liters of fuel. The estate has available 9000 liters of fuel can handle at most 6000 kg of waste. For how many acres should each machine be used to maximize the amount of tea leaves that can be picked?
+
+Expected Output Schema:
+{
+  "variables": {
+    "AcresUsed": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- M: set of machine types = {Traditional, Modern}
+
+Parameters:
+- acres_total: total available land in acres = 500 acres
+- fuel_available: total available fuel = 9000 liters
+- waste_capacity: maximum allowable waste = 6000 kg
+- tea_yield[m]: tea leaves picked per acre for machine m (kg)
+   - tea_yield[Traditional] = 30 kg/acre
+   - tea_yield[Modern] = 40 kg/acre
+- waste[m]: waste produced per acre for machine m (kg)
+   - waste[Traditional] = 10 kg/acre
+   - waste[Modern] = 15 kg/acre
+- fuel[m]: fuel required per acre for machine m (liters)
+   - fuel[Traditional] = 20 liters/acre
+   - fuel[Modern] = 15 liters/acre
+
+Variables:
+- x[m] for m in M: acres of land allocated to machine m (continuous, in acres, >= 0)
+
+Objective:
+- Maximize total tea leaves picked = tea_yield[Traditional] * x[Traditional] + tea_yield[Modern] * x[Modern]
+
+Constraints:
+1. Land constraint: x[Traditional] + x[Modern] <= acres_total 
+2. Fuel constraint: fuel[Traditional] * x[Traditional] + fuel[Modern] * x[Modern] <= fuel_available
+3. Waste constraint: waste[Traditional] * x[Traditional] + waste[Modern] * x[Modern] <= waste_capacity
+
+-----------------------------------------------------
+This model assumes that acres can be fractionally allocated. If integer allocations (i.e., whole acres) are required, the variable x[m] should be defined as integer.
+
+Execution Results:
+SUCCESS:
+Optimization Results:
+
+Continuous LP Model:
+Acres Used: {'Traditional': 300.0000000000001, 'Modern': 199.9999999999999}
+Objective (Total Tea Leaves Picked): 17000.0
+
+Integer MIP Model:
+Acres Used: {'Traditional': 300.0, 'Modern': 200.0}
+Objective (Total Tea Leaves Picked): 17000.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'AcresUsed': [300.0, 200.0]}, 'objective': 17000.0}

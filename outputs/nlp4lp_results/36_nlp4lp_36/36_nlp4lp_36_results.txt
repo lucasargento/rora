@@ -1,0 +1,65 @@
+Problem Name: 36_nlp4lp_36
+
+# Problem Description:
+'''Problem description: A farmer has 500 acres of land to grow turnips and pumpkins. Turnips require 50 minutes of watering and $80 worth of pesticide per acre. Pumpkins require 90 minutes of watering and $50 worth of pesticide per acre. The farmer has 40000 minutes available for watering and $34000 available to spend on pesticide. If the revenue per acre of turnips is $300 and the revenue per acre of pumpkins is $450, how many acres of each should he grow to maximize his revenue.
+
+Expected Output Schema:
+{
+  "variables": {
+    "LandTurnips": "float",
+    "LandPumpkins": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- Crop: set of crops = {Turnips, Pumpkins}
+
+Parameters:
+- acres_available: Total available land [acres] = 500
+- watering_time: Minutes of watering required per acre for each crop [minutes/acre]
+  • Turnips: 50
+  • Pumpkins: 90
+- pesticide_cost: Pesticide cost per acre for each crop [USD/acre]
+  • Turnips: 80
+  • Pumpkins: 50
+- revenue: Revenue per acre for each crop [USD/acre]
+  • Turnips: 300
+  • Pumpkins: 450
+- total_watering_minutes: Total available watering time [minutes] = 40000
+- total_pesticide_budget: Total available pesticide budget [USD] = 34000
+
+Variables:
+- LandTurnips: Acres planted with Turnips [continuous, acres, >= 0]
+- LandPumpkins: Acres planted with Pumpkins [continuous, acres, >= 0]
+
+Objective:
+- Maximize total revenue, defined as:
+  Total Revenue = (300 * LandTurnips) + (450 * LandPumpkins)
+
+Constraints:
+1. Land constraint:
+  LandTurnips + LandPumpkins ≤ 500
+2. Watering time constraint:
+  (50 * LandTurnips) + (90 * LandPumpkins) ≤ 40000
+3. Pesticide budget constraint:
+  (80 * LandTurnips) + (50 * LandPumpkins) ≤ 34000
+
+------------------------------------------------------
+For clarity, note that all units are consistent:
+- Acre measurements for land.
+- Minutes for watering.
+- USD per acre for costs and revenue.
+This formulation models the decision of how many acres to allocate to turnips and pumpkins in order to maximize the farmer's revenue under the given resource constraints.
+
+Execution Results:
+SUCCESS:
+Model 1 (Linear Programming Optimization) Results:
+{'variables': {'LandTurnips': 124.99999999999997, 'LandPumpkins': 375.00000000000006}, 'objective': 206250.00000000003}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'LandTurnips': 125.0, 'LandPumpkins': 375.0}, 'objective': 206250.0}

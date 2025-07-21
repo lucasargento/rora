@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Formulation 1 (Using constraint: 7 * TopsoilBags <= 3 * SubsoilBags):\n{'SubsoilBags': 24.0, 'TopsoilBags': 10.0, 'objective': 300.0}\n\nResults for Formulation 2 (Using constraint: TopsoilBags <= 0.3*(SubsoilBags + TopsoilBags)):\n{'SubsoilBags': 24.0, 'TopsoilBags': 10.0, 'objective': 300.0}\n"
+}

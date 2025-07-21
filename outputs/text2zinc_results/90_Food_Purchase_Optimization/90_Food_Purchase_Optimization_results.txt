@@ -1,0 +1,32 @@
+Problem Name: 90_Food_Purchase_Optimization
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:} \quad & K \quad \text{(number of food types)} \\
+& M \quad \text{(number of nutrients)} \\
+& \text{Price}_k \quad \text{(price per unit of food } k\text{), for } k=1,\ldots,K \\
+& \text{Demand}_m \quad \text{(required amount of nutrient } m\text{), for } m=1,\ldots,M \\
+& \text{Nutrition}_{km} \quad \text{(amount of nutrient } m \text{ in one unit of food } k\text{), for } k=1,\ldots,K,\; m=1,\ldots,M \\[1ex]
+\textbf{Decision Variables:} \quad & x_k \geq 0, \quad k = 1, \ldots, K, \\
+& \quad \text{where } x_k \text{ is the quantity of food type } k \text{ to buy.} \\[1ex]
+\textbf{Objective Function:} \quad & \min \; Z = \sum_{k=1}^{K} \text{Price}_k \, x_k \\
+& \quad \text{(minimize the total cost of purchasing the food).} \\[1ex]
+\textbf{Constraints:} \quad & \sum_{k=1}^{K} \text{Nutrition}_{km} \, x_k \geq \text{Demand}_m, \quad \forall \; m \in \{1, \ldots, M\}, \\
+& \quad \text{(ensure that the amount of each nutrient } m \text{ meets or exceeds its demand).} \\[1ex]
+& \text{Additionally, } x_k \ge 0, \quad \forall \; k \in \{1, \ldots, K\} \\
+& \quad \text{(non-negativity constraints, ensuring feasibility and a bounded solution).}
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Food 1: 4.0
+Food 2: 0.0
+Food 3: 0.0
+Total cost = 4.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 4.0}

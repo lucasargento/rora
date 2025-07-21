@@ -1,0 +1,44 @@
+Problem Name: 12_Floppy_Disk_File_Distribution
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Sets:} \quad & i \in \{1, 2, \ldots, N\} \quad \text{(set of available floppy disks)}\\[1mm]
+& j \in \{1, 2, \ldots, N\} \quad \text{(set of files)}\\[2mm]
+\textbf{Parameters:} \quad & N \quad \text{Number of files}\\[1mm]
+& C \quad \text{Capacity of each floppy disk}\\[1mm]
+& s_j \quad \text{Size of file } j, \quad j = 1,\ldots, N\\[2mm]
+\textbf{Decision Variables:} \quad & x_{ij} \in \{0,1\} \quad \forall i=1,\ldots,N,\; j=1,\ldots,N,\\[1mm]
+& \quad\quad\quad\; \text{where } x_{ij} = 
+  \begin{cases}
+    1, & \text{if file } j \text{ is stored on disk } i, \\
+    0, & \text{otherwise.}
+  \end{cases}\\[2mm]
+& y_i \in \{0,1\} \quad \forall i=1,\ldots,N,\\[1mm]
+& \quad\quad\quad\; \text{where } y_i = 
+  \begin{cases}
+    1, & \text{if disk } i \text{ is used,} \\
+    0, & \text{otherwise.}
+  \end{cases}\\[2mm]
+\textbf{Objective Function:} \quad & \min \; \sum_{i=1}^{N} y_i \quad \text{(minimize the number of disks used)}\\[2mm]
+\textbf{Constraints:} \\[1mm]
+\text{(1) Assignment Constraint:} \quad & \sum_{i=1}^{N} x_{ij} = 1 \quad \forall j = 1,\ldots,N, \\
+& \quad\quad\quad\; \text{(each file is assigned to exactly one disk)} \\[2mm]
+\text{(2) Capacity Constraint:} \quad & \sum_{j=1}^{N} s_j \, x_{ij} \leq C \, y_i \quad \forall i = 1,\ldots,N, \\
+& \quad\quad\quad\; \text{(the total size of files on disk } i \text{ does not exceed its capacity)}.
+\end{align*}  
+
+This complete model accurately formulates the scheduling (or bin-packing) problem where we decide on file-to-disk assignments with the goal of minimizing the number of floppy disks used, ensuring each file is backed up and that each disk’s capacity is not exceeded.
+
+Execution Results:
+SUCCESS:
+Solution:
+Minimum number of disks used = 3.0
+Disk 0 (load 2.5/3) -> files: [0, 3]
+Disk 1 (load 3.0/3) -> files: [2, 4]
+Disk 2 (load 2/3) -> files: [1]
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 3.0}

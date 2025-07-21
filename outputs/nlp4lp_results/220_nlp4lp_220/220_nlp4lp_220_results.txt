@@ -1,0 +1,66 @@
+Problem Name: 220_nlp4lp_220
+
+# Problem Description:
+'''Problem description: A mask making company ships masks to their retail stores using small boxes and large boxes. A small box holds 25 masks whereas a large box holds 45 masks. Since small boxes are easier to stack and will be used first to stock stores, there must be at least three times as many small boxes as large boxes. Additionally, at least 5 large boxes must be used. If at least 750 masks are required to be distributed, how many of each size of box should be used to minimize the total number of boxes needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberSmallBoxes": "float",
+    "NumberLargeBoxes": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- BoxTypes = {Small, Large}
+
+Parameters:
+- small_box_capacity = 25      // Each small box holds 25 masks (masks per box)
+- large_box_capacity = 45      // Each large box holds 45 masks (masks per box)
+- min_large_boxes = 5          // At least 5 large boxes must be used (boxes)
+- min_total_masks = 750        // At least 750 masks must be distributed (masks)
+- ratio_small_to_large = 3     // There must be at least three times as many small boxes as large boxes
+
+Variables:
+- NumberSmallBoxes: integer, >= 0    // Number of small boxes used
+- NumberLargeBoxes: integer, >= 0    // Number of large boxes used
+
+Objective:
+- Minimize total boxes used =
+  NumberSmallBoxes + NumberLargeBoxes
+
+Constraints:
+1. Capacity constraint (mask requirement):
+   small_box_capacity * NumberSmallBoxes + large_box_capacity * NumberLargeBoxes >= min_total_masks
+   (i.e., 25 * NumberSmallBoxes + 45 * NumberLargeBoxes >= 750)
+
+2. Ratio constraint (use small boxes first):
+   NumberSmallBoxes >= ratio_small_to_large * NumberLargeBoxes
+   (i.e., NumberSmallBoxes >= 3 * NumberLargeBoxes)
+
+3. Minimum large boxes constraint:
+   NumberLargeBoxes >= min_large_boxes
+   (i.e., NumberLargeBoxes >= 5)
+
+------------------------------------------------------------
+Expected Output Schema:
+{
+  "variables": {
+    "NumberSmallBoxes": "float",
+    "NumberLargeBoxes": "float"
+  },
+  "objective": "float"
+}
+
+Execution Results:
+SUCCESS:
+Version 1 (Linear Programming Model) Optimal Solution:
+{'variables': {'NumberSmallBoxes': 21.0, 'NumberLargeBoxes': 5.0}, 'objective': 26.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberSmallBoxes': 21.0, 'NumberLargeBoxes': 5.0}, 'objective': 26.0}

@@ -1,0 +1,68 @@
+Problem Name: 154_nlp4lp_154
+
+# Problem Description:
+'''Problem description: A village hosts a banquet and provides bike and car transportation for everyone. A bike can take 3 people while a car can take 5 people. Since cars are more expensive, at most 40% of the vehicles can be cars. If the village needs to transport at least 500 people, how many of each vehicle should be used to minimize the total number of bikes needed?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfBikes": "float",
+    "NumberOfCars": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the complete five‐element structured model that represents the problem exactly as described.
+
+--------------------------------------------------
+
+Sets:
+- Vehicles = {Bike, Car}  
+  (Note: Although only two types exist, we keep them separate for clarity.)
+
+Parameters:
+- capacity_Bike = 3   (number of people a bike can transport)
+- capacity_Car = 5    (number of people a car can transport)
+- min_people = 500    (minimum number of people to be transported)
+- max_car_fraction = 0.4   (maximum allowed fraction of vehicles that can be cars)
+
+Variables:
+- NumberOfBikes: number of bikes used [nonnegative real number, assume integer in practical implementation]
+- NumberOfCars: number of cars used [nonnegative real number, assume integer in practical implementation]
+
+Objective:
+- Minimize the total number of bikes, i.e., minimize NumberOfBikes  
+  (Here, the assumption is that bikes are cheaper relative to limiting total vehicles but the goal is to reduce the deployed bike count.)
+
+Constraints:
+1. Transportation capacity constraint:  
+   3 * NumberOfBikes + 5 * NumberOfCars >= 500  
+   (This ensures that the combined capacity of bikes and cars covers at least 500 people.)
+
+2. Car fraction constraint:  
+   NumberOfCars <= 0.4 * (NumberOfBikes + NumberOfCars)  
+   (This ensures that cars do not exceed 40% of the total vehicles used.)  
+
+--------------------------------------------------
+
+Additional Comments:
+- Both NumberOfBikes and NumberOfCars are decision variables and although the expected output schema lists them as float, in practice they should be integers since you cannot use a fraction of a vehicle.
+- All capacities and the minimum requirement are expressed in "people".
+- The car fraction is expressed as a percentage (40%) in its decimal form (0.4) ensuring unit consistency with the overall count of vehicles.
+
+This model is complete, self-contained, and logically consistent for implementing in any optimization solver such as OR-Tools or Python-based frameworks.
+
+Execution Results:
+SUCCESS:
+Results for Model 1 (Original constraint formulation):
+{'NumberOfBikes': 80.0, 'NumberOfCars': 53.0, 'objective': 80.0}
+
+Results for Model 2 (Simplified constraint formulation):
+{'NumberOfBikes': 80.0, 'NumberOfCars': 53.0, 'objective': 80.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfBikes': 80.0, 'NumberOfCars': 53.0}, 'objective': 80.0}

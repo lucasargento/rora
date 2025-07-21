@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nModel 1: Linear Programming Formulation using GLOP\nOptimal solution:\n{'variables': {'OriginalMeals': 0.0, 'ExperimentalMeals': 0.0}, 'objective': 0.0}\n"
+}

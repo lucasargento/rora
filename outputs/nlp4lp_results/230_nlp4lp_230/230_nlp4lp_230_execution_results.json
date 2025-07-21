@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults for Model Version 1 (Original Constraint Formulation):\n{'NumGolfCarts': 17.0, 'NumPullCarts': 12.0, 'objective': 29.0}\n\nResults for Model Version 2 (Alternative Rearranged Constraint):\n{'NumGolfCarts': 17.0, 'NumPullCarts': 12.0, 'objective': 29.0}\n"
+}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nMethod: LinearSolver\n  Solution: {'SmallSuitcasesUsed': 47.0, 'LargeSuitcasesUsed': 23.0}\n  TotalSnacksDelivered: 4190.0\n\nMethod: CPSolver\n  Solution: {'SmallSuitcasesUsed': 47, 'LargeSuitcasesUsed': 23}\n  TotalSnacksDelivered: 4190\n"
+}

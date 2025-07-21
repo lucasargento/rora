@@ -1,0 +1,66 @@
+Problem Name: 224_nlp4lp_224
+
+# Problem Description:
+'''Problem description: There are two ways to extract a metal from mined ores. The first way is to use process J and the second is process P. Process J can extract 5 units of metal using 8 units of water and produces 3 units of pollution. Process P can extract 9 units of metal using 6 units of water and produces 5 units of pollution. There can be at most 1500 units of water 1350 units of pollution. How many of each type of processes should be performed to maximize the amount of metal extracted?
+
+Expected Output Schema:
+{
+  "variables": {
+    "ProcessUnit": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- P: set of processes = {J, P}
+
+Parameters:
+- metal_p: amount of metal extracted per operation of process p [units of metal]
+  • metal_J = 5, metal_P = 9
+- water_p: water used per operation of process p [units of water]
+  • water_J = 8, water_P = 6
+- pollution_p: pollution produced per operation of process p [units of pollution]
+  • pollution_J = 3, pollution_P = 5
+- max_water: maximum available water [units of water] = 1500
+- max_pollution: maximum allowed pollution [units of pollution] = 1350
+
+Variables:
+- x_p: number of operations to perform for process p [real number ≥ 0]
+  • x_J: operations under process J (can be nonnegative float; if process counts must be integer, then restrict accordingly)
+  • x_P: operations under process P (can be nonnegative float; if process counts must be integer, then restrict accordingly)
+  
+(In the expected output schema, these are represented as ProcessUnit { "0": x_J, "1": x_P } with float values.)
+
+Objective:
+- Maximize total metal extracted defined as:
+  TotalMetal = metal_J * x_J + metal_P * x_P
+  (Units: units of metal)
+
+Constraints:
+1. Water usage constraint:
+   water_J * x_J + water_P * x_P ≤ max_water
+   (8 * x_J + 6 * x_P ≤ 1500)
+
+2. Pollution constraint:
+   pollution_J * x_J + pollution_P * x_P ≤ max_pollution
+   (3 * x_J + 5 * x_P ≤ 1350)
+
+Note: All parameters are in consistent units as described (units of water, metal, and pollution). The model assumes that process counts (x_J and x_P) can be fractional; if only whole process operations are allowed, then x_J and x_P should be declared as integer variables.
+
+Execution Results:
+SUCCESS:
+Continuous Model Result:
+{'ProcessUnit': {'0': 0.0, '1': 249.99999999999994}, 'objective': 2249.9999999999995}
+
+Integer Model Result:
+{'ProcessUnit': {'0': 0.0, '1': 250.0}, 'objective': 2250.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'ProcessUnit': {'0': 0.0, '1': 250.0}}, 'objective': 2250.0}

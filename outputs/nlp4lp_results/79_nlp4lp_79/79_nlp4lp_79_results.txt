@@ -1,0 +1,103 @@
+Problem Name: 79_nlp4lp_79
+
+# Problem Description:
+'''Problem description: A candy company is making peach flavored candy and cherry flavored candy. Each pack of peach flavored candy requires 3 units of peach flavoring and 5 units of special syrup. Each pack of cherry flavored candy requires 5 units of cherry flavoring and 4 units of special syrup. The company has available 3000 units of peach flavoring and 4000 units of cherry flavoring. Peach candy is much more popular and thus the number of peach candy packs must be larger than the number of cherry candy packs. In addition, at least 30% of the pack must be cherry flavored. How many of each should be made to minimize the total amount of special syrup used?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfPeachPacks": "float",
+    "NumberOfCherryPacks": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the complete formulation following the five‐element structure.
+
+---------------------------------------------------------
+Sets:
+- CandyTypes: {Peach, Cherry}
+
+---------------------------------------------------------
+Parameters:
+- peach_flavor_per_pack (Peach candy): 3 units per pack
+- cherry_flavor_per_pack (Cherry candy): 5 units per pack
+- syrup_per_pack_peach (Peach candy): 5 units per pack
+- syrup_per_pack_cherry (Cherry candy): 4 units per pack
+- available_peach_flavor: 3000 units  
+- available_cherry_flavor: 4000 units  
+- cherry_min_share: 0.30    (minimum share of total packs that must be cherry)
+
+Notes on units: All “units” are assumed to be consistent (e.g., units of flavoring or syrup per pack).
+
+---------------------------------------------------------
+Variables:
+- NumberOfPeachPacks: number of peach flavored candy packs produced (nonnegative integer; can be modeled as integer or continuous if approximations are acceptable)
+- NumberOfCherryPacks: number of cherry flavored candy packs produced (nonnegative integer; similarly, integer or continuous)
+
+---------------------------------------------------------
+Objective:
+Minimize TotalSyrupUsed, where
+  TotalSyrupUsed = syrup_per_pack_peach * NumberOfPeachPacks + syrup_per_pack_cherry * NumberOfCherryPacks
+
+In other words, minimize 5 * NumberOfPeachPacks + 4 * NumberOfCherryPacks
+
+---------------------------------------------------------
+Constraints:
+1. Peach flavoring availability:  
+   peach_flavor_per_pack * NumberOfPeachPacks <= available_peach_flavor  
+   i.e., 3 * NumberOfPeachPacks <= 3000
+
+2. Cherry flavoring availability:  
+   cherry_flavor_per_pack * NumberOfCherryPacks <= available_cherry_flavor  
+   i.e., 5 * NumberOfCherryPacks <= 4000
+
+3. Popularity constraint (peach candy is much more popular):  
+   NumberOfPeachPacks > NumberOfCherryPacks
+
+4. Composition constraint (at least 30% of the total packs must be cherry flavored):  
+   NumberOfCherryPacks >= cherry_min_share * (NumberOfPeachPacks + NumberOfCherryPacks)  
+   This can be rearranged as:  
+   NumberOfPeachPacks <= (1/cherry_min_share - 1) * NumberOfCherryPacks  
+   Since 1/0.30 - 1 equals 7/3 (approximately 2.333), the inequality becomes:  
+   NumberOfPeachPacks <= (7/3) * NumberOfCherryPacks
+
+5. Non-negativity:  
+   NumberOfPeachPacks >= 0,  NumberOfCherryPacks >= 0
+
+---------------------------------------------------------
+Summary in the Expected Output Schema:
+
+{
+  "variables": {
+    "NumberOfPeachPacks": "float (nonnegative, ideally integer)",
+    "NumberOfCherryPacks": "float (nonnegative, ideally integer)"
+  },
+  "objective": "Minimize 5 * NumberOfPeachPacks + 4 * NumberOfCherryPacks (minimizes total syrup used)"
+}
+
+---------------------------------------------------------
+This complete model is ready for implementation in an optimization solver (or as a guideline for an OR-Tools/Python script).
+
+Execution Results:
+SUCCESS:
+Solution for Model 1 (Linear Formulation):
+NumberOfPeachPacks = 2.0
+NumberOfCherryPacks = 1.0
+Optimal Total Syrup Used = 14.0
+
+Structured Output for Model 1:
+{
+  "variables": {
+    "NumberOfPeachPacks": "float (nonnegative, ideally integer)",
+    "NumberOfCherryPacks": "float (nonnegative, ideally integer)"
+  },
+  "objective": "Minimize 5 * NumberOfPeachPacks + 4 * NumberOfCherryPacks (minimizes total syrup used)"
+}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfPeachPacks': 0.0, 'NumberOfCherryPacks': 0.0}, 'objective': 0.0}

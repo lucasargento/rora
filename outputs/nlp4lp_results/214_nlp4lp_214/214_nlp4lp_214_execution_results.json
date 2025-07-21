@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving Integer Model (MIP) with CBC:\nInteger Model Optimal Solution:\n{'variables': {'NumberOfChopSaws': 8.0, 'NumberOfSteelCutters': 64.0}, 'objective': 72.0}\n\nSolving Relaxed Model (LP) with GLOP:\nRelaxed Model Optimal Solution:\n{'variables': {'NumberOfChopSaws': 8.800000000000002, 'NumberOfSteelCutters': 59.999999999999986}, 'objective': 68.79999999999998}\n"
+}

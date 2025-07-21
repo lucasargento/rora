@@ -1,0 +1,71 @@
+Problem Name: 187_nlp4lp_187
+
+# Problem Description:
+'''Problem description: A repairman fixes washing machines and freezers. Each washing machine takes 30 minutes of inspection and 90 minutes of fixing time. Each freezer takes 20 minutes of inspection and 125 minutes of fixing time. The repairman has 5000 minutes available for inspection and 20000 minutes available in his schedule. If each washing machine repaired earns him $250 and each freezer repaired earns his $375, how many of each appliance should he fix to maximize his earnings?
+
+Expected Output Schema:
+{
+  "variables": {
+    "WashingMachinesInspected": "float",
+    "FreezersInspected": "float",
+    "WashingMachinesRepaired": "float",
+    "FreezersRepaired": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- A: set of appliance types = {WashingMachine, Freezer}
+
+Parameters:
+- inspection_time_WM: inspection time per washing machine [minutes] = 30
+- repair_time_WM: repair time per washing machine [minutes] = 90
+- inspection_time_FR: inspection time per freezer [minutes] = 20
+- repair_time_FR: repair time per freezer [minutes] = 125
+- revenue_WM: revenue per washing machine repaired [USD] = 250
+- revenue_FR: revenue per freezer repaired [USD] = 375
+- max_inspection_time: total available inspection time [minutes] = 5000
+- max_repair_time: total available repair time [minutes] = 20000
+
+Variables:
+- WashingMachinesInspected: number of washing machines inspected [nonnegative integer]
+- WashingMachinesRepaired: number of washing machines repaired [nonnegative integer]
+- FreezersInspected: number of freezers inspected [nonnegative integer]
+- FreezersRepaired: number of freezers repaired [nonnegative integer]
+  (Note: In this model it is assumed that an appliance must be inspected before it is repaired. Therefore, each washing machine (or freezer) that is repaired is also inspected.)
+
+Objective:
+- Maximize total revenue = (revenue_WM * WashingMachinesRepaired) + (revenue_FR * FreezersRepaired)
+
+Constraints:
+1. Inspection time constraint:
+   30 * WashingMachinesInspected + 20 * FreezersInspected ≤ max_inspection_time
+
+2. Repair time constraint:
+   90 * WashingMachinesRepaired + 125 * FreezersRepaired ≤ max_repair_time
+
+3. Synchronization constraints (inspection precedes repair):
+   WashingMachinesInspected = WashingMachinesRepaired
+   FreezersInspected = FreezersRepaired
+
+Comments:
+- All time parameters are in minutes and all revenue parameters are in US dollars per repaired appliance.
+- The synchronization constraints reflect the assumption that each appliance fixed must be inspected first. If however the inspection process can extend to appliances that are not fixed, then these two pairs of variables might be decoupled and additional modeling of inspection-to-repair conversion would be required.
+- The decision variables are modeled as nonnegative integers, though they are declared as floats in the expected schema; in an integer programming implementation, they would be integer-valued.
+
+This complete model adheres to the five-element structure and is directly mappable to a working implementation in Python or OR-Tools.
+
+Execution Results:
+SUCCESS:
+Results for Formulation 1 (Strict Synchronization):
+{'WashingMachinesInspected': 0.0, 'WashingMachinesRepaired': 0.0, 'FreezersInspected': 160.0, 'FreezersRepaired': 160.0, 'objective': 60000.0}
+
+Results for Formulation 2 (Decoupled Inspection & Repair):
+{'WashingMachinesInspected': 60.0, 'WashingMachinesRepaired': 0.0, 'FreezersInspected': 160.0, 'FreezersRepaired': 160.0, 'objective': 60000.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'WashingMachinesInspected': 0.0, 'FreezersInspected': 0.0, 'WashingMachinesRepaired': -0.0, 'FreezersRepaired': 160.0}, 'objective': 60000.0}

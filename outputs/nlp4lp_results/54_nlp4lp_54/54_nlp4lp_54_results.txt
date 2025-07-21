@@ -1,0 +1,101 @@
+Problem Name: 54_nlp4lp_54
+
+# Problem Description:
+'''Problem description: A clinic employs nurses and pharmacists to deliver shots to patients. A nurse works 5 hours per shift while a pharmacist works 7 hours per shift. Nurses are paid $250 per shift while pharmacists are paid $300 per shift. Currently, the clinic needs 200 hours of healthcare labor to meet needs. If the firm has a budget of $9000, how many of each healthcare worker should be scheduled to minimize the total number of workers?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfNurseShifts": "float",
+    "NumberOfPharmacistShifts": "float",
+    "NumberOfNurses": "float",
+    "NumberOfPharmacists": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+{
+  "Sets": {
+    "WorkerTypes": ["Nurse", "Pharmacist"]
+  },
+  "Parameters": {
+    "nurse_shift_hours": {
+      "value": 5,
+      "units": "hours per shift",
+      "description": "Number of work hours provided by one nurse shift"
+    },
+    "pharmacist_shift_hours": {
+      "value": 7,
+      "units": "hours per shift",
+      "description": "Number of work hours provided by one pharmacist shift"
+    },
+    "nurse_cost_per_shift": {
+      "value": 250,
+      "units": "USD per shift",
+      "description": "Cost to employ a nurse for one shift"
+    },
+    "pharmacist_cost_per_shift": {
+      "value": 300,
+      "units": "USD per shift",
+      "description": "Cost to employ a pharmacist for one shift"
+    },
+    "required_hours": {
+      "value": 200,
+      "units": "hours",
+      "description": "Total required healthcare labor hours to be delivered"
+    },
+    "budget": {
+      "value": 9000,
+      "units": "USD",
+      "description": "Total budget available to pay for the shifts"
+    }
+  },
+  "Variables": {
+    "NumberOfNurseShifts": {
+      "type": "integer",
+      "lower_bound": 0,
+      "description": "Number of nurse shifts scheduled"
+    },
+    "NumberOfPharmacistShifts": {
+      "type": "integer",
+      "lower_bound": 0,
+      "description": "Number of pharmacist shifts scheduled"
+    },
+    "NumberOfNurses": {
+      "type": "integer",
+      "lower_bound": 0,
+      "description": "Number of nurses scheduled; assumed one shift corresponds to one nurse"
+    },
+    "NumberOfPharmacists": {
+      "type": "integer",
+      "lower_bound": 0,
+      "description": "Number of pharmacists scheduled; assumed one shift corresponds to one pharmacist"
+    }
+  },
+  "Objective": {
+    "expression": "NumberOfNurseShifts + NumberOfPharmacistShifts",
+    "sense": "minimize",
+    "description": "Minimize the total number of healthcare workers scheduled"
+  },
+  "Constraints": {
+    "HealthcareHoursConstraint": "5 * NumberOfNurseShifts + 7 * NumberOfPharmacistShifts >= 200",
+    "BudgetConstraint": "250 * NumberOfNurseShifts + 300 * NumberOfPharmacistShifts <= 9000",
+    "NurseShiftWorkerLink": "NumberOfNurseShifts == NumberOfNurses",
+    "PharmacistShiftWorkerLink": "NumberOfPharmacistShifts == NumberOfPharmacists"
+  }
+}
+
+Execution Results:
+SUCCESS:
+Solving Model Version 1 (Using shift variables only):
+{'variables': {'NumberOfNurseShifts': 0.0, 'NumberOfPharmacistShifts': 29.0, 'NumberOfNurses': 0.0, 'NumberOfPharmacists': 29.0}, 'objective': 29.0}
+
+Solving Model Version 2 (Using separate shift and worker variables with linking constraints):
+{'variables': {'NumberOfNurseShifts': 0.0, 'NumberOfPharmacistShifts': 29.0, 'NumberOfNurses': 0.0, 'NumberOfPharmacists': 29.0}, 'objective': 29.0}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfNurseShifts': 12.0, 'NumberOfPharmacistShifts': 20.0, 'NumberOfNurses': -0.0, 'NumberOfPharmacists': -0.0}, 'objective': 0.0}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\n{'LinearSolver_Model': {'variables': {'NumberOfBusTrips': 6, 'NumberOfCarTrips': 15}, 'objective': 34.5}}\n"
+}

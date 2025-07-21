@@ -1,0 +1,30 @@
+Problem Name: 103_Knapsack_Problem
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Parameters:} \quad & C \in \mathbb{R}_+,\quad \text{the total capacity of the knapsack (given } C=10\text{)},\\[1mm]
+& v_k \in \mathbb{R}_+,\quad \text{the value of item } k,\quad \text{with } v_1=10,\; v_2=20,\\[1mm]
+& s_k \in \mathbb{R}_+,\quad \text{the size of item } k,\quad \text{with } s_1=8,\; s_2=6.\\[2mm]
+\textbf{Indices:} \quad & k \in \{1,2\}.\\[2mm]
+\textbf{Decision Variables:} \quad & x_k \in \{0,1\},\quad \forall\, k \in \{1,2\},\\[1mm]
+& \quad \text{where } x_k = \begin{cases} 
+1, & \text{if item } k \text{ is selected},\\[1mm]
+0, & \text{otherwise}.
+\end{cases}\\[2mm]
+\textbf{Objective Function:} \quad & \text{maximize } Z = \sum_{k=1}^{2} v_k x_k.\\[2mm]
+\textbf{Constraints:} \quad & \sum_{k=1}^{2} s_k x_k \leq C.
+\end{align*}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Item 1: selected = 0
+Item 2: selected = 1
+Total value: 20.0
+Total size: 6.0
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 20.0}

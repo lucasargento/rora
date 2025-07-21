@@ -1,0 +1,78 @@
+Problem Name: 73_nlp4lp_73
+
+# Problem Description:
+'''Problem description: A toy company can build two factory types, a medium sized factory and a small factory. A medium sized factory can make 50 toys per day and requires 3 operators. A small factory can make 35 toys per day and requires 2 operators. The company must make at least 250 toys per day but they only have available 16 operators. How many of each factory should the company build to minimize the total number of factories?
+
+Expected Output Schema:
+{
+  "variables": {
+    "NumberOfFactories": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- F: set of factory types = {Medium, Small}
+
+Parameters:
+- production_per_factory:
+    - Medium: 50 (toys produced per day)
+    - Small: 35 (toys produced per day)
+- operators_required:
+    - Medium: 3 (operators needed per factory)
+    - Small: 2 (operators needed per factory)
+- min_toys: 250 (minimum number of toys required per day)
+- available_operators: 16 (total operators available)
+
+Variables:
+- x, where:
+    - x[Medium] is the number of medium factories (integer ≥ 0)
+    - x[Small] is the number of small factories (integer ≥ 0)
+
+Objective:
+- Minimize the total number of factories, i.e., minimize x[Medium] + x[Small]
+
+Constraints:
+1. Production constraint:
+   - 50 * x[Medium] + 35 * x[Small] ≥ 250 
+     (ensuring the total toy production meets or exceeds the daily requirement)
+2. Operator constraint:
+   - 3 * x[Medium] + 2 * x[Small] ≤ 16 
+     (ensuring the total number of operators required does not exceed availability)
+
+--------------------------------------------------
+
+Based on the expected output schema:
+
+{
+  "variables": {
+    "NumberOfFactories": {
+      "0": "float",   // corresponds to x[Medium]
+      "1": "float"    // corresponds to x[Small]
+    }
+  },
+  "objective": "float"   // represents x[Medium] + x[Small]
+}
+
+Notes:
+- In practical implementation, the decision variables should be constrained to integer values.
+- All units (toys/day for production, number of operators for staffing) are assumed consistent as specified in the problem description.
+
+Execution Results:
+SUCCESS:
+Results:
+
+Implementation_1:
+  Status: Optimal
+  Solution: {'NumberOfFactories': {'0': 5.0, '1': 0.0}, 'objective': 5.0}
+  ObjectiveValue: 5.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'NumberOfFactories': {'0': 5.0, '1': -0.0}}, 'objective': 5.0}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nSolving production transportation problem using two formulations.\n\nInteger Model (Vehicles as Integers):\n  NumberLargeUnits = 15\n  NumberSmallUnits = 5\n  Total Parking Spots = 35.0\n\n---------------------------\n\nContinuous Model (Vehicles as Continuous Variables):\n  NumberLargeUnits = 15.0\n  NumberSmallUnits = 5.0\n  Total Parking Spots = 35.0\n"
+}

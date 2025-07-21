@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nModel: Linear_Solver_Model\nVariables:\n  NumberLargePizzas: 629.0\n  NumberMediumPizzas: 314.0\nObjective Value: 10060.0\n"
+}

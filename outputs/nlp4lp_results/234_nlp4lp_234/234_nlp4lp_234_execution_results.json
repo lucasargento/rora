@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nOptimization Results:\n\nModel: Single Trip per Runner\nObjective Value: 310.0\nVariables:\n  NumRunnerTrips = 40.0\n  NumCanoeTrips = 19.0\n  NumberOfRunners = 40.0\n\nModel: Multiple Trips per Runner\nObjective Value: 310.0\nVariables:\n  NumRunnerTrips = 40.0\n  NumCanoeTrips = 19.0\n  NumberOfRunners = 4.0\n"
+}

@@ -1,0 +1,94 @@
+Problem Name: 197_nlp4lp_197
+
+# Problem Description:
+'''Problem description: The government is reworking the pipes to transport water to houses in the area. The water can be transported through wide pipes or narrow pipes. Wide pipes can transport 25 units of water per minute and narrow pipes can transport 15 units of water per minute. Due to logistics, the number of wide pipes can be at most a third the number of narrow pipes. If there needs to be at least 900 units of water transported every minute, and at least 5 wide pipes must be used, minimize the total number of pipes required.
+
+Expected Output Schema:
+{
+  "variables": {
+    "WidePipes": "float",
+    "NarrowPipes": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is a five-element structured formulation of the problem. Note that pipes are assumed to be counted in whole numbers (integers). For simplicity, we assume all capacities and flows are stated in water units per minute.
+
+--------------------------------------------------
+
+Sets:
+• (None required for this two-variable problem)
+
+Parameters:
+• WidePipeFlow = 25 (water units per minute delivered by one wide pipe)
+• NarrowPipeFlow = 15 (water units per minute delivered by one narrow pipe)
+• MinWaterFlow = 900 (minimum water flow required in water units per minute)
+• MaxWidePipesRatio = 1/3 (the number of wide pipes can be at most one third of the number of narrow pipes)
+• MinWidePipes = 5 (minimum number of wide pipes must be used)
+
+Variables:
+• WidePipes: an integer representing the number of wide pipes used (integer ≥ MinWidePipes)
+• NarrowPipes: an integer representing the number of narrow pipes used (integer ≥ 0)
+
+Objective:
+• Minimize total number of pipes = WidePipes + NarrowPipes
+
+Constraints:
+1. Water Flow Constraint:
+   • 25 * WidePipes + 15 * NarrowPipes ≥ 900
+     (ensures that the total water delivered per minute meets the minimum requirement)
+
+2. Pipe Ratio Constraint:
+   • WidePipes ≤ (1/3) * NarrowPipes
+     (ensures that the number of wide pipes is at most one third of the number of narrow pipes)
+
+3. Minimum Wide Pipe Constraint:
+   • WidePipes ≥ 5
+
+--------------------------------------------------
+
+This formulation fully captures the original problem. One can map these elements directly to a Python or OR-Tools implementation. 
+
+For the expected output schema as a JSON object, here is a concise version:
+
+{
+  "variables": {
+    "WidePipes": "integer, number of wide pipes (>= 5)",
+    "NarrowPipes": "integer, number of narrow pipes (>= 0)"
+  },
+  "objective": "Minimize: WidePipes + NarrowPipes"
+}
+
+All parameters and units have been explicitly stated to ensure clarity and consistency with the problem data.
+
+Execution Results:
+SUCCESS:
+{
+  "LinearSolver": {
+    "status": "Optimal",
+    "result": {
+      "variables": {
+        "WidePipes": 13,
+        "NarrowPipes": 39
+      },
+      "objective": 52
+    }
+  },
+  "CPSolver": {
+    "status": "Optimal",
+    "result": {
+      "variables": {
+        "WidePipes": 12,
+        "NarrowPipes": 40
+      },
+      "objective": 52
+    }
+  }
+}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'WidePipes': 12.0, 'NarrowPipes': 40.0}, 'objective': 52.0}

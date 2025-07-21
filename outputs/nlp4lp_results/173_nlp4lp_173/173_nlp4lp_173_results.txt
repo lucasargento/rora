@@ -1,0 +1,64 @@
+Problem Name: 173_nlp4lp_173
+
+# Problem Description:
+'''Problem description: An appliance company sells and installs refrigerators and stoves. Each refrigerator takes 60 minutes of mover time and 20 minutes of setup time. Each stove takes 45 minutes of mover time and 25 minutes of setup time. The company has available 20000 minutes of mover time and 13000 minutes of setup time. If the profit per refrigerator is $400 and the profit per stove is $260, how many of each should they sell in order to maximize profit?
+
+Expected Output Schema:
+{
+  "variables": {
+    "QuantityOfProduct": {
+      "0": "float",
+      "1": "float"
+    }
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- P: set of products = {Refrigerator, Stove}
+
+Parameters:
+- profit_p: profit per unit of product p [USD per unit]
+   - profit_Refrigerator = 400
+   - profit_Stove = 260
+- mover_time_p: mover time required per unit of product p [minutes per unit]
+   - mover_time_Refrigerator = 60
+   - mover_time_Stove = 45
+- setup_time_p: setup time required per unit of product p [minutes per unit]
+   - setup_time_Refrigerator = 20
+   - setup_time_Stove = 25
+- total_mover_time: total available mover time [minutes] = 20000
+- total_setup_time: total available setup time [minutes] = 13000
+
+Variables:
+- x_p: number of units of product p to sell and install [integer, ≥ 0]
+   - x_Refrigerator: number of refrigerators sold and installed
+   - x_Stove: number of stoves sold and installed
+
+Objective:
+- Maximize total profit = profit_Refrigerator * x_Refrigerator + profit_Stove * x_Stove
+
+Constraints:
+- Mover time constraint: mover_time_Refrigerator * x_Refrigerator + mover_time_Stove * x_Stove ≤ total_mover_time
+- Setup time constraint: setup_time_Refrigerator * x_Refrigerator + setup_time_Stove * x_Stove ≤ total_setup_time
+
+Note:
+- All time units are in minutes.
+- Decision variables x_Refrigerator and x_Stove are assumed to be integer values because fractional appliances do not make sense in this context.
+
+Execution Results:
+SUCCESS:
+----- Solution using ortools.linear_solver (CBC) -----
+Optimal decision variables: {'QuantityOfProduct': {'0': 333.0, '1': 0.0}}
+Optimal objective value: 133200.0
+
+----- Solution using ortools.sat.python.cp_model -----
+Optimal decision variables: {'QuantityOfProduct': {'0': 333, '1': 0}}
+Optimal objective value: 133200.0
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'QuantityOfProduct': {'0': 333.3333333333333, '1': 0.0}}, 'objective': 133333.3333333333}

@@ -1,0 +1,97 @@
+Problem Name: 232_nlp4lp_232
+
+# Problem Description:
+'''Problem description: A handmade sports equipment manufacturing company makes basketballs and footballs. Basketballs require 5 units of materials and 1 hour to make whereas footballs require 3 units of materials and 2 hours to make. The manufacturing company has available 1500 units of materials and their workers working at max capacity can work for at most 750 hours. Since basketballs sell better, there must be at least three times as many basketballs as footballs but the manufacturing company would like at least 50 footballs. How many of each should the manufacturing company make to maximize the total number of sports equipment produced?
+
+Expected Output Schema:
+{
+  "variables": {
+    "ProductionQuantity": {
+      "0": "float",
+      "1": "float"
+    },
+    "ProductionQuantityBasketballs": "float",
+    "ProductionQuantityFootballs": "float"
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Below is the formulation of the problem using the five-element framework.
+
+-----------------------------------------------------
+Sets:
+- E: set of equipment types = {basketball, football}
+
+-----------------------------------------------------
+Parameters:
+- material_per_basketball = 5 units per basketball (material consumption per unit)
+- material_per_football = 3 units per football (material consumption per unit)
+- labor_per_basketball = 1 hour per basketball (labor consumption per unit)
+- labor_per_football = 2 hours per football (labor consumption per unit)
+- max_material = 1500 units (total available material)
+- max_labor = 750 hours (total available worker hours)
+- min_football = 50 (minimum number of footballs to produce)
+- basketball_to_football_ratio = 3 (minimum factor such that number of basketballs is at least three times number of footballs)
+
+-----------------------------------------------------
+Variables:
+- ProductionQuantityBasketballs: number of basketballs produced (non-negative integer)
+- ProductionQuantityFootballs: number of footballs produced (non-negative integer)
+
+For ease of notation, one can also define a helper vector variable:
+- ProductionQuantity: where ProductionQuantity[0] = ProductionQuantityBasketballs and ProductionQuantity[1] = ProductionQuantityFootballs
+
+-----------------------------------------------------
+Objective:
+Maximize total production of sports equipment, which is defined as:
+TotalProduction = ProductionQuantityBasketballs + ProductionQuantityFootballs
+
+-----------------------------------------------------
+Constraints:
+1. Material Constraint:
+   5 * ProductionQuantityBasketballs + 3 * ProductionQuantityFootballs <= 1500
+   (The total material used for both products must not exceed the 1500 available units.)
+
+2. Labor Constraint:
+   1 * ProductionQuantityBasketballs + 2 * ProductionQuantityFootballs <= 750
+   (The total labor hours required for production cannot exceed the 750 available hours.)
+
+3. Ratio Constraint (Basketball preference):
+   ProductionQuantityBasketballs >= 3 * ProductionQuantityFootballs
+   (At least three times as many basketballs must be produced as footballs.)
+
+4. Minimum Football Production Constraint:
+   ProductionQuantityFootballs >= 50
+   (At least 50 footballs must be produced.)
+
+-----------------------------------------------------
+
+Expected Output Schema:
+{
+  "variables": {
+    "ProductionQuantity": {
+      "0": "float",
+      "1": "float"
+    },
+    "ProductionQuantityBasketballs": "float",
+    "ProductionQuantityFootballs": "float"
+  },
+  "objective": "float"
+}
+
+This completes the structured mathematical model for the manufacturing problem.
+
+Execution Results:
+SUCCESS:
+Integer Model (MIP) Solution:
+{'variables': {'ProductionQuantity': {'0': 250.0, '1': 83.0}, 'ProductionQuantityBasketballs': 250.0, 'ProductionQuantityFootballs': 83.0}, 'objective': 333.0}
+
+Continuous Model (LP) Solution:
+{'variables': {'ProductionQuantity': {'0': 250.0, '1': 83.33333333333333}, 'ProductionQuantityBasketballs': 250.0, 'ProductionQuantityFootballs': 83.33333333333333}, 'objective': 333.3333333333333}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'ProductionQuantity': {'0': 107.14285714285714, '1': 321.42857142857144}, 'ProductionQuantityBasketballs': 150.0, 'ProductionQuantityFootballs': 50.0}, 'objective': 428.57142857142856}

@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nLinear Optimization (GLOP) Solution:\n{'variables': {'NumTanksProcessed': {'0': 33.33333333333334, '1': 24.999999999999996, '2': 0.0}}, 'objective': 37083.333333333336}\n"
+}

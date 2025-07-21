@@ -1,0 +1,75 @@
+Problem Name: 69_Template_Design_for_Printing
+
+Mathematical Formulation:
+\[
+\begin{array}{rcll}
+\textbf{Parameters:} \\
+S & = & 9, & \text{(slots per template)}\\[1mm]
+t & = & 2, & \text{(number of templates)}\\[1mm]
+n & = & 7, & \text{(number of design variations)}\\[1mm]
+d_j,\; j=1,\dots,n & : & \text{demand for variation } j, & d = [250,\,255,\,260,\,500,\,500,\,800,\,1100]
+\\[2mm]
+\textbf{Decision Variables:}\\[1mm]
+x_{ij} & \in & \mathbb{Z}_{\ge 0}, & \forall\, i=1,\dots,t,\; j=1,\dots,n,\\[1mm]
+& & \text{(number of slots on template } i \text{ assigned to variation } j)\\[1mm]
+N_i & \in & \mathbb{Z}_{> 0}, & \forall\, i=1,\dots,t,\\[1mm]
+& & \text{(number of times template } i \text{ is used in production)}\\[1mm]
+p_{ij} & \in & \mathbb{Z}_{\ge 0}, & \forall\, i=1,\dots,t,\; j=1,\dots,n,\\[1mm]
+& & \text{(number of copies of product } j \text{ produced using template } i)\\[2mm]
+\textbf{Linking:} & &  p_{ij} = x_{ij} \, N_i, & \forall\, i=1,\dots,t,\; j=1,\dots,n.
+\\[2mm]
+\textbf{Model:} & & & \\
+\text{Minimize} \quad & Z = & \displaystyle \sum_{j=1}^{n} \left( \sum_{i=1}^{t} p_{ij} - d_j \right) & \quad \text{(total surplus)}\\[2mm]
+\text{subject to} \quad
+& \displaystyle \sum_{j=1}^{n} x_{ij} = S, & \forall\, i=1,\dots,t, \\
+& p_{ij} = x_{ij} \, N_i, & \forall\, i=1,\dots,t,\; j=1,\dots,n,\\[1mm]
+& \displaystyle \sum_{i=1}^{t} p_{ij} \ge d_j, & \forall\, j=1,\dots,n,\\[2mm]
+& \displaystyle \sum_{j=1}^{n} 2^{\,n-j}\,\Bigl(x_{ij} - x_{(i+1)j}\Bigr) \le 0, & \forall\, i=1,\dots,t-1,\\[2mm]
+& \text{Additional non‐triviality requirements:} & & \text{(the production mix must cover more than one variation)}\\[1mm]
+& & & \text{(in particular, the constraints } \sum_{i=1}^{t} p_{ij} \ge d_j \text{ for all } j \text{ ensure no variation is omitted)}\\[2mm]
+& x_{ij} \in \mathbb{Z}_{\ge 0}, \; N_i \in \mathbb{Z}_{>0}, \; p_{ij} \in \mathbb{Z}_{\ge 0}, & & \forall\, i=1,\dots,t,\; j=1,\dots,n.
+\end{array}
+\]
+
+\vspace{2mm}
+\textbf{Explanation:}
+
+1. Decision Variables:
+ • x₍ᵢⱼ₎ tells how many of the S slots on template i are assigned to design j.
+ • Nᵢ indicates how many times template i is produced (i.e. how many mother sheets are run with that template).
+ • p₍ᵢⱼ₎ is the production quantity of design j from template i. They satisfy p₍ᵢⱼ₎ = x₍ᵢⱼ₎·Nᵢ.
+
+2. Objective:
+ We minimize the total surplus over all variations, where surplus for design j is the total production minus the demand dⱼ.
+
+3. Constraints:
+ (a) Each template i must have exactly S slots assigned across all design variations.  
+ (b) The linking non‐linear (bilinear) constraints relate the slot assignments with production quantities.
+ (c) For each design j, the summed production over templates must meet or exceed the demand dⱼ.
+ (d) The lexicographic ordering is enforced by the weighted sum constraints: for every two consecutive templates (i and i+1), the weighted difference is non‐positive. (Here the weights 2^(n–j) guarantee that the vector (x_{i1}, …, x_{in}) is lexicographically not greater than (x_{(i+1)1}, …, x_{(i+1)n)).  
+ (e) The inherent demand constraints guarantee that a trivial mix (i.e. producing only one product while neglecting others) is not optimal.
+
+This formulation is self‐contained, reflects every detail of the problem, and is feasible and bounded given the finite template slots and the requirement to cover given demands. 
+
+Execution Results:
+SUCCESS:
+Solution Found:
+Total Surplus:  97
+
+Template 1:
+  x (slot assignments):  [0, 0, 0, 0, 0, 2, 7]
+  N (number of uses):  158
+  p (production per design):  [0, 0, 0, 0, 0, 316, 1106]
+
+Template 2:
+  x (slot assignments):  [1, 1, 1, 2, 2, 2, 0]
+  N (number of uses):  260
+  p (production per design):  [260, 260, 260, 520, 520, 520, 0]
+
+Objective Value (total surplus) =  97.0
+
+
+Expected Output:
+Expected solution
+
+: {'p': [[0, 1], [0, 1], [0, 1], [0, 2], [0, 2], [2, 2], [7, 0]], 'R': [158, 260], 'Production': 418, 'Surplus': 97, '_objective': 418}

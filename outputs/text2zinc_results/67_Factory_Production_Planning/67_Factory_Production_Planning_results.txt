@@ -1,0 +1,151 @@
+Problem Name: 67_Factory_Production_Planning
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices and Sets:}\quad
+& k \in \{1,\dots,K\} \quad\text{(products)},\\[1mm]
+& m \in \{1,\dots,M\} \quad\text{(machine types)},\\[1mm]
+& i \in \{1,\dots,I\} \quad\text{(time periods; i.e., months)}.\\[2mm]
+\textbf{Parameters:}\quad
+& \text{NumMachines}_m,\; m=1,\dots,M, \quad\text{number of machines of type } m,\\[1mm]
+& \text{Profit}_k,\; k=1,\dots,K, \quad\text{profit obtained per unit sold of product } k,\\[1mm]
+& T_{k,m},\; k=1,\dots,K,\; m=1,\dots,M, \quad\text{machine time (in hours) required to produce one unit of product } k \text{ on machine } m,\\[1mm]
+& \text{Downtime}_m,\; m=1,\dots,M, \quad\text{number of months machine type } m \text{ must be down for maintenance,}\\[1mm]
+& \text{Limit}_{k,i},\; k=1,\dots,K,\; i=1,\dots,I,\quad\text{upper bound on production quantity of product } k \text{ in month } i,\\[1mm]
+& \text{StorePrice},\quad\text{storage cost per unit per month (e.g., }0.5\text{)},\\[1mm]
+& \text{KeepQuantity},\quad\text{minimum inventory to keep at the end of months } i\ge 2 \text{ (e.g., }100\text{)},\\[1mm]
+& \text{WorkHours},\quad\text{number of working hours per shift (e.g., }8\text{)}.\\[1mm]
+& \text{C} = 24\text{ days} \times 2\text{ shifts/day} \times \text{WorkHours} \quad\text{(total available hours per machine per month if operational).}\\[2mm]
+\textbf{Decision Variables:}\\[1mm]
+& x_{k,i} \ge 0\quad\text{[continuous or integer]}: \quad\text{units of product } k \text{ produced in month } i,\\[1mm]
+& y_{k,i} \ge 0\quad\text{[continuous or integer]}: \quad\text{units of product } k \text{ sold in month } i,\\[1mm]
+& s_{k,i} \ge 0\quad\text{[continuous or integer]}: \quad\text{inventory (stock) level of product } k \text{ at the end of month } i,\\[1mm]
+& z_{m,i} \in \{0,1\}:\quad\text{1 if machine type } m \text{ is operational in month } i,\text{ 0 if under maintenance.}\\[2mm]
+\textbf{Objective Function:}\\[1mm]
+\text{Maximize } \quad & Z = \sum_{i=1}^I \sum_{k=1}^K \left( \text{Profit}_k \, y_{k,i} - \text{StorePrice}\, s_{k,i} \right). \\[2mm]
+\textbf{Constraints:}\\[1mm]
+\underline{\text{(1) Inventory Balance:}}\\[1mm]
+& s_{k,1} = x_{k,1} - y_{k,1} \quad \forall\, k=1,\dots,K,\\[1mm]
+& s_{k,i} = s_{k,i-1} + x_{k,i} - y_{k,i} \quad \forall\, k=1,\dots,K,\; i=2,\dots,I.\\[2mm]
+\underline{\text{(2) Storage Limits:}}\\[1mm]
+& s_{k,i} \le 100 \quad \forall\, k=1,\dots,K,\; i=1,\dots,I,\\[1mm]
+& s_{k,i} \ge \text{KeepQuantity} \quad \forall\, k=1,\dots,K,\; i=2,\dots,I.\\[2mm]
+\underline{\text{(3) Production Capacity via Machines:}}\\[1mm]
+& \sum_{k=1}^K T_{k,m}\, x_{k,i} \le z_{m,i}\cdot \text{NumMachines}_m \cdot C,\quad \forall\, m=1,\dots,M,\; i=1,\dots,I,\\[1mm]
+& \text{with } C=24\times2\times\text{WorkHours}.\\[2mm]
+\underline{\text{(4) Production Limits:}}\\[1mm]
+& x_{k,i} \le \text{Limit}_{k,i} \quad \forall\, k=1,\dots,K,\; i=1,\dots,I.\\[2mm]
+\underline{\text{(5) Maintenance Scheduling for Machines:}}\\[1mm]
+& \sum_{i=1}^I z_{m,i} = I - \text{Downtime}_m, \quad \forall\, m=1,\dots,M.\\[2mm]
+\underline{\text{(6) Non-Trivial Production (to avoid degenerate scenarios):}}\\[1mm]
+& \sum_{k=1}^K y_{k,i} \ge \epsilon \quad \forall\, i=1,\dots,I, \quad \text{with } \epsilon > 0 \text{ (a small positive number)}.\\[2mm]
+\textbf{Variable Domains:}\\[1mm]
+& x_{k,i}\ge 0,\quad y_{k,i}\ge 0,\quad s_{k,i}\ge 0\quad \forall\, k=1,\dots,K,\; i=1,\dots,I,\\[1mm]
+& z_{m,i}\in\{0,1\}\quad \forall\, m=1,\dots,M,\; i=1,\dots,I.
+\end{align*}
+
+\vspace{3mm}
+\textbf{Explanation:}\\
+1. The decision variables x, y, and s denote production, sales, and inventory levels, respectively, for every product and period. The binary variables z indicate whether each machine type is operational (1) or undergoing maintenance (0) in each month.\\[1mm]
+2. The objective is to maximize the net profit obtained from sales revenues (Profit × units sold) minus the cost incurred by storing unsold inventory.\\[1mm]
+3. Constraint (1) enforces the flow balance—inventory carried over is what was produced minus what was sold. Constraint (2) limits storage capacity and enforces a minimum inventory (except possibly in the first period). Constraint (3) guarantees that the production scheduled does not exceed the available machine time; note that if a machine is down (i.e. z_{m,i}=0), no production can use that machine in that month. Constraint (4) enforces product‐specific production limits per month. Constraint (5) ensures that for each machine type, exactly the prescribed number of months (I – Downtime) they are operational. Finally, constraint (6) excludes trivial solutions where no sales occur.\\[1mm]
+4. This formulation is complete, feasible, and bounded given the finite production limits and machine capacities.
+\medskip
+
+This model is self–contained and fully represents the manufacturing, storage, and maintenance scheduling decisions necessary to maximize profit in the given setting.
+
+
+Execution Results:
+SUCCESS:
+Solution:
+Optimal objective value = 96900.0
+
+--- Month 1 ---
+Product 1: Produced = 500.0, Sold = 500.0, Inventory = 0.0
+Product 2: Produced = 1000.0, Sold = 1000.0, Inventory = 0.0
+Product 3: Produced = 300.0, Sold = 300.0, Inventory = 0.0
+Product 4: Produced = 300.0, Sold = 300.0, Inventory = 0.0
+Product 5: Produced = 500.0, Sold = 500.0, Inventory = 0.0
+Product 6: Produced = 200.0, Sold = 200.0, Inventory = 0.0
+Machine type 1: Operational
+Machine type 2: Operational
+Machine type 3: Operational
+Machine type 4: Operational
+Machine type 5: Operational
+
+--- Month 2 ---
+Product 1: Produced = 600.0, Sold = 500.0, Inventory = 100.0
+Product 2: Produced = 500.0, Sold = 400.0, Inventory = 100.0
+Product 3: Produced = 200.0, Sold = 100.0, Inventory = 100.0
+Product 4: Produced = 200.0, Sold = 100.0, Inventory = 100.0
+Product 5: Produced = 100.0, Sold = 0.0, Inventory = 100.0
+Product 6: Produced = 1000.0, Sold = 900.0, Inventory = 100.0
+Product 7: Produced = 300.0, Sold = 200.0, Inventory = 100.0
+Machine type 1: Operational
+Machine type 2: Operational
+Machine type 3: Operational
+Machine type 4: Operational
+Machine type 5: Operational
+
+--- Month 3 ---
+Product 1: Produced = 300.0, Sold = 300.0, Inventory = 100.0
+Product 2: Produced = 600.0, Sold = 600.0, Inventory = 100.0
+Product 3: Produced = 0.0, Sold = 0.0, Inventory = 100.0
+Product 4: Produced = 100.0, Sold = 100.0, Inventory = 100.0
+Product 5: Produced = 300.0, Sold = 300.0, Inventory = 100.0
+Product 6: Produced = 1100.0, Sold = 1100.0, Inventory = 100.0
+Product 7: Produced = 500.0, Sold = 500.0, Inventory = 100.0
+Machine type 1: Operational
+Machine type 2: Operational
+Machine type 3: Operational
+Machine type 4: Operational
+Machine type 5: Operational
+
+--- Month 4 ---
+Product 1: Produced = 200.0, Sold = 200.0, Inventory = 100.0
+Product 2: Produced = 300.0, Sold = 300.0, Inventory = 100.0
+Product 3: Produced = 400.0, Sold = 400.0, Inventory = 100.0
+Product 4: Produced = 300.0, Sold = 300.0, Inventory = 100.0
+Product 5: Produced = 800.0, Sold = 800.0, Inventory = 100.0
+Product 6: Produced = 200.0, Sold = 200.0, Inventory = 100.0
+Product 7: Produced = 100.0, Sold = 100.0, Inventory = 100.0
+Machine type 1: Operational
+Machine type 2: Operational
+Machine type 3: Operational
+Machine type 4: Operational
+Machine type 5: Operational
+
+--- Month 5 ---
+Product 1: Produced = 0.0, Sold = 0.0, Inventory = 100.0
+Product 2: Produced = 0.0, Sold = 0.0, Inventory = 100.0
+Product 3: Produced = 0.0, Sold = 0.0, Inventory = 100.0
+Product 4: Produced = 0.0, Sold = 0.0, Inventory = 100.0
+Product 5: Produced = 0.0, Sold = 0.0, Inventory = 100.0
+Product 6: Produced = 0.0, Sold = 0.0, Inventory = 100.0
+Product 7: Produced = 150.0, Sold = 150.0, Inventory = 100.0
+Machine type 1: Operational
+Machine type 2: Maintenance
+Machine type 3: Maintenance
+Machine type 4: Maintenance
+Machine type 5: Maintenance
+
+--- Month 6 ---
+Product 1: Produced = 500.0, Sold = 500.0, Inventory = 100.0
+Product 2: Produced = 500.0, Sold = 500.0, Inventory = 100.0
+Product 3: Produced = 100.0, Sold = 100.0, Inventory = 100.0
+Product 4: Produced = 0.0, Sold = 0.0, Inventory = 100.0
+Product 5: Produced = 500.0, Sold = 500.0, Inventory = 100.0
+Product 6: Produced = 400.0, Sold = 400.0, Inventory = 100.0
+Product 7: Produced = 100.0, Sold = 100.0, Inventory = 100.0
+Machine type 1: Operational
+Machine type 2: Operational
+Machine type 3: Operational
+Machine type 4: Operational
+Machine type 5: Operational
+
+
+
+Expected Output:
+Expected solution
+
+: {'_objective': 93715.0}

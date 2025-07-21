@@ -1,0 +1,54 @@
+Problem Name: 22_nlp4lp_22
+
+# Problem Description:
+'''Problem description: Ayse produces a plant growth compound by mixing two types of fertilizer: C and Y. This growth compound must contain at least 5 units of nitrous oxide and 8 units of vitamin mix. Fertilizer C and Y cost $2 and $3 per kg respectively. Fertilizer C contains 1.5 units of nitrous oxide per kg and 3 units of vitamin mix per kg. Fertilizer Y contains 5 units of nitrous oxide per kg and 1 unit of vitamin mix per kg. Determine the minimum cost of Ayse's compound.
+
+Expected Output Schema:
+{
+  "variables": {
+    "FertilizerQuantity": [
+      "float"
+    ]
+  },
+  "objective": "float"
+}'''
+
+Mathematical Formulation:
+Sets:
+- F: set of fertilizers = {C, Y}
+
+Parameters:
+- cost_f: cost per kg for fertilizer f [USD/kg], where cost_C = 2 and cost_Y = 3.
+- nitrous_f: units of nitrous oxide per kg for fertilizer f, where nitrous_C = 1.5 and nitrous_Y = 5.
+- vitamin_f: units of vitamin mix per kg for fertilizer f, where vitamin_C = 3 and vitamin_Y = 1.
+- min_nitrous: minimum required units of nitrous oxide = 5 [units].
+- min_vitamin: minimum required units of vitamin mix = 8 [units].
+
+Variables:
+- x_f: quantity (kg) of fertilizer f used in the compound [continuous, x_f ≥ 0].
+
+Objective:
+- Minimize total cost = cost_C * x_C + cost_Y * x_Y [USD].
+
+Constraints:
+- Nitrous oxide requirement: nitrous_C * x_C + nitrous_Y * x_Y ≥ min_nitrous.
+- Vitamin mix requirement: vitamin_C * x_C + vitamin_Y * x_Y ≥ min_vitamin.
+
+Notes:
+- All costs are in USD per kg.
+- The nutrient content for each fertilizer is given per kg. Ensure that the total nutrients from the mix meet or exceed the minimum requirements.
+- x_f are continuous variables representing the weight in kilograms of each fertilizer used.
+
+Execution Results:
+SUCCESS:
+Results using OR-Tools Linear Solver (GLOP):
+{'variables': {'FertilizerQuantity': [2.592592592592592, 0.22222222222222232]}, 'objective': 5.851851851851851}
+
+Results using OR-Tools CP-SAT (discretized version):
+{'variables': {'FertilizerQuantity': [2.6, 0.22]}, 'objective': 5.86}
+
+
+Expected Output:
+Expected solution
+
+: {'variables': {'FertilizerQuantity': [2.5925925925925926, 0.22222222222222224]}, 'objective': 5.851851851851852}

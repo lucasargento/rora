@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nLinear Solver Model Solution:\nStatus: OPTIMAL\nNumberOfSmallShops = 1.0\nNumberOfLargeShops = 7.0\nTotal shops (Objective) = 8.0\n\nFinal Structured Output:\n{'LinearSolver': {'variables': {'NumberOfSmallShops': 1.0, 'NumberOfLargeShops': 7.0}, 'objective': 8.0}}\n"
+}

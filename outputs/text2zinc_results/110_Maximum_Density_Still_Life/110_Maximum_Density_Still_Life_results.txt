@@ -1,0 +1,57 @@
+Problem Name: 110_Maximum_Density_Still_Life
+
+Mathematical Formulation:
+\begin{align*}
+\textbf{Indices:}\quad & i,j \in \{1,2,\ldots,n\}.\\[1mm]
+\textbf{Decision Variables:}\quad & x_{ij} \in \{0,1\} \quad \forall\, i,j, \quad\text{where } x_{ij}=1 \text{ if cell } (i,j) \text{ is alive, and } 0 \text{ otherwise}.\\[1mm]
+\textbf{Auxiliary Definitions:}\\[1mm]
+&\text{For each cell } (i,j), \text{ define its (discrete) neighbourhood}\\[1mm]
+&\quad \mathcal{N}(i,j)= \{(k,\ell) \in \{1,\ldots,n\}^2 : \max\{|i-k|,|j-\ell|\}=1 \text{ and } (k,\ell) \neq (i,j)\}.\\[1mm]
+&\text{Let } s_{ij} \text{ denote the number of live neighbours of cell } (i,j):\\[1mm]
+&\quad s_{ij} = \sum_{(k,\ell)\in \mathcal{N}(i,j)} x_{k\ell}\quad\forall\, i,j.\\[2mm]
+\textbf{Objective Function:}\\[1mm]
+&\text{Maximize the total number of live cells:}\\[1mm]
+&\quad \max \; Z = \sum_{i=1}^{n}\sum_{j=1}^{n} x_{ij}.\\[2mm]
+\textbf{Constraints (Still-life conditions):}\\[1mm]
+&\text{The configuration must be stable under the Game of Life update rules.}\\[1mm]
+&\quad \textbf{(a)}\;\; \text{If a cell has exactly three live neighbours, it must be alive:} \\[1mm]
+&\qquad \text{For all } (i,j):\quad s_{ij} = 3 \implies x_{ij}=1.\\[1mm]
+&\quad \textbf{(b)}\;\; \text{If a cell has fewer than two or more than three live neighbours, it must be dead:} \\[1mm]
+&\qquad \text{For all } (i,j):\quad \big(s_{ij} \le 1 \text{ or } s_{ij} \ge 4\big) \implies x_{ij}=0.\\[1mm]
+&\quad \textbf{(c)}\;\; \text{If a cell has exactly two live neighbours, no state‐change is enforced (i.e., its state is free).}\\[2mm]
+\textbf{Summary of the Model:}\\[1mm]
+& \begin{array}{rcll}
+\max & Z = \displaystyle \sum_{i=1}^{n}\sum_{j=1}^{n} x_{ij} & & \\
+\text{s.t.} & s_{ij} = \displaystyle \sum_{(k,\ell)\in \mathcal{N}(i,j)} x_{k\ell}, & \forall\, i,j, & \\
+& s_{ij} = 3 \implies x_{ij} = 1, & \forall\, i,j, & \text{(Enforce life when exactly three neighbours)}\\[1mm]
+& \big(s_{ij} \le 1 \text{ or } s_{ij}\ge 4 \big)\implies x_{ij} = 0,  & \forall\, i,j, & \text{(Enforce death when too few or too many neighbours)}\\[1mm]
+& x_{ij} \in \{0,1\}, & \forall\, i,j. & \\
+\end{array}
+\end{align*}
+
+\vspace{2mm}
+\textbf{Notes:}  
+\begin{itemize}
+    \item The logical implications above may be reformulated using indicator constraints or big-M formulations when implementing in a mixed‐integer programming solver.
+    \item Cells outside the $n\times n$ board are assumed dead; hence, in computing $s_{ij}$ for boundary cells, only those neighbours within $\{1,\ldots,n\}^2$ contribute.
+    \item The model is non‐trivial since the still-life conditions create intricate combinatorial restrictions and the objective is to maximize the live cell count within the board.
+\end{itemize}
+
+Execution Results:
+SUCCESS:
+Optimal solution found:
+Objective (number of live cells): 40.0
+1 1 1 1 1 1 1 1 
+1 0 0 0 0 0 0 1 
+1 0 1 1 1 1 0 1 
+1 0 1 0 0 1 0 1 
+1 0 1 0 0 1 0 1 
+1 0 1 1 1 1 0 1 
+1 0 0 0 0 0 0 1 
+1 1 1 1 1 1 1 1 
+
+
+Expected Output:
+Expected solution
+
+: {'grid': [[0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 1, 1, 0, 1, 1, 0, 1, 0, 0], [0, 0, 0, 1, 0, 1, 0, 1, 1, 0, 0], [0, 0, 1, 0, 0, 1, 0, 0, 0, 0, 0], [0, 0, 1, 1, 1, 0, 1, 1, 1, 0, 0], [0, 0, 0, 0, 0, 1, 0, 0, 1, 0, 0], [0, 0, 1, 1, 0, 1, 0, 1, 0, 0, 0], [0, 0, 1, 0, 1, 1, 0, 1, 1, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0], [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]], '_objective': 28}

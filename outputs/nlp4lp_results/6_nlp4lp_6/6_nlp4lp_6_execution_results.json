@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResult using ortools.linear_solver (Linear Programming):\n{'variables': {'QuantityFeedA': 1.0638297872340425, 'QuantityFeedB': 2.765957446808511}, 'objective': 327.6595744680851}\n"
+}

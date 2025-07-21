@@ -1,0 +1,3 @@
+{
+  "execution_results": "SUCCESS:\nResults Summary:\n-------------------------------------------------\nImplementation1:\nStatus    : OPTIMAL\nVariables:\n  Salmon bowls (index 0): 4.615384615384616\n  Eggs bowls   (index 1): 3.076923076923077\nObjective : 430.76923076923083 (minimum total sodium intake in mg)\n-------------------------------------------------\n"
+}
