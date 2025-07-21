@@ -1,4 +1,4 @@
-# Operations Research III - Experiments Repository
+# Reasoning Operations Research Agent
 
 ## 📋 General Description
 
