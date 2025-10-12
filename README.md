@@ -2,7 +2,7 @@
 
 > **Resumen**  
 >
-> Como parte de un trabajo de investigación de la mateira Investigación Operativa Superior de la Facultad de Ingeniería de Buenos Aires, este trabajo analiza el desempeño de una arquitectura de agentes de inteligencia artificial, impulsada por grandes modelos del lenguaje (LLMs, por sus siglas en inglés) con capacidad de razonamiento, sobre ejemplos validados de los datasets de Investigación Operativa **Text2Zinc** y **NLP4LP**.  
+> Dentro del marco de la materia de Investigación Operativa Superior de la Facultad de Ingeniería de Buenos Aires, este trabajo analiza el desempeño de una arquitectura de agentes de inteligencia artificial, impulsada por grandes modelos del lenguaje (LLMs, por sus siglas en inglés) con capacidad de razonamiento, sobre ejemplos validados de los datasets de Investigación Operativa **Text2Zinc** y **NLP4LP**.  
 >
 > Se consideraron tanto problemas de **satisfacción** como de **optimización** para las evaluaciones. Se presenta la solución de alrededor de **120 problemas** provenientes de los conjuntos de datos mencionados (incluyendo descripciones de los problemas, implementaciones de código y soluciones).  
 >
