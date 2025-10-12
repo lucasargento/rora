@@ -6,7 +6,7 @@ from src.agent.nodes.experts import expert_math_agent, expert_code_agent, code_c
 from src.agent.nodes.tool_nodes import code_executor_node, code_validator_node, save_model_node, end_execution_on_max_retries
 from src.agent.gates.gates import post_code_validation_gate, post_code_critic_gate, post_code_execution_gate, post_reflection_gate
 from src.agent.tools.tools import code_validator, code_executor, save_model_files
-from src.state import State
+from src.agent.state import State
 
 
 

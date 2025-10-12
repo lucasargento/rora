@@ -1,4 +1,4 @@
-from src.state import State
+from src.agent.state import State
 
 
 # aux functions

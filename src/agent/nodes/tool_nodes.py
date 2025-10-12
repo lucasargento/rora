@@ -1,4 +1,4 @@
-from src.state import State
+from src.agent.state import State
 from src.agent.tools.tools import code_validator, code_executor, save_model_files
 
 def code_validator_node(state: State):

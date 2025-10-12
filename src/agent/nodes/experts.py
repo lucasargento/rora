@@ -1,5 +1,5 @@
 from langchain_openai import ChatOpenAI
-from src.state import State
+from src.agent.state import State
 from src.agent.tools.tools import code_validator, code_executor, save_model_files
 import os
 
