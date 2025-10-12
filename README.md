@@ -17,11 +17,10 @@
 
 ### Cómo Probarlo
 
-1. **Cloná este repositorio** (o descargalo y ubicáte en la raíz):
+1. **Cloná este repositorio**:
 
    ```bash
-   git clone <url-del-repo>
-   cd <carpeta-del-repo>
+   git clone https://github.com/lucasargento/rora.git
    ```
 
 2. **Creá y activá un entorno virtual (recomendado):**
