@@ -14,3 +14,37 @@
 - **`src/`**: código fuente del agente y utilidades (p. ej., `src/agent/agent.py`, `src/agent/gates/`, `src/agent/nodes/`). Definen toda estructura modular del agente y permiten extenderlo/ utilizarlo a partir de la funcion build_agent().
 - **`paper/`**: documento que explica la metodologia, el diseño del agente y los resultados sobre los datasets de evaluacion.
 - **`outputs/`**: salidas generadas por corridas de razonamiento y registros asociados generados al correr el agente sobre los datasets de evaluación..
+
+### Cómo Probarlo
+
+1. **Cloná este repositorio** (o descargalo y ubicáte en la raíz):
+
+   ```bash
+   git clone <url-del-repo>
+   cd <carpeta-del-repo>
+   ```
+
+2. **Creá y activá un entorno virtual (recomendado):**
+
+   ```bash
+   python3 -m venv venv
+   source venv/bin/activate      # En Linux/Mac
+   # .\venv\Scripts\activate     # En Windows
+   ```
+
+3. **Instalá las dependencias:**
+
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+4. **Ejecutá el frontend (app de Streamlit):**
+
+   ```bash
+   streamlit run src/frontend/main.py
+   ```
+
+5. **Configurá tu clave de OpenAI API:**
+   - Ingresala en la barra lateral de la app cuando se te solicite (`sk-...`).
+
+¡Listo! Ahora podés testear el agente desde el navegador, interactuando con problemas de investigación operativa de manera conversacional.
