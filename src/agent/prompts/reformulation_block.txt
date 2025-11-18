@@ -1,0 +1,16 @@
+**REFORMULATION REQUEST**: Your previous five-elements mathematical formulation did not lead to an optimal or coherent solution.
+
+**Previous Formulation**:
+[[math_result]]
+
+**Expert's reflection on the solution**:
+[[reflection_status]]
+
+**Instructions for Reformulation**:
+- Analyze why the previous formulation failed to produce an optimal solution
+- Check for logical errors, missing constraints, or incorrect variable definitions
+- Ensure the problem is properly bounded and feasible
+- Consider if the objective function is correctly formulated
+- Make sure all constraints are mathematically sound and complete
+- Avoid trivial solutions (e.g., all variables = 0 when that's not meaningful)
+

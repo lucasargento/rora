@@ -1,0 +1,72 @@
+You are an expert in mathematical optimization. Your task is to translate the following real-world optimization problem into a precise and structured mathematical model using the five-element framework.
+
+Problem description:
+"""
+[[problem_statement]]
+"""
+
+[[reformulation_context]]
+
+Use the following five-element structure to express the model:
+
+---
+
+### Example:
+
+**Problem description:**
+A factory produces two products: A and B. Each unit of A gives a profit of $30, and each unit of B gives a profit of $20. Product A requires 2 machine hours and product B requires 1 machine hour. There are at most 100 machine hours available. Also, product A requires 1 labor hour and product B requires 2 labor hours. There are at most 80 labor hours available. The factory wants to determine how many units of each product to produce in order to maximize profit.
+
+**Structured Model:**
+
+## Sets:
+- P: set of products = {{A, B}}
+
+## Parameters:
+- profit_p: profit per unit of product p [USD]
+- time_p: machine hours required per unit of p [hours]
+- labor_p: labor hours required per unit of p [hours]
+- max_machine_time: total available machine hours [hours]
+- max_labor_time: total available labor hours [hours]
+
+## Variables:
+- x_p: number of units of product p to produce [integer ≥ 0] [units]
+
+## Objective:
+- Maximize total profit = sum over p in P of (profit_p * x_p)
+
+## Constraints:
+- Machine time constraint: sum over p in P of (time_p * x_p) ≤ max_machine_time
+- Labor constraint: sum over p in P of (labor_p * x_p) ≤ max_labor_time
+
+---
+
+Now, apply the same structure to the new problem below.
+
+Requirements:
+1. Be complete and faithful to the original problem.
+2. Do NOT use LaTeX or any math formatting syntax.
+3. Ensure the model is self-contained and logically consistent.
+4. Do not invent data or simplify the problem unless explicitly instructed.
+5. Use simple mathematical expressions that are easy to map to Python or OR-Tools code.
+6. The model will be used by another LLM to generate a working implementation, so make it readable and unambiguous.
+7. Check that the units of all parameters are consistent with the problem description.
+    - If units are unclear or inconsistent, make reasonable assumptions and explicitly state them in the model comments.
+    - If ambiguity remains (for example if different units are stated in problem data/parametrs and problem description), produce an alternative version of the model alongside the main one, so the coding agent can implement and compare both.
+    - You dont need to always create two models, only if you consider that two formulations are required.
+    - If you are REFORMULATING this problem dont include math models for previously proven unfeasible formulations
+
+Additional important guidelines for modeling:
+- If the objective involves both revenues and costs, clearly separate them into two expressions: total revenue and total cost. Then define the net objective as their difference.
+- Always specify the unit and interpretation of economic parameters like costs, prices, or revenues (e.g., per unit produced, per batch, per hour).
+- Use consistent naming and consider defining helper variables (e.g., total input used, total output produced) to improve readability and implementation.
+- Avoid duplicating the same expression in multiple places; define and reuse intermediate expressions where possible.
+- If helpful, include sanity-check expectations (e.g., typical variable ranges, expected magnitudes) as comments or hints — these are optional and for interpretability only.
+- Be explicit about whether each decision variable is continuous, integer, or binary.
+- If there is any investment or delay that affects future capacity, define a parameter for investment effectiveness or capacity gain.
+- Use semantically clear names for parameters and variables that reflect their economic or physical meaning (e.g., InputFinal, InvestmentGain, etc).
+- Clearly define when stock becomes available (beginning of period or end?) and whether it can be used in the same period.
+- For complex dynamics like stock balance or delayed effects, define intermediate expressions to improve traceability and code generation.
+
+Respond strictly using the five-element format:
+Sets, Parameters, Variables, Objective, Constraints.
+

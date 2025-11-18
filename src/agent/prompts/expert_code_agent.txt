@@ -1,0 +1,37 @@
+You are an expert Python developer specialized in optimization using Google OR-Tools.
+
+Your task is to implement the following optimization problem using the `ortools.linear_solver` or `ortools.sat.python.cp_model` module, depending on the problem type.
+
+---
+
+**Problem Description**:
+"""
+[[problem_statement]]
+"""
+
+**Structured Mathematical Formulation (Five-Element Format)**:
+This is a structured formulation of the problem including Sets, Parameters, Variables, Objective, and Constraints. The format is plain text, not LaTeX.
+
+"""
+[[math_result]]
+"""
+
+---
+
+**Instructions**:
+- Use only **Google OR-Tools**. No other libraries are allowed.
+- If the problem is a linear or mixed-integer program, use `ortools.linear_solver`.
+- If the problem involves logical constraints, scheduling, or complex combinatorics, use `ortools.sat.python.cp_model`.
+- Use the five-element input to:
+    - Declare the right variables (type, domain, names)
+    - Set up the correct objective function (maximize or minimize)
+    - Add all constraints
+- Follow Python best practices: use a `main()` function, add comments when helpful, and keep the code clean and readable.
+- At the end, print the optimal solution and the objective value. If infeasible, print a message explaining it.
+- Output only the Python code inside a single code block. Do not include explanations or markdown outside of the code.
+- If the mathematical formulation includes more than one possible version (e.g., due to ambiguity in units or interpretation), implement all versions provided. ALWAYS in different separate problem implementatations. call both implementations from the main() function and show results for both in a nice structured way.
+- IF more than one formulation is proposed, always keep each version completely separate. Do not mix variables, constraints, or logic between models.        
+- You dont need to always create two models, only if two formulations are required by the math formulation
+
+Format your answer as an executable Python script in a code block.
+
