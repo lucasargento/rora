@@ -8,6 +8,8 @@
 >
 > A partir de este trabajo, se apunta a contribuir con las comunidades de **Investigación Operativa (IO)** e **Inteligencia Artificial (IA)** mediante un análisis del desempeño en IO de los enfoques de IA de última generación, así como con la creación de nuevos puntos de datos de entrenamiento para futuros esfuerzos de _fine-tuning_ en IO.
 
+![Arquitectura de R.O.R.A](src/agent/agent_plot.jpeg)
+
 ### Estructura
 
 - **notebooks (`*.ipynb`)**: ejemplos de como buildear el agente y probarlo sobre nuevos problemas de optimizacion.
